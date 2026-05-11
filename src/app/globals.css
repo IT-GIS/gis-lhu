@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+/* ─── Global Color Scheme ─── */
+:root {
+  color-scheme: light;
+
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  /* GIS Custom Branding Colors */
+  --color-gis-blue: #2B3386;
+  --color-gis-blue-hover: #3A44A4;
+  --color-gis-blue-dark: #1F2563;
+  --color-gis-red: #C1121F;
+  --color-gis-red-hover: #D61B29;
+
+  /* Semantic Colors */
+  --color-border: hsl(232 17% 87%);
+  --color-input: hsl(232 17% 94%);
+  --color-ring: hsl(236 87% 64%);
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(228 25% 16%);
+  --color-muted: hsl(225 23% 96%);
+  --color-muted-foreground: hsl(228 12% 43%);
+  --color-primary: hsl(192 64% 44%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(205 91% 95%);
+  --color-secondary-foreground: hsl(222 47% 11%);
+  --color-accent: hsl(266 100% 96%);
+  --color-accent-foreground: hsl(249 36% 20%);
+  --color-success: hsl(147 66% 39%);
+  --color-success-foreground: hsl(0 0% 100%);
+  --color-warning: hsl(39 97% 55%);
+  --color-warning-foreground: hsl(26 83% 14%);
+  --color-destructive: hsl(0 84% 60%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-card: hsla(0 0% 100% / 0.82);
+  --color-card-foreground: hsl(228 25% 16%);
+
+  /* Neumorphic palette (light mode) */
+  --neu-bg:       #eaeef6;
+  --neu-white:    #ffffff;
+  --neu-shadow-a: #c8d0e7;
+  --neu-shadow-b: #ffffff;
+  --neu-primary:  #289db9;
+  --neu-pri-light:#5ac8e0;
+  --neu-pri-dark: #1e7a91;
+  --neu-text:     #9baacf;
+
+  /* Raised shadow (element lifts off surface) */
+  --neu-raised: .4rem .4rem .9rem var(--neu-shadow-a),
+                -.25rem -.25rem .7rem var(--neu-white);
+
+  /* Inset shadow (element pressed into surface) */
+  --neu-inset:  inset .2rem .2rem .5rem var(--neu-shadow-a),
+               inset -.2rem -.2rem .5rem var(--neu-white);
+
+  /* Fonts */
+  --font-display-ui: "Segoe UI Variable Display", "Aptos Display", "Trebuchet MS", sans-serif;
+  --font-mono-ui: "Cascadia Mono", "Consolas", monospace;
+}
+
+.dark {
+  /* Dark mode neumorphic uses slate tones */
+  --neu-bg:       #1e2535;
+  --neu-white:    #252d3d;
+  --neu-shadow-a: #161b28;
+  --neu-shadow-b: #283044;
+  --neu-raised: .4rem .4rem .9rem var(--neu-shadow-a),
+                -.25rem -.25rem .7rem var(--neu-shadow-b);
+  --neu-inset:  inset .2rem .2rem .5rem var(--neu-shadow-a),
+               inset -.2rem -.2rem .5rem var(--neu-shadow-b);
+}
+
+/* ─── Theme Tokens ─── */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-display-ui);
+  --font-mono: var(--font-mono-ui);
+
+  --color-gis-blue: #2B3386;
+  --color-gis-blue-hover: #3A44A4;
+  --color-gis-blue-dark: #1F2563;
+  --color-gis-red: #C1121F;
+  --color-gis-red-hover: #D61B29;
+
+  /* Indigo palette */
+  --color-indigo-50: #eaf6f8;
+  --color-indigo-100: #d5edf2;
+  --color-indigo-200: #aadde5;
+  --color-indigo-300: #80cce0;
+  --color-indigo-400: #5ac8e0;
+  --color-indigo-500: #3dbce1;
+  --color-indigo-600: #289db9;
+  --color-indigo-700: #1e7a91;
+  --color-indigo-800: #1a6274;
+  --color-indigo-900: #175261;
+  --color-indigo-950: #0a333d;
+
+  /* Shadows */
+  --shadow-glow: 0 18px 40px -18px rgba(40, 157, 185, 0.45);
+  --shadow-glass: 0 12px 50px rgba(15, 23, 42, 0.08);
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.8s ease-out forwards;
+  --animate-slide-up: slide-up 0.8s ease-out forwards;
+  --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-scale-in: scale-in 0.5s ease-out forwards;
+  --animate-float: float 7s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes fade-in-up {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes scale-in {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+}
+
+/* ─── Base Styles ─── */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-display-ui);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image:
+    radial-gradient(circle at top, rgba(40, 157, 185, 0.10), transparent 28%),
+    linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(247,249,255,1) 100%);
+}
+
+.dark body {
+  background-image: linear-gradient(180deg, rgba(11,15,25,1) 0%, rgba(15,23,42,1) 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+textarea,
+select {
+  outline: none;
+}
+
+::selection {
+  background: rgba(40, 157, 185, 0.16);
+}
+
+/* ─── Neumorphic Utility Classes ─── */
+
+/** Raised card — element appears to float above the background */
+.neu-card {
+  background: var(--neu-bg) !important;
+  border: none !important;
+  box-shadow: var(--neu-raised) !important;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.neu-card:hover {
+  box-shadow: .6rem .6rem 1.2rem var(--neu-shadow-a),
+              -.3rem -.3rem .9rem var(--neu-white) !important;
+}
+
+/** Pressed card — element sinks into the background */
+.neu-card-inset {
+  background: var(--neu-bg) !important;
+  border: none !important;
+  box-shadow: var(--neu-inset) !important;
+}
+
+/** Neumorphic primary button press state */
+.neu-btn-press:active {
+  box-shadow: inset .2rem .2rem .6rem var(--neu-pri-dark),
+              inset -.2rem -.2rem .6rem var(--neu-pri-light) !important;
+}
+
+/* ─── Stagger Utility Classes ─── */
+.stagger-1 { animation-delay: 100ms; opacity: 0; }
+.stagger-2 { animation-delay: 200ms; opacity: 0; }
+.stagger-3 { animation-delay: 300ms; opacity: 0; }
+.stagger-4 { animation-delay: 400ms; opacity: 0; }
+.stagger-5 { animation-delay: 500ms; opacity: 0; }
