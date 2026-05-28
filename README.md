@@ -29,17 +29,6 @@ npm run db:seed
 npm run dev
 ```
 
-## Akun demo
-
-Semua akun menggunakan password `Password123!`.
-
-- `superadmin@gis-lhu.local`
-- `admin@gis-lhu.local`
-- `frontdesk@gis-lhu.local`
-- `analis@gis-lhu.local`
-- `qa@gis-lhu.local`
-- `auditor@gis-lhu.local`
-
 ## Route utama
 
 - `/login`
