@@ -15,6 +15,5 @@ if (Number.isNaN(ttlDays) || ttlDays <= 0) {
 
 export const env = {
   appUrl: required("APP_URL", "http://localhost:3000"),
-  databaseUrl: required("DATABASE_URL"),
   sessionTtlDays: ttlDays,
 };

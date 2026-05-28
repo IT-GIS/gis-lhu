@@ -1,21 +1,40 @@
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "@prisma/client";
 
-import { env } from "@/lib/env";
-
 const globalForPrisma = globalThis as unknown as {
   prisma?: PrismaClient;
 };
 
-const adapter = new PrismaMariaDb(env.databaseUrl);
+function requiredDatabaseUrl() {
+  const value = process.env.DATABASE_URL;
 
-export const prisma =
-  globalForPrisma.prisma ??
-  new PrismaClient({
-    adapter,
+  if (!value) {
+    throw new Error("Environment variable DATABASE_URL is required.");
+  }
+
+  return value;
+}
+
+function createPrismaClient() {
+  return new PrismaClient({
+    adapter: new PrismaMariaDb(requiredDatabaseUrl()),
     log: process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
   });
-
-if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = prisma;
 }
+
+function getPrismaClient() {
+  if (!globalForPrisma.prisma) {
+    globalForPrisma.prisma = createPrismaClient();
+  }
+
+  return globalForPrisma.prisma;
+}
+
+export const prisma = new Proxy({} as PrismaClient, {
+  get(_target, property) {
+    const client = getPrismaClient();
+    const value = Reflect.get(client, property);
+
+    return typeof value === "function" ? value.bind(client) : value;
+  },
+});
