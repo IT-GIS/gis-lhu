@@ -94,6 +94,161 @@ const LANDING_RUNTIME_CSS = `
   }
 `;
 
+const LANDING_HERO_OVERRIDE_CSS = `
+  .landing-html .profile-main {
+    max-width: none !important;
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .landing-html .profile-main > section:first-child {
+    background:
+      linear-gradient(90deg, rgba(5, 24, 44, 0.84), rgba(0, 88, 188, 0.36), rgba(5, 24, 44, 0.72)),
+      url("/landing/blog/mengenal-berbagai-pengujian-laboratorium-dari-pelumas-otomotif-hingga-analisa-minyak-sawit-apa-saja-manfaatnya-2.jpg") center/cover !important;
+    min-height: 100vh !important;
+    height: auto !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 120px 24px 72px !important;
+    border-radius: 0 !important;
+  }
+
+  .landing-html .profile-main > section:first-child > .absolute.inset-0.bg-cover {
+    opacity: 0 !important;
+  }
+
+  .landing-html .profile-main > section:first-child > .relative.z-10 {
+    width: min(896px, 100%) !important;
+  }
+
+  .landing-html .profile-main > section:not(:first-child) {
+    width: min(1280px, calc(100% - 48px));
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .landing-html.bg-background main > section:first-child {
+    background:
+      linear-gradient(90deg, rgba(248, 252, 255, 0.88), rgba(235, 248, 255, 0.7), rgba(10, 37, 64, 0.18)),
+      url("https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1800") center/cover !important;
+    min-height: 100vh !important;
+    height: auto !important;
+    padding: 120px 24px 72px !important;
+  }
+
+  .landing-html.bg-background main > section:first-child > .absolute.inset-0 img {
+    opacity: 0 !important;
+  }
+
+  .landing-html.bg-background main > section:first-child > .relative.z-10 {
+    width: min(896px, 100%) !important;
+    max-width: 896px !important;
+  }
+
+  @media (max-width: 768px) {
+    .landing-html .profile-main > section:first-child,
+    .landing-html.bg-background main > section:first-child {
+      padding: 108px 18px 56px !important;
+    }
+
+    .landing-html .navbar-wrapper {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
+
+    .landing-html .navbar {
+      padding: 10px 14px !important;
+    }
+
+    .landing-html .nav-brand {
+      min-width: 0 !important;
+      gap: 8px !important;
+      font-size: 0.88rem !important;
+    }
+
+    .landing-html .nav-brand img {
+      width: 32px !important;
+      height: auto !important;
+      margin-right: 0 !important;
+      transform: none !important;
+    }
+
+    .landing-html .profile-main > section:first-child > .relative.z-10 {
+      width: min(100% - 32px, 896px) !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      padding: 34px 24px !important;
+    }
+
+    .landing-html .profile-main > section:first-child h1,
+    .landing-html.bg-background main > section:first-child h1 {
+      max-width: 342px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: clamp(2rem, 8.8vw, 2.35rem) !important;
+      line-height: 1.08 !important;
+      overflow-wrap: normal;
+    }
+
+    .landing-html .profile-main > section:first-child p,
+    .landing-html.bg-background main > section:first-child p {
+      max-width: 342px;
+      overflow-wrap: normal;
+    }
+
+    .landing-html .profile-main > section:not(:first-child) {
+      width: min(100% - 36px, 1280px);
+    }
+  }
+`;
+
+const LANDING_PROFILE_POLICY_CSS = `
+  .landing-html .policy-tab-panel .policy-with-portrait {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+    gap: 48px;
+    align-items: center;
+    max-width: 1000px !important;
+  }
+
+  .landing-html .policy-tab-panel .policy-copy-column {
+    min-width: 0;
+  }
+
+  .landing-html .policy-tab-panel .policy-portrait {
+    width: min(100%, 260px);
+    justify-self: center;
+    align-self: center;
+    aspect-ratio: 4 / 5;
+    border-radius: 28px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(248, 251, 255, 0.96), rgba(226, 238, 249, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.86);
+    box-shadow: 0 22px 48px -24px rgba(10, 37, 64, 0.48);
+  }
+
+  .landing-html .policy-tab-panel .policy-portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  @media (max-width: 900px) {
+    .landing-html .policy-tab-panel .policy-with-portrait {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .landing-html .policy-tab-panel .policy-portrait {
+      width: min(240px, 100%);
+      order: -1;
+    }
+  }
+`;
+
 const serviceDetails = {
   quality: {
     title: "Pengujian Kualitas Tanah & Sedimen",
@@ -372,6 +527,32 @@ function bindProfileTabs() {
   };
 }
 
+function injectProfilePolicyPortraits() {
+  const panelIds = ["planning-tab", "research-tab"];
+  const portraitSrc = "/landing/profile/vera-marini.png";
+
+  panelIds.forEach((id) => {
+    const panel = document.getElementById(id);
+    const content = panel?.firstElementChild;
+    if (!panel || !content || content.classList.contains("policy-with-portrait")) return;
+
+    content.classList.add("policy-with-portrait");
+    content.classList.remove("max-w-4xl");
+
+    const copyColumn = document.createElement("div");
+    copyColumn.className = "policy-copy-column";
+    Array.from(content.childNodes).forEach((child) => copyColumn.appendChild(child));
+
+    const portrait = document.createElement("figure");
+    portrait.className = "policy-portrait";
+    portrait.innerHTML = `<img src="${portraitSrc}" alt="Vera Marini, Director PT Global Inspeksi Sistem" loading="lazy">`;
+
+    content.append(copyColumn, portrait);
+  });
+
+  return () => undefined;
+}
+
 function bindWhatsapp() {
   const toggleWa = document.getElementById("toggle-wa");
   const closeWa = document.getElementById("close-wa");
@@ -430,6 +611,7 @@ export function LandingHtmlPage({ page }: { page: LandingStaticPage }) {
       bindHomeTyping(),
       bindServiceDetails(),
       bindProfileTabs(),
+      injectProfilePolicyPortraits(),
       bindWhatsapp(),
       bindContactForm(),
     ];
@@ -443,6 +625,8 @@ export function LandingHtmlPage({ page }: { page: LandingStaticPage }) {
     <>
       <style dangerouslySetInnerHTML={{ __html: LANDING_RUNTIME_CSS }} />
       <style dangerouslySetInnerHTML={{ __html: page.styles }} />
+      <style dangerouslySetInnerHTML={{ __html: LANDING_HERO_OVERRIDE_CSS }} />
+      <style dangerouslySetInnerHTML={{ __html: LANDING_PROFILE_POLICY_CSS }} />
       <div
         className={["landing-html", page.bodyClass].filter(Boolean).join(" ")}
         dangerouslySetInnerHTML={{ __html: page.html }}

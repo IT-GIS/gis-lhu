@@ -44,6 +44,14 @@ export function canRevokeDocument(role: AppRole) {
   return ["SUPER_ADMIN", "ADMIN_LAB"].includes(role);
 }
 
+export function canDeleteDocument(role: AppRole) {
+  return ["SUPER_ADMIN", "ADMIN_LAB"].includes(role);
+}
+
 export function canViewAuditLogs(role: AppRole) {
   return ["SUPER_ADMIN", "ADMIN_LAB", "VIEWER_AUDITOR", "QA_SUPERVISOR"].includes(role);
+}
+
+export function canManageBlogPosts(role: AppRole) {
+  return ["SUPER_ADMIN", "ADMIN_LAB"].includes(role);
 }

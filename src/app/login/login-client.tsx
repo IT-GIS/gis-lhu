@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition, useEffect } from "react";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { loginAction } from "@/actions/auth";
 
 // ---------------------------------------------------------------------------
@@ -356,8 +357,14 @@ export default function LoginClient() {
     startTransition(async () => {
       try {
         // loginAction is a server action; we call it via FormData
-        await loginAction(formData);
-      } catch {
+        const result = await loginAction(formData);
+        if (result?.error) {
+          setError(result.error);
+        }
+      } catch (error) {
+        if (isRedirectError(error)) {
+          throw error;
+        }
         setError("Terjadi gangguan saat memproses login. Silakan coba lagi.");
       }
     });

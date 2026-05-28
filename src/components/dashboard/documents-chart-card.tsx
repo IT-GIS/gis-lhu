@@ -19,11 +19,8 @@ export function DocumentsChartCard({ allData }: { allData?: DocumentData[] }) {
   const displayedData = month === "all" ? base : base.filter((d) => d.month === month);
 
   return (
-    <Card className="neu-card flex flex-col overflow-hidden rounded-2xl">
-      <div
-        className="px-5 md:px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
-        style={{ borderBottom: "1px solid var(--neu-shadow-a)" }}
-      >
+    <Card className="flex flex-col overflow-hidden rounded-[28px] p-0">
+      <div className="flex flex-col justify-between gap-3 border-b border-sky-100 px-5 py-4 dark:border-slate-800 sm:flex-row sm:items-center md:px-6">
         <div>
           <div className="text-base font-bold text-slate-800 dark:text-slate-200">Dokumen per Bulan</div>
           <div className="text-xs font-medium text-slate-500 hidden md:block">Volume Draft, Review, dan Published</div>
@@ -33,8 +30,7 @@ export function DocumentsChartCard({ allData }: { allData?: DocumentData[] }) {
           <select
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            className="h-8 pl-3 pr-8 py-1 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 outline-none cursor-pointer"
-            style={{ background: "var(--neu-bg)", boxShadow: "var(--neu-inset)", border: "none" }}
+            className="h-8 cursor-pointer rounded-xl border border-sky-100 bg-white/80 py-1 pl-3 pr-8 text-xs font-semibold text-slate-700 outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
           >
             <option value="2026">2026</option>
             <option value="2025">2025</option>
@@ -44,8 +40,7 @@ export function DocumentsChartCard({ allData }: { allData?: DocumentData[] }) {
           <select
             value={month}
             onChange={(e) => setMonth(e.target.value)}
-            className="h-8 pl-3 pr-8 py-1 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 outline-none cursor-pointer"
-            style={{ background: "var(--neu-bg)", boxShadow: "var(--neu-inset)", border: "none" }}
+            className="h-8 cursor-pointer rounded-xl border border-sky-100 bg-white/80 py-1 pl-3 pr-8 text-xs font-semibold text-slate-700 outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
           >
             <option value="all">Semua Bln</option>
             {MONTHS.map((m) => <option key={m} value={m}>{m}</option>)}

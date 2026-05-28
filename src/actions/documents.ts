@@ -5,7 +5,13 @@ import { redirect } from "next/navigation";
 import { ZodError } from "zod";
 
 import { requireAuthenticatedUser } from "@/lib/auth";
-import { addReviewComment, createDocument, transitionDocument, updateDocument } from "@/lib/documents";
+import {
+  addReviewComment,
+  createDocument,
+  deleteDocument,
+  transitionDocument,
+  updateDocument,
+} from "@/lib/documents";
 import { buildMessageUrl } from "@/lib/utils";
 
 function getFormValues(formData: FormData) {
@@ -28,22 +34,26 @@ function getErrorMessage(error: unknown) {
 
 export async function createDocumentAction(formData: FormData) {
   const actor = await requireAuthenticatedUser();
+  let redirectUrl = "/documents/new";
 
   try {
     const created = await createDocument(actor, getFormValues(formData));
 
     revalidatePath("/dashboard");
     revalidatePath("/documents");
-    redirect(buildMessageUrl(`/documents/${created.id}`, "success", "Dokumen berhasil dibuat."));
+    redirectUrl = buildMessageUrl(`/documents/${created.id}`, "success", "Dokumen berhasil dibuat.");
   } catch (error) {
-    redirect(buildMessageUrl("/documents/new", "error", getErrorMessage(error)));
+    redirectUrl = buildMessageUrl("/documents/new", "error", getErrorMessage(error));
   }
+
+  redirect(redirectUrl);
 }
 
 export async function updateDocumentAction(formData: FormData) {
   const actor = await requireAuthenticatedUser();
   const values = getFormValues(formData);
   const documentId = values.documentId;
+  let redirectUrl = `/documents/${documentId}`;
 
   try {
     await updateDocument(actor, values);
@@ -51,16 +61,38 @@ export async function updateDocumentAction(formData: FormData) {
     revalidatePath("/dashboard");
     revalidatePath("/documents");
     revalidatePath(`/documents/${documentId}`);
-    redirect(buildMessageUrl(`/documents/${documentId}`, "success", "Dokumen berhasil diperbarui."));
+    redirectUrl = buildMessageUrl(`/documents/${documentId}`, "success", "Dokumen berhasil diperbarui.");
   } catch (error) {
-    redirect(buildMessageUrl(`/documents/${documentId}`, "error", getErrorMessage(error)));
+    redirectUrl = buildMessageUrl(`/documents/${documentId}`, "error", getErrorMessage(error));
   }
+
+  redirect(redirectUrl);
+}
+
+export async function deleteDocumentAction(formData: FormData) {
+  const actor = await requireAuthenticatedUser();
+  const values = getFormValues(formData);
+  let redirectUrl = "/documents";
+
+  try {
+    await deleteDocument(actor, values);
+
+    revalidatePath("/dashboard");
+    revalidatePath("/documents");
+    revalidatePath("/published");
+    redirectUrl = buildMessageUrl("/documents", "success", "Dokumen LHU berhasil dihapus permanen.");
+  } catch (error) {
+    redirectUrl = buildMessageUrl("/documents", "error", getErrorMessage(error));
+  }
+
+  redirect(redirectUrl);
 }
 
 export async function transitionDocumentAction(formData: FormData) {
   const actor = await requireAuthenticatedUser();
   const values = getFormValues(formData);
   const documentId = values.documentId;
+  let redirectUrl = `/documents/${documentId}`;
 
   try {
     await transitionDocument(actor, values);
@@ -70,23 +102,28 @@ export async function transitionDocumentAction(formData: FormData) {
     revalidatePath("/review");
     revalidatePath("/published");
     revalidatePath(`/documents/${documentId}`);
-    redirect(buildMessageUrl(`/documents/${documentId}`, "success", "Status dokumen berhasil diperbarui."));
+    redirectUrl = buildMessageUrl(`/documents/${documentId}`, "success", "Status dokumen berhasil diperbarui.");
   } catch (error) {
-    redirect(buildMessageUrl(`/documents/${documentId}`, "error", getErrorMessage(error)));
+    redirectUrl = buildMessageUrl(`/documents/${documentId}`, "error", getErrorMessage(error));
   }
+
+  redirect(redirectUrl);
 }
 
 export async function addReviewCommentAction(formData: FormData) {
   const actor = await requireAuthenticatedUser();
   const values = getFormValues(formData);
   const documentId = values.documentId;
+  let redirectUrl = `/documents/${documentId}`;
 
   try {
     await addReviewComment(actor, values);
 
     revalidatePath(`/documents/${documentId}`);
-    redirect(buildMessageUrl(`/documents/${documentId}`, "success", "Komentar review berhasil ditambahkan."));
+    redirectUrl = buildMessageUrl(`/documents/${documentId}`, "success", "Komentar review berhasil ditambahkan.");
   } catch (error) {
-    redirect(buildMessageUrl(`/documents/${documentId}`, "error", getErrorMessage(error)));
+    redirectUrl = buildMessageUrl(`/documents/${documentId}`, "error", getErrorMessage(error));
   }
+
+  redirect(redirectUrl);
 }

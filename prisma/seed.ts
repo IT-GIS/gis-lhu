@@ -1,8 +1,10 @@
 import "dotenv/config";
 
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
-import { PrismaClient, DocumentStatus, FormType, Role, ReviewAction } from "@prisma/client";
+import { PrismaClient, BlogPostStatus, DocumentStatus, FormType, Role, ReviewAction } from "@prisma/client";
 import { hashSync } from "bcryptjs";
+
+import { initialBlogArticles } from "../src/features/landing/blog-data";
 
 const databaseUrl = process.env.DATABASE_URL;
 
@@ -134,9 +136,46 @@ async function seedDocuments() {
   }
 }
 
+async function seedBlogPosts() {
+  const admin = await prisma.user.findUniqueOrThrow({
+    where: { email: "admin@gis-lhu.local" },
+  });
+
+  for (const article of initialBlogArticles) {
+    await prisma.blogPost.upsert({
+      where: { slug: article.slug },
+      update: {
+        title: article.title,
+        excerpt: article.excerpt,
+        content: article.content,
+        category: article.category,
+        coverImage: article.image,
+        sourceUrl: article.sourceUrl,
+        status: BlogPostStatus.published,
+        publishedAt: new Date(article.date),
+        updatedById: admin.id,
+      },
+      create: {
+        title: article.title,
+        slug: article.slug,
+        excerpt: article.excerpt,
+        content: article.content,
+        category: article.category,
+        coverImage: article.image,
+        sourceUrl: article.sourceUrl,
+        status: BlogPostStatus.published,
+        publishedAt: new Date(article.date),
+        createdById: admin.id,
+        updatedById: admin.id,
+      },
+    });
+  }
+}
+
 async function main() {
   await seedUsers();
   await seedDocuments();
+  await seedBlogPosts();
 }
 
 main()

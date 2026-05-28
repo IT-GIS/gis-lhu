@@ -33,6 +33,17 @@ export async function buildVerificationQrCode(token: string) {
   });
 }
 
+export async function buildVerificationQrCodeBuffer(token: string) {
+  return QRCode.toBuffer(buildVerificationUrl(token), {
+    width: 640,
+    margin: 2,
+    color: {
+      dark: "#0f172a",
+      light: "#ffffff",
+    },
+  });
+}
+
 export function getVerificationView(input: {
   tokenExists: boolean;
   isActive: boolean;
@@ -51,7 +62,7 @@ export function getVerificationView(input: {
       state: "revoked",
       title: "Dokumen sudah tidak aktif",
       description:
-        "Dokumen pernah dipublikasikan, tetapi token verifikasinya sudah dicabut atau dokumennya telah direvoke.",
+        "Dokumen pernah terdaftar, tetapi token verifikasinya sudah dicabut atau dokumennya tidak aktif.",
     } satisfies VerificationView;
   }
 
@@ -59,6 +70,6 @@ export function getVerificationView(input: {
     state: "valid",
     title: "Dokumen resmi berhasil diverifikasi",
     description:
-      "Token aktif dan dokumen masih berstatus published. Informasi yang ditampilkan di bawah dapat digunakan untuk validasi keaslian.",
+      "Token aktif dan dokumen terdaftar di sistem GIS LHU. Informasi yang ditampilkan di bawah dapat digunakan untuk validasi keaslian.",
   } satisfies VerificationView;
 }

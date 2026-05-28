@@ -11,6 +11,7 @@ import type { AuthUser } from "@/lib/auth";
 import { formTypeLabels } from "@/lib/domain";
 import {
   canCreateDocument,
+  canDeleteDocument,
   canEditDocument,
   canPublishDocument,
   canReviewDocument,
@@ -18,11 +19,10 @@ import {
   canSubmitForReview,
 } from "@/lib/permissions";
 import { prisma } from "@/lib/prisma";
+import { parseLhuDocumentInput } from "@/lib/lhu-payload";
 import {
-  createDocumentSchema,
   reviewCommentSchema,
   transitionSchema,
-  updateDocumentSchema,
 } from "@/lib/validators";
 import { canTransitionStatus } from "@/lib/workflow";
 
@@ -110,6 +110,8 @@ export async function getDashboardData() {
 }
 
 export async function getDocuments() {
+  await ensureDocumentVerificationTokens();
+
   return prisma.document.findMany({
     orderBy: { updatedAt: "desc" },
     include: {
@@ -122,6 +124,50 @@ export async function getDocuments() {
       verification: true,
     },
   });
+}
+
+async function ensureDocumentVerificationTokens() {
+  const documents = await prisma.document.findMany({
+    select: {
+      id: true,
+      verification: {
+        select: {
+          id: true,
+          isActive: true,
+          publishedAt: true,
+        },
+      },
+    },
+  });
+  const missingTokenDocuments = documents.filter((document) => !document.verification);
+  const inactiveTokens = documents.filter((document) => document.verification && !document.verification.isActive);
+
+  if (!missingTokenDocuments.length && !inactiveTokens.length) {
+    return;
+  }
+
+  await prisma.$transaction([
+    ...missingTokenDocuments.map((document) =>
+      prisma.verificationToken.create({
+        data: {
+          documentId: document.id,
+          token: createVerificationToken(),
+          isActive: true,
+          publishedAt: new Date(),
+        },
+      }),
+    ),
+    ...inactiveTokens.map((document) =>
+      prisma.verificationToken.update({
+        where: { documentId: document.id },
+        data: {
+          isActive: true,
+          revokedAt: null,
+          publishedAt: document.verification?.publishedAt ?? new Date(),
+        },
+      }),
+    ),
+  ]);
 }
 
 export async function getReviewQueue() {
@@ -199,7 +245,7 @@ export async function createDocument(actor: AuthUser, input: Record<string, stri
     throw new Error("Anda tidak memiliki izin untuk membuat dokumen.");
   }
 
-  const parsed = createDocumentSchema.parse(input);
+  const parsed = parseLhuDocumentInput(input);
 
   return prisma.$transaction(async (tx) => {
     const documentNumber = await generateDocumentNumber(tx);
@@ -214,8 +260,18 @@ export async function createDocument(actor: AuthUser, input: Record<string, stri
         sampleName: normalizeOptionalString(parsed.sampleName),
         notes: normalizeOptionalString(parsed.notes),
         assignedToId: normalizeOptionalString(parsed.assignedToId),
-        formPayload: {},
+        formPayload: parsed.formPayload as Prisma.InputJsonValue,
         createdById: actor.id,
+      },
+    });
+
+    const token = createVerificationToken();
+    await tx.verificationToken.create({
+      data: {
+        documentId: created.id,
+        token,
+        isActive: true,
+        publishedAt: new Date(),
       },
     });
 
@@ -227,6 +283,7 @@ export async function createDocument(actor: AuthUser, input: Record<string, stri
       metadata: {
         documentNumber,
         formTypeLabel: formTypeLabels[created.formType],
+        verificationToken: token,
       },
     });
 
@@ -235,11 +292,16 @@ export async function createDocument(actor: AuthUser, input: Record<string, stri
 }
 
 export async function updateDocument(actor: AuthUser, input: Record<string, string>) {
-  const parsed = updateDocumentSchema.parse(input);
+  const parsed = parseLhuDocumentInput(input);
+  const documentId = input.documentId?.trim();
+
+  if (!documentId) {
+    throw new Error("Dokumen tidak ditemukan.");
+  }
 
   return prisma.$transaction(async (tx) => {
     const existing = await tx.document.findUnique({
-      where: { id: parsed.documentId },
+      where: { id: documentId },
     });
 
     if (!existing) {
@@ -262,6 +324,7 @@ export async function updateDocument(actor: AuthUser, input: Record<string, stri
         notes: normalizeOptionalString(parsed.notes),
         assignedToId: normalizeOptionalString(parsed.assignedToId),
         formType: nextFormType,
+        formPayload: parsed.formPayload as Prisma.InputJsonValue,
       },
     });
 
@@ -276,6 +339,45 @@ export async function updateDocument(actor: AuthUser, input: Record<string, stri
     });
 
     return updated;
+  });
+}
+
+export async function deleteDocument(actor: AuthUser, input: Record<string, string>) {
+  if (!canDeleteDocument(actor.role)) {
+    throw new Error("Anda tidak memiliki izin untuk menghapus dokumen.");
+  }
+
+  const documentId = input.documentId?.trim();
+
+  if (!documentId) {
+    throw new Error("Dokumen tidak ditemukan.");
+  }
+
+  return prisma.$transaction(async (tx) => {
+    const existing = await tx.document.findUnique({
+      where: { id: documentId },
+    });
+
+    if (!existing) {
+      throw new Error("Dokumen tidak ditemukan.");
+    }
+
+    await recordAudit(tx, {
+      actorId: actor.id,
+      action: "document.delete",
+      entityType: "document",
+      entityId: existing.id,
+      metadata: {
+        documentNumber: existing.documentNumber,
+        title: existing.title,
+      },
+    });
+
+    await tx.document.delete({
+      where: { id: existing.id },
+    });
+
+    return existing;
   });
 }
 

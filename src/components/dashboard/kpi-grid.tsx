@@ -18,13 +18,13 @@ export function KpiGrid({ items }: Props) {
       {items.map((item, i) => (
         <Card
           key={item.label}
-          className="neu-card group relative overflow-hidden rounded-2xl p-6 cursor-default hover:-translate-y-1.5 transition-all duration-500"
+          className="group relative cursor-default overflow-hidden rounded-[28px] border border-white/70 bg-white/82 p-6 shadow-glass backdrop-blur-2xl transition-all duration-500 hover:-translate-y-1.5"
           style={{ animationDelay: `${i * 100}ms` }}
         >
           {/* Decorative gradient orb */}
-          <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br from-indigo-200/50 to-indigo-100/30 dark:from-indigo-900/30 dark:to-transparent opacity-70 transition-transform duration-700 group-hover:scale-[2] ease-out pointer-events-none" />
+          <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br from-cyan-200/60 to-sky-100/40 opacity-70 transition-transform duration-700 ease-out group-hover:scale-[2] dark:from-sky-900/30 dark:to-transparent" />
           <div className="relative">
-            <div className="text-xs font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400 transition-colors group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
+            <div className="text-xs font-bold uppercase tracking-widest text-slate-500 transition-colors group-hover:text-[var(--color-gis-blue)] dark:text-slate-400 dark:group-hover:text-[var(--color-gis-cyan)]">
               {item.label}
             </div>
             <div className={`mt-3 text-4xl font-extrabold tracking-tight ${item.color ?? "text-slate-800 dark:text-slate-100"}`}>

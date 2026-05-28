@@ -12,6 +12,9 @@ describe("verification view state", () => {
   });
 
   it("returns valid when token exists and is active", () => {
-    expect(getVerificationView({ tokenExists: true, isActive: true }).state).toBe("valid");
+    const view = getVerificationView({ tokenExists: true, isActive: true });
+
+    expect(view.state).toBe("valid");
+    expect(view.description).toContain("terdaftar di sistem GIS LHU");
   });
 });

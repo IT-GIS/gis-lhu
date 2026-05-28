@@ -24,6 +24,7 @@
 .DS_Store
 *.pem
 dev-server.log
+dev-server.err.log
 tmp-*.png
 tmp-*.jpg
 tmp-*.jpeg

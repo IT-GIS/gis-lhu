@@ -1,6 +1,7 @@
 import { FormTypeBadge } from "@/components/form-type-badge";
 import { StatusBadge } from "@/components/status-badge";
 import { resolveVerificationToken } from "@/lib/documents";
+import { resolveLhuPayload } from "@/lib/lhu-payload";
 import { getVerificationView } from "@/lib/verification";
 import { formatDate } from "@/lib/utils";
 
@@ -17,8 +18,14 @@ export default async function VerifyPage({
   const verification = await resolveVerificationToken(token);
   const view = getVerificationView({
     tokenExists: Boolean(verification),
-    isActive: Boolean(verification?.isActive && verification?.document.status === "published"),
+    isActive: Boolean(verification?.isActive),
   });
+  const payload = verification
+    ? resolveLhuPayload(verification.document.formType, verification.document.formPayload)
+    : null;
+  const principalName = payload?.principal.name || verification?.document.clientName || verification?.document.title;
+  const reportNo = payload?.reportNo || verification?.document.referenceNo || "-";
+  const sampleName = payload?.sample.sampleName || verification?.document.sampleName || "-";
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.16),_transparent_24%),linear-gradient(180deg,_#f8fafc_0%,_#eff6ff_100%)] px-4 py-8">
@@ -46,13 +53,25 @@ export default async function VerifyPage({
                 </p>
               </div>
               <div className="rounded-[28px] border border-slate-100 bg-slate-50/80 p-5">
-                <p className="text-sm text-slate-500">Judul dokumen</p>
+                <p className="text-sm text-slate-500">Nomor laporan</p>
                 <p className="mt-2 text-lg font-semibold text-slate-900">
-                  {verification.document.title}
+                  {reportNo}
                 </p>
               </div>
               <div className="rounded-[28px] border border-slate-100 bg-slate-50/80 p-5">
-                <p className="text-sm text-slate-500">Tanggal publish</p>
+                <p className="text-sm text-slate-500">Pelanggan</p>
+                <p className="mt-2 text-lg font-semibold text-slate-900">
+                  {principalName}
+                </p>
+              </div>
+              <div className="rounded-[28px] border border-slate-100 bg-slate-50/80 p-5">
+                <p className="text-sm text-slate-500">Sampel</p>
+                <p className="mt-2 text-lg font-semibold text-slate-900">
+                  {sampleName}
+                </p>
+              </div>
+              <div className="rounded-[28px] border border-slate-100 bg-slate-50/80 p-5">
+                <p className="text-sm text-slate-500">Tanggal barcode aktif</p>
                 <p className="mt-2 text-lg font-semibold text-slate-900">
                   {formatDate(verification.publishedAt)}
                 </p>
@@ -69,7 +88,7 @@ export default async function VerifyPage({
           </section>
         ) : (
           <section className="rounded-[36px] border border-white/60 bg-white/90 p-8 text-sm leading-7 text-slate-600 shadow-[0_40px_120px_rgba(15,23,42,0.12)]">
-            Token yang Anda akses tidak tersedia di sistem GIS LHU. Pastikan tautan berasal dari dokumen resmi yang diterbitkan laboratorium.
+            Token yang Anda akses tidak tersedia di sistem GIS LHU. Pastikan tautan berasal dari dokumen resmi yang terdaftar di sistem laboratorium.
           </section>
         )}
       </div>

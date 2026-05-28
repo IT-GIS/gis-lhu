@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { FormTypeBadge } from "@/components/form-type-badge";
+import { PageHeader } from "@/components/shared/page-header";
 import { SectionCard } from "@/components/section-card";
 import { StatusBadge } from "@/components/status-badge";
 import { getPublishedDocuments } from "@/lib/documents";
@@ -11,15 +12,10 @@ export default async function PublishedPage() {
 
   return (
     <div className="space-y-6 p-2 lg:p-4">
-      <section className="rounded-[32px] border border-white/60 bg-white/80 p-8 shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
-        <p className="text-xs uppercase tracking-[0.28em] text-amber-600">Publikasi Internal</p>
-        <h1 className="mt-3 font-[family-name:var(--font-display)] text-4xl font-bold tracking-tight text-slate-950">
-          Dokumen published dan revoked
-        </h1>
-        <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-500">
-          Pantau token verifikasi yang sedang aktif dan histori dokumen yang telah direvoke.
-        </p>
-      </section>
+      <PageHeader
+        title="Dokumen published dan revoked"
+        description="Pantau token verifikasi yang sedang aktif dan histori dokumen yang telah direvoke."
+      />
 
       <SectionCard title="Daftar publikasi" description={`${documents.length} dokumen`}>
         <div className="space-y-4">
@@ -27,12 +23,12 @@ export default async function PublishedPage() {
             <Link
               key={document.id}
               href={`/documents/${document.id}`}
-              className="block rounded-[28px] border border-slate-100 bg-slate-50/80 px-5 py-5 transition hover:border-slate-200 hover:bg-white"
+              className="block rounded-[28px] border border-sky-100 bg-sky-50/55 px-5 py-5 transition hover:-translate-y-0.5 hover:border-sky-200 hover:bg-white dark:border-slate-800 dark:bg-slate-900/70"
             >
               <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div className="space-y-2">
                   <div className="flex flex-wrap items-center gap-3">
-                    <h2 className="text-lg font-semibold text-slate-900">{document.title}</h2>
+                    <h2 className="text-lg font-bold text-[var(--color-gis-navy)] dark:text-slate-100">{document.title}</h2>
                     <StatusBadge status={document.status} />
                     <FormTypeBadge formType={document.formType} />
                   </div>

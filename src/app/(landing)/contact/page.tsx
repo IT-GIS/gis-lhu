@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 
-import { ContactLandingPage } from "@/features/landing/pages";
-import { landingPages } from "@/features/landing/static-pages";
+import { ContactPage } from "@/features/landing/contact-page";
 
 export const metadata: Metadata = {
-  title: landingPages.contact.title,
-  description: landingPages.contact.description,
+  title: "Kontak - GISLAB",
+  description: "Hubungi GIS Laboratorium untuk konsultasi layanan pengujian dan informasi kantor.",
 };
 
 export default function LandingContactRoute() {
-  return <ContactLandingPage />;
+  return <ContactPage />;
 }

@@ -38,6 +38,11 @@ enum ReviewAction {
   COMMENT
 }
 
+enum BlogPostStatus {
+  draft
+  published
+}
+
 model User {
   id                String       @id @default(cuid())
   name              String
@@ -52,6 +57,8 @@ model User {
   createdDocuments  Document[]   @relation("CreatedDocuments")
   assignedDocuments Document[]   @relation("AssignedDocuments")
   reviewEntries     ReviewEntry[]
+  createdBlogPosts   BlogPost[]   @relation("CreatedBlogPosts")
+  updatedBlogPosts   BlogPost[]   @relation("UpdatedBlogPosts")
 }
 
 model Session {
@@ -133,4 +140,28 @@ model AuditLog {
 
   @@index([entityType, entityId, createdAt])
   @@index([actorId])
+}
+
+model BlogPost {
+  id          String         @id @default(cuid())
+  title       String
+  slug        String         @unique
+  excerpt     String         @db.Text
+  content     String         @db.LongText
+  category    String
+  coverImage  String?
+  sourceUrl   String?
+  status      BlogPostStatus @default(draft)
+  publishedAt DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  createdById String?
+  updatedById String?
+  creator     User?          @relation("CreatedBlogPosts", fields: [createdById], references: [id], onDelete: SetNull)
+  updater     User?          @relation("UpdatedBlogPosts", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([status, publishedAt])
+  @@index([category])
+  @@index([createdById])
+  @@index([updatedById])
 }

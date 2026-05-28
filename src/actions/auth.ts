@@ -4,20 +4,20 @@ import { redirect } from "next/navigation";
 
 import { authenticateUser, createUserSession, destroyUserSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { buildMessageUrl, trimToNull } from "@/lib/utils";
+import { trimToNull } from "@/lib/utils";
 
 export async function loginAction(formData: FormData) {
   const email = trimToNull(formData.get("email"));
   const password = trimToNull(formData.get("password"));
 
   if (!email || !password) {
-    redirect(buildMessageUrl("/login", "error", "Email dan password wajib diisi."));
+    return { error: "Email dan password wajib diisi." };
   }
 
   const user = await authenticateUser(email, password);
 
   if (!user) {
-    redirect(buildMessageUrl("/login", "error", "Email atau password tidak valid."));
+    return { error: "Email atau password tidak valid." };
   }
 
   await createUserSession(user.id);

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   canCreateDocument,
+  canDeleteDocument,
   canEditDocument,
   canPublishDocument,
   canReviewDocument,
@@ -31,5 +32,12 @@ describe("permission helpers", () => {
     expect(canPublishDocument("ADMIN_LAB")).toBe(true);
     expect(canPublishDocument("QA_SUPERVISOR")).toBe(false);
     expect(canRevokeDocument("SUPER_ADMIN")).toBe(true);
+  });
+
+  it("restricts permanent delete to admin roles", () => {
+    expect(canDeleteDocument("SUPER_ADMIN")).toBe(true);
+    expect(canDeleteDocument("ADMIN_LAB")).toBe(true);
+    expect(canDeleteDocument("QA_SUPERVISOR")).toBe(false);
+    expect(canDeleteDocument("FRONTDESK")).toBe(false);
   });
 });

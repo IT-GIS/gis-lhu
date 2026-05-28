@@ -30,11 +30,8 @@ export function StatusChartCard({ counts }: { counts?: Record<string, number> })
     }));
 
   return (
-    <Card className="neu-card flex flex-col overflow-hidden rounded-2xl">
-      <div
-        className="px-5 md:px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
-        style={{ borderBottom: "1px solid var(--neu-shadow-a)" }}
-      >
+    <Card className="flex flex-col overflow-hidden rounded-[28px] p-0">
+      <div className="flex flex-col justify-between gap-3 border-b border-sky-100 px-5 py-4 dark:border-slate-800 sm:flex-row sm:items-center md:px-6">
         <div>
           <div className="text-base font-bold text-slate-800 dark:text-slate-200">Komposisi Status</div>
           <div className="text-xs font-medium text-slate-500 hidden md:block">Distribusi pipeline operasional</div>
@@ -44,8 +41,7 @@ export function StatusChartCard({ counts }: { counts?: Record<string, number> })
           <select
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            className="h-8 pl-3 pr-8 py-1 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 outline-none cursor-pointer"
-            style={{ background: "var(--neu-bg)", boxShadow: "var(--neu-inset)", border: "none" }}
+            className="h-8 cursor-pointer rounded-xl border border-sky-100 bg-white/80 py-1 pl-3 pr-8 text-xs font-semibold text-slate-700 outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
           >
             <option value="all">Semua Thn</option>
             <option value="2026">2026</option>
@@ -55,8 +51,7 @@ export function StatusChartCard({ counts }: { counts?: Record<string, number> })
           <select
             value={month}
             onChange={(e) => setMonth(e.target.value)}
-            className="h-8 pl-3 pr-8 py-1 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 outline-none cursor-pointer"
-            style={{ background: "var(--neu-bg)", boxShadow: "var(--neu-inset)", border: "none" }}
+            className="h-8 cursor-pointer rounded-xl border border-sky-100 bg-white/80 py-1 pl-3 pr-8 text-xs font-semibold text-slate-700 outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
           >
             <option value="all">Semua Bln</option>
             {["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"].map(m => (

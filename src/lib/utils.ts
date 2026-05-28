@@ -48,13 +48,13 @@ export function getStatusColor(
     case "draft":
       return "bg-[var(--color-muted)] text-[var(--color-muted-foreground)]";
     case "input_hasil":
-      return "bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)]";
+      return "bg-sky-50 text-sky-700";
     case "review":
-      return "bg-[var(--color-accent)] text-[var(--color-accent-foreground)]";
+      return "bg-cyan-50 text-cyan-700";
     case "revisi":
       return "bg-amber-100 text-amber-800";
     case "approved":
-      return "bg-emerald-50 text-emerald-700";
+      return "bg-teal-50 text-teal-700";
     case "published":
       return "bg-sky-50 text-sky-700";
     case "revoked":

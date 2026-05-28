@@ -13,10 +13,10 @@ export function FlashMessage({
 
   return (
     <div
-      className={`rounded-2xl border px-4 py-3 text-sm ${
+      className={`rounded-2xl border px-4 py-3 text-sm font-semibold shadow-sm ${
         isError
           ? "border-rose-200 bg-rose-50 text-rose-800"
-          : "border-emerald-200 bg-emerald-50 text-emerald-800"
+          : "border-cyan-200 bg-cyan-50 text-cyan-800"
       }`}
     >
       {error ?? success}
