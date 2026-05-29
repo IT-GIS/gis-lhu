@@ -19,9 +19,9 @@ function FieldBlock({
   mono?: boolean;
 }) {
   return (
-    <div className="rounded-[24px] border border-slate-100 bg-slate-50/80 p-5">
-      <p className="text-sm text-slate-500">{label}</p>
-      <p className={`mt-2 break-words text-base font-semibold text-slate-950 ${mono ? "font-mono text-sm" : ""}`}>
+    <div className="min-w-0 border-b border-slate-100 py-4">
+      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{label}</p>
+      <p className={`mt-2 break-words text-base font-semibold leading-7 text-slate-950 ${mono ? "font-mono text-sm" : ""}`}>
         {value || "-"}
       </p>
     </div>
@@ -36,8 +36,8 @@ function PublicSection({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-[32px] border border-white/70 bg-white/92 p-6 shadow-[0_24px_80px_rgba(15,23,42,0.09)]">
-      <h2 className="text-lg font-extrabold text-slate-950">{title}</h2>
+    <section className="border-t border-slate-200 pt-7">
+      <h2 className="text-base font-extrabold uppercase tracking-[0.08em] text-slate-950">{title}</h2>
       <div className="mt-5">{children}</div>
     </section>
   );
@@ -78,7 +78,7 @@ function ResultTable({
   const columns = getResultColumns(formType);
 
   return (
-    <div className="overflow-x-auto rounded-[24px] border border-slate-200 bg-white">
+    <div className="overflow-x-auto rounded-[18px] border border-slate-200 bg-white">
       <table className="w-full min-w-[760px] border-collapse text-sm">
         <thead className="bg-slate-950 text-white">
           <tr>
@@ -128,68 +128,86 @@ export default async function VerifyPage({
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.16),_transparent_24%),linear-gradient(180deg,_#f8fafc_0%,_#eff6ff_100%)] px-4 py-8">
-      <div className="mx-auto max-w-6xl space-y-6">
-        <section className="rounded-[36px] border border-white/60 bg-white/90 p-8 shadow-[0_40px_120px_rgba(15,23,42,0.12)]">
-          <p className="text-xs uppercase tracking-[0.28em] text-sky-700">Verifikasi Publik GIS LHU</p>
-          <h1 className="mt-4 font-[family-name:var(--font-display)] text-4xl font-bold tracking-tight text-slate-950">
-            {view.title}
-          </h1>
-          <p className="mt-4 text-sm leading-7 text-slate-600">{view.description}</p>
-        </section>
-
+      <div className="mx-auto max-w-6xl">
         {verification && payload ? (
-          <div className="space-y-6">
-            <section className="rounded-[36px] border border-white/60 bg-white/90 p-8 shadow-[0_40px_120px_rgba(15,23,42,0.12)]">
-            <div className="flex flex-wrap items-center gap-3">
-              <StatusBadge status={verification.document.status} />
-              <FormTypeBadge formType={verification.document.formType} />
-            </div>
-
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <FieldBlock label="Nomor dokumen" value={verification.document.documentNumber} />
-              <FieldBlock label="Nomor laporan" value={reportNo} />
-              <FieldBlock label="No. Order / Nomor Pekerjaan" value={payload.orderNo} />
-              <FieldBlock label="Pelanggan" value={principalName} />
-              <FieldBlock label="Sampel" value={sampleName} />
-              <FieldBlock label="Tanggal barcode aktif" value={formatDate(verification.publishedAt)} />
-              <FieldBlock label="Token" value={verification.token} mono />
-            </div>
-          </section>
-
-            <PublicSection title="II. Principal / Pelanggan">
-              <div className="grid gap-4 md:grid-cols-2">
-                <FieldBlock label="Name / Nama" value={payload.principal.name} />
-                <FieldBlock label="Address / Alamat" value={payload.principal.address} />
+          <article className="rounded-[36px] border border-white/60 bg-white/92 p-6 shadow-[0_40px_120px_rgba(15,23,42,0.12)] sm:p-8">
+            <header className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+              <div className="max-w-3xl">
+                <p className="text-xs uppercase tracking-[0.28em] text-sky-700">Verifikasi Publik GIS LHU</p>
+                <h1 className="mt-4 font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+                  {view.title}
+                </h1>
+                <p className="mt-4 text-sm leading-7 text-slate-600">{view.description}</p>
               </div>
-            </PublicSection>
+              <div className="flex flex-wrap items-center gap-3 lg:justify-end">
+                <StatusBadge status={verification.document.status} />
+                <FormTypeBadge formType={verification.document.formType} />
+              </div>
+            </header>
 
-            <PublicSection title="III. Sample / Contoh Uji">
-              <AdditionalInfoList payload={payload} />
-            </PublicSection>
-
-            <PublicSection title="IV. Result / Hasil Uji">
-              <ResultTable formType={verification.document.formType} payload={payload} />
-              {payload.notes ? (
-                <div className="mt-5 rounded-[24px] border border-amber-100 bg-amber-50 p-5 text-sm leading-7 text-amber-950">
-                  <p className="font-bold">Catatan</p>
-                  <p className="mt-2 whitespace-pre-line">{payload.notes}</p>
+            <div className="mt-8 space-y-8">
+              <PublicSection title="Data verifikasi barcode">
+                <div className="grid gap-x-8 md:grid-cols-2">
+                  <FieldBlock label="Nomor dokumen" value={verification.document.documentNumber} />
+                  <FieldBlock label="Nomor laporan" value={reportNo} />
+                  <FieldBlock label="Status dokumen" value={verification.document.status} />
+                  <FieldBlock label="Tipe form" value={verification.document.formType.replace("_", " ")} />
+                  <FieldBlock label="Tanggal barcode aktif" value={formatDate(verification.publishedAt)} />
+                  <FieldBlock label="Token" value={verification.token} mono />
                 </div>
-              ) : null}
-            </PublicSection>
+              </PublicSection>
 
-            <PublicSection title="Penerbit dan Penanggung Jawab">
-              <div className="grid gap-4 md:grid-cols-2">
-                <FieldBlock label="Tempat terbit" value={payload.issue.place} />
-                <FieldBlock label="Tanggal terbit" value={payload.issue.date} />
-                <FieldBlock label="Perusahaan" value={payload.signer.company} />
-                <FieldBlock label="Nama penanda tangan" value={payload.signer.name} />
-                <FieldBlock label="Jabatan" value={payload.signer.title} />
-              </div>
-            </PublicSection>
-          </div>
+              <PublicSection title="I. Report of Analysis / Laporan Hasil Pengujian">
+                <div className="grid gap-x-8 md:grid-cols-2">
+                  <FieldBlock label="No. Report / Nomor Laporan" value={payload.reportNo} />
+                  <FieldBlock label="No. Order / Nomor Pekerjaan" value={payload.orderNo} />
+                  <FieldBlock label="Principal / Pelanggan" value={principalName} />
+                  <FieldBlock label="Sample / Contoh Uji" value={sampleName} />
+                </div>
+              </PublicSection>
+
+              <PublicSection title="II. Principal / Pelanggan">
+                <div className="grid gap-x-8 md:grid-cols-2">
+                  <FieldBlock label="Name / Nama" value={payload.principal.name} />
+                  <FieldBlock label="Address / Alamat" value={payload.principal.address} />
+                </div>
+              </PublicSection>
+
+              <PublicSection title="III. Sample / Contoh Uji">
+                <AdditionalInfoList payload={payload} />
+              </PublicSection>
+
+              <PublicSection title="IV. Result / Hasil Uji">
+                <ResultTable formType={verification.document.formType} payload={payload} />
+                {payload.notes ? (
+                  <div className="mt-5 border-t border-amber-200 bg-amber-50/70 px-4 py-5 text-sm leading-7 text-amber-950">
+                    <p className="font-bold">Catatan</p>
+                    <p className="mt-2 whitespace-pre-line">{payload.notes}</p>
+                  </div>
+                ) : null}
+              </PublicSection>
+
+              <PublicSection title="Penerbit dan Penanggung Jawab">
+                <div className="grid gap-x-8 md:grid-cols-2">
+                  <FieldBlock label="Tempat terbit" value={payload.issue.place} />
+                  <FieldBlock label="Tanggal terbit" value={payload.issue.date} />
+                  <FieldBlock label="Perusahaan" value={payload.signer.company} />
+                  <FieldBlock label="Nama penanda tangan" value={payload.signer.name} />
+                  <FieldBlock label="Jabatan" value={payload.signer.title} />
+                </div>
+              </PublicSection>
+            </div>
+          </article>
         ) : (
-          <section className="rounded-[36px] border border-white/60 bg-white/90 p-8 text-sm leading-7 text-slate-600 shadow-[0_40px_120px_rgba(15,23,42,0.12)]">
-            Token yang Anda akses tidak tersedia di sistem GIS LHU. Pastikan tautan berasal dari dokumen resmi yang terdaftar di sistem laboratorium.
+          <section className="rounded-[36px] border border-white/60 bg-white/90 p-8 shadow-[0_40px_120px_rgba(15,23,42,0.12)]">
+            <p className="text-xs uppercase tracking-[0.28em] text-sky-700">Verifikasi Publik GIS LHU</p>
+            <h1 className="mt-4 font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+              {view.title}
+            </h1>
+            <p className="mt-4 text-sm leading-7 text-slate-600">{view.description}</p>
+            <p className="mt-6 border-t border-slate-200 pt-6 text-sm leading-7 text-slate-600">
+              Token yang Anda akses tidak tersedia di sistem GIS LHU. Pastikan tautan berasal dari dokumen resmi yang terdaftar di sistem laboratorium.
+            </p>
           </section>
         )}
       </div>
