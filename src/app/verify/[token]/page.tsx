@@ -187,7 +187,6 @@ export default async function VerifyPage({
               <div className="space-y-8">
                 <PublicSection title="Data Verifikasi Dokumen">
                   <div className="grid gap-x-8 md:grid-cols-2">
-                    <FieldBlock label="Nomor dokumen" value={verification.document.documentNumber} />
                     <FieldBlock label="Nomor laporan" value={reportNo} />
                     <FieldBlock label="Tanggal barcode aktif" value={formatDate(verification.publishedAt)} />
                   </div>
