@@ -1,5 +1,3 @@
-import { FormTypeBadge } from "@/components/form-type-badge";
-import { StatusBadge } from "@/components/status-badge";
 import { resolveVerificationToken } from "@/lib/documents";
 import { getResultColumns, resolveLhuPayload, type LhuPayload } from "@/lib/lhu-payload";
 import { getVerificationView } from "@/lib/verification";
@@ -12,18 +10,14 @@ export const dynamic = "force-dynamic";
 function FieldBlock({
   label,
   value,
-  mono = false,
 }: {
   label: string;
   value?: string | null;
-  mono?: boolean;
 }) {
   return (
-    <div className="min-w-0 border-b border-slate-100 py-4">
-      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{label}</p>
-      <p className={`mt-2 break-words text-base font-semibold leading-7 text-slate-950 ${mono ? "font-mono text-sm" : ""}`}>
-        {value || "-"}
-      </p>
+    <div className="min-w-0 rounded-lg border border-slate-200 bg-slate-50/70 px-4 py-4">
+      <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-500">{label}</p>
+      <p className="mt-2 break-words text-base font-semibold leading-7 text-slate-950">{value || "-"}</p>
     </div>
   );
 }
@@ -36,8 +30,8 @@ function PublicSection({
   children: React.ReactNode;
 }) {
   return (
-    <section className="border-t border-slate-200 pt-7">
-      <h2 className="text-base font-extrabold uppercase tracking-[0.08em] text-slate-950">{title}</h2>
+    <section className="border-t border-slate-200 pt-8 first:border-t-0 first:pt-0">
+      <h2 className="text-sm font-extrabold uppercase tracking-[0.08em] text-slate-950 sm:text-base">{title}</h2>
       <div className="mt-5">{children}</div>
     </section>
   );
@@ -78,7 +72,7 @@ function ResultTable({
   const columns = getResultColumns(formType);
 
   return (
-    <div className="overflow-x-auto rounded-[18px] border border-slate-200 bg-white">
+    <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
       <table className="w-full min-w-[760px] border-collapse text-sm">
         <thead className="bg-slate-950 text-white">
           <tr>
@@ -111,7 +105,7 @@ function ResultTable({
 function SignatureBlock({ payload }: { payload: LhuPayload }) {
   return (
     <div className="flex justify-start md:justify-end">
-      <div className="w-full max-w-sm text-left md:text-center">
+      <div className="w-full max-w-sm rounded-lg border border-slate-200 bg-slate-50/70 px-6 py-6 text-left md:text-center">
         <p className="text-base font-semibold leading-7 text-slate-950">
           {payload.issue.place || "Jakarta"}, {payload.issue.date || "-"}
         </p>
@@ -150,10 +144,10 @@ export default async function VerifyPage({
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.16),_transparent_24%),linear-gradient(180deg,_#f8fafc_0%,_#eff6ff_100%)] px-4 py-8">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl space-y-6">
         {verification && payload ? (
-          <article className="rounded-[36px] border border-white/60 bg-white/92 p-6 shadow-[0_40px_120px_rgba(15,23,42,0.12)] sm:p-8">
-            <header className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+          <>
+            <section className="rounded-lg border border-white/70 bg-white/95 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.10)] sm:p-8">
               <div className="max-w-3xl">
                 <p className="text-xs uppercase tracking-[0.28em] text-sky-700">Verifikasi Publik GIS LHU</p>
                 <h1 className="mt-4 font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
@@ -161,61 +155,56 @@ export default async function VerifyPage({
                 </h1>
                 <p className="mt-4 text-sm leading-7 text-slate-600">{view.description}</p>
               </div>
-              <div className="flex flex-wrap items-center gap-3 lg:justify-end">
-                <StatusBadge status={verification.document.status} />
-                <FormTypeBadge formType={verification.document.formType} />
-              </div>
-            </header>
+            </section>
 
-            <div className="mt-8 space-y-8">
-              <PublicSection title="Data verifikasi barcode">
-                <div className="grid gap-x-8 md:grid-cols-2">
-                  <FieldBlock label="Nomor dokumen" value={verification.document.documentNumber} />
-                  <FieldBlock label="Nomor laporan" value={reportNo} />
-                  <FieldBlock label="Status dokumen" value={verification.document.status} />
-                  <FieldBlock label="Tipe form" value={verification.document.formType.replace("_", " ")} />
-                  <FieldBlock label="Tanggal barcode aktif" value={formatDate(verification.publishedAt)} />
-                  <FieldBlock label="Token" value={verification.token} mono />
-                </div>
-              </PublicSection>
-
-              <PublicSection title="I. Report of Analysis / Laporan Hasil Pengujian">
-                <div className="grid gap-x-8 md:grid-cols-2">
-                  <FieldBlock label="No. Report / Nomor Laporan" value={payload.reportNo} />
-                  <FieldBlock label="No. Order / Nomor Pekerjaan" value={payload.orderNo} />
-                  <FieldBlock label="Principal / Pelanggan" value={principalName} />
-                  <FieldBlock label="Sample / Contoh Uji" value={sampleName} />
-                </div>
-              </PublicSection>
-
-              <PublicSection title="II. Principal / Pelanggan">
-                <div className="grid gap-x-8 md:grid-cols-2">
-                  <FieldBlock label="Name / Nama" value={payload.principal.name} />
-                  <FieldBlock label="Address / Alamat" value={payload.principal.address} />
-                </div>
-              </PublicSection>
-
-              <PublicSection title="III. Sample / Contoh Uji">
-                <AdditionalInfoList payload={payload} />
-              </PublicSection>
-
-              <PublicSection title="IV. Result / Hasil Uji">
-                <ResultTable formType={verification.document.formType} payload={payload} />
-                {payload.notes ? (
-                  <div className="mt-5 border-t border-amber-200 bg-amber-50/70 px-4 py-5 text-sm leading-7 text-amber-950">
-                    <p className="font-bold">Catatan</p>
-                    <p className="mt-2 whitespace-pre-line">{payload.notes}</p>
+            <article className="rounded-lg border border-white/70 bg-white/95 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.10)] sm:p-8">
+              <div className="space-y-8">
+                <PublicSection title="Data Verifikasi Dokumen">
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <FieldBlock label="Nomor dokumen" value={verification.document.documentNumber} />
+                    <FieldBlock label="Nomor laporan" value={reportNo} />
+                    <FieldBlock label="Tanggal barcode aktif" value={formatDate(verification.publishedAt)} />
                   </div>
-                ) : null}
-              </PublicSection>
+                </PublicSection>
 
-              <PublicSection title="Penerbit dan Penanggung Jawab">
-                <SignatureBlock payload={payload} />
-              </PublicSection>
-            </div>
-          </article>
+                <PublicSection title="I. Report of Analysis / Laporan Hasil Pengujian">
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <FieldBlock label="No. Report / Nomor Laporan" value={payload.reportNo} />
+                    <FieldBlock label="No. Order / Nomor Pekerjaan" value={payload.orderNo} />
+                    <FieldBlock label="Principal / Pelanggan" value={principalName} />
+                    <FieldBlock label="Sample / Contoh Uji" value={sampleName} />
+                  </div>
+                </PublicSection>
+
+                <PublicSection title="II. Principal / Pelanggan">
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <FieldBlock label="Name / Nama" value={payload.principal.name} />
+                    <FieldBlock label="Address / Alamat" value={payload.principal.address} />
+                  </div>
+                </PublicSection>
+
+                <PublicSection title="III. Sample / Contoh Uji">
+                  <AdditionalInfoList payload={payload} />
+                </PublicSection>
+
+                <PublicSection title="IV. Result / Hasil Uji">
+                  <ResultTable formType={verification.document.formType} payload={payload} />
+                  {payload.notes ? (
+                    <div className="mt-5 border-t border-amber-200 bg-amber-50/70 px-4 py-5 text-sm leading-7 text-amber-950">
+                      <p className="font-bold">Catatan</p>
+                      <p className="mt-2 whitespace-pre-line">{payload.notes}</p>
+                    </div>
+                  ) : null}
+                </PublicSection>
+
+                <PublicSection title="Penerbit dan Penanggung Jawab">
+                  <SignatureBlock payload={payload} />
+                </PublicSection>
+              </div>
+            </article>
+          </>
         ) : (
-          <section className="rounded-[36px] border border-white/60 bg-white/90 p-8 shadow-[0_40px_120px_rgba(15,23,42,0.12)]">
+          <section className="rounded-lg border border-white/70 bg-white/95 p-8 shadow-[0_24px_70px_rgba(15,23,42,0.10)]">
             <p className="text-xs uppercase tracking-[0.28em] text-sky-700">Verifikasi Publik GIS LHU</p>
             <h1 className="mt-4 font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
               {view.title}

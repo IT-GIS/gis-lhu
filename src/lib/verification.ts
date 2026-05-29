@@ -70,8 +70,8 @@ export function getVerificationView(input: {
 
   return {
     state: "valid",
-    title: "Dokumen resmi berhasil diverifikasi",
+    title: "Dokumen Laporan Hasil Uji Telah Terverifikasi",
     description:
-      "Token aktif dan dokumen terdaftar di sistem GIS LHU. Informasi yang ditampilkan di bawah dapat digunakan untuk validasi keaslian.",
+      "Dokumen ini tercatat pada sistem verifikasi PT Global Inspeksi Sistem. Informasi yang ditampilkan dapat digunakan untuk memastikan keaslian dokumen dan kesesuaian data penerbitan.",
   } satisfies VerificationView;
 }
