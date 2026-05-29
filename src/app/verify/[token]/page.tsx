@@ -142,6 +142,7 @@ export default async function VerifyPage({
   const payload = verification
     ? resolveLhuPayload(verification.document.formType, verification.document.formPayload)
     : null;
+  const isPubliclyVerified = Boolean(verification?.isActive);
   const principalName = payload?.principal.name || verification?.document.clientName || verification?.document.title;
   const reportNo = payload?.reportNo || verification?.document.referenceNo || "-";
   const sampleName = payload?.sample.sampleName || verification?.document.sampleName || "-";
@@ -149,7 +150,7 @@ export default async function VerifyPage({
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,_#f8fafc_0%,_#eef6ff_48%,_#f8fafc_100%)] px-4 py-8 sm:py-10">
       <div className="mx-auto max-w-6xl space-y-6">
-        {verification && payload ? (
+        {verification && payload && isPubliclyVerified ? (
           <>
             <section className="overflow-hidden rounded-lg border border-slate-200 bg-white">
               <div className="h-1.5 bg-gradient-to-r from-sky-700 via-cyan-500 to-emerald-500" aria-hidden="true" />
@@ -187,14 +188,14 @@ export default async function VerifyPage({
               <div className="space-y-8">
                 <PublicSection title="Data Verifikasi Dokumen">
                   <div className="grid gap-x-8 md:grid-cols-2">
-                    <FieldBlock label="Nomor laporan" value={reportNo} />
+                    <FieldBlock label="No. Laporan Hasil Uji" value={reportNo} />
                     <FieldBlock label="Tanggal barcode aktif" value={formatDate(verification.publishedAt)} />
                   </div>
                 </PublicSection>
 
                 <PublicSection title="I. Report of Analysis / Laporan Hasil Pengujian">
                   <div className="grid gap-x-8 md:grid-cols-2">
-                    <FieldBlock label="No. Report / Nomor Laporan" value={payload.reportNo} />
+                    <FieldBlock label="No. Report / No. Laporan Hasil Uji" value={payload.reportNo} />
                     <FieldBlock label="No. Order / Nomor Pekerjaan" value={payload.orderNo} />
                     <FieldBlock label="Principal / Pelanggan" value={principalName} />
                     <FieldBlock label="Sample / Contoh Uji" value={sampleName} />
@@ -239,7 +240,7 @@ export default async function VerifyPage({
               </h1>
               <p className="mt-4 text-sm leading-7 text-slate-600">{view.description}</p>
               <p className="mt-6 border-t border-slate-200 pt-6 text-sm leading-7 text-slate-600">
-                Token yang Anda akses tidak tersedia di sistem GIS LHU. Pastikan tautan berasal dari dokumen resmi yang terdaftar di sistem laboratorium.
+                Tautan yang Anda akses belum tersedia sebagai dokumen aktif di sistem verifikasi publik. Pastikan tautan berasal dari barcode LHU yang tersimpan di sistem.
               </p>
             </div>
           </section>

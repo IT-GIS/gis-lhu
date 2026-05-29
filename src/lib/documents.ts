@@ -130,6 +130,8 @@ async function ensureDocumentVerificationTokens() {
   const documents = await prisma.document.findMany({
     select: {
       id: true,
+      status: true,
+      publishedAt: true,
       verification: {
         select: {
           id: true,
@@ -140,9 +142,8 @@ async function ensureDocumentVerificationTokens() {
     },
   });
   const missingTokenDocuments = documents.filter((document) => !document.verification);
-  const inactiveTokens = documents.filter((document) => document.verification && !document.verification.isActive);
 
-  if (!missingTokenDocuments.length && !inactiveTokens.length) {
+  if (!missingTokenDocuments.length) {
     return;
   }
 
@@ -152,18 +153,8 @@ async function ensureDocumentVerificationTokens() {
         data: {
           documentId: document.id,
           token: createVerificationToken(),
-          isActive: true,
-          publishedAt: new Date(),
-        },
-      }),
-    ),
-    ...inactiveTokens.map((document) =>
-      prisma.verificationToken.update({
-        where: { documentId: document.id },
-        data: {
-          isActive: true,
-          revokedAt: null,
-          publishedAt: document.verification?.publishedAt ?? new Date(),
+          isActive: document.status !== "revoked",
+          publishedAt: document.publishedAt ?? new Date(),
         },
       }),
     ),
@@ -492,12 +483,11 @@ export async function transitionDocument(actor: AuthUser, input: Record<string, 
     });
 
     if (parsed.nextStatus === "published") {
-      const token = createVerificationToken();
+      const token = existing.verification?.token ?? createVerificationToken();
 
       await tx.verificationToken.upsert({
         where: { documentId: existing.id },
         update: {
-          token,
           isActive: true,
           publishedAt: publishedAt ?? new Date(),
           revokedAt: null,

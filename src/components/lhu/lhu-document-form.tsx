@@ -351,7 +351,7 @@ export function LhuDocumentForm({
           </select>
         </Field>
 
-        <Field label="No. LP / Nomor laporan">
+        <Field label="No. LP / No. Laporan Hasil Uji">
           <Input value={payload.reportNo} onChange={(event) => setPayloadField("reportNo", event.target.value)} placeholder="LP/J-0024D/26" disabled={!canEdit} required />
         </Field>
 

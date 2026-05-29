@@ -63,9 +63,6 @@ export default async function DocumentDetailPage({
           <div className="flex flex-wrap items-center gap-3">
             <StatusBadge status={document.status} />
             <FormTypeBadge formType={document.formType} />
-            <span className="rounded-full border border-sky-100 bg-white/80 px-3 py-1 text-xs font-bold text-slate-600">
-              {document.documentNumber}
-            </span>
             <Button asChild variant="outline" size="sm">
               <Link href={`/documents/${document.id}/print`} target="_blank">
                 Print/PDF
@@ -118,27 +115,6 @@ export default async function DocumentDetailPage({
         </div>
 
         <div className="space-y-6">
-          <SectionCard title="Informasi dokumen" description="Metadata internal untuk daftar dan penelusuran LHU">
-            <div className="grid gap-3 text-sm">
-              <div className="rounded-[20px] border border-slate-100 bg-slate-50/80 p-4">
-                <p className="text-slate-500">Nomor dokumen internal</p>
-                <p className="mt-1 font-semibold text-slate-900">{document.documentNumber}</p>
-              </div>
-              <div className="rounded-[20px] border border-slate-100 bg-slate-50/80 p-4">
-                <p className="text-slate-500">Nomor laporan</p>
-                <p className="mt-1 font-semibold text-slate-900">{document.referenceNo ?? "-"}</p>
-              </div>
-              <div className="rounded-[20px] border border-slate-100 bg-slate-50/80 p-4">
-                <p className="text-slate-500">Pelanggan</p>
-                <p className="mt-1 font-semibold text-slate-900">{document.clientName ?? "-"}</p>
-              </div>
-              <div className="rounded-[20px] border border-slate-100 bg-slate-50/80 p-4">
-                <p className="text-slate-500">Contoh uji</p>
-                <p className="mt-1 font-semibold text-slate-900">{document.sampleName ?? "-"}</p>
-              </div>
-            </div>
-          </SectionCard>
-
           <SectionCard title="Barcode verifikasi" description="QR aktif sejak LHU dibuat dan tersimpan di sistem">
             {document.verification ? (
               <div className="space-y-4">
