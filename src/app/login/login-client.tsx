@@ -186,58 +186,6 @@ const NEU_CSS = `
     cursor: not-allowed;
   }
 
-  /* Divider */
-  .neu-divider {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    color: var(--neu-login-light-3);
-    font-size: 1.1rem;
-    font-weight: 600;
-  }
-  .neu-divider-line {
-    flex: 1;
-    height: .1rem;
-    background: linear-gradient(to right, transparent, var(--neu-login-light-2), transparent);
-  }
-
-  /* Demo credential chips */
-  .neu-demo-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: .8rem;
-  }
-  .neu-demo-chip {
-    padding: 0.8rem 1rem;
-    border-radius: 1rem;
-    box-shadow: var(--neu-login-shadow);
-    background: var(--neu-login-bg);
-    cursor: pointer;
-    transition: box-shadow .2s;
-    border: none;
-    font-family: inherit;
-    text-align: left;
-  }
-  .neu-demo-chip:hover { box-shadow: var(--neu-login-inset); }
-  .neu-demo-chip:active { box-shadow: var(--neu-login-inset); }
-  .neu-chip-role {
-    font-size: .95rem;
-    font-weight: 700;
-    color: var(--neu-login-primary);
-    display: block;
-  }
-  .neu-chip-email {
-    font-size: .85rem;
-    color: var(--neu-login-dark);
-    display: block;
-    margin-top: .1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
   /* Spinner */
   @keyframes neu-spin { to { transform: rotate(360deg); } }
   .neu-spinner {
@@ -252,7 +200,6 @@ const NEU_CSS = `
 
   @media (max-width: 480px) {
     .neu-login-card { padding: 3rem 2rem; }
-    .neu-demo-grid { grid-template-columns: 1fr; }
   }
 
   /* Cloudflare Checking Styles */
@@ -298,13 +245,6 @@ const NEU_CSS = `
   }
 `;
 
-const demoPassword = "Password123!";
-
-const DEMO_ACCOUNTS = [
-  { role: "Super Admin", email: "superadmin@gis-lhu.local" },
-  { role: "Admin Lab", email: "admin@gis-lhu.local" },
-];
-
 /**
  * LoginClient — Login page with Neumorphic Soft-UI design.
  * Ported from gift project, adapted for GIS branding.
@@ -343,12 +283,6 @@ export default function LoginClient() {
       clearTimeout(timer3);
     };
   }, []);
-
-  const fillDemo = (acc: typeof DEMO_ACCOUNTS[number]) => {
-    setEmail(acc.email);
-    setPassword(demoPassword);
-    setError(null);
-  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -473,26 +407,6 @@ export default function LoginClient() {
                 </button>
               </form>
 
-              {/* ── Demo Credentials ── */}
-              <div className="neu-divider">
-                <span className="neu-divider-line" />
-                <span>Demo Akun</span>
-                <span className="neu-divider-line" />
-              </div>
-
-              <div className="neu-demo-grid">
-                {DEMO_ACCOUNTS.map((acc) => (
-                  <button
-                    key={acc.email}
-                    type="button"
-                    className="neu-demo-chip"
-                    onClick={() => fillDemo(acc)}
-                  >
-                    <span className="neu-chip-role">{acc.role}</span>
-                    <span className="neu-chip-email">{acc.email}</span>
-                  </button>
-                ))}
-              </div>
             </>
           )}
         </div>
