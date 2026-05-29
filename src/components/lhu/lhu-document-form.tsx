@@ -15,7 +15,7 @@ import {
   type LhuPayload,
   type LhuResultRow,
 } from "@/lib/lhu-payload";
-import { parseLhuDocxFile } from "@/lib/lhu-docx-parser";
+import { parseLhuImportFile } from "@/lib/lhu-docx-parser";
 
 type AssignableUser = {
   id: string;
@@ -126,7 +126,7 @@ export function LhuDocumentForm({
     message: string;
   }>({
     tone: "idle",
-    message: "Upload file .docx untuk mengisi draft otomatis dari dokumen LHU.",
+    message: "Upload file .docx atau .pdf untuk mengisi draft otomatis dari dokumen LHU.",
   });
 
   const setPayloadField = <K extends keyof LhuPayload>(key: K, value: LhuPayload[K]) => {
@@ -218,7 +218,7 @@ export function LhuDocumentForm({
     }));
   };
 
-  const importDocxFile = async (file?: File | null) => {
+  const importLhuFile = async (file?: File | null) => {
     if (!file) return;
 
     setImportStatus({
@@ -227,7 +227,7 @@ export function LhuDocumentForm({
     });
 
     try {
-      const parsed = await parseLhuDocxFile(file);
+      const parsed = await parseLhuImportFile(file);
       setFormType(parsed.formType);
       setPayload(parsed.payload);
       setImportStatus({
@@ -284,24 +284,24 @@ export function LhuDocumentForm({
               onDrop={(event) => {
                 event.preventDefault();
                 setIsDraggingFile(false);
-                void importDocxFile(event.dataTransfer.files.item(0));
+                void importLhuFile(event.dataTransfer.files.item(0));
               }}
             >
               <input
                 className="sr-only"
                 type="file"
-                accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                accept=".docx,.pdf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 onChange={(event) => {
-                  void importDocxFile(event.target.files?.item(0));
+                  void importLhuFile(event.target.files?.item(0));
                   event.currentTarget.value = "";
                 }}
               />
               <UploadCloud className="mb-3 h-9 w-9 text-[var(--color-gis-blue)]" />
               <span className="text-sm font-bold text-[var(--color-gis-navy)] dark:text-slate-100">
-                Drop file Word LHU di sini atau klik untuk upload
+                Drop file Word/PDF LHU di sini atau klik untuk upload
               </span>
               <span className="mt-1 text-xs text-slate-500">
-                Sistem akan membaca tipe form, data pelanggan, sampel, tabel hasil, catatan, dan tanda tangan.
+                Sistem akan membaca tipe form, data pelanggan, sampel, tabel hasil, catatan, dan tanda tangan dari DOCX atau PDF berbasis teks.
               </span>
               <span
                 className={`mt-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ${

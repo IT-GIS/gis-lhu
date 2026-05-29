@@ -11,6 +11,8 @@ type ParsedDocx = {
   payload: LhuPayload;
 };
 
+const pdfTextDecoder = new TextDecoder("latin1");
+
 function normalizeText(value: string) {
   return value.replace(/\s+/g, " ").trim();
 }
@@ -61,9 +63,23 @@ function collectContinuation(lines: string[], startIndex: number, stopPattern: R
   return normalizeText(values.join(" "));
 }
 
-function extractNumberedValue(lines: string[], pattern: RegExp, stopPattern = /^\d+\.\d+\.|^[IVX]+\./) {
+function extractLooseValue(lines: string[], pattern: RegExp, stopPattern: RegExp) {
   const index = findIndex(lines, pattern);
+  if (index < 0) return "";
+
+  const inlineValue = extractAfterColon(lines[index]);
+  if (inlineValue) return inlineValue;
+
+  const nextLine = lines[index + 1];
+  if (nextLine && !stopPattern.test(nextLine)) {
+    return normalizeText(nextLine);
+  }
+
   return collectContinuation(lines, index, stopPattern);
+}
+
+function extractNumberedValue(lines: string[], pattern: RegExp, stopPattern = /^\d+\.\d+\.|^[IVX]+\./) {
+  return extractLooseValue(lines, pattern, stopPattern);
 }
 
 function extractIssue(lines: string[]) {
@@ -147,6 +163,80 @@ function parseResults(rows: string[][], formType: AppFormType) {
   return { results, notes };
 }
 
+function isResultTableStopLine(line: string) {
+  return (
+    /^Catatan\b/i.test(line) ||
+    /^Notes?\b/i.test(line) ||
+    /^\*?This report\b/i.test(line) ||
+    /^[A-Za-z .]+,\s+\d{1,2}\s+\S+\s+\d{4}$/i.test(line) ||
+    /^PT\.?\s+Global\s+Inspeksi\s+Sistem/i.test(line) ||
+    /^Technical\s+Manager/i.test(line) ||
+    /^Page\b/i.test(line)
+  );
+}
+
+function parsePdfInlineResultRow(line: string, formType: AppFormType) {
+  const cells = line.split(/\s{2,}|\t+/).map(normalizeText).filter(Boolean);
+  const expectedCells = formType === "TYPE_1" ? 6 : 5;
+
+  if (cells.length >= expectedCells && /^\d+$/.test(cells[0] ?? "")) {
+    return cells.slice(0, expectedCells);
+  }
+
+  return null;
+}
+
+function extractPdfResultRows(lines: string[], formType: AppFormType) {
+  const headerIndex = findIndex(
+    lines,
+    (formType === "TYPE_1" ? /NO\b.*PARAMETER\b.*UNIT\b.*SPECIFICATION\b.*RESULT\b.*METHODS\b/i : /NO\b.*PARAMETER\b.*UNIT\b.*RESULT\b.*METHODS\b/i),
+  );
+  const separateHeaderIndex =
+    headerIndex >= 0
+      ? headerIndex
+      : findIndex(lines, /^NO$/i) >= 0 && findIndex(lines, /^PARAMETER$/i) >= 0
+        ? findIndex(lines, /^NO$/i)
+        : -1;
+
+  if (separateHeaderIndex < 0) return [];
+
+  const headerCells =
+    formType === "TYPE_1"
+      ? ["NO", "PARAMETER", "UNIT", "SPECIFICATION", "RESULT", "METHODS"]
+      : ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"];
+  const startIndex = headerIndex >= 0 ? headerIndex + 1 : separateHeaderIndex + headerCells.length;
+  const tableRows: string[][] = [headerCells];
+
+  for (let index = startIndex; index < lines.length; index += 1) {
+    const line = lines[index];
+    if (isResultTableStopLine(line)) break;
+
+    const inlineRow = parsePdfInlineResultRow(line, formType);
+    if (inlineRow) {
+      tableRows.push(inlineRow);
+      continue;
+    }
+
+    if (!/^\d+$/.test(line)) continue;
+
+    const expectedDataCells = formType === "TYPE_1" ? 5 : 4;
+    const row = [line];
+
+    for (let offset = 1; offset <= expectedDataCells; offset += 1) {
+      const value = lines[index + offset];
+      if (!value || isResultTableStopLine(value)) break;
+      row.push(value);
+    }
+
+    if (row.length === expectedDataCells + 1) {
+      tableRows.push(row);
+      index += expectedDataCells;
+    }
+  }
+
+  return tableRows.length > 1 ? tableRows : [];
+}
+
 function extractAdditionalInfo(lines: string[], formType: AppFormType) {
   if (formType === "TYPE_1") {
     return [
@@ -192,6 +282,49 @@ function extractParagraphs(documentXml: XMLDocument) {
     .filter(Boolean);
 }
 
+function parseLhuFromText(lines: string[], table: string[][]): ParsedDocx {
+  const header = table[0] ?? [];
+  const formType: AppFormType =
+    header.some((cell) => /SPECIFICATION/i.test(cell)) || lines.some((line) => /\bSPECIFICATION\b/i.test(line))
+      ? "TYPE_1"
+      : "TYPE_2";
+  const resultTable = table.length ? table : extractPdfResultRows(lines, formType);
+  const payload = createEmptyLhuPayload(formType);
+  const parsedResults = parseResults(resultTable, formType);
+  const issue = extractIssue(lines);
+  const nextSectionPattern = /^\d+\.\d+\.|^[IVX]+\.|^No\.\s*LP|^Date\b|^Tanggal\b|^Sampling\b/i;
+
+  payload.reportNo = extractLooseValue(lines, /^No\.\s*LP\//i, nextSectionPattern);
+  payload.orderNo = extractLooseValue(lines, /No\.\s*Order|Nomor Pekerjaan/i, nextSectionPattern);
+  payload.principal.name = extractLooseValue(lines, /2\.1\.\s*Name\s*\/\s*Nama/i, nextSectionPattern);
+  payload.principal.address = collectContinuation(
+    lines,
+    findIndex(lines, /2\.2\.\s*Address\s*\/\s*Alamat/i),
+    /^III\.|^3\.1\./,
+  );
+  payload.sample.sampleNo = extractLooseValue(lines, /3\.1\.\s*Sample/i, nextSectionPattern);
+  payload.sample.sampleName = extractLooseValue(lines, /3\.2\.\s*Sample Name/i, nextSectionPattern);
+  payload.sample.packaging = extractLooseValue(lines, /3\.3\.\s*Packaging/i, nextSectionPattern);
+  payload.sample.commodity = extractNumberedValue(lines, /Commodity\/\s*Komoditi/i);
+  payload.sample.type = extractNumberedValue(lines, /Type\/\s*Jenis/i);
+  payload.sample.additionalInfo = extractAdditionalInfo(lines, formType);
+  payload.receivedDate = extractLooseValue(lines, /Date of Received|Tanggal Terima/i, nextSectionPattern);
+  payload.analysisDate = extractLooseValue(lines, /Date of Analysis|Tanggal Uji/i, nextSectionPattern);
+  payload.sample.sampling = formType === "TYPE_2" ? extractLooseValue(lines, /Sampling\/Pengambilan Sample/i, nextSectionPattern) || "-" : "";
+  payload.results = parsedResults.results.length ? parsedResults.results : payload.results;
+  payload.notes = parsedResults.notes || payload.notes;
+  payload.issue = issue.issue;
+  payload.signer = issue.signer;
+
+  const title = `LHU ${payload.sample.sampleName} ${payload.principal.name}`.trim();
+
+  return {
+    formType,
+    title,
+    payload,
+  };
+}
+
 export async function parseLhuDocxFile(file: File): Promise<ParsedDocx> {
   if (!file.name.toLowerCase().endsWith(".docx")) {
     throw new Error("File harus berformat .docx.");
@@ -207,39 +340,195 @@ export async function parseLhuDocxFile(file: File): Promise<ParsedDocx> {
   const documentXml = new DOMParser().parseFromString(documentText, "application/xml");
   const lines = extractParagraphs(documentXml);
   const table = extractTables(documentXml)[0] ?? [];
-  const header = table[0] ?? [];
-  const formType: AppFormType = header.some((cell) => /SPECIFICATION/i.test(cell)) ? "TYPE_1" : "TYPE_2";
-  const payload = createEmptyLhuPayload(formType);
-  const parsedResults = parseResults(table, formType);
-  const issue = extractIssue(lines);
 
-  payload.reportNo = extractAfterColon(findLine(lines, /^No\.\s*LP\//i));
-  payload.orderNo = extractAfterColon(findLine(lines, /No\.\s*Order|Nomor Pekerjaan/i));
-  payload.principal.name = extractAfterColon(findLine(lines, /2\.1\.\s*Name\s*\/\s*Nama/i));
-  payload.principal.address = collectContinuation(
-    lines,
-    findIndex(lines, /2\.2\.\s*Address\s*\/\s*Alamat/i),
-    /^III\.|^3\.1\./,
-  );
-  payload.sample.sampleNo = extractAfterColon(findLine(lines, /3\.1\.\s*Sample/i));
-  payload.sample.sampleName = extractAfterColon(findLine(lines, /3\.2\.\s*Sample Name/i));
-  payload.sample.packaging = extractAfterColon(findLine(lines, /3\.3\.\s*Packaging/i));
-  payload.sample.commodity = extractNumberedValue(lines, /Commodity\/\s*Komoditi/i);
-  payload.sample.type = extractNumberedValue(lines, /Type\/\s*Jenis/i);
-  payload.sample.additionalInfo = extractAdditionalInfo(lines, formType);
-  payload.receivedDate = extractAfterColon(findLine(lines, /Date of Received|Tanggal Terima/i));
-  payload.analysisDate = extractAfterColon(findLine(lines, /Date of Analysis|Tanggal Uji/i));
-  payload.sample.sampling = formType === "TYPE_2" ? extractAfterColon(findLine(lines, /Sampling\/Pengambilan Sample/i)) || "-" : "";
-  payload.results = parsedResults.results.length ? parsedResults.results : payload.results;
-  payload.notes = parsedResults.notes || payload.notes;
-  payload.issue = issue.issue;
-  payload.signer = issue.signer;
+  return parseLhuFromText(lines, table);
+}
 
-  const title = `LHU ${payload.sample.sampleName} ${payload.principal.name}`.trim();
+function decodePdfLiteralString(value: string) {
+  let result = "";
 
-  return {
-    formType,
-    title,
-    payload,
-  };
+  for (let index = 0; index < value.length; index += 1) {
+    const char = value[index];
+
+    if (char !== "\\") {
+      result += char;
+      continue;
+    }
+
+    const next = value[index + 1];
+    index += 1;
+
+    if (next === "n") result += "\n";
+    else if (next === "r") result += "\r";
+    else if (next === "t") result += "\t";
+    else if (next === "b") result += "\b";
+    else if (next === "f") result += "\f";
+    else if (next === "\r" || next === "\n") {
+      if (next === "\r" && value[index + 1] === "\n") index += 1;
+    } else if (next && /[0-7]/.test(next)) {
+      let octal = next;
+      for (let count = 0; count < 2 && /[0-7]/.test(value[index + 1] ?? ""); count += 1) {
+        octal += value[index + 1];
+        index += 1;
+      }
+      result += String.fromCharCode(Number.parseInt(octal, 8));
+    } else {
+      result += next ?? "";
+    }
+  }
+
+  return result;
+}
+
+function decodePdfHexString(value: string) {
+  const clean = value.replace(/\s+/g, "");
+  const evenHex = clean.length % 2 === 0 ? clean : `${clean}0`;
+  const bytes = evenHex.match(/.{1,2}/g)?.map((item) => Number.parseInt(item, 16)) ?? [];
+
+  if (bytes[0] === 0xfe && bytes[1] === 0xff) {
+    let text = "";
+    for (let index = 2; index < bytes.length; index += 2) {
+      text += String.fromCharCode(((bytes[index] ?? 0) << 8) + (bytes[index + 1] ?? 0));
+    }
+    return text;
+  }
+
+  return String.fromCharCode(...bytes);
+}
+
+function extractPdfStrings(segment: string) {
+  const strings: string[] = [];
+
+  for (let index = 0; index < segment.length; index += 1) {
+    const char = segment[index];
+
+    if (char === "(") {
+      let depth = 1;
+      let value = "";
+      index += 1;
+
+      for (; index < segment.length; index += 1) {
+        const current = segment[index];
+
+        if (current === "\\") {
+          value += current + (segment[index + 1] ?? "");
+          index += 1;
+          continue;
+        }
+
+        if (current === "(") {
+          depth += 1;
+        } else if (current === ")") {
+          depth -= 1;
+          if (depth === 0) break;
+        }
+
+        value += current;
+      }
+
+      strings.push(decodePdfLiteralString(value));
+      continue;
+    }
+
+    if (char === "<" && segment[index + 1] !== "<") {
+      const endIndex = segment.indexOf(">", index + 1);
+      if (endIndex < 0) continue;
+
+      const value = segment.slice(index + 1, endIndex);
+      if (/^[\da-f\s]+$/i.test(value)) {
+        strings.push(decodePdfHexString(value));
+      }
+      index = endIndex;
+    }
+  }
+
+  return strings.map((value) => value.replace(/\u0000/g, "")).filter(Boolean);
+}
+
+function extractTextFromPdfContent(content: string) {
+  const lines: string[] = [];
+  const textBlockPattern = /BT([\s\S]*?)ET/g;
+  const operatorPattern = /([\s\S]*?)(?:Tj|TJ|'|")/g;
+  let blockMatch: RegExpExecArray | null;
+
+  while ((blockMatch = textBlockPattern.exec(content))) {
+    const block = blockMatch[1] ?? "";
+    let operatorMatch: RegExpExecArray | null;
+
+    while ((operatorMatch = operatorPattern.exec(block))) {
+      const text = normalizeText(extractPdfStrings(operatorMatch[1] ?? "").join(""));
+      if (text) lines.push(text);
+    }
+  }
+
+  if (lines.length) return lines.join("\n");
+
+  return extractPdfStrings(content).map(normalizeText).filter(Boolean).join("\n");
+}
+
+async function inflatePdfStream(value: string) {
+  if (typeof DecompressionStream === "undefined") return "";
+
+  const bytes = Uint8Array.from(value, (char) => char.charCodeAt(0) & 255);
+
+  for (const format of ["deflate", "deflate-raw"] as const) {
+    try {
+      const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream(format));
+      return await new Response(stream).text();
+    } catch {
+      // Try the next supported deflate flavor.
+    }
+  }
+
+  return "";
+}
+
+async function extractPdfText(file: File) {
+  const raw = pdfTextDecoder.decode(await file.arrayBuffer());
+  const chunks = [raw];
+  const streamPattern = /<<(.*?)>>\s*stream\r?\n?([\s\S]*?)\r?\n?endstream/g;
+  let streamMatch: RegExpExecArray | null;
+
+  while ((streamMatch = streamPattern.exec(raw))) {
+    const dictionary = streamMatch[1] ?? "";
+    const stream = streamMatch[2] ?? "";
+
+    if (/\/FlateDecode\b/.test(dictionary)) {
+      const inflated = await inflatePdfStream(stream);
+      if (inflated) chunks.push(inflated);
+    } else {
+      chunks.push(stream);
+    }
+  }
+
+  return chunks.map(extractTextFromPdfContent).join("\n");
+}
+
+export async function parseLhuPdfFile(file: File): Promise<ParsedDocx> {
+  if (!file.name.toLowerCase().endsWith(".pdf") && file.type !== "application/pdf") {
+    throw new Error("File harus berformat .pdf.");
+  }
+
+  const text = await extractPdfText(file);
+  const lines = text.split(/\r?\n+/).map(normalizeText).filter(Boolean);
+
+  if (!lines.length) {
+    throw new Error("Teks PDF tidak dapat dibaca. Untuk PDF hasil scan gambar, lakukan OCR atau upload file Word/PDF yang masih berisi teks.");
+  }
+
+  return parseLhuFromText(lines, []);
+}
+
+export async function parseLhuImportFile(file: File): Promise<ParsedDocx> {
+  const name = file.name.toLowerCase();
+
+  if (name.endsWith(".docx")) {
+    return parseLhuDocxFile(file);
+  }
+
+  if (name.endsWith(".pdf") || file.type === "application/pdf") {
+    return parseLhuPdfFile(file);
+  }
+
+  throw new Error("File harus berformat .docx atau .pdf.");
 }
