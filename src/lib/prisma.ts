@@ -1,38 +1,17 @@
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "@prisma/client";
 
+import { getDatabasePoolConfig } from "@/lib/database-config";
+
 const globalForPrisma = globalThis as unknown as {
   prisma?: PrismaClient;
 };
 
-function requiredDatabaseUrl() {
-  const value = process.env.DATABASE_URL;
-
-  if (!value) {
-    throw new Error("Environment variable DATABASE_URL is required.");
-  }
-
-  try {
-    const url = new URL(value);
-
-    if (url.hostname === "localhost") {
-      url.hostname = "127.0.0.1";
-    }
-
-    url.searchParams.set("connectionLimit", url.searchParams.get("connectionLimit") ?? "2");
-    url.searchParams.set("connectTimeout", url.searchParams.get("connectTimeout") ?? "10000");
-    url.searchParams.set("acquireTimeout", url.searchParams.get("acquireTimeout") ?? "30000");
-    url.searchParams.set("socketTimeout", url.searchParams.get("socketTimeout") ?? "30000");
-
-    return url.toString();
-  } catch {
-    return value;
-  }
-}
-
 function createPrismaClient() {
+  const databaseConfig = getDatabasePoolConfig() as ConstructorParameters<typeof PrismaMariaDb>[0];
+
   return new PrismaClient({
-    adapter: new PrismaMariaDb(requiredDatabaseUrl()),
+    adapter: new PrismaMariaDb(databaseConfig),
     log: process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
   });
 }
