@@ -7,8 +7,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import type { AppFormType, AppRole } from "@/lib/domain";
-import { formTypeLabels, formTypes, roleLabels } from "@/lib/domain";
+import type { AppFormType } from "@/lib/domain";
+import { formTypeLabels, formTypes } from "@/lib/domain";
 import {
   createEmptyLhuPayload,
   type LhuAdditionalInfo,
@@ -17,18 +17,10 @@ import {
 } from "@/lib/lhu-payload";
 import { parseLhuImportFile } from "@/lib/lhu-docx-parser";
 
-type AssignableUser = {
-  id: string;
-  name: string;
-  role: AppRole;
-};
-
 type LhuDocumentFormProps = {
   action: (formData: FormData) => void | Promise<void>;
-  assignableUsers: AssignableUser[];
   submitLabel: string;
   documentId?: string;
-  initialAssignedToId?: string | null;
   initialFormType?: AppFormType;
   initialPayload?: LhuPayload;
   canEdit?: boolean;
@@ -107,10 +99,8 @@ function Field({ label, children, className = "" }: { label: string; children: R
 
 export function LhuDocumentForm({
   action,
-  assignableUsers,
   submitLabel,
   documentId,
-  initialAssignedToId = "",
   initialFormType = "TYPE_1",
   initialPayload,
   canEdit = true,
@@ -335,17 +325,6 @@ export function LhuDocumentForm({
             {formTypes.map((type) => (
               <option key={type} value={type}>
                 {formTypeLabels[type]}
-              </option>
-            ))}
-          </select>
-        </Field>
-
-        <Field label="PIC / assignee">
-          <select className={selectClass} name="assignedToId" defaultValue={initialAssignedToId ?? ""} disabled={!canEdit}>
-            <option value="">Belum ditentukan</option>
-            {assignableUsers.map((assignee) => (
-              <option key={assignee.id} value={assignee.id}>
-                {assignee.name} ({roleLabels[assignee.role]})
               </option>
             ))}
           </select>

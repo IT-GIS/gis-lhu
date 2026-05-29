@@ -42,7 +42,6 @@ export default async function DocumentsPage({
     const searchableText = [
       principalName,
       document.title,
-      document.documentNumber,
       reportNo,
       document.referenceNo,
       sampleName,
@@ -93,7 +92,7 @@ export default async function DocumentsPage({
                 name="q"
                 defaultValue={searchQuery}
                 className="pl-10"
-                placeholder="Cari nama pelanggan, no dokumen, no laporan, atau sampel"
+                placeholder="Cari nama pelanggan, no laporan, atau sampel"
               />
             </div>
             <div className="flex gap-2">
@@ -125,11 +124,7 @@ export default async function DocumentsPage({
                         <FormTypeBadge formType={document.formType} />
                       </div>
 
-                    <div className="grid gap-3 text-sm text-slate-600 sm:grid-cols-2 xl:grid-cols-4 dark:text-slate-300">
-                      <div>
-                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400">No. dokumen</p>
-                        <p className="mt-1 font-semibold text-slate-800 dark:text-slate-100">{document.documentNumber}</p>
-                      </div>
+                    <div className="grid gap-3 text-sm text-slate-600 sm:grid-cols-2 xl:grid-cols-3 dark:text-slate-300">
                       <div>
                         <p className="text-xs font-bold uppercase tracking-wider text-slate-400">No. laporan</p>
                         <p className="mt-1 font-semibold text-slate-800 dark:text-slate-100">{reportNo}</p>
@@ -146,7 +141,6 @@ export default async function DocumentsPage({
 
                     <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs font-medium text-slate-500">
                       <span>Creator: {document.creator.name}</span>
-                      <span>Assignee: {document.assignedTo?.name ?? "-"}</span>
                       <span>Updated: {formatDate(document.updatedAt)}</span>
                       <span>{document.verification?.isActive ? "Barcode aktif" : "Barcode tidak aktif"}</span>
                     </div>

@@ -12,7 +12,7 @@ import { SectionCard } from "@/components/section-card";
 import { StatusBadge } from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { requireAuthenticatedUser } from "@/lib/auth";
-import { getAssignableUsers, getDocumentDetail, getRecentAuditLog } from "@/lib/documents";
+import { getDocumentDetail, getRecentAuditLog } from "@/lib/documents";
 import { resolveLhuPayload } from "@/lib/lhu-payload";
 import { canEditDocument } from "@/lib/permissions";
 import { buildVerificationQrCode, buildVerificationUrl } from "@/lib/verification";
@@ -32,10 +32,9 @@ export default async function DocumentDetailPage({
   const { id } = await params;
   const query = await searchParams;
 
-  const [document, auditLog, assignableUsers] = await Promise.all([
+  const [document, auditLog] = await Promise.all([
     getDocumentDetail(id, user.role),
     getRecentAuditLog(id),
-    getAssignableUsers(),
   ]);
 
   if (!document) {
@@ -91,10 +90,8 @@ export default async function DocumentDetailPage({
           <SectionCard title="Form LHU" description="Data laporan, pelanggan, sampel, hasil uji, dan tanda tangan.">
             <LhuDocumentForm
               action={updateDocumentAction}
-              assignableUsers={assignableUsers}
               submitLabel="Simpan Perubahan"
               documentId={document.id}
-              initialAssignedToId={document.assignedTo?.id ?? ""}
               initialFormType={document.formType}
               initialPayload={lhuPayload}
               canEdit={canEdit}

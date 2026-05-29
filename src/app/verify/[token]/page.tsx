@@ -143,9 +143,7 @@ export default async function VerifyPage({
     ? resolveLhuPayload(verification.document.formType, verification.document.formPayload)
     : null;
   const isPubliclyVerified = Boolean(verification?.isActive);
-  const principalName = payload?.principal.name || verification?.document.clientName || verification?.document.title;
   const reportNo = payload?.reportNo || verification?.document.referenceNo || "-";
-  const sampleName = payload?.sample.sampleName || verification?.document.sampleName || "-";
 
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,_#f8fafc_0%,_#eef6ff_48%,_#f8fafc_100%)] px-4 py-8 sm:py-10">
@@ -195,10 +193,7 @@ export default async function VerifyPage({
 
                 <PublicSection title="I. Report of Analysis / Laporan Hasil Pengujian">
                   <div className="grid gap-x-8 md:grid-cols-2">
-                    <FieldBlock label="No. Report / No. Laporan Hasil Uji" value={payload.reportNo} />
                     <FieldBlock label="No. Order / Nomor Pekerjaan" value={payload.orderNo} />
-                    <FieldBlock label="Principal / Pelanggan" value={principalName} />
-                    <FieldBlock label="Sample / Contoh Uji" value={sampleName} />
                   </div>
                 </PublicSection>
 
