@@ -1,5 +1,7 @@
 import QRCode from "qrcode";
 
+const PUBLIC_APP_URL = "https://gislaboratorium.com";
+
 export type VerificationView =
   | {
       state: "valid";
@@ -18,7 +20,7 @@ export type VerificationView =
     };
 
 export function buildVerificationUrl(token: string) {
-  const appUrl = process.env.APP_URL ?? "http://localhost:3000";
+  const appUrl = (process.env.APP_URL || PUBLIC_APP_URL).replace(/\/+$/, "");
   return `${appUrl}/verify/${token}`;
 }
 
