@@ -59,6 +59,8 @@ model User {
   reviewEntries     ReviewEntry[]
   createdBlogPosts   BlogPost[]   @relation("CreatedBlogPosts")
   updatedBlogPosts   BlogPost[]   @relation("UpdatedBlogPosts")
+
+  @@map("user")
 }
 
 model Session {
@@ -72,6 +74,7 @@ model Session {
 
   @@index([userId])
   @@index([expiresAt])
+  @@map("session")
 }
 
 model Document {
@@ -99,6 +102,7 @@ model Document {
   @@index([formType])
   @@index([createdById])
   @@index([assignedToId])
+  @@map("document")
 }
 
 model ReviewEntry {
@@ -113,6 +117,7 @@ model ReviewEntry {
 
   @@index([documentId, createdAt])
   @@index([reviewerId])
+  @@map("reviewentry")
 }
 
 model VerificationToken {
@@ -126,6 +131,7 @@ model VerificationToken {
 
   @@index([token])
   @@index([isActive])
+  @@map("verificationtoken")
 }
 
 model AuditLog {
@@ -140,6 +146,7 @@ model AuditLog {
 
   @@index([entityType, entityId, createdAt])
   @@index([actorId])
+  @@map("auditlog")
 }
 
 model BlogPost {
@@ -164,4 +171,5 @@ model BlogPost {
   @@index([category])
   @@index([createdById])
   @@index([updatedById])
+  @@map("blogpost")
 }
