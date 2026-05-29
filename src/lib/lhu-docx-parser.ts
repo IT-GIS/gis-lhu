@@ -3,8 +3,6 @@ import JSZip from "jszip";
 import type { AppFormType } from "@/lib/domain";
 import { createEmptyLhuPayload, type LhuPayload, type LhuResultRow } from "@/lib/lhu-payload";
 
-const WORD_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
-
 type ParsedDocx = {
   formType: AppFormType;
   title: string;
@@ -17,21 +15,38 @@ function normalizeText(value: string) {
   return value.replace(/\s+/g, " ").trim();
 }
 
-function getNodeText(node: Element) {
-  return Array.from(node.getElementsByTagNameNS(WORD_NS, "t"))
-    .map((textNode) => textNode.textContent ?? "")
-    .join("");
+function decodeXmlText(value: string) {
+  return value
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'");
 }
 
-function hasTableAncestor(node: Element) {
-  let current = node.parentElement;
+function extractWordText(fragment: string) {
+  return normalizeText(
+    decodeXmlText(
+      fragment
+        .replace(/<w:tab\b[^>]*\/>/g, "\t")
+        .replace(/<w:br\b[^>]*\/>/g, "\n")
+        .replace(/<[^>]+>/g, ""),
+    ),
+  );
+}
 
-  while (current) {
-    if (current.localName === "tbl") return true;
-    current = current.parentElement;
-  }
+function extractWordParagraphs(documentText: string) {
+  return Array.from(documentText.matchAll(/<w:p\b[\s\S]*?<\/w:p>/g))
+    .map((paragraph) => extractWordText(paragraph[0]))
+    .filter(Boolean);
+}
 
-  return false;
+function extractWordTables(documentText: string) {
+  return Array.from(documentText.matchAll(/<w:tbl\b[\s\S]*?<\/w:tbl>/g)).map((table) =>
+    Array.from(table[0].matchAll(/<w:tr\b[\s\S]*?<\/w:tr>/g)).map((row) =>
+      Array.from(row[0].matchAll(/<w:tc\b[\s\S]*?<\/w:tc>/g)).map((cell) => extractWordText(cell[0])),
+    ),
+  );
 }
 
 function extractAfterColon(line?: string) {
@@ -78,8 +93,19 @@ function extractLooseValue(lines: string[], pattern: RegExp, stopPattern: RegExp
   return collectContinuation(lines, index, stopPattern);
 }
 
+function extractReportNo(lines: string[]) {
+  const line = findLine(lines, /^No\.\s*LP/i);
+  if (!line) return "";
+
+  const colonValue = extractAfterColon(line);
+  if (colonValue) return colonValue;
+
+  return normalizeText(line.replace(/^No\.\s*/i, ""));
+}
+
 function extractNumberedValue(lines: string[], pattern: RegExp, stopPattern = /^\d+\.\d+\.|^[IVX]+\./) {
-  return extractLooseValue(lines, pattern, stopPattern);
+  const index = findIndex(lines, pattern);
+  return collectContinuation(lines, index, stopPattern);
 }
 
 function extractIssue(lines: string[]) {
@@ -116,14 +142,6 @@ function extractIssue(lines: string[]) {
       title: signerTitle,
     },
   };
-}
-
-function extractTables(documentXml: XMLDocument) {
-  return Array.from(documentXml.getElementsByTagNameNS(WORD_NS, "tbl")).map((table) =>
-    Array.from(table.getElementsByTagNameNS(WORD_NS, "tr")).map((row) =>
-      Array.from(row.getElementsByTagNameNS(WORD_NS, "tc")).map((cell) => normalizeText(getNodeText(cell))),
-    ),
-  );
 }
 
 function parseResults(rows: string[][], formType: AppFormType) {
@@ -275,17 +293,12 @@ function extractAdditionalInfo(lines: string[], formType: AppFormType) {
   ];
 }
 
-function extractParagraphs(documentXml: XMLDocument) {
-  return Array.from(documentXml.getElementsByTagNameNS(WORD_NS, "p"))
-    .filter((paragraph) => !hasTableAncestor(paragraph))
-    .map((paragraph) => normalizeText(getNodeText(paragraph)))
-    .filter(Boolean);
-}
-
 function parseLhuFromText(lines: string[], table: string[][]): ParsedDocx {
   const header = table[0] ?? [];
   const formType: AppFormType =
-    header.some((cell) => /SPECIFICATION/i.test(cell)) || lines.some((line) => /\bSPECIFICATION\b/i.test(line))
+    header.some((cell) => /SPECIFICATION/i.test(cell)) ||
+    lines.some((line) => /^SPECIFICATION$/i.test(line)) ||
+    lines.some((line) => /\bPARAMETER\b.*\bSPECIFICATION\b.*\bRESULT\b/i.test(line))
       ? "TYPE_1"
       : "TYPE_2";
   const resultTable = table.length ? table : extractPdfResultRows(lines, formType);
@@ -294,7 +307,7 @@ function parseLhuFromText(lines: string[], table: string[][]): ParsedDocx {
   const issue = extractIssue(lines);
   const nextSectionPattern = /^\d+\.\d+\.|^[IVX]+\.|^No\.\s*LP|^Date\b|^Tanggal\b|^Sampling\b/i;
 
-  payload.reportNo = extractLooseValue(lines, /^No\.\s*LP\//i, nextSectionPattern);
+  payload.reportNo = extractReportNo(lines);
   payload.orderNo = extractLooseValue(lines, /No\.\s*Order|Nomor Pekerjaan/i, nextSectionPattern);
   payload.principal.name = extractLooseValue(lines, /2\.1\.\s*Name\s*\/\s*Nama/i, nextSectionPattern);
   payload.principal.address = collectContinuation(
@@ -337,9 +350,8 @@ export async function parseLhuDocxFile(file: File): Promise<ParsedDocx> {
     throw new Error("Isi dokumen Word tidak dapat dibaca.");
   }
 
-  const documentXml = new DOMParser().parseFromString(documentText, "application/xml");
-  const lines = extractParagraphs(documentXml);
-  const table = extractTables(documentXml)[0] ?? [];
+  const lines = extractWordParagraphs(documentText);
+  const table = extractWordTables(documentText)[0] ?? [];
 
   return parseLhuFromText(lines, table);
 }
