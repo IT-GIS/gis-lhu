@@ -108,6 +108,28 @@ function ResultTable({
   );
 }
 
+function SignatureBlock({ payload }: { payload: LhuPayload }) {
+  return (
+    <div className="flex justify-start md:justify-end">
+      <div className="w-full max-w-sm text-left md:text-center">
+        <p className="text-base font-semibold leading-7 text-slate-950">
+          {payload.issue.place || "Jakarta"}, {payload.issue.date || "-"}
+        </p>
+        <p className="mt-2 text-sm font-semibold leading-7 text-slate-800">
+          {payload.signer.company || "PT. Global Inspeksi Sistem"}
+        </p>
+        <div className="h-24" aria-hidden="true" />
+        <p className="text-base font-bold text-slate-950 underline underline-offset-4">
+          {payload.signer.name || "Wina"}
+        </p>
+        <p className="mt-1 text-sm font-semibold text-slate-700">
+          {payload.signer.title || "Technical Manager"}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default async function VerifyPage({
   params,
 }: {
@@ -188,13 +210,7 @@ export default async function VerifyPage({
               </PublicSection>
 
               <PublicSection title="Penerbit dan Penanggung Jawab">
-                <div className="grid gap-x-8 md:grid-cols-2">
-                  <FieldBlock label="Tempat terbit" value={payload.issue.place} />
-                  <FieldBlock label="Tanggal terbit" value={payload.issue.date} />
-                  <FieldBlock label="Perusahaan" value={payload.signer.company} />
-                  <FieldBlock label="Nama penanda tangan" value={payload.signer.name} />
-                  <FieldBlock label="Jabatan" value={payload.signer.title} />
-                </div>
+                <SignatureBlock payload={payload} />
               </PublicSection>
             </div>
           </article>
