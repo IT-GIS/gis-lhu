@@ -12,7 +12,22 @@ function requiredDatabaseUrl() {
     throw new Error("Environment variable DATABASE_URL is required.");
   }
 
-  return value;
+  try {
+    const url = new URL(value);
+
+    if (url.hostname === "localhost") {
+      url.hostname = "127.0.0.1";
+    }
+
+    url.searchParams.set("connectionLimit", url.searchParams.get("connectionLimit") ?? "2");
+    url.searchParams.set("connectTimeout", url.searchParams.get("connectTimeout") ?? "10000");
+    url.searchParams.set("acquireTimeout", url.searchParams.get("acquireTimeout") ?? "30000");
+    url.searchParams.set("socketTimeout", url.searchParams.get("socketTimeout") ?? "30000");
+
+    return url.toString();
+  } catch {
+    return value;
+  }
 }
 
 function createPrismaClient() {

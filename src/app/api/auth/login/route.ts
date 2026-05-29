@@ -4,6 +4,33 @@ import { authenticateUser, createUserSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { trimToNull } from "@/lib/utils";
 
+function summarizeLoginError(error: unknown) {
+  const databaseUrl = process.env.DATABASE_URL;
+  let databaseHost = "unknown";
+  let databaseProtocol = "unknown";
+
+  if (databaseUrl) {
+    try {
+      const parsed = new URL(databaseUrl);
+      databaseHost = parsed.hostname;
+      databaseProtocol = parsed.protocol.replace(":", "");
+    } catch {
+      databaseHost = "unparseable";
+    }
+  }
+
+  if (error instanceof Error) {
+    return {
+      name: error.name,
+      message: error.message,
+      databaseHost,
+      databaseProtocol,
+    };
+  }
+
+  return { error, databaseHost, databaseProtocol };
+}
+
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
@@ -40,7 +67,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true, redirectTo: "/dashboard" });
   } catch (error) {
-    console.error("Login route failed", error);
+    console.error("Login route failed", summarizeLoginError(error));
     return NextResponse.json({ error: "Terjadi gangguan saat memproses login. Silakan coba lagi." }, { status: 500 });
   }
 }
