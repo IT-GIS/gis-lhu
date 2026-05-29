@@ -1,9 +1,6 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { isRedirectError } from "next/dist/client/components/redirect-error";
-
-import { loginAction } from "@/actions/auth";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -18,15 +15,20 @@ export function LoginForm() {
     const formData = new FormData(event.currentTarget);
     startTransition(async () => {
       try {
-        const result = await loginAction(formData);
-        if (result?.error) {
-          setError(result.error);
-        }
-      } catch (submitError) {
-        if (isRedirectError(submitError)) {
-          throw submitError;
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          body: formData,
+        });
+        const result = (await response.json()) as { error?: string; redirectTo?: string };
+
+        if (!response.ok || result.error) {
+          setError(result.error ?? "Terjadi gangguan saat memproses login. Silakan coba lagi.");
+          return;
         }
 
+        window.location.assign(result.redirectTo ?? "/dashboard");
+      } catch (submitError) {
+        console.error("Login request failed", submitError);
         setError("Terjadi gangguan saat memproses login. Silakan coba lagi.");
       }
     });

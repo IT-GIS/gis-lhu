@@ -1,8 +1,6 @@
 "use client";
 
-import { useState, useTransition, useEffect } from "react";
-import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { loginAction } from "@/actions/auth";
+import { useEffect, useState, useTransition } from "react";
 
 // ---------------------------------------------------------------------------
 // Neumorphic CSS variables & styles injected via a <style> tag.
@@ -290,15 +288,20 @@ export default function LoginClient() {
     const formData = new FormData(e.currentTarget);
     startTransition(async () => {
       try {
-        // loginAction is a server action; we call it via FormData
-        const result = await loginAction(formData);
-        if (result?.error) {
-          setError(result.error);
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          body: formData,
+        });
+        const result = (await response.json()) as { error?: string; redirectTo?: string };
+
+        if (!response.ok || result.error) {
+          setError(result.error ?? "Terjadi gangguan saat memproses login. Silakan coba lagi.");
+          return;
         }
+
+        window.location.assign(result.redirectTo ?? "/dashboard");
       } catch (error) {
-        if (isRedirectError(error)) {
-          throw error;
-        }
+        console.error("Login request failed", error);
         setError("Terjadi gangguan saat memproses login. Silakan coba lagi.");
       }
     });
