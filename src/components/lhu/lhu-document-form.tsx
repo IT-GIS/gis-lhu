@@ -57,7 +57,7 @@ function mergePayloadForType(nextFormType: AppFormType, current: LhuPayload): Lh
       packaging: current.sample.packaging,
       commodity: current.sample.commodity,
       type: current.sample.type,
-      sampling: nextFormType === "TYPE_2" ? current.sample.sampling || "-" : "",
+      sampling: current.sample.sampling || "-",
     },
     results: current.results.map((row) => ({
       ...row,
@@ -364,7 +364,7 @@ export function LhuDocumentForm({
         </Field>
       </div>
 
-      <FormSection number="1" title="No. Order">
+      <FormSection number="1" title="Report / Laporan">
         <Field label="No. Order/ Nomor Pekerjaan">
           <Input value={payload.orderNo ?? ""} onChange={(event) => setPayloadField("orderNo", event.target.value)} placeholder="GIS2602HOF0025" disabled={!canEdit} />
         </Field>
@@ -381,14 +381,14 @@ export function LhuDocumentForm({
         </div>
       </FormSection>
 
-      <FormSection number="3" title="Sampel / Contoh Uji">
+      <FormSection number="3" title="Sample / Contoh Uji">
         <div className="space-y-5">
           <div className="grid gap-4 lg:grid-cols-2">
-            <Field label="Sample Nomer/ Nomor Contoh">
-              <Input value={payload.sample.sampleNo ?? ""} onChange={(event) => setSampleField("sampleNo", event.target.value)} placeholder="J/FE-0024" disabled={!canEdit} />
+            <Field label="Sample Number/ Nomor Contoh">
+              <Input value={payload.sample.sampleNo ?? ""} onChange={(event) => setSampleField("sampleNo", event.target.value)} placeholder="J/FE-0004" disabled={!canEdit} />
             </Field>
             <Field label="Sample Name / Nama Contoh">
-              <Input value={payload.sample.sampleName} onChange={(event) => setSampleField("sampleName", event.target.value)} placeholder="Fosfat Alam Untuk Pertanian" disabled={!canEdit} required />
+              <Input value={payload.sample.sampleName} onChange={(event) => setSampleField("sampleName", event.target.value)} placeholder="Triple Super Phosphate (TSP)" disabled={!canEdit} required />
             </Field>
             <Field label="Packaging / Kemasan" className="lg:col-span-2">
               <Input value={payload.sample.packaging ?? ""} onChange={(event) => setSampleField("packaging", event.target.value)} placeholder="Plastik 2 kg" disabled={!canEdit} />
@@ -493,11 +493,9 @@ export function LhuDocumentForm({
             <Field label="Date of Analysis /Tanggal Uji">
               <Input value={payload.analysisDate ?? ""} onChange={(event) => setPayloadField("analysisDate", event.target.value)} placeholder="27 Februari - 09 Maret 2026" disabled={!canEdit} />
             </Field>
-            {formType === "TYPE_2" ? (
-              <Field label="Sampling/Pengambilan Sample" className="lg:col-span-2">
-                <Input value={payload.sample.sampling ?? ""} onChange={(event) => setSampleField("sampling", event.target.value)} placeholder="-" disabled={!canEdit} />
-              </Field>
-            ) : null}
+            <Field label="Sampling/Pengambilan Sample" className="lg:col-span-2">
+              <Input value={payload.sample.sampling ?? ""} onChange={(event) => setSampleField("sampling", event.target.value)} placeholder="-" disabled={!canEdit} />
+            </Field>
           </div>
         </div>
       </FormSection>

@@ -78,6 +78,10 @@ function collectContinuation(lines: string[], startIndex: number, stopPattern: R
   return normalizeText(values.join(" "));
 }
 
+function cleanAdditionalInfoValue(value: string) {
+  return normalizeText(value.replace(/\bLokasi Pengambilan\s*/i, ""));
+}
+
 function extractLooseValue(lines: string[], pattern: RegExp, stopPattern: RegExp) {
   const index = findIndex(lines, pattern);
   if (index < 0) return "";
@@ -260,19 +264,19 @@ function extractAdditionalInfo(lines: string[], formType: AppFormType) {
     return [
       {
         label: "Brand/ Merek",
-        value: extractNumberedValue(lines, /Brand\/\s*Merek/i),
+        value: cleanAdditionalInfoValue(extractNumberedValue(lines, /Brand\/\s*Merek/i)),
       },
       {
         label: "Address of Sampling/ Lokasi Pengambilan",
-        value: extractNumberedValue(lines, /Address of Sampling|Lokasi Pengambilan/i),
+        value: cleanAdditionalInfoValue(extractNumberedValue(lines, /Address of Sampling|Lokasi Pengambilan/i)),
       },
       {
         label: "Parameter",
-        value: extractNumberedValue(lines, /Parameter/i),
+        value: cleanAdditionalInfoValue(extractNumberedValue(lines, /Parameter/i)),
       },
       {
         label: "No BAPC",
-        value: extractNumberedValue(lines, /No BAPC/i),
+        value: cleanAdditionalInfoValue(extractNumberedValue(lines, /No BAPC/i)),
       },
     ];
   }
@@ -323,7 +327,7 @@ function parseLhuFromText(lines: string[], table: string[][]): ParsedDocx {
   payload.sample.additionalInfo = extractAdditionalInfo(lines, formType);
   payload.receivedDate = extractLooseValue(lines, /Date of Received|Tanggal Terima/i, nextSectionPattern);
   payload.analysisDate = extractLooseValue(lines, /Date of Analysis|Tanggal Uji/i, nextSectionPattern);
-  payload.sample.sampling = formType === "TYPE_2" ? extractLooseValue(lines, /Sampling\/Pengambilan Sample/i, nextSectionPattern) || "-" : "";
+  payload.sample.sampling = extractLooseValue(lines, /Sampling\/Pengambilan Sample/i, nextSectionPattern) || "-";
   payload.results = parsedResults.results.length ? parsedResults.results : payload.results;
   payload.notes = parsedResults.notes || payload.notes;
   payload.issue = issue.issue;

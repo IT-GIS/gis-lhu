@@ -90,8 +90,8 @@ export function LhuDocumentPreview({
       </section>
 
       <section className="mt-6 space-y-2">
-        <h2 className={labelClass}>III. Sampel / Contoh Uji</h2>
-        <InfoLine number="3.1." label="Sample Nomer/ Nomor Contoh" value={payload.sample.sampleNo} />
+        <h2 className={labelClass}>III. Sample / Contoh Uji</h2>
+        <InfoLine number="3.1." label="Sample Number/ Nomor Contoh" value={payload.sample.sampleNo} />
         <InfoLine number="3.2." label="Sample Name / Nama Contoh" value={payload.sample.sampleName} />
         <InfoLine number="3.3." label="Packaging / Kemasan" value={payload.sample.packaging} />
         <p className={labelClass}>3.4. Other Information / Keterangan lain</p>
@@ -110,9 +110,7 @@ export function LhuDocumentPreview({
         </div>
         <InfoLine number="3.5." label="Date of Received/Tanggal Terima" value={payload.receivedDate} />
         <InfoLine number="3.6." label="Date of Analysis /Tanggal Uji" value={payload.analysisDate} />
-        {formType === "TYPE_2" ? (
-          <InfoLine number="3.7." label="Sampling/Pengambilan Sample" value={payload.sample.sampling} />
-        ) : null}
+        <InfoLine number="3.7." label="Sampling/Pengambilan Sample" value={payload.sample.sampling} />
       </section>
 
       <section className="mt-6">

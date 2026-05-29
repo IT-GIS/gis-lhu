@@ -104,7 +104,7 @@ export function createEmptyLhuPayload(formType: AppFormType): LhuPayload {
               { label: "BL", value: "" },
               { label: "Gudang", value: "" },
             ],
-      sampling: formType === "TYPE_2" ? "-" : "",
+      sampling: "-",
     },
     results: [
       {
