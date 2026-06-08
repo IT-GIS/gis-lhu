@@ -113,7 +113,7 @@ function extractNumberedValue(lines: string[], pattern: RegExp, stopPattern = /^
 }
 
 function extractIssue(lines: string[]) {
-  const issueIndex = findIndex(lines, /^[A-Za-z .]+,\s+\d{1,2}\s+\S+\s+\d{4}$/i);
+  const issueIndex = findIndex(lines, /[A-Za-z .]+,\s+\d{1,2}\s+\S+\s+\d{4}/i);
 
   if (issueIndex < 0) {
     return {
@@ -129,7 +129,7 @@ function extractIssue(lines: string[]) {
     };
   }
 
-  const line = issueIndex >= 0 ? lines[issueIndex] : "";
+  const line = lines[issueIndex]?.match(/[A-Za-z .]+,\s+\d{1,2}\s+\S+\s+\d{4}/i)?.[0] ?? "";
   const [place = "Jakarta", ...dateParts] = line.split(",");
   const company = lines[issueIndex + 1]?.includes("Global Inspeksi") ? lines[issueIndex + 1] : "PT. Global Inspeksi Sistem";
   const signerName = lines[issueIndex + 2] && !/^Page\b/i.test(lines[issueIndex + 2]) ? lines[issueIndex + 2] : "Wina";
@@ -156,6 +156,21 @@ function parseResults(rows: string[][], formType: AppFormType) {
     const firstCell = cells[0] ?? "";
 
     if (/^\d+$/.test(firstCell)) {
+      if (formType === "TYPE_3") {
+        results.push({
+          no: firstCell,
+          parameter: cells[1] ?? "",
+          methods: cells[2] ?? "",
+          unit: cells[3] ?? "",
+          result: cells[4] ?? "",
+          limitCfMin: cells[5] ?? "",
+          limitCfMax: cells[6] ?? "",
+          limitSfMin: cells[7] ?? "",
+          limitSfMax: cells[8] ?? "",
+        });
+        return;
+      }
+
       if (formType === "TYPE_1") {
         results.push({
           parameter: cells[1] ?? "",
@@ -176,6 +191,21 @@ function parseResults(rows: string[][], formType: AppFormType) {
       return;
     }
 
+    if (formType === "TYPE_3" && cells[1]) {
+      results.push({
+        no: "",
+        parameter: cells[1] ?? "",
+        methods: cells[2] ?? "",
+        unit: cells[3] ?? "",
+        result: cells[4] ?? "",
+        limitCfMin: cells[5] ?? "",
+        limitCfMax: cells[6] ?? "",
+        limitSfMin: cells[7] ?? "",
+        limitSfMax: cells[8] ?? "",
+      });
+      return;
+    }
+
     const noteText = cells.join(" ");
     if (/catatan/i.test(noteText)) {
       notes = noteText.replace(/^Catatan\s*:?\s*/i, "");
@@ -190,7 +220,7 @@ function isResultTableStopLine(line: string) {
     /^Catatan\b/i.test(line) ||
     /^Notes?\b/i.test(line) ||
     /^\*?This report\b/i.test(line) ||
-    /^[A-Za-z .]+,\s+\d{1,2}\s+\S+\s+\d{4}$/i.test(line) ||
+    /[A-Za-z .]+,\s+\d{1,2}\s+\S+\s+\d{4}/i.test(line) ||
     /^PT\.?\s+Global\s+Inspeksi\s+Sistem/i.test(line) ||
     /^Technical\s+Manager/i.test(line) ||
     /^Page\b/i.test(line)
@@ -199,7 +229,7 @@ function isResultTableStopLine(line: string) {
 
 function parsePdfInlineResultRow(line: string, formType: AppFormType) {
   const cells = line.split(/\s{2,}|\t+/).map(normalizeText).filter(Boolean);
-  const expectedCells = formType === "TYPE_1" ? 6 : 5;
+  const expectedCells = formType === "TYPE_1" ? 6 : formType === "TYPE_3" ? 9 : 5;
 
   if (cells.length >= expectedCells && /^\d+$/.test(cells[0] ?? "")) {
     return cells.slice(0, expectedCells);
@@ -211,7 +241,11 @@ function parsePdfInlineResultRow(line: string, formType: AppFormType) {
 function extractPdfResultRows(lines: string[], formType: AppFormType) {
   const headerIndex = findIndex(
     lines,
-    (formType === "TYPE_1" ? /NO\b.*PARAMETER\b.*UNIT\b.*SPECIFICATION\b.*RESULT\b.*METHODS\b/i : /NO\b.*PARAMETER\b.*UNIT\b.*RESULT\b.*METHODS\b/i),
+    formType === "TYPE_1"
+      ? /NO\b.*PARAMETER\b.*UNIT\b.*SPECIFICATION\b.*RESULT\b.*METHODS\b/i
+      : formType === "TYPE_3"
+        ? /NO\b.*PARAMETER\b.*METHOD\b.*UNIT\b.*RESULT\b.*LIMIT/i
+        : /NO\b.*PARAMETER\b.*UNIT\b.*RESULT\b.*METHODS\b/i,
   );
   const separateHeaderIndex =
     headerIndex >= 0
@@ -225,6 +259,8 @@ function extractPdfResultRows(lines: string[], formType: AppFormType) {
   const headerCells =
     formType === "TYPE_1"
       ? ["NO", "PARAMETER", "UNIT", "SPECIFICATION", "RESULT", "METHODS"]
+      : formType === "TYPE_3"
+        ? ["NO", "PARAMETER", "METHOD", "UNIT", "RESULT", "LIMIT (CF) MIN", "LIMIT (CF) MAX", "LIMIT (SF) MIN", "LIMIT (SF) MAX"]
       : ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"];
   const startIndex = headerIndex >= 0 ? headerIndex + 1 : separateHeaderIndex + headerCells.length;
   const tableRows: string[][] = [headerCells];
@@ -241,7 +277,7 @@ function extractPdfResultRows(lines: string[], formType: AppFormType) {
 
     if (!/^\d+$/.test(line)) continue;
 
-    const expectedDataCells = formType === "TYPE_1" ? 5 : 4;
+    const expectedDataCells = formType === "TYPE_1" ? 5 : formType === "TYPE_3" ? 8 : 4;
     const row = [line];
 
     for (let offset = 1; offset <= expectedDataCells; offset += 1) {
@@ -281,30 +317,49 @@ function extractAdditionalInfo(lines: string[], formType: AppFormType) {
     ];
   }
 
-  return [
-    {
-      label: "Vessel/ Kapal",
-      value: extractNumberedValue(lines, /Vessel\/\s*Kapal/i),
-    },
-    {
-      label: "BL",
-      value: extractNumberedValue(lines, /\bBL\b/i),
-    },
-    {
-      label: "Gudang",
-      value: extractNumberedValue(lines, /Gudang/i),
-    },
-  ];
+  if (formType === "TYPE_2") {
+    return [
+      {
+        label: "Vessel/ Kapal",
+        value: extractNumberedValue(lines, /Vessel\/\s*Kapal/i),
+      },
+      {
+        label: "BL",
+        value: extractNumberedValue(lines, /\bBL\b/i),
+      },
+      {
+        label: "Gudang",
+        value: extractNumberedValue(lines, /Gudang/i),
+      },
+    ];
+  }
+
+  return [];
 }
 
-function parseLhuFromText(lines: string[], table: string[][]): ParsedDocx {
-  const header = table[0] ?? [];
-  const formType: AppFormType =
+function detectFormType(lines: string[], table: string[][]): AppFormType {
+  const header = table.slice(0, 2).flat();
+
+  if (
+    header.some((cell) => /Limit\s*\(CF\)|Limit\s*\(SF\)/i.test(cell)) ||
+    lines.some((line) => /Limit\s*\(CF\)|Limit\s*\(SF\)/i.test(line))
+  ) {
+    return "TYPE_3";
+  }
+
+  if (
     header.some((cell) => /SPECIFICATION/i.test(cell)) ||
     lines.some((line) => /^SPECIFICATION$/i.test(line)) ||
     lines.some((line) => /\bPARAMETER\b.*\bSPECIFICATION\b.*\bRESULT\b/i.test(line))
-      ? "TYPE_1"
-      : "TYPE_2";
+  ) {
+    return "TYPE_1";
+  }
+
+  return "TYPE_2";
+}
+
+function parseLhuFromText(lines: string[], table: string[][]): ParsedDocx {
+  const formType = detectFormType(lines, table);
   const resultTable = table.length ? table : extractPdfResultRows(lines, formType);
   const payload = createEmptyLhuPayload(formType);
   const parsedResults = parseResults(resultTable, formType);
@@ -324,6 +379,7 @@ function parseLhuFromText(lines: string[], table: string[][]): ParsedDocx {
   payload.sample.packaging = extractLooseValue(lines, /3\.3\.\s*Packaging/i, nextSectionPattern);
   payload.sample.commodity = extractNumberedValue(lines, /Commodity\/\s*Komoditi/i);
   payload.sample.type = extractNumberedValue(lines, /Type\/\s*Jenis/i);
+  payload.sample.sniNo = extractLooseValue(lines, /Number of SNI|Nomor SNI/i, nextSectionPattern);
   payload.sample.additionalInfo = extractAdditionalInfo(lines, formType);
   payload.receivedDate = extractLooseValue(lines, /Date of Received|Tanggal Terima/i, nextSectionPattern);
   payload.analysisDate = extractLooseValue(lines, /Date of Analysis|Tanggal Uji/i, nextSectionPattern);

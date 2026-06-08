@@ -7,7 +7,7 @@ export const roles = [
   "VIEWER_AUDITOR",
 ] as const;
 
-export const formTypes = ["TYPE_1", "TYPE_2"] as const;
+export const formTypes = ["TYPE_1", "TYPE_2", "TYPE_3"] as const;
 
 export const documentStatuses = [
   "draft",
@@ -35,6 +35,7 @@ export const roleLabels: Record<AppRole, string> = {
 export const formTypeLabels: Record<AppFormType, string> = {
   TYPE_1: "Form Tipe 1",
   TYPE_2: "Form Tipe 2",
+  TYPE_3: "Form Tipe 3",
 };
 
 export const statusLabels: Record<AppDocumentStatus, string> = {

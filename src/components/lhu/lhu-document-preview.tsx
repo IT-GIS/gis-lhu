@@ -110,33 +110,69 @@ export function LhuDocumentPreview({
         </div>
         <InfoLine number="3.5." label="Date of Received/Tanggal Terima" value={payload.receivedDate} />
         <InfoLine number="3.6." label="Date of Analysis /Tanggal Uji" value={payload.analysisDate} />
-        <InfoLine number="3.7." label="Sampling/Pengambilan Sample" value={payload.sample.sampling} />
+        {formType === "TYPE_3" ? (
+          <InfoLine number="3.7." label="Number of SNI /Nomor SNI" value={payload.sample.sniNo} />
+        ) : (
+          <InfoLine number="3.7." label="Sampling/Pengambilan Sample" value={payload.sample.sampling} />
+        )}
       </section>
 
       <section className="mt-6">
         <h2 className={labelClass}>IV. Result / Hasil Uji:</h2>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full border-collapse text-xs">
-            <thead>
-              <tr>
-                {columns.map((column) => (
-                  <th key={column} className="border border-slate-950 px-2 py-2 text-center font-bold">
-                    {column}
-                  </th>
-                ))}
-              </tr>
-            </thead>
+            {formType === "TYPE_3" ? (
+              <thead>
+                <tr>
+                  <th rowSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">No</th>
+                  <th rowSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">Parameter</th>
+                  <th rowSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">Method</th>
+                  <th rowSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">Unit</th>
+                  <th rowSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">Result</th>
+                  <th colSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">Limit (CF)</th>
+                  <th colSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">Limit (SF)</th>
+                </tr>
+                <tr>
+                  <th className="border border-slate-950 px-2 py-2 text-center font-bold">Min</th>
+                  <th className="border border-slate-950 px-2 py-2 text-center font-bold">Max</th>
+                  <th className="border border-slate-950 px-2 py-2 text-center font-bold">Min</th>
+                  <th className="border border-slate-950 px-2 py-2 text-center font-bold">Max</th>
+                </tr>
+              </thead>
+            ) : (
+              <thead>
+                <tr>
+                  {columns.map((column) => (
+                    <th key={column} className="border border-slate-950 px-2 py-2 text-center font-bold">
+                      {column}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+            )}
             <tbody>
               {payload.results.map((row, index) => (
                 <tr key={index}>
-                  <td className="border border-slate-950 px-2 py-2 text-center">{index + 1}</td>
+                  <td className="border border-slate-950 px-2 py-2 text-center">{formType === "TYPE_3" ? row.no || "" : index + 1}</td>
                   <td className="border border-slate-950 px-2 py-2">{row.parameter || "-"}</td>
+                  {formType === "TYPE_3" ? (
+                    <td className="border border-slate-950 px-2 py-2">{row.methods || "-"}</td>
+                  ) : null}
                   <td className="border border-slate-950 px-2 py-2 text-center">{row.unit || "-"}</td>
                   {formType === "TYPE_1" ? (
                     <td className="border border-slate-950 px-2 py-2 text-center">{row.specification || "-"}</td>
                   ) : null}
                   <td className="border border-slate-950 px-2 py-2 text-center">{row.result || "-"}</td>
-                  <td className="border border-slate-950 px-2 py-2">{row.methods || "-"}</td>
+                  {formType === "TYPE_3" ? (
+                    <>
+                      <td className="border border-slate-950 px-2 py-2 text-center">{row.limitCfMin || "-"}</td>
+                      <td className="border border-slate-950 px-2 py-2 text-center">{row.limitCfMax || "-"}</td>
+                      <td className="border border-slate-950 px-2 py-2 text-center">{row.limitSfMin || "-"}</td>
+                      <td className="border border-slate-950 px-2 py-2 text-center">{row.limitSfMax || "-"}</td>
+                    </>
+                  ) : (
+                    <td className="border border-slate-950 px-2 py-2">{row.methods || "-"}</td>
+                  )}
                 </tr>
               ))}
             </tbody>

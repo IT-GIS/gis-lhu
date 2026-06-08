@@ -49,11 +49,17 @@ function mergePayloadForType(nextFormType: AppFormType, current: LhuPayload): Lh
       packaging: current.sample.packaging,
       commodity: current.sample.commodity,
       type: current.sample.type,
+      sniNo: current.sample.sniNo,
       sampling: current.sample.sampling || "-",
     },
     results: current.results.map((row) => ({
       ...row,
+      no: nextFormType === "TYPE_3" ? row.no ?? "" : "",
       specification: nextFormType === "TYPE_1" ? row.specification ?? "" : "",
+      limitCfMin: nextFormType === "TYPE_3" ? row.limitCfMin ?? "" : "",
+      limitCfMax: nextFormType === "TYPE_3" ? row.limitCfMax ?? "" : "",
+      limitSfMin: nextFormType === "TYPE_3" ? row.limitSfMin ?? "" : "",
+      limitSfMax: nextFormType === "TYPE_3" ? row.limitSfMax ?? "" : "",
     })),
     notes: current.notes,
     signer: current.signer,
@@ -198,11 +204,16 @@ export function LhuDocumentForm({
       results: [
         ...current.results,
         {
+          no: formType === "TYPE_3" ? String(current.results.length + 1) : "",
           parameter: "",
           unit: "",
           specification: formType === "TYPE_1" ? "" : undefined,
           result: "",
           methods: "",
+          limitCfMin: formType === "TYPE_3" ? "" : undefined,
+          limitCfMax: formType === "TYPE_3" ? "" : undefined,
+          limitSfMin: formType === "TYPE_3" ? "" : undefined,
+          limitSfMax: formType === "TYPE_3" ? "" : undefined,
         },
       ],
     }));
@@ -249,6 +260,7 @@ export function LhuDocumentForm({
       <input type="hidden" name="packaging" value={payload.sample.packaging ?? ""} />
       <input type="hidden" name="commodity" value={payload.sample.commodity ?? ""} />
       <input type="hidden" name="sampleType" value={payload.sample.type ?? ""} />
+      <input type="hidden" name="sniNo" value={payload.sample.sniNo ?? ""} />
       <input type="hidden" name="sampling" value={payload.sample.sampling ?? ""} />
       <input type="hidden" name="additionalInfoJson" value={JSON.stringify(payload.sample.additionalInfo)} />
       <input type="hidden" name="resultsJson" value={JSON.stringify(payload.results)} />
@@ -472,9 +484,15 @@ export function LhuDocumentForm({
             <Field label="Date of Analysis /Tanggal Uji">
               <Input value={payload.analysisDate ?? ""} onChange={(event) => setPayloadField("analysisDate", event.target.value)} placeholder="27 Februari - 09 Maret 2026" disabled={!canEdit} />
             </Field>
-            <Field label="Sampling/Pengambilan Sample" className="lg:col-span-2">
-              <Input value={payload.sample.sampling ?? ""} onChange={(event) => setSampleField("sampling", event.target.value)} placeholder="-" disabled={!canEdit} />
-            </Field>
+            {formType === "TYPE_3" ? (
+              <Field label="Number of SNI /Nomor SNI" className="lg:col-span-2">
+                <Input value={payload.sample.sniNo ?? ""} onChange={(event) => setSampleField("sniNo", event.target.value)} placeholder="SNI 7069-1:2020" disabled={!canEdit} />
+              </Field>
+            ) : (
+              <Field label="Sampling/Pengambilan Sample" className="lg:col-span-2">
+                <Input value={payload.sample.sampling ?? ""} onChange={(event) => setSampleField("sampling", event.target.value)} placeholder="-" disabled={!canEdit} />
+              </Field>
+            )}
           </div>
         </div>
       </FormSection>
@@ -486,32 +504,64 @@ export function LhuDocumentForm({
               <colgroup>
                 <col className="w-[64px]" />
                 <col className="w-[250px]" />
+                {formType === "TYPE_3" ? <col className="w-[180px]" /> : null}
                 <col className="w-[110px]" />
                 {formType === "TYPE_1" ? <col className="w-[170px]" /> : null}
                 <col className="w-[140px]" />
-                <col className="w-[280px]" />
+                {formType === "TYPE_3" ? (
+                  <>
+                    <col className="w-[110px]" />
+                    <col className="w-[110px]" />
+                    <col className="w-[110px]" />
+                    <col className="w-[110px]" />
+                  </>
+                ) : null}
+                {formType !== "TYPE_3" ? <col className="w-[280px]" /> : null}
                 {canEdit ? <col className="w-[64px]" /> : null}
               </colgroup>
               <thead className="bg-slate-100 text-xs font-bold uppercase tracking-[0.08em] text-slate-600 dark:bg-slate-900 dark:text-slate-300">
                 <tr>
                   <th className="border-b border-slate-200 px-3 py-3 text-center dark:border-slate-800">NO</th>
                   <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">PARAMETER</th>
+                  {formType === "TYPE_3" ? (
+                    <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">METHOD</th>
+                  ) : null}
                   <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">UNIT</th>
                   {formType === "TYPE_1" ? (
                     <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">SPECIFICATION</th>
                   ) : null}
                   <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">RESULT</th>
-                  <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">METHODS</th>
+                  {formType === "TYPE_3" ? (
+                    <>
+                      <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">LIMIT (CF) MIN</th>
+                      <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">LIMIT (CF) MAX</th>
+                      <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">LIMIT (SF) MIN</th>
+                      <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">LIMIT (SF) MAX</th>
+                    </>
+                  ) : (
+                    <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">METHODS</th>
+                  )}
                   {canEdit ? <th className="border-b border-slate-200 px-3 py-3 dark:border-slate-800"> </th> : null}
                 </tr>
               </thead>
               <tbody>
                 {payload.results.map((row, index) => (
                   <tr key={index} className="border-t border-slate-100 align-top dark:border-slate-800">
-                    <td className="px-3 py-3 text-center font-semibold text-slate-600 dark:text-slate-300">{index + 1}</td>
+                    <td className="px-3 py-3 text-center font-semibold text-slate-600 dark:text-slate-300">
+                      {formType === "TYPE_3" ? (
+                        <Input className="rounded-xl text-center" value={row.no ?? ""} onChange={(event) => setResultRow(index, { ...row, no: event.target.value })} disabled={!canEdit} />
+                      ) : (
+                        index + 1
+                      )}
+                    </td>
                     <td className="px-3 py-3">
                       <Input className="rounded-xl" value={row.parameter ?? ""} onChange={(event) => setResultRow(index, { ...row, parameter: event.target.value })} disabled={!canEdit} />
                     </td>
+                    {formType === "TYPE_3" ? (
+                      <td className="px-3 py-3">
+                        <Input className="rounded-xl" value={row.methods ?? ""} onChange={(event) => setResultRow(index, { ...row, methods: event.target.value })} disabled={!canEdit} />
+                      </td>
+                    ) : null}
                     <td className="px-3 py-3">
                       <Input className="rounded-xl" value={row.unit ?? ""} onChange={(event) => setResultRow(index, { ...row, unit: event.target.value })} disabled={!canEdit} />
                     </td>
@@ -523,9 +573,26 @@ export function LhuDocumentForm({
                     <td className="px-3 py-3">
                       <Input className="rounded-xl" value={row.result ?? ""} onChange={(event) => setResultRow(index, { ...row, result: event.target.value })} disabled={!canEdit} />
                     </td>
-                    <td className="px-3 py-3">
-                      <Input className="rounded-xl" value={row.methods ?? ""} onChange={(event) => setResultRow(index, { ...row, methods: event.target.value })} disabled={!canEdit} />
-                    </td>
+                    {formType === "TYPE_3" ? (
+                      <>
+                        <td className="px-3 py-3">
+                          <Input className="rounded-xl" value={row.limitCfMin ?? ""} onChange={(event) => setResultRow(index, { ...row, limitCfMin: event.target.value })} disabled={!canEdit} />
+                        </td>
+                        <td className="px-3 py-3">
+                          <Input className="rounded-xl" value={row.limitCfMax ?? ""} onChange={(event) => setResultRow(index, { ...row, limitCfMax: event.target.value })} disabled={!canEdit} />
+                        </td>
+                        <td className="px-3 py-3">
+                          <Input className="rounded-xl" value={row.limitSfMin ?? ""} onChange={(event) => setResultRow(index, { ...row, limitSfMin: event.target.value })} disabled={!canEdit} />
+                        </td>
+                        <td className="px-3 py-3">
+                          <Input className="rounded-xl" value={row.limitSfMax ?? ""} onChange={(event) => setResultRow(index, { ...row, limitSfMax: event.target.value })} disabled={!canEdit} />
+                        </td>
+                      </>
+                    ) : (
+                      <td className="px-3 py-3">
+                        <Input className="rounded-xl" value={row.methods ?? ""} onChange={(event) => setResultRow(index, { ...row, methods: event.target.value })} disabled={!canEdit} />
+                      </td>
+                    )}
                     {canEdit ? (
                       <td className="px-3 py-3">
                         <Button

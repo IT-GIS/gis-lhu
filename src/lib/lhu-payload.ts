@@ -29,11 +29,16 @@ const additionalInfoSchema = z.object({
 });
 
 const resultRowSchema = z.object({
+  no: z.string().trim().max(20).optional().or(z.literal("")),
   parameter: z.string().trim().max(200).optional().or(z.literal("")),
   unit: z.string().trim().max(50).optional().or(z.literal("")),
   specification: z.string().trim().max(200).optional().or(z.literal("")),
   result: z.string().trim().max(200).optional().or(z.literal("")),
   methods: z.string().trim().max(500).optional().or(z.literal("")),
+  limitCfMin: z.string().trim().max(100).optional().or(z.literal("")),
+  limitCfMax: z.string().trim().max(100).optional().or(z.literal("")),
+  limitSfMin: z.string().trim().max(100).optional().or(z.literal("")),
+  limitSfMax: z.string().trim().max(100).optional().or(z.literal("")),
 });
 
 const basePayloadSchema = z.object({
@@ -55,6 +60,7 @@ const basePayloadSchema = z.object({
     packaging: z.string().trim().max(200).optional().or(z.literal("")),
     commodity: z.string().trim().max(200).optional().or(z.literal("")),
     type: z.string().trim().max(200).optional().or(z.literal("")),
+    sniNo: z.string().trim().max(200).optional().or(z.literal("")),
     additionalInfo: z.array(additionalInfoSchema).default([]),
     sampling: z.string().trim().max(500).optional().or(z.literal("")),
   }),
@@ -91,6 +97,7 @@ export function createEmptyLhuPayload(formType: AppFormType): LhuPayload {
       packaging: "",
       commodity: "",
       type: "",
+      sniNo: "",
       additionalInfo:
         formType === "TYPE_1"
           ? [
@@ -99,20 +106,27 @@ export function createEmptyLhuPayload(formType: AppFormType): LhuPayload {
               { label: "Parameter", value: "" },
               { label: "No BAPC", value: "" },
             ]
-          : [
-              { label: "Vessel/ Kapal", value: "" },
-              { label: "BL", value: "" },
-              { label: "Gudang", value: "" },
-            ],
+          : formType === "TYPE_2"
+            ? [
+                { label: "Vessel/ Kapal", value: "" },
+                { label: "BL", value: "" },
+                { label: "Gudang", value: "" },
+              ]
+            : [],
       sampling: "-",
     },
     results: [
       {
+        no: "1",
         parameter: "",
         unit: "",
         specification: formType === "TYPE_1" ? "" : undefined,
         result: "",
         methods: "",
+        limitCfMin: formType === "TYPE_3" ? "" : undefined,
+        limitCfMax: formType === "TYPE_3" ? "" : undefined,
+        limitSfMin: formType === "TYPE_3" ? "" : undefined,
+        limitSfMax: formType === "TYPE_3" ? "" : undefined,
       },
     ],
     notes: defaultNotes,
@@ -135,7 +149,11 @@ function compactResults(rows: LhuResultRow[]) {
       row.unit?.trim() ||
       row.specification?.trim() ||
       row.result?.trim() ||
-      row.methods?.trim(),
+      row.methods?.trim() ||
+      row.limitCfMin?.trim() ||
+      row.limitCfMax?.trim() ||
+      row.limitSfMin?.trim() ||
+      row.limitSfMax?.trim(),
   );
 }
 
@@ -146,17 +164,23 @@ function parseJsonArray<T>(value: unknown, fallback: T[]) {
 
 function normalizePayload(formType: AppFormType, payload: LhuPayload): LhuPayload {
   const results = payload.results.map((row) => ({
+    no: row.no ?? "",
     parameter: row.parameter ?? "",
     unit: row.unit ?? "",
     specification: formType === "TYPE_1" ? row.specification ?? "" : "",
     result: row.result ?? "",
     methods: row.methods ?? "",
+    limitCfMin: formType === "TYPE_3" ? row.limitCfMin ?? "" : "",
+    limitCfMax: formType === "TYPE_3" ? row.limitCfMax ?? "" : "",
+    limitSfMin: formType === "TYPE_3" ? row.limitSfMin ?? "" : "",
+    limitSfMax: formType === "TYPE_3" ? row.limitSfMax ?? "" : "",
   }));
 
   return {
     ...payload,
     sample: {
       ...payload.sample,
+      sniNo: payload.sample.sniNo ?? "",
       sampling: payload.sample.sampling ?? "",
       additionalInfo: compactAdditionalInfo(payload.sample.additionalInfo).map((item) => ({
         label: item.label ?? "",
@@ -197,6 +221,7 @@ export function parseLhuDocumentInput(input: Record<string, string>) {
       packaging: input.packaging ?? "",
       commodity: input.commodity ?? "",
       type: input.sampleType ?? "",
+      sniNo: input.sniNo ?? "",
       sampling: input.sampling ?? "",
       additionalInfo,
     },
@@ -220,11 +245,11 @@ export function parseLhuDocumentInput(input: Record<string, string>) {
       throw new Error(`Parameter wajib diisi pada baris hasil uji ${index + 1}.`);
     }
 
-    if (!row.result?.trim()) {
+    if (formType !== "TYPE_3" && !row.result?.trim()) {
       throw new Error(`Result wajib diisi pada baris hasil uji ${index + 1}.`);
     }
 
-    if (!row.methods?.trim()) {
+    if (formType !== "TYPE_3" && !row.methods?.trim()) {
       throw new Error(`Methods wajib diisi pada baris hasil uji ${index + 1}.`);
     }
   });
@@ -261,7 +286,13 @@ export function resolveLhuPayload(formType: AppFormType, value: unknown): LhuPay
 }
 
 export function getResultColumns(formType: AppFormType) {
-  return formType === "TYPE_1"
-    ? ["NO", "PARAMETER", "UNIT", "SPECIFICATION", "RESULT", "METHODS"]
-    : ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"];
+  if (formType === "TYPE_1") {
+    return ["NO", "PARAMETER", "UNIT", "SPECIFICATION", "RESULT", "METHODS"];
+  }
+
+  if (formType === "TYPE_3") {
+    return ["NO", "PARAMETER", "METHOD", "UNIT", "RESULT", "LIMIT (CF) MIN", "LIMIT (CF) MAX", "LIMIT (SF) MIN", "LIMIT (SF) MAX"];
+  }
+
+  return ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"];
 }
