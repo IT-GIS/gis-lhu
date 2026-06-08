@@ -346,7 +346,21 @@ function extractAdditionalInfo(lines: string[], formType: AppFormType) {
 }
 
 function detectFormType(lines: string[], table: string[][]): AppFormType {
-  const header = table.slice(0, 2).flat();
+  const headerRows = table.slice(0, 2);
+  const header = headerRows.flat();
+  const firstHeaderRow = headerRows[0] ?? [];
+  const secondHeaderRow = headerRows[1] ?? [];
+  const hasMethodColumn = firstHeaderRow.some((cell) => /^Method$/i.test(cell));
+  const limitGroupCount = firstHeaderRow.filter((cell) => /^Limit\b/i.test(cell)).length;
+  const limitSubcolumnCount = secondHeaderRow.filter((cell) => /^(Min|Max)$/i.test(cell)).length;
+
+  if (hasMethodColumn && limitGroupCount >= 2 && limitSubcolumnCount >= 4) {
+    return "TYPE_3";
+  }
+
+  if (hasMethodColumn && limitGroupCount === 1 && limitSubcolumnCount >= 2) {
+    return "TYPE_4";
+  }
 
   if (
     header.some((cell) => /Limit\s*\(CF\)|Limit\s*\(SF\)/i.test(cell)) ||
