@@ -29,6 +29,7 @@ export function LhuDocumentPreview({
   className = "",
 }: LhuDocumentPreviewProps) {
   const columns = getResultColumns(formType);
+  const usesLimitTable = formType === "TYPE_3" || formType === "TYPE_4";
 
   return (
     <article className={`relative h-[297mm] w-[210mm] overflow-hidden bg-white text-slate-950 ${className}`}>
@@ -110,7 +111,7 @@ export function LhuDocumentPreview({
         </div>
         <InfoLine number="3.5." label="Date of Received/Tanggal Terima" value={payload.receivedDate} />
         <InfoLine number="3.6." label="Date of Analysis /Tanggal Uji" value={payload.analysisDate} />
-        {formType === "TYPE_3" ? (
+        {usesLimitTable ? (
           <InfoLine number="3.7." label="Number of SNI /Nomor SNI" value={payload.sample.sniNo} />
         ) : (
           <InfoLine number="3.7." label="Sampling/Pengambilan Sample" value={payload.sample.sampling} />
@@ -139,6 +140,21 @@ export function LhuDocumentPreview({
                   <th className="border border-slate-950 px-2 py-2 text-center font-bold">Max</th>
                 </tr>
               </thead>
+            ) : formType === "TYPE_4" ? (
+              <thead>
+                <tr>
+                  <th rowSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">No</th>
+                  <th rowSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">Parameter</th>
+                  <th rowSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">Method</th>
+                  <th rowSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">Unit</th>
+                  <th rowSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">Result</th>
+                  <th colSpan={2} className="border border-slate-950 px-2 py-2 text-center font-bold">Limit (TB)</th>
+                </tr>
+                <tr>
+                  <th className="border border-slate-950 px-2 py-2 text-center font-bold">Min</th>
+                  <th className="border border-slate-950 px-2 py-2 text-center font-bold">Max</th>
+                </tr>
+              </thead>
             ) : (
               <thead>
                 <tr>
@@ -153,9 +169,9 @@ export function LhuDocumentPreview({
             <tbody>
               {payload.results.map((row, index) => (
                 <tr key={index}>
-                  <td className="border border-slate-950 px-2 py-2 text-center">{formType === "TYPE_3" ? row.no || "" : index + 1}</td>
+                  <td className="border border-slate-950 px-2 py-2 text-center">{usesLimitTable ? row.no || "" : index + 1}</td>
                   <td className="border border-slate-950 px-2 py-2">{row.parameter || "-"}</td>
-                  {formType === "TYPE_3" ? (
+                  {usesLimitTable ? (
                     <td className="border border-slate-950 px-2 py-2">{row.methods || "-"}</td>
                   ) : null}
                   <td className="border border-slate-950 px-2 py-2 text-center">{row.unit || "-"}</td>
@@ -169,6 +185,11 @@ export function LhuDocumentPreview({
                       <td className="border border-slate-950 px-2 py-2 text-center">{row.limitCfMax || "-"}</td>
                       <td className="border border-slate-950 px-2 py-2 text-center">{row.limitSfMin || "-"}</td>
                       <td className="border border-slate-950 px-2 py-2 text-center">{row.limitSfMax || "-"}</td>
+                    </>
+                  ) : formType === "TYPE_4" ? (
+                    <>
+                      <td className="border border-slate-950 px-2 py-2 text-center">{row.limitTbMin || "-"}</td>
+                      <td className="border border-slate-950 px-2 py-2 text-center">{row.limitTbMax || "-"}</td>
                     </>
                   ) : (
                     <td className="border border-slate-950 px-2 py-2">{row.methods || "-"}</td>

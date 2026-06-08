@@ -156,17 +156,19 @@ function parseResults(rows: string[][], formType: AppFormType) {
     const firstCell = cells[0] ?? "";
 
     if (/^\d+$/.test(firstCell)) {
-      if (formType === "TYPE_3") {
+      if (formType === "TYPE_3" || formType === "TYPE_4") {
         results.push({
           no: firstCell,
           parameter: cells[1] ?? "",
           methods: cells[2] ?? "",
           unit: cells[3] ?? "",
           result: cells[4] ?? "",
-          limitCfMin: cells[5] ?? "",
-          limitCfMax: cells[6] ?? "",
-          limitSfMin: cells[7] ?? "",
-          limitSfMax: cells[8] ?? "",
+          limitCfMin: formType === "TYPE_3" ? cells[5] ?? "" : "",
+          limitCfMax: formType === "TYPE_3" ? cells[6] ?? "" : "",
+          limitSfMin: formType === "TYPE_3" ? cells[7] ?? "" : "",
+          limitSfMax: formType === "TYPE_3" ? cells[8] ?? "" : "",
+          limitTbMin: formType === "TYPE_4" ? cells[5] ?? "" : "",
+          limitTbMax: formType === "TYPE_4" ? cells[6] ?? "" : "",
         });
         return;
       }
@@ -191,17 +193,19 @@ function parseResults(rows: string[][], formType: AppFormType) {
       return;
     }
 
-    if (formType === "TYPE_3" && cells[1]) {
+    if ((formType === "TYPE_3" || formType === "TYPE_4") && cells[1]) {
       results.push({
         no: "",
         parameter: cells[1] ?? "",
         methods: cells[2] ?? "",
         unit: cells[3] ?? "",
         result: cells[4] ?? "",
-        limitCfMin: cells[5] ?? "",
-        limitCfMax: cells[6] ?? "",
-        limitSfMin: cells[7] ?? "",
-        limitSfMax: cells[8] ?? "",
+        limitCfMin: formType === "TYPE_3" ? cells[5] ?? "" : "",
+        limitCfMax: formType === "TYPE_3" ? cells[6] ?? "" : "",
+        limitSfMin: formType === "TYPE_3" ? cells[7] ?? "" : "",
+        limitSfMax: formType === "TYPE_3" ? cells[8] ?? "" : "",
+        limitTbMin: formType === "TYPE_4" ? cells[5] ?? "" : "",
+        limitTbMax: formType === "TYPE_4" ? cells[6] ?? "" : "",
       });
       return;
     }
@@ -229,7 +233,7 @@ function isResultTableStopLine(line: string) {
 
 function parsePdfInlineResultRow(line: string, formType: AppFormType) {
   const cells = line.split(/\s{2,}|\t+/).map(normalizeText).filter(Boolean);
-  const expectedCells = formType === "TYPE_1" ? 6 : formType === "TYPE_3" ? 9 : 5;
+  const expectedCells = formType === "TYPE_1" ? 6 : formType === "TYPE_3" ? 9 : formType === "TYPE_4" ? 7 : 5;
 
   if (cells.length >= expectedCells && /^\d+$/.test(cells[0] ?? "")) {
     return cells.slice(0, expectedCells);
@@ -245,6 +249,8 @@ function extractPdfResultRows(lines: string[], formType: AppFormType) {
       ? /NO\b.*PARAMETER\b.*UNIT\b.*SPECIFICATION\b.*RESULT\b.*METHODS\b/i
       : formType === "TYPE_3"
         ? /NO\b.*PARAMETER\b.*METHOD\b.*UNIT\b.*RESULT\b.*LIMIT/i
+        : formType === "TYPE_4"
+          ? /NO\b.*PARAMETER\b.*METHOD\b.*UNIT\b.*RESULT\b.*LIMIT/i
         : /NO\b.*PARAMETER\b.*UNIT\b.*RESULT\b.*METHODS\b/i,
   );
   const separateHeaderIndex =
@@ -261,6 +267,8 @@ function extractPdfResultRows(lines: string[], formType: AppFormType) {
       ? ["NO", "PARAMETER", "UNIT", "SPECIFICATION", "RESULT", "METHODS"]
       : formType === "TYPE_3"
         ? ["NO", "PARAMETER", "METHOD", "UNIT", "RESULT", "LIMIT (CF) MIN", "LIMIT (CF) MAX", "LIMIT (SF) MIN", "LIMIT (SF) MAX"]
+      : formType === "TYPE_4"
+        ? ["NO", "PARAMETER", "METHOD", "UNIT", "RESULT", "LIMIT (TB) MIN", "LIMIT (TB) MAX"]
       : ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"];
   const startIndex = headerIndex >= 0 ? headerIndex + 1 : separateHeaderIndex + headerCells.length;
   const tableRows: string[][] = [headerCells];
@@ -277,7 +285,7 @@ function extractPdfResultRows(lines: string[], formType: AppFormType) {
 
     if (!/^\d+$/.test(line)) continue;
 
-    const expectedDataCells = formType === "TYPE_1" ? 5 : formType === "TYPE_3" ? 8 : 4;
+    const expectedDataCells = formType === "TYPE_1" ? 5 : formType === "TYPE_3" ? 8 : formType === "TYPE_4" ? 6 : 4;
     const row = [line];
 
     for (let offset = 1; offset <= expectedDataCells; offset += 1) {
@@ -345,6 +353,13 @@ function detectFormType(lines: string[], table: string[][]): AppFormType {
     lines.some((line) => /Limit\s*\(CF\)|Limit\s*\(SF\)/i.test(line))
   ) {
     return "TYPE_3";
+  }
+
+  if (
+    header.some((cell) => /Limit\s*\(TB\)/i.test(cell)) ||
+    lines.some((line) => /Limit\s*\(TB\)/i.test(line))
+  ) {
+    return "TYPE_4";
   }
 
   if (

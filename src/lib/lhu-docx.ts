@@ -85,6 +85,16 @@ function resultTable(formType: AppFormType, payload: LhuPayload) {
             row.limitSfMin || "-",
             row.limitSfMax || "-",
           ]
+        : formType === "TYPE_4"
+        ? [
+            row.no || String(index + 1),
+            row.parameter || "-",
+            row.methods || "-",
+            row.unit || "-",
+            row.result || "-",
+            row.limitTbMin || "-",
+            row.limitTbMax || "-",
+          ]
         : formType === "TYPE_1"
         ? [
             String(index + 1),
@@ -103,13 +113,22 @@ function resultTable(formType: AppFormType, payload: LhuPayload) {
           ];
 
     return tableRow(values, {
-      centerIndexes: formType === "TYPE_3" ? [0, 3, 4, 5, 6, 7, 8] : formType === "TYPE_1" ? [0, 2, 3, 4] : [0, 2, 3],
+      centerIndexes:
+        formType === "TYPE_3"
+          ? [0, 3, 4, 5, 6, 7, 8]
+          : formType === "TYPE_4"
+            ? [0, 3, 4, 5, 6]
+            : formType === "TYPE_1"
+              ? [0, 2, 3, 4]
+              : [0, 2, 3],
     });
   });
 
   const headers =
     formType === "TYPE_3"
       ? `${tableRow(["No", "Parameter", "Method", "Unit", "Result", "Limit (CF)", "Limit (SF)"], { header: true })}${tableRow(["", "", "", "", "", "Min", "Max", "Min", "Max"], { header: true })}`
+      : formType === "TYPE_4"
+        ? `${tableRow(["No", "Parameter", "Method", "Unit", "Result", "Limit (TB)"], { header: true })}${tableRow(["", "", "", "", "", "Min", "Max"], { header: true })}`
       : tableRow(columns, { header: true });
 
   return `<w:tbl><w:tblPr><w:tblW w:w="10000" w:type="pct"/><w:tblBorders><w:top w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:left w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:insideH w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:insideV w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:tblBorders><w:tblLook w:firstRow="1" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/></w:tblPr>${headers}${rows.join("")}</w:tbl>`;
@@ -146,7 +165,7 @@ function buildBodyContent({
     additionalInfo,
     line("3.5. Date of Received/Tanggal Terima", payload.receivedDate),
     line("3.6. Date of Analysis /Tanggal Uji", payload.analysisDate),
-    formType === "TYPE_3" ? line("3.7. Number of SNI /Nomor SNI", payload.sample.sniNo) : "",
+    formType === "TYPE_3" || formType === "TYPE_4" ? line("3.7. Number of SNI /Nomor SNI", payload.sample.sniNo) : "",
     formType === "TYPE_2" ? line("3.7. Sampling/Pengambilan Sample", payload.sample.sampling) : "",
     sectionTitle("IV. Result / Hasil Uji:"),
     resultTable(formType, payload),
