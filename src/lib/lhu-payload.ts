@@ -39,6 +39,8 @@ const resultRowSchema = z.object({
   limitCfMax: z.string().trim().max(100).optional().or(z.literal("")),
   limitSfMin: z.string().trim().max(100).optional().or(z.literal("")),
   limitSfMax: z.string().trim().max(100).optional().or(z.literal("")),
+  limitTbMin: z.string().trim().max(100).optional().or(z.literal("")),
+  limitTbMax: z.string().trim().max(100).optional().or(z.literal("")),
 });
 
 const basePayloadSchema = z.object({
@@ -127,6 +129,8 @@ export function createEmptyLhuPayload(formType: AppFormType): LhuPayload {
         limitCfMax: formType === "TYPE_3" ? "" : undefined,
         limitSfMin: formType === "TYPE_3" ? "" : undefined,
         limitSfMax: formType === "TYPE_3" ? "" : undefined,
+        limitTbMin: formType === "TYPE_4" ? "" : undefined,
+        limitTbMax: formType === "TYPE_4" ? "" : undefined,
       },
     ],
     notes: defaultNotes,
@@ -153,7 +157,9 @@ function compactResults(rows: LhuResultRow[]) {
       row.limitCfMin?.trim() ||
       row.limitCfMax?.trim() ||
       row.limitSfMin?.trim() ||
-      row.limitSfMax?.trim(),
+      row.limitSfMax?.trim() ||
+      row.limitTbMin?.trim() ||
+      row.limitTbMax?.trim(),
   );
 }
 
@@ -174,6 +180,8 @@ function normalizePayload(formType: AppFormType, payload: LhuPayload): LhuPayloa
     limitCfMax: formType === "TYPE_3" ? row.limitCfMax ?? "" : "",
     limitSfMin: formType === "TYPE_3" ? row.limitSfMin ?? "" : "",
     limitSfMax: formType === "TYPE_3" ? row.limitSfMax ?? "" : "",
+    limitTbMin: formType === "TYPE_4" ? row.limitTbMin ?? "" : "",
+    limitTbMax: formType === "TYPE_4" ? row.limitTbMax ?? "" : "",
   }));
 
   return {
@@ -245,11 +253,11 @@ export function parseLhuDocumentInput(input: Record<string, string>) {
       throw new Error(`Parameter wajib diisi pada baris hasil uji ${index + 1}.`);
     }
 
-    if (formType !== "TYPE_3" && !row.result?.trim()) {
+    if (formType !== "TYPE_3" && formType !== "TYPE_4" && !row.result?.trim()) {
       throw new Error(`Result wajib diisi pada baris hasil uji ${index + 1}.`);
     }
 
-    if (formType !== "TYPE_3" && !row.methods?.trim()) {
+    if (formType !== "TYPE_3" && formType !== "TYPE_4" && !row.methods?.trim()) {
       throw new Error(`Methods wajib diisi pada baris hasil uji ${index + 1}.`);
     }
   });
@@ -292,6 +300,10 @@ export function getResultColumns(formType: AppFormType) {
 
   if (formType === "TYPE_3") {
     return ["NO", "PARAMETER", "METHOD", "UNIT", "RESULT", "LIMIT (CF) MIN", "LIMIT (CF) MAX", "LIMIT (SF) MIN", "LIMIT (SF) MAX"];
+  }
+
+  if (formType === "TYPE_4") {
+    return ["NO", "PARAMETER", "METHOD", "UNIT", "RESULT", "LIMIT (TB) MIN", "LIMIT (TB) MAX"];
   }
 
   return ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"];

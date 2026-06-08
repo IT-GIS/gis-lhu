@@ -76,6 +76,7 @@ function ResultTable({
   payload: LhuPayload;
 }) {
   const columns = getResultColumns(formType);
+  const usesLimitTable = formType === "TYPE_3" || formType === "TYPE_4";
 
   return (
     <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
@@ -98,6 +99,21 @@ function ResultTable({
               <th className="border border-slate-800 px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.12em]">MAX</th>
             </tr>
           </thead>
+        ) : formType === "TYPE_4" ? (
+          <thead className="bg-slate-900 text-white">
+            <tr>
+              <th rowSpan={2} className="border border-slate-800 px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.12em]">NO</th>
+              <th rowSpan={2} className="border border-slate-800 px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.12em]">PARAMETER</th>
+              <th rowSpan={2} className="border border-slate-800 px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.12em]">METHOD</th>
+              <th rowSpan={2} className="border border-slate-800 px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.12em]">UNIT</th>
+              <th rowSpan={2} className="border border-slate-800 px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.12em]">RESULT</th>
+              <th colSpan={2} className="border border-slate-800 px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.12em]">LIMIT (TB)</th>
+            </tr>
+            <tr>
+              <th className="border border-slate-800 px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.12em]">MIN</th>
+              <th className="border border-slate-800 px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.12em]">MAX</th>
+            </tr>
+          </thead>
         ) : (
           <thead className="bg-slate-900 text-white">
             <tr>
@@ -112,9 +128,9 @@ function ResultTable({
         <tbody>
           {payload.results.map((row, index) => (
             <tr key={index} className="odd:bg-white even:bg-slate-50">
-              <td className="border border-slate-200 px-4 py-3 font-semibold text-slate-900">{formType === "TYPE_3" ? row.no || "" : index + 1}</td>
+              <td className="border border-slate-200 px-4 py-3 font-semibold text-slate-900">{usesLimitTable ? row.no || "" : index + 1}</td>
               <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.parameter || "-"}</td>
-              {formType === "TYPE_3" ? (
+              {usesLimitTable ? (
                 <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.methods || "-"}</td>
               ) : null}
               <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.unit || "-"}</td>
@@ -128,6 +144,11 @@ function ResultTable({
                   <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.limitCfMax || "-"}</td>
                   <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.limitSfMin || "-"}</td>
                   <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.limitSfMax || "-"}</td>
+                </>
+              ) : formType === "TYPE_4" ? (
+                <>
+                  <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.limitTbMin || "-"}</td>
+                  <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.limitTbMax || "-"}</td>
                 </>
               ) : (
                 <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.methods || "-"}</td>

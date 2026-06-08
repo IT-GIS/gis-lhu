@@ -54,12 +54,14 @@ function mergePayloadForType(nextFormType: AppFormType, current: LhuPayload): Lh
     },
     results: current.results.map((row) => ({
       ...row,
-      no: nextFormType === "TYPE_3" ? row.no ?? "" : "",
+      no: nextFormType === "TYPE_3" || nextFormType === "TYPE_4" ? row.no ?? "" : "",
       specification: nextFormType === "TYPE_1" ? row.specification ?? "" : "",
       limitCfMin: nextFormType === "TYPE_3" ? row.limitCfMin ?? "" : "",
       limitCfMax: nextFormType === "TYPE_3" ? row.limitCfMax ?? "" : "",
       limitSfMin: nextFormType === "TYPE_3" ? row.limitSfMin ?? "" : "",
       limitSfMax: nextFormType === "TYPE_3" ? row.limitSfMax ?? "" : "",
+      limitTbMin: nextFormType === "TYPE_4" ? row.limitTbMin ?? "" : "",
+      limitTbMax: nextFormType === "TYPE_4" ? row.limitTbMax ?? "" : "",
     })),
     notes: current.notes,
     signer: current.signer,
@@ -204,7 +206,7 @@ export function LhuDocumentForm({
       results: [
         ...current.results,
         {
-          no: formType === "TYPE_3" ? String(current.results.length + 1) : "",
+          no: formType === "TYPE_3" || formType === "TYPE_4" ? String(current.results.length + 1) : "",
           parameter: "",
           unit: "",
           specification: formType === "TYPE_1" ? "" : undefined,
@@ -214,6 +216,8 @@ export function LhuDocumentForm({
           limitCfMax: formType === "TYPE_3" ? "" : undefined,
           limitSfMin: formType === "TYPE_3" ? "" : undefined,
           limitSfMax: formType === "TYPE_3" ? "" : undefined,
+          limitTbMin: formType === "TYPE_4" ? "" : undefined,
+          limitTbMax: formType === "TYPE_4" ? "" : undefined,
         },
       ],
     }));
@@ -242,6 +246,9 @@ export function LhuDocumentForm({
       });
     }
   };
+
+  const usesSniNumber = formType === "TYPE_3" || formType === "TYPE_4";
+  const usesLimitTable = formType === "TYPE_3" || formType === "TYPE_4";
 
   return (
     <form action={action} className="space-y-8">
@@ -484,9 +491,9 @@ export function LhuDocumentForm({
             <Field label="Date of Analysis /Tanggal Uji">
               <Input value={payload.analysisDate ?? ""} onChange={(event) => setPayloadField("analysisDate", event.target.value)} placeholder="27 Februari - 09 Maret 2026" disabled={!canEdit} />
             </Field>
-            {formType === "TYPE_3" ? (
+            {usesSniNumber ? (
               <Field label="Number of SNI /Nomor SNI" className="lg:col-span-2">
-                <Input value={payload.sample.sniNo ?? ""} onChange={(event) => setSampleField("sniNo", event.target.value)} placeholder="SNI 7069-1:2020" disabled={!canEdit} />
+                <Input value={payload.sample.sniNo ?? ""} onChange={(event) => setSampleField("sniNo", event.target.value)} placeholder={formType === "TYPE_4" ? "SNI 7069-3:2020" : "SNI 7069-1:2020"} disabled={!canEdit} />
               </Field>
             ) : (
               <Field label="Sampling/Pengambilan Sample" className="lg:col-span-2">
@@ -504,7 +511,7 @@ export function LhuDocumentForm({
               <colgroup>
                 <col className="w-[64px]" />
                 <col className="w-[250px]" />
-                {formType === "TYPE_3" ? <col className="w-[180px]" /> : null}
+                {usesLimitTable ? <col className="w-[180px]" /> : null}
                 <col className="w-[110px]" />
                 {formType === "TYPE_1" ? <col className="w-[170px]" /> : null}
                 <col className="w-[140px]" />
@@ -516,14 +523,20 @@ export function LhuDocumentForm({
                     <col className="w-[110px]" />
                   </>
                 ) : null}
-                {formType !== "TYPE_3" ? <col className="w-[280px]" /> : null}
+                {formType === "TYPE_4" ? (
+                  <>
+                    <col className="w-[110px]" />
+                    <col className="w-[110px]" />
+                  </>
+                ) : null}
+                {!usesLimitTable ? <col className="w-[280px]" /> : null}
                 {canEdit ? <col className="w-[64px]" /> : null}
               </colgroup>
               <thead className="bg-slate-100 text-xs font-bold uppercase tracking-[0.08em] text-slate-600 dark:bg-slate-900 dark:text-slate-300">
                 <tr>
                   <th className="border-b border-slate-200 px-3 py-3 text-center dark:border-slate-800">NO</th>
                   <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">PARAMETER</th>
-                  {formType === "TYPE_3" ? (
+                  {usesLimitTable ? (
                     <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">METHOD</th>
                   ) : null}
                   <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">UNIT</th>
@@ -538,6 +551,11 @@ export function LhuDocumentForm({
                       <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">LIMIT (SF) MIN</th>
                       <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">LIMIT (SF) MAX</th>
                     </>
+                  ) : formType === "TYPE_4" ? (
+                    <>
+                      <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">LIMIT (TB) MIN</th>
+                      <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">LIMIT (TB) MAX</th>
+                    </>
                   ) : (
                     <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">METHODS</th>
                   )}
@@ -548,7 +566,7 @@ export function LhuDocumentForm({
                 {payload.results.map((row, index) => (
                   <tr key={index} className="border-t border-slate-100 align-top dark:border-slate-800">
                     <td className="px-3 py-3 text-center font-semibold text-slate-600 dark:text-slate-300">
-                      {formType === "TYPE_3" ? (
+                      {usesLimitTable ? (
                         <Input className="rounded-xl text-center" value={row.no ?? ""} onChange={(event) => setResultRow(index, { ...row, no: event.target.value })} disabled={!canEdit} />
                       ) : (
                         index + 1
@@ -557,7 +575,7 @@ export function LhuDocumentForm({
                     <td className="px-3 py-3">
                       <Input className="rounded-xl" value={row.parameter ?? ""} onChange={(event) => setResultRow(index, { ...row, parameter: event.target.value })} disabled={!canEdit} />
                     </td>
-                    {formType === "TYPE_3" ? (
+                    {usesLimitTable ? (
                       <td className="px-3 py-3">
                         <Input className="rounded-xl" value={row.methods ?? ""} onChange={(event) => setResultRow(index, { ...row, methods: event.target.value })} disabled={!canEdit} />
                       </td>
@@ -586,6 +604,15 @@ export function LhuDocumentForm({
                         </td>
                         <td className="px-3 py-3">
                           <Input className="rounded-xl" value={row.limitSfMax ?? ""} onChange={(event) => setResultRow(index, { ...row, limitSfMax: event.target.value })} disabled={!canEdit} />
+                        </td>
+                      </>
+                    ) : formType === "TYPE_4" ? (
+                      <>
+                        <td className="px-3 py-3">
+                          <Input className="rounded-xl" value={row.limitTbMin ?? ""} onChange={(event) => setResultRow(index, { ...row, limitTbMin: event.target.value })} disabled={!canEdit} />
+                        </td>
+                        <td className="px-3 py-3">
+                          <Input className="rounded-xl" value={row.limitTbMax ?? ""} onChange={(event) => setResultRow(index, { ...row, limitTbMax: event.target.value })} disabled={!canEdit} />
                         </td>
                       </>
                     ) : (

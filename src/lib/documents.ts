@@ -26,27 +26,27 @@ import {
 } from "@/lib/validators";
 import { canTransitionStatus } from "@/lib/workflow";
 
-let formType3EnumReady = false;
+let formTypeEnumReady = false;
 
-async function ensureFormType3Enum() {
-  if (formType3EnumReady) {
+async function ensureLatestFormTypeEnum() {
+  if (formTypeEnumReady) {
     return;
   }
 
-  const alterSql = "MODIFY `formType` ENUM('TYPE_1','TYPE_2','TYPE_3') NOT NULL";
+  const alterSql = "MODIFY `formType` ENUM('TYPE_1','TYPE_2','TYPE_3','TYPE_4') NOT NULL";
 
   try {
     await prisma.$executeRawUnsafe(`ALTER TABLE \`document\` ${alterSql}`);
-    formType3EnumReady = true;
+    formTypeEnumReady = true;
     return;
   } catch (lowercaseError) {
     try {
       await prisma.$executeRawUnsafe(`ALTER TABLE \`Document\` ${alterSql}`);
-      formType3EnumReady = true;
+      formTypeEnumReady = true;
       return;
     } catch {
       throw new Error(
-        `Database enum FormType belum mendukung TYPE_3. Jalankan migration 20260608000000_add_form_type_3 terlebih dahulu. Detail: ${
+        `Database enum FormType belum mendukung tipe form terbaru. Jalankan migration 20260608000000_add_form_type_3 dan 20260608000001_add_form_type_4 terlebih dahulu. Detail: ${
           lowercaseError instanceof Error ? lowercaseError.message : "ALTER TABLE document gagal"
         }`,
       );
@@ -266,8 +266,8 @@ export async function createDocument(actor: AuthUser, input: Record<string, stri
 
   const parsed = parseLhuDocumentInput(input);
 
-  if (parsed.formType === "TYPE_3") {
-    await ensureFormType3Enum();
+  if (parsed.formType === "TYPE_3" || parsed.formType === "TYPE_4") {
+    await ensureLatestFormTypeEnum();
   }
 
   return prisma.$transaction(async (tx) => {
@@ -322,8 +322,8 @@ export async function updateDocument(actor: AuthUser, input: Record<string, stri
     throw new Error("Dokumen tidak ditemukan.");
   }
 
-  if (parsed.formType === "TYPE_3") {
-    await ensureFormType3Enum();
+  if (parsed.formType === "TYPE_3" || parsed.formType === "TYPE_4") {
+    await ensureLatestFormTypeEnum();
   }
 
   return prisma.$transaction(async (tx) => {
