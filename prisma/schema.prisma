@@ -1,0 +1,177 @@
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN_LAB
+  FRONTDESK
+  ANALIS
+  QA_SUPERVISOR
+  VIEWER_AUDITOR
+}
+
+enum FormType {
+  TYPE_1
+  TYPE_2
+  TYPE_3
+  TYPE_4
+}
+
+enum DocumentStatus {
+  draft
+  input_hasil
+  review
+  revisi
+  approved
+  published
+  revoked
+}
+
+enum ReviewAction {
+  SUBMIT
+  RETURN_REVISI
+  APPROVE
+  COMMENT
+}
+
+enum BlogPostStatus {
+  draft
+  published
+}
+
+model User {
+  id                String       @id @default(cuid())
+  name              String
+  email             String       @unique
+  role              Role
+  passwordHash      String
+  active            Boolean      @default(true)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  sessions          Session[]
+  auditLogs         AuditLog[]
+  createdDocuments  Document[]   @relation("CreatedDocuments")
+  assignedDocuments Document[]   @relation("AssignedDocuments")
+  reviewEntries     ReviewEntry[]
+  createdBlogPosts   BlogPost[]   @relation("CreatedBlogPosts")
+  updatedBlogPosts   BlogPost[]   @relation("UpdatedBlogPosts")
+
+  @@map("user")
+}
+
+model Session {
+  id         String   @id @default(cuid())
+  token      String   @unique
+  userId     String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  lastSeenAt DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("session")
+}
+
+model Document {
+  id             String            @id @default(cuid())
+  documentNumber String            @unique
+  title          String
+  referenceNo    String?
+  clientName     String?
+  sampleName     String?
+  notes          String?           @db.Text
+  status         DocumentStatus    @default(draft)
+  formType       FormType
+  formPayload    Json
+  createdById    String
+  assignedToId   String?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  publishedAt    DateTime?
+  creator        User              @relation("CreatedDocuments", fields: [createdById], references: [id], onDelete: Restrict)
+  assignedTo     User?             @relation("AssignedDocuments", fields: [assignedToId], references: [id], onDelete: SetNull)
+  reviewEntries  ReviewEntry[]
+  verification   VerificationToken?
+
+  @@index([status])
+  @@index([formType])
+  @@index([createdById])
+  @@index([assignedToId])
+  @@map("document")
+}
+
+model ReviewEntry {
+  id         String       @id @default(cuid())
+  documentId String
+  reviewerId String
+  action     ReviewAction
+  comment    String?      @db.Text
+  createdAt  DateTime     @default(now())
+  document   Document     @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  reviewer   User         @relation(fields: [reviewerId], references: [id], onDelete: Restrict)
+
+  @@index([documentId, createdAt])
+  @@index([reviewerId])
+  @@map("reviewentry")
+}
+
+model VerificationToken {
+  id         String    @id @default(cuid())
+  documentId String    @unique
+  token      String    @unique
+  isActive   Boolean   @default(true)
+  publishedAt DateTime @default(now())
+  revokedAt  DateTime?
+  document   Document  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([isActive])
+  @@map("verificationtoken")
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  action     String
+  entityType String
+  entityId   String
+  metadata   Json?
+  createdAt  DateTime @default(now())
+  actor      User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([entityType, entityId, createdAt])
+  @@index([actorId])
+  @@map("auditlog")
+}
+
+model BlogPost {
+  id          String         @id @default(cuid())
+  title       String
+  slug        String         @unique
+  excerpt     String         @db.Text
+  content     String         @db.LongText
+  category    String
+  coverImage  String?
+  sourceUrl   String?
+  status      BlogPostStatus @default(draft)
+  publishedAt DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  createdById String?
+  updatedById String?
+  creator     User?          @relation("CreatedBlogPosts", fields: [createdById], references: [id], onDelete: SetNull)
+  updater     User?          @relation("UpdatedBlogPosts", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([status, publishedAt])
+  @@index([category])
+  @@index([createdById])
+  @@index([updatedById])
+  @@map("blogpost")
+}
