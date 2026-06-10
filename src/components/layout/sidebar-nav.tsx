@@ -1,6 +1,14 @@
 "use client";
 
-import { FileText, LayoutDashboard, Newspaper, SearchCheck, Upload } from "lucide-react";
+import {
+  Activity,
+  FileText,
+  LayoutDashboard,
+  Newspaper,
+  SearchCheck,
+  Settings,
+  Upload,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,7 +23,19 @@ const navItems = [
 ];
 
 const bottomNavItems = [
-  { href: "/posts", label: "Post", icon: Newspaper, permission: "manageBlogPosts" },
+  {
+    href: "/posts",
+    label: "Post",
+    icon: Newspaper,
+    permission: "manageBlogPosts",
+  },
+  {
+    href: "/audit-logs",
+    label: "Audit Logs",
+    icon: Activity,
+    permission: "manageBlogPosts",
+  },
+  { href: "/akun", label: "Pengaturan", icon: Settings },
 ];
 
 function hasPermission(role: AppRole, permission?: string) {
