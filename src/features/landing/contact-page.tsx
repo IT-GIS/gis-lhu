@@ -606,7 +606,7 @@ const CONTACT_STYLES = `
 
   .contact-page .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: 40px;
   }
 
@@ -901,6 +901,8 @@ export function ContactPage() {
   const [scrolled, setScrolled] = useState(false);
   const [whatsappOpen, setWhatsappOpen] = useState(false);
   const [messageReady, setMessageReady] = useState(false);
+  const [messageError, setMessageError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     ensureLandingHeadAssets();
@@ -912,35 +914,91 @@ export function ContactPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const name = encodeURIComponent(String(formData.get("name") ?? "").trim());
-    const email = encodeURIComponent(String(formData.get("email") ?? "").trim());
-    const message = encodeURIComponent(String(formData.get("message") ?? "").trim());
-    const subject = encodeURIComponent("Pesan dari halaman kontak GIS Laboratorium");
-    const body = `Nama:%20${name}%0AEmail:%20${email}%0A%0APesan:%0A${message}`;
 
-    setMessageReady(true);
-    window.location.href = `mailto:globalinspeksisistem@gmail.com?subject=${subject}&body=${body}`;
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload = {
+      name: String(formData.get("name") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      message: String(formData.get("message") ?? "").trim(),
+    };
+
+    setMessageReady(false);
+    setMessageError("");
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact-messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+
+      if (!response.ok) {
+        throw new Error(result?.error || "Pesan belum bisa dikirim. Silakan coba lagi.");
+      }
+
+      form.reset();
+      setMessageReady(true);
+    } catch (error) {
+      setMessageError(error instanceof Error ? error.message : "Pesan belum bisa dikirim. Silakan coba lagi.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="contact-page">
       <style dangerouslySetInnerHTML={{ __html: CONTACT_STYLES }} />
-      <header className={`navbar-wrapper${scrolled ? " scrolled" : ""}`} id="navbar">
+      <header
+        className={`navbar-wrapper${scrolled ? " scrolled" : ""}`}
+        id="navbar"
+      >
         <nav className="navbar">
           <Link href="/" className="nav-brand">
-            <Image src="/landing/animation/logo-lab.png" alt="GISLAB" width={90} height={28} />
+            <Image
+              src="/landing/animation/logo-lab.png"
+              alt="GISLAB"
+              width={90}
+              height={28}
+            />
             Global Inspeksi Sistem
           </Link>
           <ul className={`nav-menu${menuOpen ? " active" : ""}`} id="navMenu">
-            <li><Link href="/" className="nav-link">Beranda</Link></li>
-            <li><Link href="/profile" className="nav-link">Profile</Link></li>
-            <li><Link href="/service" className="nav-link">Layanan</Link></li>
-            <li><Link href="/ruang-lingkup-pengujian" className="nav-link">Ruang Lingkup Pengujian</Link></li>
-            <li><Link href="/informasi" className="nav-link">Informasi</Link></li>
-            <li><Link href="/contact" className="nav-link active">Kontak</Link></li>
+            <li>
+              <Link href="/" className="nav-link">
+                Beranda
+              </Link>
+            </li>
+            <li>
+              <Link href="/profile" className="nav-link">
+                Profile
+              </Link>
+            </li>
+            <li>
+              <Link href="/service" className="nav-link">
+                Layanan
+              </Link>
+            </li>
+            <li>
+              <Link href="/ruang-lingkup-pengujian" className="nav-link">
+                Ruang Lingkup Pengujian
+              </Link>
+            </li>
+            <li>
+              <Link href="/informasi" className="nav-link">
+                Informasi
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="nav-link active">
+                Kontak
+              </Link>
+            </li>
           </ul>
           <button
             className="mobile-menu-btn"
@@ -958,33 +1016,54 @@ export function ContactPage() {
         <section className="contact-hero-section">
           <div className="contact-hero">
             <div className="hero-content">
-              <span className="eyebrow"><i className="fa-solid fa-headset" /> Kontak kami</span>
-              <h1 className="hero-title">Get in touch and let us know how we can help.</h1>
+              <span className="eyebrow">
+                <i className="fa-solid fa-headset" /> Kontak kami
+              </span>
+              <h1 className="hero-title">
+                Hubungi kami dan beri tahu kami bagaimana kami dapat membantu.
+              </h1>
               <p className="hero-text">
-                Tim Global Inspeksi Sistem siap membantu kebutuhan pengujian, koordinasi sampel, administrasi, dan
-                informasi layanan laboratorium.
+                Tim Global Inspeksi Sistem siap membantu kebutuhan pengujian,
+                koordinasi sampel, administrasi, dan informasi layanan
+                laboratorium.
               </p>
             </div>
           </div>
 
           <div className="quick-contact">
-            <a className="quick-card glass" href="tel:+622150208008">
-              <span className="quick-icon"><i className="fa-solid fa-phone" /></span>
+            {/* Mengganti href tel ke nomor utama dan menampilkan 3 nomor tersusun */}
+            <a className="quick-card glass" href="tel:+6281285328232">
+              <span className="quick-icon">
+                <i className="fa-solid fa-phone" />
+              </span>
               <h2 className="quick-label">Telepon</h2>
-              <p className="quick-value">021 50208008 / 021 50560008</p>
+              <p className="quick-value">
+                +62 812-8532-8232 <br />
+                +62 817-888-879 <br />
+                +62 812-1704-7976
+              </p>
             </a>
-            <a className="quick-card glass" href="mailto:globalinspeksisistem@gmail.com">
-              <span className="quick-icon"><i className="fa-solid fa-envelope" /></span>
+
+            <a
+              className="quick-card glass"
+              href="mailto:globalinspeksisistem@gmail.com"
+            >
+              <span className="quick-icon">
+                <i className="fa-solid fa-envelope" />
+              </span>
               <h2 className="quick-label">Email</h2>
               <p className="quick-value">globalinspeksisistem@gmail.com</p>
             </a>
+
             <a
               className="quick-card glass"
-              href="https://wa.me/6285281844641?text=Halo%20GIS%20Laboratorium"
+              href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium"
               target="_blank"
               rel="noopener"
             >
-              <span className="quick-icon"><i className="fa-brands fa-whatsapp" /></span>
+              <span className="quick-icon">
+                <i className="fa-brands fa-whatsapp" />
+              </span>
               <h2 className="quick-label">WhatsApp</h2>
               <p className="quick-value">Customer Service GIS</p>
             </a>
@@ -995,46 +1074,47 @@ export function ContactPage() {
           <div className="container">
             <div className="section-header">
               <div>
-                <span className="eyebrow"><i className="fa-solid fa-building" /> Office</span>
-                <h2 className="section-title">Kunjungi kantor GIS Laboratorium.</h2>
+                <span className="eyebrow">
+                  <i className="fa-solid fa-building" /> Office
+                </span>
+                <h2 className="section-title">
+                  Kunjungi kantor GIS Laboratorium.
+                </h2>
               </div>
               <p className="section-copy">
-                GIS Laboratorium melayani pelanggan melalui kantor Jakarta dan Surabaya. Pilih lokasi terdekat untuk
-                konsultasi, pengiriman sampel, atau kebutuhan koordinasi pengujian.
+                GIS Laboratorium siap melayani Anda. Kunjungi kantor kami untuk
+                konsultasi, pengiriman sampel, atau kebutuhan koordinasi
+                pengujian secara langsung.
               </p>
             </div>
 
-            <div className="office-grid">
-              <article className="office-card jakarta">
-                <div className="office-body">
-                  <span className="office-kicker">Head Office</span>
-                  <h3 className="office-title">Jakarta</h3>
-                  <ul className="office-list">
-                    <li><i className="fa-solid fa-phone" /><span>031 99726239</span></li>
-                    <li><i className="fa-solid fa-envelope" /><span>globalinspeksisistem@gmail.com</span></li>
-                    <li>
-                      <i className="fa-solid fa-location-dot" />
-                      <span>
-                        Jl. Raya Daan Mogot No. 89 RT.2/RW.2, Wijaya Kusuma, Kec. Grogol Petamburan,
-                        Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11460
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </article>
-
-              <article className="office-card surabaya">
+            {/* Mengubah grid menjadi 1 kolom, membatasi lebar maksimal, dan menaruhnya di tengah */}
+            <div
+              className="office-grid"
+              style={{
+                gridTemplateColumns: "1fr",
+                maxWidth: "600px",
+                margin: "0 auto",
+              }}
+            >
+              <article className="office-card surabaya glass">
                 <div className="office-body">
                   <span className="office-kicker">Branch Office</span>
                   <h3 className="office-title">Surabaya</h3>
                   <ul className="office-list">
-                    <li><i className="fa-solid fa-phone" /><span>031 99726239</span></li>
-                    <li><i className="fa-solid fa-envelope" /><span>globalinspeksisistem@gmail.com</span></li>
+                    <li>
+                      <i className="fa-solid fa-phone" />
+                      <span>+62 812-8532-8232</span>
+                    </li>
+                    <li>
+                      <i className="fa-solid fa-envelope" />
+                      <span>globalinspeksisistem@gmail.com</span>
+                    </li>
                     <li>
                       <i className="fa-solid fa-location-dot" />
                       <span>
-                        Jl. Pahlawan No.2, Kwadengan Barat, Lemahputro, Kec. Sidoarjo, Kabupaten Sidoarjo,
-                        Jawa Timur 61213
+                        Jl. Pahlawan No.2, Kwadengan Barat, Lemahputro, Kec.
+                        Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213
                       </span>
                     </li>
                   </ul>
@@ -1048,10 +1128,13 @@ export function ContactPage() {
           <div className="container">
             <div className="contact-panel">
               <aside className="contact-info-panel">
-                <span className="eyebrow"><i className="fa-solid fa-comments" /> Discuss with us</span>
+                <span className="eyebrow">
+                  <i className="fa-solid fa-comments" /> Discuss with us
+                </span>
                 <h2 className="section-title">Contact info</h2>
                 <p>
-                  Hubungi kami untuk pertanyaan layanan, kebutuhan penawaran, atau konsultasi ruang lingkup pengujian.
+                  Hubungi kami untuk pertanyaan layanan, kebutuhan penawaran,
+                  atau konsultasi ruang lingkup pengujian.
                 </p>
                 <div className="info-list">
                   <div className="info-item">
@@ -1059,8 +1142,9 @@ export function ContactPage() {
                     <div>
                       <strong>Alamat</strong>
                       <span>
-                        DELREY Biztown Blok B1 No. 5 Jl. Lingkar Bumi Botanika Utara, Desa Lengkong Kulon,
-                        Kecamatan Pagedangan, Kabupaten Tangerang, Provinsi Banten Kode Pos 15331
+                        DELREY Biztown Blok B1 No. 5 Jl. Lingkar Bumi Botanika
+                        Utara, Desa Lengkong Kulon, Kecamatan Pagedangan,
+                        Kabupaten Tangerang, Provinsi Banten Kode Pos 15331
                       </span>
                     </div>
                   </div>
@@ -1068,16 +1152,14 @@ export function ContactPage() {
                     <i className="fa-solid fa-phone" />
                     <div>
                       <strong>Telepon</strong>
-                      <span>021 50208008 / 021 50560008</span>
+                      <span>
+                        +62 812-8532-8232 <br />
+                        +62 817-888-879 <br />
+                        +62 812-1704-7976
+                      </span>
                     </div>
                   </div>
-                  <div className="info-item">
-                    <i className="fa-solid fa-fax" />
-                    <div>
-                      <strong>Fax</strong>
-                      <span>021 50208009 / 021 50560009</span>
-                    </div>
-                  </div>
+
                   <div className="info-item">
                     <i className="fa-solid fa-envelope" />
                     <div>
@@ -1088,18 +1170,42 @@ export function ContactPage() {
                 </div>
               </aside>
 
-              <section className="form-panel glass" aria-labelledby="contactFormTitle">
-                <h2 className="form-title" id="contactFormTitle">Contact Us</h2>
-                <p className="form-copy">Isi pesan singkat berikut agar tim kami dapat membantu Anda lebih cepat.</p>
-                <form className="contact-form" id="contactForm" onSubmit={handleSubmit}>
+              <section
+                className="form-panel glass"
+                aria-labelledby="contactFormTitle"
+              >
+                <h2 className="form-title" id="contactFormTitle">
+                  Contact Us
+                </h2>
+                <p className="form-copy">
+                  Isi pesan singkat berikut agar tim kami dapat membantu Anda
+                  lebih cepat.
+                </p>
+                <form
+                  className="contact-form"
+                  id="contactForm"
+                  onSubmit={handleSubmit}
+                >
                   <div className="form-row">
                     <div className="field">
                       <label htmlFor="name">Name</label>
-                      <input type="text" id="name" name="name" placeholder="Nama Anda" required />
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Nama Anda"
+                        required
+                      />
                     </div>
                     <div className="field">
                       <label htmlFor="email">Email</label>
-                      <input type="email" id="email" name="email" placeholder="email@perusahaan.com" required />
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="email@perusahaan.com"
+                        required
+                      />
                     </div>
                   </div>
                   <div className="field">
@@ -1111,12 +1217,23 @@ export function ContactPage() {
                       required
                     />
                   </div>
-                  <button className="btn btn-primary" type="submit">
-                    Send <i className="fa-solid fa-paper-plane" />
+                  <button
+                    className="btn btn-primary"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Mengirim..." : "Send"}{" "}
+                    <i className="fa-solid fa-paper-plane" />
                   </button>
                   <p className={`form-message${messageReady ? " active" : ""}`}>
-                    Terima kasih. Draft pesan sudah siap di email Anda.
+                    Terima kasih. Pesan Anda sudah terkirim dan tersimpan di
+                    admin.
                   </p>
+                  {messageError ? (
+                    <p className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-bold text-rose-700">
+                      {messageError}
+                    </p>
+                  ) : null}
                 </form>
               </section>
             </div>
@@ -1141,49 +1258,77 @@ export function ContactPage() {
         <div className="container">
           <div className="footer-panel glass-dark">
             <div className="footer-grid">
+              {/* Kolom 1: Contact */}
               <div>
                 <h4 className="footer-col-title">Contact</h4>
-                <div className="footer-text"><i className="fa-solid fa-envelope" /> globalinspeksisistem@gmail.com</div>
-                <div className="footer-text"><i className="fa-solid fa-phone" /> 021 50208008</div>
-                <div className="footer-text"><i className="fa-solid fa-globe" /> www.gislaboratorium.com</div>
+                <div className="footer-text">
+                  <i className="fa-solid fa-envelope" />{" "}
+                  globalinspeksisistem@gmail.com
+                </div>
+                <div
+                  className="footer-text"
+                  style={{ alignItems: "flex-start" }}
+                >
+                  <i
+                    className="fa-solid fa-phone"
+                    style={{ marginTop: "4px" }}
+                  />{" "}
+                  <div>
+                    +62 812-8532-8232
+                    <br />
+                    +62 817-888-879
+                    <br />
+                    +62 812-1704-7976
+                  </div>
+                </div>
+                <div className="footer-text">
+                  <i className="fa-solid fa-globe" /> www.gislaboratorium.com
+                </div>
               </div>
 
+              {/* Kolom 2: Link */}
               <div>
                 <h4 className="footer-col-title">Link</h4>
-                <Link href="/profile" className="footer-link">Profile</Link>
-                <Link href="/service" className="footer-link">Layanan</Link>
-                <Link href="/ruang-lingkup-pengujian" className="footer-link">Ruang Lingkup</Link>
-                <Link href="/informasi" className="footer-link">Informasi</Link>
-              </div>
-
-              <div>
-                <h4 className="footer-col-title">Kontak</h4>
-                <Link href="/informasi" className="footer-link">Informasi</Link>
-                <Link href="/informasi" className="footer-link">Blog</Link>
-                <Link href="/contact" className="footer-link">Contact</Link>
-              </div>
-
-              <div>
-                <h4 className="footer-col-title">Newsletter</h4>
-                <p className="footer-text" style={{ fontSize: "0.95rem" }}>Dapatkan informasi terbaru dari GISLAB.</p>
-                <form className="newsletter-form" onSubmit={(event) => event.preventDefault()}>
-                  <input type="email" className="newsletter-input" placeholder="Masukkan email" required />
-                  <button type="submit" className="newsletter-btn" aria-label="Kirim email newsletter">
-                    <i className="fa-solid fa-paper-plane" />
-                  </button>
-                </form>
+                <Link href="/" className="footer-link">
+                  Beranda
+                </Link>
+                <Link href="/profile" className="footer-link">
+                  Profile
+                </Link>
+                <Link href="/service" className="footer-link">
+                  Layanan
+                </Link>
+                <Link href="/ruang-lingkup-pengujian" className="footer-link">
+                  Ruang Lingkup Pengujian
+                </Link>
+                <Link href="/informasi" className="footer-link">
+                  Informasi
+                </Link>
+                <Link href="/contact" className="footer-link">
+                  Kontak
+                </Link>
               </div>
             </div>
           </div>
-          <div className="footer-bottom">&copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.</div>
+          <div className="footer-bottom">
+            &copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
+          </div>
         </div>
       </footer>
 
       <div className="whatsapp-widget">
-        <div className={`whatsapp-window${whatsappOpen ? " active" : ""}`} id="whatsappWindow">
+        <div
+          className={`whatsapp-window${whatsappOpen ? " active" : ""}`}
+          id="whatsappWindow"
+        >
           <div className="wa-header">
             <div className="wa-brand">
-              <Image src="/landing/animation/logo-lab.png" alt="GISLAB" width={28} height={28} />
+              <Image
+                src="/landing/animation/logo-lab.png"
+                alt="GISLAB"
+                width={28}
+                height={28}
+              />
               <span>PT Global Inspeksi Sistem</span>
             </div>
             <button
@@ -1197,10 +1342,12 @@ export function ContactPage() {
             </button>
           </div>
           <div className="wa-body">
-            <div className="wa-bubble">Halo! Ada yang bisa kami bantu mengenai layanan pengujian GIS?</div>
+            <div className="wa-bubble">
+              Halo! Ada yang bisa kami bantu mengenai layanan pengujian GIS?
+            </div>
             <a
               className="wa-link"
-              href="https://wa.me/6285281844641?text=Halo%20GIS%20Laboratorium"
+              href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium"
               target="_blank"
               rel="noopener"
             >

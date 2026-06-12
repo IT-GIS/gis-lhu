@@ -693,9 +693,10 @@ const INFORMATION_STYLES = `
     padding: 44px;
     border-radius: var(--radius-lg);
   }
+  /* UBAH DISINI: Dari 4 kolom menjadi 2 kolom agar layout tidak kopong */
   .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.4fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: 36px;
   }
   .footer-col-title {
@@ -711,40 +712,24 @@ const INFORMATION_STYLES = `
     gap: 10px;
     margin-bottom: 12px;
   }
-  .footer-link:hover { color: var(--accent); }
+  .footer-link {
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .footer-link:hover { 
+    color: var(--accent); 
+    transform: translateX(5px);
+  }
   .footer-bottom {
     text-align: center;
     margin-top: 28px;
     color: rgba(255,255,255,0.65);
     font-size: 0.9rem;
   }
-  .newsletter-form {
-    display: flex;
-    margin-top: 14px;
-    background: rgba(255,255,255,0.1);
-    border-radius: var(--radius-pill);
-    padding: 4px;
-    border: 1px solid rgba(255,255,255,0.18);
-  }
-  .newsletter-input {
-    flex: 1;
-    border: 0;
-    background: transparent;
-    color: var(--white);
-    padding: 10px 14px;
-    outline: none;
-    min-width: 0;
-  }
-  .newsletter-input::placeholder { color: rgba(255,255,255,0.65); }
-  .newsletter-btn {
-    width: 42px;
-    height: 42px;
-    border: 0;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--secondary), var(--accent));
-    color: var(--white);
-    cursor: pointer;
-  }
+  
+  /* Class newsletter bisa dihapus sepenuhnya jika tidak ada lagi di halaman manapun, 
+     namun jika masih ada di file static-pages.ts, biarkan saja (tidak akan ter-render). */
+
   .whatsapp-widget {
     position: fixed;
     right: 24px;
@@ -784,6 +769,7 @@ const INFORMATION_STYLES = `
     .toolbar { grid-template-columns: 1fr; }
     .category-tabs { justify-content: flex-start; }
     .article-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    /* UBAH DISINI JUGA (Opsional, karena sudah 2 kolom di atas) */
     .footer-grid { grid-template-columns: 1fr 1fr; }
   }
 
@@ -804,9 +790,9 @@ const INFORMATION_STYLES = `
     .article-grid { grid-template-columns: 1fr; }
     .section-meta { align-items: flex-start; flex-direction: column; }
     .footer-panel { padding: 28px 22px; }
-    .footer-grid { grid-template-columns: 1fr; }
-  }
-`;
+    /* Jadi 1 kolom bersusun di layar HP */
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  }`;
 
 function ensureLandingHeadAssets() {
   if (!document.querySelector("link[data-gislab-fontawesome]")) {
@@ -854,16 +840,47 @@ export function InformationPage({ initialArticles = articles }: { initialArticle
       <header className="navbar-wrapper" id="navbar">
         <nav className="navbar">
           <Link href="/" className="nav-brand">
-            <Image className="nav-logo" src="/landing/animation/logo-lab.png" alt="GISLAB" width={128} height={64} priority />
+            <Image
+              className="nav-logo"
+              src="/landing/animation/logo-lab.png"
+              alt="GISLAB"
+              width={128}
+              height={64}
+              priority
+            />
             Global Inspeksi Sistem
           </Link>
           <ul className={`nav-menu${menuOpen ? " open" : ""}`} id="navMenu">
-            <li><Link href="/" className="nav-link">Beranda</Link></li>
-            <li><Link href="/profile" className="nav-link">Profile</Link></li>
-            <li><Link href="/service" className="nav-link">Layanan</Link></li>
-            <li><Link href="/ruang-lingkup-pengujian" className="nav-link">Ruang Lingkup Pengujian</Link></li>
-            <li><Link href="/informasi" className="nav-link active">Informasi</Link></li>
-            <li><Link href="/contact" className="nav-link">Kontak</Link></li>
+            <li>
+              <Link href="/" className="nav-link">
+                Beranda
+              </Link>
+            </li>
+            <li>
+              <Link href="/profile" className="nav-link">
+                Profile
+              </Link>
+            </li>
+            <li>
+              <Link href="/service" className="nav-link">
+                Layanan
+              </Link>
+            </li>
+            <li>
+              <Link href="/ruang-lingkup-pengujian" className="nav-link">
+                Ruang Lingkup Pengujian
+              </Link>
+            </li>
+            <li>
+              <Link href="/informasi" className="nav-link active">
+                Informasi
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="nav-link">
+                Kontak
+              </Link>
+            </li>
           </ul>
           <button
             className="mobile-menu-btn"
@@ -882,16 +899,27 @@ export function InformationPage({ initialArticles = articles }: { initialArticle
           <div className="container">
             <div className="hero-card">
               <div className="hero-content">
-                <span className="eyebrow"><i className="fa-solid fa-newspaper" /> Informasi GISLAB</span>
-                <h1 className="hero-title">Artikel, insight, dan <span>berita pengujian</span>.</h1>
+                <span className="eyebrow">
+                  <i className="fa-solid fa-newspaper" /> Informasi GISLAB
+                </span>
+                <h1 className="hero-title">
+                  Artikel, insight, dan <span>berita pengujian</span>.
+                </h1>
                 <p className="hero-copy">
-                  Kumpulan artikel dari blog GIS Laboratorium tentang pengujian pelumas, lingkungan, pangan,
-                  sawit, alat pertanian, dan layanan laboratorium.
+                  Kumpulan artikel dari blog GIS Laboratorium tentang pengujian
+                  pelumas, lingkungan, pangan, sawit, alat pertanian, dan
+                  layanan laboratorium.
                 </p>
                 <div className="hero-pills" aria-label="Topik utama informasi">
-                  <span className="hero-pill"><i className="fa-solid fa-flask-vial" /> Pengujian Mutu</span>
-                  <span className="hero-pill"><i className="fa-solid fa-leaf" /> Lingkungan</span>
-                  <span className="hero-pill"><i className="fa-solid fa-oil-can" /> Pelumas & Sawit</span>
+                  <span className="hero-pill">
+                    <i className="fa-solid fa-flask-vial" /> Pengujian Mutu
+                  </span>
+                  <span className="hero-pill">
+                    <i className="fa-solid fa-leaf" /> Lingkungan
+                  </span>
+                  <span className="hero-pill">
+                    <i className="fa-solid fa-oil-can" /> Pelumas & Sawit
+                  </span>
                 </div>
               </div>
               <div className="hero-visual" aria-hidden="true">
@@ -918,7 +946,10 @@ export function InformationPage({ initialArticles = articles }: { initialArticle
                   onChange={(event) => setQuery(event.target.value)}
                 />
               </label>
-              <div className="category-tabs" aria-label="Filter kategori artikel">
+              <div
+                className="category-tabs"
+                aria-label="Filter kategori artikel"
+              >
                 {categories.map((category) => (
                   <button
                     key={category}
@@ -946,13 +977,24 @@ export function InformationPage({ initialArticles = articles }: { initialArticle
                 <article className="article-card" key={article.id}>
                   <div className="article-image">
                     <span className="article-category">{article.category}</span>
-                    <Image src={article.image} alt={article.title} fill sizes="(max-width: 680px) 100vw, (max-width: 1060px) 50vw, 33vw" />
+                    <Image
+                      src={article.image}
+                      alt={article.title}
+                      fill
+                      sizes="(max-width: 680px) 100vw, (max-width: 1060px) 50vw, 33vw"
+                    />
                   </div>
                   <div className="article-body">
-                    <span className="article-date"><i className="fa-regular fa-calendar" /> {formatDate(article.date)}</span>
+                    <span className="article-date">
+                      <i className="fa-regular fa-calendar" />{" "}
+                      {formatDate(article.date)}
+                    </span>
                     <h2 className="article-title">{article.title}</h2>
                     <p className="article-excerpt">{article.excerpt}</p>
-                    <Link className="article-link" href={`/informasi/${article.slug}`}>
+                    <Link
+                      className="article-link"
+                      href={`/informasi/${article.slug}`}
+                    >
                       Baca Artikel <i className="fa-solid fa-arrow-right" />
                     </Link>
                   </div>
@@ -976,43 +1018,63 @@ export function InformationPage({ initialArticles = articles }: { initialArticle
             <div className="footer-grid">
               <div>
                 <h4 className="footer-col-title">Contact</h4>
-                <div className="footer-text"><i className="fa-solid fa-envelope" /> globalinspeksisistem@gmail.com</div>
-                <div className="footer-text"><i className="fa-solid fa-phone" /> 021 50208008</div>
-                <div className="footer-text"><i className="fa-solid fa-globe" /> www.gislaboratorium.com</div>
+                <div className="footer-text">
+                  <i className="fa-solid fa-envelope" />{" "}
+                  globalinspeksisistem@gmail.com
+                </div>
+                <div
+                  className="footer-text"
+                  style={{ alignItems: "flex-start" }}
+                >
+                  <i
+                    className="fa-solid fa-phone"
+                    style={{ marginTop: "4px" }}
+                  />
+                  <div>
+                    +62 812-8532-8232
+                    <br />
+                    +62 817-888-879
+                    <br />
+                    +62 812-1704-7976
+                  </div>
+                </div>
+                <div className="footer-text">
+                  <i className="fa-solid fa-globe" /> www.gislaboratorium.com
+                </div>
               </div>
               <div>
                 <h4 className="footer-col-title">Link</h4>
-                <Link href="/profile" className="footer-link">Profile</Link>
-                <Link href="/service" className="footer-link">Layanan</Link>
-                <Link href="/ruang-lingkup-pengujian" className="footer-link">Ruang Lingkup</Link>
-                <Link href="/informasi" className="footer-link">Informasi</Link>
-              </div>
-              <div>
-                <h4 className="footer-col-title">Kontak</h4>
-                <Link href="/informasi" className="footer-link">Informasi</Link>
-                <Link href="/informasi" className="footer-link">Blog</Link>
-                <Link href="/contact" className="footer-link">Contact</Link>
-              </div>
-              <div>
-                <h4 className="footer-col-title">Newsletter</h4>
-                <p className="footer-text">Dapatkan informasi terbaru dari GISLAB.</p>
-                <form className="newsletter-form" onSubmit={(event) => event.preventDefault()}>
-                  <input type="email" className="newsletter-input" placeholder="Masukkan email" aria-label="Email newsletter" />
-                  <button type="submit" className="newsletter-btn" aria-label="Kirim email newsletter">
-                    <i className="fa-solid fa-paper-plane" />
-                  </button>
-                </form>
+                <Link href="/" className="footer-link">
+                  Beranda
+                </Link>
+                <Link href="/profile" className="footer-link">
+                  Profile
+                </Link>
+                <Link href="/service" className="footer-link">
+                  Layanan
+                </Link>
+                <Link href="/ruang-lingkup-pengujian" className="footer-link">
+                  Ruang Lingkup Pengujian
+                </Link>
+                <Link href="/informasi" className="footer-link">
+                  Informasi
+                </Link>
+                <Link href="/contact" className="footer-link">
+                  Kontak
+                </Link>
               </div>
             </div>
           </div>
-          <div className="footer-bottom">&copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.</div>
+          <div className="footer-bottom">
+            &copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
+          </div>
         </div>
       </footer>
 
       <div className="whatsapp-widget">
         <a
           className="whatsapp-toggle"
-          href="https://wa.me/6285281844641?text=Halo%20GIS%20Laboratorium"
+          href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Buka WhatsApp GIS Laboratorium"

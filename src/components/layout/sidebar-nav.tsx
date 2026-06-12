@@ -1,8 +1,10 @@
 "use client";
 
 import {
-  Activity, FileText,
+  Activity,
+  FileText,
   LayoutDashboard,
+  MessageSquare,
   Newspaper,
   SearchCheck,
   Settings,
@@ -12,7 +14,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import type { AppRole } from "@/lib/domain";
-import { canCreateDocument, canManageBlogPosts } from "@/lib/permissions";
+import { canCreateDocument, canManageBlogPosts, canViewContactMessages } from "@/lib/permissions";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -34,13 +36,20 @@ const bottomNavItems = [
     icon: Activity,
     permission: "manageBlogPosts",
   },
-  { href: "/akun", label: "Pengaturan", icon: Settings }, 
+  { href: "/akun", label: "Pengaturan", icon: Settings },
+  {
+    href: "/messages",
+    label: "Pesan",
+    icon: MessageSquare,
+    permission: "viewContactMessages",
+  },
 ];
 
 function hasPermission(role: AppRole, permission?: string) {
   if (!permission) return true;
   if (permission === "createDocument") return canCreateDocument(role);
   if (permission === "manageBlogPosts") return canManageBlogPosts(role);
+  if (permission === "viewContactMessages") return canViewContactMessages(role);
   return true;
 }
 
