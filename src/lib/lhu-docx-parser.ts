@@ -82,6 +82,10 @@ function cleanAdditionalInfoValue(value: string) {
   return normalizeText(value.replace(/\bLokasi Pengambilan\s*/i, ""));
 }
 
+function extractInlineLabelValue(lines: string[], pattern: RegExp) {
+  return extractAfterColon(findLine(lines, pattern));
+}
+
 function extractLooseValue(lines: string[], pattern: RegExp, stopPattern: RegExp) {
   const index = findIndex(lines, pattern);
   if (index < 0) return "";
@@ -98,13 +102,16 @@ function extractLooseValue(lines: string[], pattern: RegExp, stopPattern: RegExp
 }
 
 function extractReportNo(lines: string[]) {
-  const line = findLine(lines, /^No\.\s*LP/i);
+  const line = findLine(lines, /(?:^|\b)No\.\s*LP/i);
   if (!line) return "";
 
   const colonValue = extractAfterColon(line);
   if (colonValue) return colonValue;
 
-  return normalizeText(line.replace(/^No\.\s*/i, ""));
+  const inlineMatch = line.match(/No\.\s*(LP\s*\/?\s*[-A-Z0-9/ ]+)/i);
+  if (inlineMatch?.[1]) return normalizeText(inlineMatch[1]);
+
+  return normalizeText(line.replace(/^.*?No\.\s*/i, ""));
 }
 
 function extractNumberedValue(lines: string[], pattern: RegExp, stopPattern = /^\d+\.\d+\.|^[IVX]+\./) {
@@ -151,6 +158,12 @@ function extractIssue(lines: string[]) {
 function parseResults(rows: string[][], formType: AppFormType) {
   const results: LhuResultRow[] = [];
   let notes = "";
+  const header = rows[0] ?? [];
+  const parameterIndex = header.findIndex((cell) => /^PARAMETER$/i.test(cell));
+  const unitIndex = header.findIndex((cell) => /^UNIT$/i.test(cell));
+  const specificationIndex = header.findIndex((cell) => /^SPECIFICATION$/i.test(cell));
+  const resultIndex = header.findIndex((cell) => /^RESULT$/i.test(cell));
+  const methodsIndex = header.findIndex((cell) => /^METHODS?$/i.test(cell));
 
   rows.slice(1).forEach((cells) => {
     const firstCell = cells[0] ?? "";
@@ -190,6 +203,43 @@ function parseResults(rows: string[][], formType: AppFormType) {
           methods: cells[4] ?? "",
         });
       }
+      return;
+    }
+
+    if (
+      formType === "TYPE_1" &&
+      parameterIndex >= 0 &&
+      unitIndex >= 0 &&
+      specificationIndex >= 0 &&
+      resultIndex >= 0 &&
+      methodsIndex >= 0 &&
+      cells[parameterIndex]
+    ) {
+      results.push({
+        parameter: cells[parameterIndex] ?? "",
+        unit: cells[unitIndex] ?? "",
+        specification: cells[specificationIndex] ?? "",
+        result: cells[resultIndex] ?? "",
+        methods: cells[methodsIndex] ?? "",
+      });
+      return;
+    }
+
+    if (
+      formType === "TYPE_2" &&
+      parameterIndex >= 0 &&
+      unitIndex >= 0 &&
+      resultIndex >= 0 &&
+      methodsIndex >= 0 &&
+      cells[parameterIndex]
+    ) {
+      results.push({
+        parameter: cells[parameterIndex] ?? "",
+        unit: cells[unitIndex] ?? "",
+        specification: "",
+        result: cells[resultIndex] ?? "",
+        methods: cells[methodsIndex] ?? "",
+      });
       return;
     }
 
@@ -326,19 +376,23 @@ function extractAdditionalInfo(lines: string[], formType: AppFormType) {
   }
 
   if (formType === "TYPE_2") {
+    const merk = extractInlineLabelValue(lines, /^Merk\s*:/i);
+    const vessel = extractNumberedValue(lines, /^(?:\d+\.\d+\.\d+\.\s*)?Vessel\s*\/\s*Kapal/i);
+    const bl = extractNumberedValue(lines, /^(?:\d+\.\d+\.\d+\.\s*)?BL\b/i);
+    const gudang = extractNumberedValue(lines, /^(?:\d+\.\d+\.\d+\.\s*)?Gudang\b/i);
+
     return [
-      {
-        label: "Vessel/ Kapal",
-        value: extractNumberedValue(lines, /Vessel\/\s*Kapal/i),
-      },
-      {
-        label: "BL",
-        value: extractNumberedValue(lines, /\bBL\b/i),
-      },
-      {
-        label: "Gudang",
-        value: extractNumberedValue(lines, /Gudang/i),
-      },
+      ...(merk
+        ? [
+            {
+              label: "Merk",
+              value: merk,
+            },
+          ]
+        : []),
+      ...(vessel ? [{ label: "Vessel/ Kapal", value: vessel }] : []),
+      ...(bl ? [{ label: "BL", value: bl }] : []),
+      ...(gudang ? [{ label: "Gudang", value: gudang }] : []),
     ];
   }
 
@@ -397,15 +451,15 @@ function parseLhuFromText(lines: string[], table: string[][]): ParsedDocx {
 
   payload.reportNo = extractReportNo(lines);
   payload.orderNo = extractLooseValue(lines, /No\.\s*Order|Nomor Pekerjaan/i, nextSectionPattern);
-  payload.principal.name = extractLooseValue(lines, /2\.1\.\s*Name\s*\/\s*Nama/i, nextSectionPattern);
+  payload.principal.name = extractLooseValue(lines, /^(?:2\.1\.\s*)?Name\s*\/\s*Nama/i, nextSectionPattern);
   payload.principal.address = collectContinuation(
     lines,
-    findIndex(lines, /2\.2\.\s*Address\s*\/\s*Alamat/i),
-    /^III\.|^3\.1\./,
+    findIndex(lines, /^(?:2\.2\.\s*)?Address\s*\/\s*Alamat/i),
+    /^III\.|^Sampel\s*\/|^Sample Number|^3\.1\./i,
   );
-  payload.sample.sampleNo = extractLooseValue(lines, /3\.1\.\s*Sample/i, nextSectionPattern);
-  payload.sample.sampleName = extractLooseValue(lines, /3\.2\.\s*Sample Name/i, nextSectionPattern);
-  payload.sample.packaging = extractLooseValue(lines, /3\.3\.\s*Packaging/i, nextSectionPattern);
+  payload.sample.sampleNo = extractLooseValue(lines, /^(?:3\.1\.\s*)?Sample (?:Number|Nomer|Nomor)\s*\/\s*Nomor (?:Contoh|Sampel)/i, nextSectionPattern);
+  payload.sample.sampleName = extractLooseValue(lines, /^(?:3\.2\.\s*)?Sample Name\s*\/\s*Nama (?:Contoh|Sampel)/i, nextSectionPattern);
+  payload.sample.packaging = extractLooseValue(lines, /^(?:3\.3\.\s*)?Packaging\s*\/\s*Kemasan/i, nextSectionPattern);
   payload.sample.commodity = extractNumberedValue(lines, /Commodity\/\s*Komoditi/i);
   payload.sample.type = extractNumberedValue(lines, /Type\/\s*Jenis/i);
   payload.sample.sniNo = extractLooseValue(lines, /Number of SNI|Nomor SNI/i, nextSectionPattern);
