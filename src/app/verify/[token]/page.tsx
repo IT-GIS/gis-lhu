@@ -45,7 +45,7 @@ function PublicSection({
 function LaboratoryIdentityCard() {
   return (
     <section className="rounded-lg border border-sky-100 bg-white px-6 py-7 shadow-sm sm:px-8 lg:px-10">
-      <div className="grid gap-5 lg:grid-cols-[max-content_minmax(0,1fr)_220px] lg:items-center lg:gap-6">
+      <div className="grid gap-5 lg:grid-cols-[max-content_minmax(0,1fr)_260px] lg:items-center lg:gap-6">
         <div className="flex justify-center lg:justify-start">
           <Image
             src="/logo-lab-GIS.png"
@@ -71,11 +71,11 @@ function LaboratoryIdentityCard() {
         </div>
         <div className="flex justify-center lg:justify-end">
           <Image
-            src="/templates/lhu-media/kan-logo.png"
+            src="/kan-lp-1784-idn.png"
             alt="Komite Akreditasi Nasional LP-1784-IDN"
-            width={220}
-            height={124}
-            className="h-auto w-44 object-contain sm:w-56"
+            width={260}
+            height={138}
+            className="h-auto w-52 object-contain sm:w-64"
             priority
             unoptimized
           />

@@ -1003,7 +1003,7 @@ export function ContactPage() {
             <div className="office-grid">
               <article className="office-card surabaya">
                 <div className="office-body">
-                  <span className="office-kicker">Branch Office</span>
+                  <span className="office-kicker">Office</span>
                   <h3 className="office-title">Surabaya</h3>
                   <ul className="office-list">
                     <li><i className="fa-solid fa-phone" /><span>031 99726239</span></li>
