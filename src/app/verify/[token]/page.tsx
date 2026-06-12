@@ -1,4 +1,5 @@
-import { CheckCircle2, FileCheck2 } from "lucide-react";
+import Image from "next/image";
+import { CheckCircle2 } from "lucide-react";
 import { resolveVerificationToken } from "@/lib/documents";
 import { getResultColumns, resolveLhuPayload, type LhuPayload } from "@/lib/lhu-payload";
 import { getVerificationView } from "@/lib/verification";
@@ -37,6 +38,49 @@ function PublicSection({
         <h2 className="text-sm font-extrabold uppercase tracking-[0.08em] text-slate-950 sm:text-base">{title}</h2>
       </div>
       <div className="mt-5">{children}</div>
+    </section>
+  );
+}
+
+function LaboratoryIdentityCard() {
+  return (
+    <section className="rounded-lg border border-sky-100 bg-white px-6 py-7 shadow-sm sm:px-8 lg:px-10">
+      <div className="grid gap-5 lg:grid-cols-[max-content_minmax(0,1fr)_220px] lg:items-center lg:gap-6">
+        <div className="flex justify-center lg:justify-start">
+          <Image
+            src="/logo-lab-GIS.png"
+            alt="PT Global Inspeksi Sistem"
+            width={260}
+            height={282}
+            className="h-auto w-48 object-contain sm:w-60 lg:w-37"
+            priority
+            unoptimized
+          />
+        </div>
+        <div className="max-w-2xl text-left">
+          <h1 className="font-[family-name:var(--font-display)] text-2xl font-extrabold uppercase leading-tight text-[#253f92] sm:whitespace-nowrap sm:text-[30px]">
+            PT GLOBAL INSPEKSI SISTEM
+          </h1>
+          <p className="mt-2 max-w-2xl text-base font-medium leading-7 text-slate-700 sm:text-[16px]">
+            <span className="block">Jl. Pahlawan No.2, Kwadengan Barat, Lemahputro, Kec. Sidoarjo,</span>
+            <span className="block">Kabupaten Sidoarjo, Jawa Timur 61213</span>
+          </p>
+          <p className="mt-1 text-base font-semibold leading-7 text-slate-800 sm:text-[16px]">
+            Email: <span className="text-[#253f92]">gislaboratorium@gmail.com</span>
+          </p>
+        </div>
+        <div className="flex justify-center lg:justify-end">
+          <Image
+            src="/templates/lhu-media/kan-logo.png"
+            alt="Komite Akreditasi Nasional LP-1784-IDN"
+            width={220}
+            height={124}
+            className="h-auto w-44 object-contain sm:w-56"
+            priority
+            unoptimized
+          />
+        </div>
+      </div>
     </section>
   );
 }
@@ -205,38 +249,21 @@ export default async function VerifyPage({
       <div className="mx-auto max-w-6xl space-y-6">
         {verification && payload && isPubliclyVerified ? (
           <>
-            <section className="overflow-hidden rounded-lg border border-slate-200 bg-white">
-              <div className="h-1.5 bg-gradient-to-r from-sky-700 via-cyan-500 to-emerald-500" aria-hidden="true" />
-              <div className="flex flex-col gap-6 p-6 sm:p-8 lg:flex-row lg:items-start lg:justify-between">
-                <div className="max-w-3xl">
-                  <p className="text-xs font-bold uppercase tracking-[0.28em] text-sky-700">Verifikasi Publik GIS LHU</p>
-                  <h1 className="mt-4 font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-                    {view.title}
-                  </h1>
-                  <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600">{view.description}</p>
-                </div>
-                <div className="flex items-center gap-3 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-900">
-                  <CheckCircle2 className="h-5 w-5 shrink-0" aria-hidden="true" />
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.14em]">Status</p>
-                    <p className="text-sm font-bold">Terverifikasi</p>
-                  </div>
+            <section className="mx-auto max-w-4xl rounded-lg border border-emerald-200 bg-emerald-50 px-5 py-5 text-emerald-900">
+              <div className="flex items-center gap-4">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                  <CheckCircle2 className="h-6 w-6" aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="text-base font-extrabold text-emerald-950 sm:text-lg">{view.title}</p>
+                  <p className="mt-1 text-sm leading-6 text-emerald-800">{view.description}</p>
                 </div>
               </div>
             </section>
 
+            <LaboratoryIdentityCard />
+
             <article className="rounded-lg border border-slate-200 bg-white">
-              <header className="border-b border-slate-200 px-6 py-5 sm:px-8">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-700">
-                    <FileCheck2 className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <p className="text-base font-bold text-slate-950">Detail Laporan Hasil Uji</p>
-                    <p className="mt-1 text-sm leading-6 text-slate-500">Data berikut bersumber dari dokumen yang tercatat di sistem verifikasi.</p>
-                  </div>
-                </div>
-              </header>
               <div className="p-6 sm:p-8">
               <div className="space-y-8">
                 <PublicSection title="Data Verifikasi Dokumen">

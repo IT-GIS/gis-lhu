@@ -309,7 +309,7 @@ const CONTACT_STYLES = `
 
   .contact-page .office-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 28px;
   }
 
@@ -330,10 +330,6 @@ const CONTACT_STYLES = `
     inset: 0;
     background: linear-gradient(180deg, rgba(10, 37, 64, 0.12), rgba(10, 37, 64, 0.86));
     z-index: -1;
-  }
-
-  .contact-page .office-card.jakarta {
-    background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200') center/cover;
   }
 
   .contact-page .office-card.surabaya {
@@ -922,7 +918,7 @@ export function ContactPage() {
     const body = `Nama:%20${name}%0AEmail:%20${email}%0A%0APesan:%0A${message}`;
 
     setMessageReady(true);
-    window.location.href = `mailto:globalinspeksisistem@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:gislaboratorium@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -973,10 +969,10 @@ export function ContactPage() {
               <h2 className="quick-label">Telepon</h2>
               <p className="quick-value">021 50208008 / 021 50560008</p>
             </a>
-            <a className="quick-card glass" href="mailto:globalinspeksisistem@gmail.com">
+            <a className="quick-card glass" href="mailto:gislaboratorium@gmail.com">
               <span className="quick-icon"><i className="fa-solid fa-envelope" /></span>
               <h2 className="quick-label">Email</h2>
-              <p className="quick-value">globalinspeksisistem@gmail.com</p>
+              <p className="quick-value">gislaboratorium@gmail.com</p>
             </a>
             <a
               className="quick-card glass"
@@ -999,37 +995,19 @@ export function ContactPage() {
                 <h2 className="section-title">Kunjungi kantor GIS Laboratorium.</h2>
               </div>
               <p className="section-copy">
-                GIS Laboratorium melayani pelanggan melalui kantor Jakarta dan Surabaya. Pilih lokasi terdekat untuk
-                konsultasi, pengiriman sampel, atau kebutuhan koordinasi pengujian.
+                GIS Laboratorium melayani pelanggan melalui kantor Sidoarjo untuk konsultasi, pengiriman sampel,
+                atau kebutuhan koordinasi pengujian.
               </p>
             </div>
 
             <div className="office-grid">
-              <article className="office-card jakarta">
-                <div className="office-body">
-                  <span className="office-kicker">Head Office</span>
-                  <h3 className="office-title">Jakarta</h3>
-                  <ul className="office-list">
-                    <li><i className="fa-solid fa-phone" /><span>031 99726239</span></li>
-                    <li><i className="fa-solid fa-envelope" /><span>globalinspeksisistem@gmail.com</span></li>
-                    <li>
-                      <i className="fa-solid fa-location-dot" />
-                      <span>
-                        Jl. Raya Daan Mogot No. 89 RT.2/RW.2, Wijaya Kusuma, Kec. Grogol Petamburan,
-                        Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11460
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </article>
-
               <article className="office-card surabaya">
                 <div className="office-body">
                   <span className="office-kicker">Branch Office</span>
                   <h3 className="office-title">Surabaya</h3>
                   <ul className="office-list">
                     <li><i className="fa-solid fa-phone" /><span>031 99726239</span></li>
-                    <li><i className="fa-solid fa-envelope" /><span>globalinspeksisistem@gmail.com</span></li>
+                    <li><i className="fa-solid fa-envelope" /><span>gislaboratorium@gmail.com</span></li>
                     <li>
                       <i className="fa-solid fa-location-dot" />
                       <span>
@@ -1082,7 +1060,7 @@ export function ContactPage() {
                     <i className="fa-solid fa-envelope" />
                     <div>
                       <strong>Email</strong>
-                      <span>globalinspeksisistem@gmail.com</span>
+                      <span>gislaboratorium@gmail.com</span>
                     </div>
                   </div>
                 </div>
@@ -1128,7 +1106,7 @@ export function ContactPage() {
             <div className="map-shell glass">
               <iframe
                 title="Peta lokasi kantor GIS Laboratorium"
-                src="https://www.google.com/maps?q=Jl.%20Raya%20Daan%20Mogot%20No.%2089%20Wijaya%20Kusuma%20Grogol%20Petamburan%20Jakarta%20Barat&output=embed"
+                src="https://www.google.com/maps?q=Jl.%20Pahlawan%20No.2%2C%20Kwadengan%20Barat%2C%20Lemahputro%2C%20Kec.%20Sidoarjo%2C%20Kabupaten%20Sidoarjo%2C%20Jawa%20Timur%2061213&output=embed"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
@@ -1143,7 +1121,7 @@ export function ContactPage() {
             <div className="footer-grid">
               <div>
                 <h4 className="footer-col-title">Contact</h4>
-                <div className="footer-text"><i className="fa-solid fa-envelope" /> globalinspeksisistem@gmail.com</div>
+                <div className="footer-text"><i className="fa-solid fa-envelope" /> gislaboratorium@gmail.com</div>
                 <div className="footer-text"><i className="fa-solid fa-phone" /> 021 50208008</div>
                 <div className="footer-text"><i className="fa-solid fa-globe" /> www.gislaboratorium.com</div>
               </div>

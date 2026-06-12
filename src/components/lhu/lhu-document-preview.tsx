@@ -55,10 +55,10 @@ export function LhuDocumentPreview({
                 PT GLOBAL INSPEKSI SISTEM
               </p>
               <p className="mt-1 text-[11px] leading-5 text-slate-800">
-                Jl. Daan Mogot No.89, RT.002 RW.002 Kel. Wijaya Kusuma, Kec. Grogol Petamburan,
+                Jl. Pahlawan No.2, Kwadengan Barat, Lemahputro, Kec. Sidoarjo,
               </p>
               <p className="text-[11px] leading-5 text-slate-800">
-                Kota Jakarta Barat, Provinsi DKI Jakarta-11460
+                Kabupaten Sidoarjo, Jawa Timur 61213
               </p>
               <p className="text-[11px] leading-5 text-[#2f5496]">Email : gislaboratorium@gmail.com</p>
             </div>
