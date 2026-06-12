@@ -100,21 +100,7 @@ export function createEmptyLhuPayload(formType: AppFormType): LhuPayload {
       commodity: "",
       type: "",
       sniNo: "",
-      additionalInfo:
-        formType === "TYPE_1"
-          ? [
-              { label: "Brand/ Merek", value: "" },
-              { label: "Address of Sampling/ Lokasi Pengambilan", value: "" },
-              { label: "Parameter", value: "" },
-              { label: "No BAPC", value: "" },
-            ]
-          : formType === "TYPE_2"
-            ? [
-                { label: "Vessel/ Kapal", value: "" },
-                { label: "BL", value: "" },
-                { label: "Gudang", value: "" },
-              ]
-            : [],
+      additionalInfo: [],
       sampling: "-",
     },
     results: [

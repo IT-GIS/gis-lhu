@@ -144,7 +144,7 @@ function buildBodyContent({
   documentNumber: string;
 }) {
   const additionalInfo = payload.sample.additionalInfo
-    .map((item, index) => line(`3.4.${index + 3}. ${item.label || "Informasi"}`, item.value, 420))
+    .map((item, index) => line(`3.4.${index + 1}. ${item.label || "Informasi"}`, item.value, 420))
     .join("");
 
   return [
@@ -160,8 +160,6 @@ function buildBodyContent({
     line("3.2. Sample Name / Nama Contoh", payload.sample.sampleName),
     line("3.3. Packaging / Kemasan", payload.sample.packaging),
     paragraph("3.4. Other Information / Keterangan lain", { bold: true, size: 18, after: 20 }),
-    line("3.4.1. Commodity/Komoditi", payload.sample.commodity, 420),
-    line("3.4.2. Type/ Jenis", payload.sample.type, 420),
     additionalInfo,
     line("3.5. Date of Received/Tanggal Terima", payload.receivedDate),
     line("3.6. Date of Analysis /Tanggal Uji", payload.analysisDate),

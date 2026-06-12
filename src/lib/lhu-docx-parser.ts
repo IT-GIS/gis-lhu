@@ -1,7 +1,7 @@
 import JSZip from "jszip";
 
 import type { AppFormType } from "@/lib/domain";
-import { createEmptyLhuPayload, type LhuPayload, type LhuResultRow } from "@/lib/lhu-payload";
+import { createEmptyLhuPayload, type LhuAdditionalInfo, type LhuPayload, type LhuResultRow } from "@/lib/lhu-payload";
 
 type ParsedDocx = {
   formType: AppFormType;
@@ -78,14 +78,6 @@ function collectContinuation(lines: string[], startIndex: number, stopPattern: R
   return normalizeText(values.join(" "));
 }
 
-function cleanAdditionalInfoValue(value: string) {
-  return normalizeText(value.replace(/\bLokasi Pengambilan\s*/i, ""));
-}
-
-function extractInlineLabelValue(lines: string[], pattern: RegExp) {
-  return extractAfterColon(findLine(lines, pattern));
-}
-
 function extractLooseValue(lines: string[], pattern: RegExp, stopPattern: RegExp) {
   const index = findIndex(lines, pattern);
   if (index < 0) return "";
@@ -112,11 +104,6 @@ function extractReportNo(lines: string[]) {
   if (inlineMatch?.[1]) return normalizeText(inlineMatch[1]);
 
   return normalizeText(line.replace(/^.*?No\.\s*/i, ""));
-}
-
-function extractNumberedValue(lines: string[], pattern: RegExp, stopPattern = /^\d+\.\d+\.|^[IVX]+\./) {
-  const index = findIndex(lines, pattern);
-  return collectContinuation(lines, index, stopPattern);
 }
 
 function extractIssue(lines: string[]) {
@@ -353,50 +340,86 @@ function extractPdfResultRows(lines: string[], formType: AppFormType) {
   return tableRows.length > 1 ? tableRows : [];
 }
 
-function extractAdditionalInfo(lines: string[], formType: AppFormType) {
-  if (formType === "TYPE_1") {
-    return [
-      {
-        label: "Brand/ Merek",
-        value: cleanAdditionalInfoValue(extractNumberedValue(lines, /Brand\/\s*Merek/i)),
-      },
-      {
-        label: "Address of Sampling/ Lokasi Pengambilan",
-        value: cleanAdditionalInfoValue(extractNumberedValue(lines, /Address of Sampling|Lokasi Pengambilan/i)),
-      },
-      {
-        label: "Parameter",
-        value: cleanAdditionalInfoValue(extractNumberedValue(lines, /Parameter/i)),
-      },
-      {
-        label: "No BAPC",
-        value: cleanAdditionalInfoValue(extractNumberedValue(lines, /No BAPC/i)),
-      },
-    ];
+function isOtherInfoStartLine(line: string) {
+  return /^(?:\d+\.\d+\.?\s*)?Other Information\s*\/\s*Keterangan\s*lain/i.test(line);
+}
+
+function isOtherInfoStopLine(line: string) {
+  return (
+    /^(?:\d+\.\d+\.?\s*)?(Date of Received|Date of Analysis|Tanggal Terima|Tanggal Uji|Sampling\s*\/|Number of SNI|Nomor SNI)/i.test(line) ||
+    /^(?:IV\.|Result\s*\/|Hasil Uji|PARAMETER\b|NO\b)/i.test(line)
+  );
+}
+
+function cleanOtherInfoLabel(label: string) {
+  return normalizeText(label.replace(/^\d+(?:\.\d+)*\.?\s*/, ""));
+}
+
+function parseOtherInfoLine(line: string) {
+  const match = cleanOtherInfoLabel(line).match(/^(.+?)\s*:\s*(.*)$/);
+  if (!match) return null;
+
+  const label = normalizeText(match[1] ?? "");
+  const value = normalizeText(match[2] ?? "");
+  if (!label || isOtherInfoStartLine(label)) return null;
+
+  return { label, value };
+}
+
+function looksLikeOtherInfoLabel(line: string) {
+  const label = cleanOtherInfoLabel(line);
+  return (
+    !label.includes(":") &&
+    label.length <= 100 &&
+    /\/|^(Brand|Merek|Address|Lokasi|Parameter|No BAPC|Commodity|Komoditi|Type|Jenis|Vessel|Kapal|BL|Gudang|Merk)\b/i.test(label)
+  );
+}
+
+function extractAdditionalInfo(lines: string[]) {
+  const startIndex = lines.findIndex((line) => isOtherInfoStartLine(line));
+  if (startIndex < 0) return [];
+
+  const items: LhuAdditionalInfo[] = [];
+  let pendingLabel = "";
+  const startValue = extractAfterColon(lines[startIndex]);
+  const candidateLines = startValue ? [startValue] : [];
+
+  for (let index = startIndex + 1; index < lines.length; index += 1) {
+    const line = lines[index];
+    if (isOtherInfoStopLine(line)) break;
+    candidateLines.push(line);
   }
 
-  if (formType === "TYPE_2") {
-    const merk = extractInlineLabelValue(lines, /^Merk\s*:/i);
-    const vessel = extractNumberedValue(lines, /^(?:\d+\.\d+\.\d+\.\s*)?Vessel\s*\/\s*Kapal/i);
-    const bl = extractNumberedValue(lines, /^(?:\d+\.\d+\.\d+\.\s*)?BL\b/i);
-    const gudang = extractNumberedValue(lines, /^(?:\d+\.\d+\.\d+\.\s*)?Gudang\b/i);
+  candidateLines.forEach((line) => {
+    const parsed = parseOtherInfoLine(line);
 
-    return [
-      ...(merk
-        ? [
-            {
-              label: "Merk",
-              value: merk,
-            },
-          ]
-        : []),
-      ...(vessel ? [{ label: "Vessel/ Kapal", value: vessel }] : []),
-      ...(bl ? [{ label: "BL", value: bl }] : []),
-      ...(gudang ? [{ label: "Gudang", value: gudang }] : []),
-    ];
-  }
+    if (parsed) {
+      pendingLabel = "";
+      if (parsed.value) items.push(parsed);
+      return;
+    }
 
-  return [];
+    if (pendingLabel) {
+      items.push({
+        label: pendingLabel,
+        value: normalizeText(line),
+      });
+      pendingLabel = "";
+      return;
+    }
+
+    if (looksLikeOtherInfoLabel(line)) {
+      pendingLabel = cleanOtherInfoLabel(line);
+      return;
+    }
+
+    const lastItem = items[items.length - 1];
+    if (lastItem?.value) {
+      lastItem.value = normalizeText(`${lastItem.value} ${line}`);
+    }
+  });
+
+  return items;
 }
 
 function detectFormType(lines: string[], table: string[][]): AppFormType {
@@ -460,10 +483,8 @@ function parseLhuFromText(lines: string[], table: string[][]): ParsedDocx {
   payload.sample.sampleNo = extractLooseValue(lines, /^(?:3\.1\.\s*)?Sample (?:Number|Nomer|Nomor)\s*\/\s*Nomor (?:Contoh|Sampel)/i, nextSectionPattern);
   payload.sample.sampleName = extractLooseValue(lines, /^(?:3\.2\.\s*)?Sample Name\s*\/\s*Nama (?:Contoh|Sampel)/i, nextSectionPattern);
   payload.sample.packaging = extractLooseValue(lines, /^(?:3\.3\.\s*)?Packaging\s*\/\s*Kemasan/i, nextSectionPattern);
-  payload.sample.commodity = extractNumberedValue(lines, /Commodity\/\s*Komoditi/i);
-  payload.sample.type = extractNumberedValue(lines, /Type\/\s*Jenis/i);
   payload.sample.sniNo = extractLooseValue(lines, /Number of SNI|Nomor SNI/i, nextSectionPattern);
-  payload.sample.additionalInfo = extractAdditionalInfo(lines, formType);
+  payload.sample.additionalInfo = extractAdditionalInfo(lines);
   payload.receivedDate = extractLooseValue(lines, /Date of Received|Tanggal Terima/i, nextSectionPattern);
   payload.analysisDate = extractLooseValue(lines, /Date of Analysis|Tanggal Uji/i, nextSectionPattern);
   payload.sample.sampling = extractLooseValue(lines, /Sampling\/Pengambilan Sample/i, nextSectionPattern) || "-";

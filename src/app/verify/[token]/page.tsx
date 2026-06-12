@@ -90,8 +90,6 @@ function AdditionalInfoList({ payload }: { payload: LhuPayload }) {
     { label: "Sample Number / Nomor Contoh", value: payload.sample.sampleNo },
     { label: "Sample Name / Nama Contoh", value: payload.sample.sampleName },
     { label: "Packaging / Kemasan", value: payload.sample.packaging },
-    { label: "Commodity / Komoditi", value: payload.sample.commodity },
-    { label: "Type / Jenis", value: payload.sample.type },
     ...payload.sample.additionalInfo.map((item) => ({
       label: item.label || "Informasi",
       value: item.value,

@@ -265,8 +265,6 @@ export function LhuDocumentForm({
       <input type="hidden" name="sampleNo" value={payload.sample.sampleNo ?? ""} />
       <input type="hidden" name="sampleName" value={payload.sample.sampleName} />
       <input type="hidden" name="packaging" value={payload.sample.packaging ?? ""} />
-      <input type="hidden" name="commodity" value={payload.sample.commodity ?? ""} />
-      <input type="hidden" name="sampleType" value={payload.sample.type ?? ""} />
       <input type="hidden" name="sniNo" value={payload.sample.sniNo ?? ""} />
       <input type="hidden" name="sampling" value={payload.sample.sampling ?? ""} />
       <input type="hidden" name="additionalInfoJson" value={JSON.stringify(payload.sample.additionalInfo)} />
@@ -397,16 +395,8 @@ export function LhuDocumentForm({
             <h4 className="mb-4 text-sm font-bold text-[var(--color-gis-navy)] dark:text-slate-100">
               Other Information / Keterangan lain
             </h4>
-            <div className="grid gap-4 lg:grid-cols-2">
-              <Field label="Commodity/Komoditi">
-                <Input value={payload.sample.commodity ?? ""} onChange={(event) => setSampleField("commodity", event.target.value)} placeholder={formType === "TYPE_1" ? "Fertilizer" : "FERTILIZER"} disabled={!canEdit} />
-              </Field>
-              <Field label="Type/ Jenis">
-                <Input value={payload.sample.type ?? ""} onChange={(event) => setSampleField("type", event.target.value)} placeholder={formType === "TYPE_1" ? "Rock Phosphate" : "AMONIUM SULFAT"} disabled={!canEdit} />
-              </Field>
-            </div>
 
-            <div className="mt-4 space-y-3">
+            <div className="space-y-3">
               {payload.sample.additionalInfo.map((item, index) => {
                 const valueIsLong =
                   item.label?.toLowerCase().includes("address") ||

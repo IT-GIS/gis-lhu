@@ -97,12 +97,10 @@ export function LhuDocumentPreview({
         <InfoLine number="3.3." label="Packaging / Kemasan" value={payload.sample.packaging} />
         <p className={labelClass}>3.4. Other Information / Keterangan lain</p>
         <div className="space-y-1">
-          <InfoLine number="3.4.1." label="Commodity/Komoditi" value={payload.sample.commodity} indent />
-          <InfoLine number="3.4.2." label="Type/ Jenis" value={payload.sample.type} indent />
           {payload.sample.additionalInfo.map((item, index) => (
             <InfoLine
               key={`${item.label}-${index}`}
-              number={`3.4.${index + 3}.`}
+              number={`3.4.${index + 1}.`}
               label={item.label || "Informasi"}
               value={item.value}
               indent
