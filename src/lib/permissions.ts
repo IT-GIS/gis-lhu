@@ -55,3 +55,6 @@ export function canViewAuditLogs(role: AppRole) {
 export function canManageBlogPosts(role: AppRole) {
   return ["SUPER_ADMIN", "ADMIN_LAB"].includes(role);
 }
+export function canViewContactMessages(role: AppRole) {
+  return ["SUPER_ADMIN", "ADMIN_LAB", "FRONTDESK"].includes(role);
+}

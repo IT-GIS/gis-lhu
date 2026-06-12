@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -482,7 +482,7 @@ const SCOPE_STYLES = `
     font-style: normal;
   }
 
-  .scope-page .footer {
+.scope-page .footer {
     position: relative;
     padding: 80px 0 40px;
     background: linear-gradient(135deg, var(--primary), #0e4e8a);
@@ -497,9 +497,10 @@ const SCOPE_STYLES = `
     border-radius: var(--radius-lg);
   }
 
+  /* UBAH: Dari 4 kolom menjadi 2 kolom */
   .scope-page .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: 40px;
   }
 
@@ -523,6 +524,7 @@ const SCOPE_STYLES = `
     transition: var(--transition);
     display: block;
     margin-bottom: 12px;
+    text-decoration: none;
   }
 
   .scope-page .footer-link:hover {
@@ -574,7 +576,7 @@ const SCOPE_STYLES = `
     transform: scale(1.05);
   }
 
-  .scope-page .footer-bottom {
+.scope-page .footer-bottom {
     position: relative;
     z-index: 10;
     text-align: center;
@@ -711,11 +713,14 @@ const SCOPE_STYLES = `
     .scope-page .nav-link {
       white-space: normal;
     }
+}
 
+    @media (max-width: 1024px) {
     .scope-page .footer-grid {
       grid-template-columns: 1fr 1fr;
     }
   }
+
 
   @media (max-width: 600px) {
     .scope-page .container {
@@ -823,19 +828,51 @@ export function ScopeLandingPage() {
   return (
     <div className="scope-page">
       <style dangerouslySetInnerHTML={{ __html: SCOPE_STYLES }} />
-      <header className={`navbar-wrapper${scrolled ? " scrolled" : ""}`} id="navbar">
+      <header
+        className={`navbar-wrapper${scrolled ? " scrolled" : ""}`}
+        id="navbar"
+      >
         <nav className="navbar">
           <Link href="/" className="nav-brand">
-            <Image src="/landing/animation/logo-lab.png" alt="GISLAB" width={90} height={28} />
+            <Image
+              src="/landing/animation/logo-lab.png"
+              alt="GISLAB"
+              width={90}
+              height={28}
+            />
             Global Inspeksi Sistem
           </Link>
           <ul className={`nav-menu${menuOpen ? " active" : ""}`} id="navMenu">
-            <li><Link href="/" className="nav-link">Beranda</Link></li>
-            <li><Link href="/profile" className="nav-link">Profile</Link></li>
-            <li><Link href="/service" className="nav-link">Layanan</Link></li>
-            <li><Link href={SCOPE_ROUTE} className="nav-link active">Ruang Lingkup Pengujian</Link></li>
-            <li><Link href="/informasi" className="nav-link">Informasi</Link></li>
-            <li><Link href="/contact" className="nav-link">Kontak</Link></li>
+            <li>
+              <Link href="/" className="nav-link">
+                Beranda
+              </Link>
+            </li>
+            <li>
+              <Link href="/profile" className="nav-link">
+                Profile
+              </Link>
+            </li>
+            <li>
+              <Link href="/service" className="nav-link">
+                Layanan
+              </Link>
+            </li>
+            <li>
+              <Link href={SCOPE_ROUTE} className="nav-link active">
+                Ruang Lingkup Pengujian
+              </Link>
+            </li>
+            <li>
+              <Link href="/informasi" className="nav-link">
+                Informasi
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="nav-link">
+                Kontak
+              </Link>
+            </li>
           </ul>
           <button
             className="mobile-menu-btn"
@@ -853,10 +890,13 @@ export function ScopeLandingPage() {
         <section className="scope-hero-section">
           <div className="scope-hero">
             <div className="hero-content">
-              <span className="eyebrow"><i className="fa-solid fa-flask-vial" /> Lingkup akreditasi</span>
+              <span className="eyebrow">
+                <i className="fa-solid fa-flask-vial" /> Lingkup akreditasi
+              </span>
               <h1 className="hero-title">Ruang Lingkup Pengujian</h1>
               <p className="hero-text">
-                Daftar metode, bahan atau produk, dan jenis pengujian yang tersedia di GIS Laboratorium.
+                Daftar metode, bahan atau produk, dan jenis pengujian yang
+                tersedia di GIS Laboratorium.
               </p>
             </div>
           </div>
@@ -878,8 +918,13 @@ export function ScopeLandingPage() {
                 </div>
               </div>
 
-              <div id="area-tabel-final" dangerouslySetInnerHTML={{ __html: SCOPE_TABLES_HTML }} />
-              <div id="pesan-nihil">Data tidak ditemukan. Silakan coba kata kunci lain.</div>
+              <div
+                id="area-tabel-final"
+                dangerouslySetInnerHTML={{ __html: SCOPE_TABLES_HTML }}
+              />
+              <div id="pesan-nihil">
+                Data tidak ditemukan. Silakan coba kata kunci lain.
+              </div>
             </div>
           </div>
         </section>
@@ -891,47 +936,73 @@ export function ScopeLandingPage() {
             <div className="footer-grid">
               <div>
                 <h4 className="footer-col-title">Contact</h4>
-                <div className="footer-text"><i className="fa-solid fa-envelope" /> info@gislaboratorium.com</div>
-                <div className="footer-text"><i className="fa-solid fa-phone" /> +031 2355 5278</div>
-                <div className="footer-text"><i className="fa-solid fa-globe" /> www.gislaboratorium.com</div>
+                <div className="footer-text">
+                  <i className="fa-solid fa-envelope" />{" "}
+                  globalinspeksisistem@gmail.com
+                </div>
+                <div
+                  className="footer-text"
+                  style={{ alignItems: "flex-start" }}
+                >
+                  <i
+                    className="fa-solid fa-phone"
+                    style={{ marginTop: "4px" }}
+                  />
+                  <div>
+                    +62 812-8532-8232
+                    <br />
+                    +62 817-888-879
+                    <br />
+                    +62 812-1704-7976
+                  </div>
+                </div>
+                <div className="footer-text">
+                  <i className="fa-solid fa-globe" /> www.gislaboratorium.com
+                </div>
               </div>
 
               <div>
                 <h4 className="footer-col-title">Link</h4>
-                <Link href="/profile" className="footer-link">Profile</Link>
-                <Link href="/service" className="footer-link">Layanan</Link>
-                <Link href={SCOPE_ROUTE} className="footer-link">Ruang Lingkup</Link>
-                <Link href="/informasi" className="footer-link">Informasi</Link>
-              </div>
-
-              <div>
-                <h4 className="footer-col-title">Kontak</h4>
-                <Link href="/informasi" className="footer-link">Informasi</Link>
-                <Link href="/informasi" className="footer-link">Blog</Link>
-                <Link href="/contact" className="footer-link">Contact</Link>
-              </div>
-
-              <div>
-                <h4 className="footer-col-title">Newsletter</h4>
-                <p className="footer-text" style={{ fontSize: "0.95rem" }}>Dapatkan informasi terbaru dari GISLAB.</p>
-                <form className="newsletter-form" onSubmit={(event) => event.preventDefault()}>
-                  <input type="email" className="newsletter-input" placeholder="Masukkan email" required />
-                  <button type="submit" className="newsletter-btn" aria-label="Kirim email newsletter">
-                    <i className="fa-solid fa-paper-plane" />
-                  </button>
-                </form>
+                <Link href="/" className="footer-link">
+                  Beranda
+                </Link>
+                <Link href="/profile" className="footer-link">
+                  Profile
+                </Link>
+                <Link href="/service" className="footer-link">
+                  Layanan
+                </Link>
+                <Link href={SCOPE_ROUTE} className="footer-link">
+                  Ruang Lingkup Pengujian
+                </Link>
+                <Link href="/informasi" className="footer-link">
+                  Informasi
+                </Link>
+                <Link href="/contact" className="footer-link">
+                  Kontak
+                </Link>
               </div>
             </div>
           </div>
-          <div className="footer-bottom">&copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.</div>
+          <div className="footer-bottom">
+            &copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
+          </div>
         </div>
       </footer>
 
       <div className="whatsapp-widget">
-        <div className={`whatsapp-window${whatsappOpen ? " active" : ""}`} id="whatsappWindow">
+        <div
+          className={`whatsapp-window${whatsappOpen ? " active" : ""}`}
+          id="whatsappWindow"
+        >
           <div className="wa-header">
             <div className="wa-brand">
-              <Image src="/landing/animation/logo-lab.png" alt="GISLAB" width={28} height={28} />
+              <Image
+                src="/landing/animation/logo-lab.png"
+                alt="GISLAB"
+                width={28}
+                height={28}
+              />
               <span>PT Global Inspeksi Sistem</span>
             </div>
             <button
@@ -945,10 +1016,12 @@ export function ScopeLandingPage() {
             </button>
           </div>
           <div className="wa-body">
-            <div className="wa-bubble">Halo! Ada yang bisa kami bantu mengenai layanan pengujian GIS?</div>
+            <div className="wa-bubble">
+              Halo! Ada yang bisa kami bantu mengenai layanan pengujian GIS?
+            </div>
             <a
               className="wa-link"
-              href="https://wa.me/6285281844641?text=Halo%20GIS%20Laboratorium"
+              href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium"
               target="_blank"
               rel="noopener"
             >

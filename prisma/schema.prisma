@@ -175,3 +175,19 @@ model BlogPost {
   @@index([updatedById])
   @@map("blogpost")
 }
+
+model ContactMessage {
+  id        String   @id
+  name      String
+  email     String
+  subject   String?
+  message   String   @db.Text
+  status    String   @default("unread")
+  source    String?
+  userAgent String?  @db.VarChar(500)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, createdAt])
+  @@map("contactmessage")
+}

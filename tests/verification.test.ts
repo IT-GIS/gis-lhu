@@ -15,6 +15,6 @@ describe("verification view state", () => {
     const view = getVerificationView({ tokenExists: true, isActive: true });
 
     expect(view.state).toBe("valid");
-    expect(view.description).toContain("terdaftar di sistem GIS LHU");
+    expect(view.description).toContain("tercatat pada sistem verifikasi PT Global Inspeksi Sistem");
   });
 });

@@ -1,4 +1,4 @@
-﻿export type LandingPageKey = 'home' | 'profile' | 'service' | 'contact';
+export type LandingPageKey = "home" | "profile" | "service" | "contact";
 
 export type LandingStaticPage = {
   key: LandingPageKey;
@@ -10,42 +10,1475 @@ export type LandingStaticPage = {
 };
 
 const pageList = [
-    {
-        "key":  "home",
-        "title":  "GISLAB - Laboratorium Pengujian Global Inspeksi Sistem",
-        "description":  "Laboratorium pengujian akurat, terpercaya, didukung tenaga ahli berpengalaman dan peralatan modern.",
-        "bodyClass":  "",
-        "styles":  "@import url(\u0027https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800\u0026display=swap\u0027);\n@import url(\u0027https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700\u0026family=Inter:wght@300;400;500;600;700\u0026display=swap\u0027);\n\n        :root {\n            --primary: #0A2540;\n            /* Navy */\n            --secondary: #0070F3;\n            /* Bright Blue */\n            --accent: #00DFD8;\n            /* Cyan */\n            --light-blue: #EBF4F8;\n            --white: #FFFFFF;\n            --text-dark: #1E293B;\n            --text-muted: #64748B;\n            --text-light: #F8FAFC;\n\n            --glass-bg: rgba(255, 255, 255, 0.65);\n            --glass-border: rgba(255, 255, 255, 0.8);\n            --glass-dark-bg: rgba(10, 37, 64, 0.4);\n            --glass-dark-border: rgba(255, 255, 255, 0.15);\n\n            --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);\n            --shadow-hover: 0 20px 40px -10px rgba(0, 112, 243, 0.15);\n            --shadow-glow: 0 0 20px rgba(0, 223, 216, 0.4);\n\n            --radius-pill: 100px;\n            --radius-md: 24px;\n            --radius-lg: 32px;\n\n            --font-main: \u0027Plus Jakarta Sans\u0027, sans-serif;\n            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);\n        }\n\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        html {\n            scroll-behavior: smooth;\n        }\n\n        body {\n            font-family: var(--font-main);\n            color: var(--text-dark);\n            background-color: #FAFCFF;\n            line-height: 1.6;\n            overflow-x: hidden;\n            position: relative;\n        }\n\n        /* Subtle background gradient */\n        body::before {\n            content: \u0027\u0027;\n            position: fixed;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 100%;\n            background: radial-gradient(circle at 15% 50%, rgba(0, 223, 216, 0.04), transparent 25%),\n                radial-gradient(circle at 85% 30%, rgba(0, 112, 243, 0.04), transparent 25%);\n            z-index: -1;\n            pointer-events: none;\n        }\n\n        a {\n            text-decoration: none;\n            color: inherit;\n        }\n\n        ul {\n            list-style: none;\n        }\n\n        .container {\n            max-width: 1280px;\n            margin: 0 auto;\n            padding: 0 24px;\n        }\n\n        /* Glassmorphism Utilities */\n        .glass {\n            background: var(--glass-bg);\n            backdrop-filter: blur(16px);\n            -webkit-backdrop-filter: blur(16px);\n            border: 1px solid var(--glass-border);\n            box-shadow: var(--shadow-soft);\n        }\n\n        .glass-dark {\n            background: var(--glass-dark-bg);\n            backdrop-filter: blur(20px);\n            -webkit-backdrop-filter: blur(20px);\n            border: 1px solid var(--glass-dark-border);\n            color: var(--white);\n        }\n\n        /* Buttons */\n        .btn {\n            display: inline-flex;\n            align-items: center;\n            justify-content: center;\n            padding: 14px 28px;\n            border-radius: var(--radius-pill);\n            font-weight: 600;\n            font-size: 1rem;\n            transition: var(--transition);\n            cursor: pointer;\n            border: none;\n            outline: none;\n        }\n\n        .btn-primary {\n            background: linear-gradient(135deg, var(--secondary), var(--accent));\n            color: var(--white);\n            box-shadow: 0 4px 15px rgba(0, 112, 243, 0.3);\n        }\n\n        .btn-primary:hover {\n            transform: translateY(-3px);\n            box-shadow: var(--shadow-glow);\n        }\n\n        .btn-sm {\n            padding: 10px 20px;\n            font-size: 0.875rem;\n        }\n\n        /* Navbar */\n        .navbar-wrapper {\n            position: fixed;\n            top: 24px;\n            left: 0;\n            width: 100%;\n            z-index: 1000;\n            display: flex;\n            justify-content: center;\n            padding: 0 24px;\n            transition: var(--transition);\n        }\n\n        .navbar-wrapper.scrolled {\n            top: 12px;\n        }\n\n        .navbar {\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n            width: 100%;\n            max-width: 1100px;\n            padding: 12px 24px;\n            border-radius: var(--radius-pill);\n            background: rgba(255, 255, 255, 0.75);\n            backdrop-filter: blur(20px);\n            -webkit-backdrop-filter: blur(20px);\n            border: 1px solid rgba(255, 255, 255, 0.6);\n            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);\n        }\n\n        .nav-brand {\n            display: flex;\n            align-items: center;\n            gap: 10px;\n            font-weight: 800;\n            font-size: 1.25rem;\n            color: var(--primary);\n            letter-spacing: -0.5px;\n        }\n\n        .nav-brand i {\n            color: var(--secondary);\n            font-size: 1.5rem;\n        }\n\n        .nav-menu {\n            display: flex;\n            gap: 8px;\n        }\n\n        .nav-link {\n            padding: 8px 16px;\n            border-radius: var(--radius-pill);\n            font-weight: 500;\n            font-size: 0.95rem;\n            color: var(--text-muted);\n            transition: var(--transition);\n        }\n\n        .nav-link:hover {\n            color: var(--primary);\n            background: rgba(0, 112, 243, 0.05);\n        }\n\n        .nav-link.active {\n            background: rgba(0, 223, 216, 0.15);\n            color: var(--secondary);\n            font-weight: 600;\n        }\n\n        .mobile-menu-btn {\n            display: none;\n            font-size: 1.5rem;\n            color: var(--primary);\n            background: none;\n            border: none;\n            cursor: pointer;\n        }\n\n        /* Hero Section */\n        .hero {\n            position: relative;\n            min-height: 100vh;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            padding-top: 100px;\n            overflow: hidden;\n        }\n\n        .hero-content {\n            position: relative;\n            z-index: 10;\n            text-align: center;\n            width: 100%;\n            max-width: 800px;\n            margin: 0 auto;\n        }\n\n        .hero-panel {\n            padding: 60px 40px;\n            border-radius: var(--radius-lg);\n            margin-bottom: 40px;\n            background: rgba(255, 255, 255, 0.25);\n            border: 1px solid rgba(255, 255, 255, 0.3);\n            box-sizing: border-box;\n            height: 500px !important;\n            min-height: 500px !important;\n            max-height: 500px !important;\n            width: 100% !important;\n            display: flex !important;\n            flex-direction: column !important;\n            justify-content: center !important;\n            align-items: center !important;\n            text-align: center;\n            overflow: hidden !important;\n        }\n\n        .hero-title-slot,\n        .hero-subtitle-slot {\n            width: 100%;\n            flex-shrink: 0;\n            overflow: hidden;\n        }\n\n        .hero-title-slot {\n            min-height: 160px;\n        }\n\n        .hero-subtitle-slot {\n            min-height: 100px;\n            margin-top: 16px;\n            margin-bottom: 32px;\n        }\n\n        .hero-title {\n            font-size: 3.5rem;\n            font-weight: 800;\n            color: var(--primary);\n            line-height: 1.2;\n            margin-bottom: 24px;\n            letter-spacing: -1px;\n            position: relative;\n            width: 100%;\n        }\n\n        .hero-title span {\n            background: linear-gradient(135deg, var(--secondary), var(--accent));\n            -webkit-background-clip: text;\n            -webkit-text-fill-color: transparent;\n        }\n\n        .hero-subtitle {\n            font-size: 1.125rem;\n            color: var(--text-dark);\n            margin-bottom: 32px;\n            font-weight: 500;\n        }\n\n        .typing-ghost {\n            visibility: hidden;\n        }\n\n        .typing-live {\n            position: absolute;\n            inset: 0;\n        }\n\n        .typing-neutral {\n            background: none !important;\n            color: inherit !important;\n            -webkit-text-fill-color: initial !important;\n        }\n\n        .typing-accent {\n            background: linear-gradient(135deg, var(--secondary), var(--accent));\n            -webkit-background-clip: text;\n            -webkit-text-fill-color: transparent;\n        }\n\n        .hero-subtitle {\n            position: relative;\n            width: 100%;\n        }\n\n        .hero-subtitle .typing-live {\n            display: block;\n        }\n\n        /* Advantages Cards */\n        .advantages-wrapper {\n            position: relative;\n            z-index: 20;\n            margin-top: -60px;\n            padding-bottom: 60px;\n        }\n\n        .advantages-grid {\n            display: grid;\n            grid-template-columns: repeat(3, 1fr);\n            gap: 24px;\n        }\n\n        .advantage-card {\n            padding: 32px;\n            border-radius: var(--radius-md);\n            text-align: center;\n            transition: var(--transition);\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            gap: 16px;\n            animation: fadeUp 1s ease-out backwards;\n        }\n\n        .advantage-card:nth-child(2) {\n            animation-delay: 0.2s;\n        }\n\n        .advantage-card:nth-child(3) {\n            animation-delay: 0.4s;\n        }\n\n        .advantage-card:hover {\n            transform: translateY(-10px);\n            box-shadow: var(--shadow-hover);\n        }\n\n        .advantage-icon {\n            width: 64px;\n            height: 64px;\n            border-radius: 50%;\n            background: rgba(0, 112, 243, 0.1);\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            font-size: 1.75rem;\n            color: var(--secondary);\n            margin-bottom: 8px;\n        }\n\n        .advantage-title {\n            font-size: 1.25rem;\n            font-weight: 700;\n            color: var(--primary);\n        }\n\n        /* About Section */\n        .about-section {\n            padding: 100px 0;\n            position: relative;\n        }\n\n        .about-grid {\n            display: grid;\n            grid-template-columns: 1fr 1fr;\n            gap: 48px;\n            align-items: stretch;\n        }\n\n        .about-card {\n            padding: 48px;\n            border-radius: var(--radius-lg);\n            position: relative;\n            overflow: hidden;\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n        }\n\n        .about-img-small {\n            position: absolute;\n            right: -20px;\n            bottom: -20px;\n            width: 200px;\n            height: 200px;\n            border-radius: 50%;\n            object-fit: cover;\n            border: 8px solid var(--white);\n            box-shadow: var(--shadow-soft);\n            opacity: 0.8;\n        }\n\n        .section-title {\n            font-size: 2.5rem;\n            font-weight: 800;\n            color: var(--primary);\n            margin-bottom: 24px;\n        }\n\n        .about-text {\n            font-size: 1.1rem;\n            color: var(--text-muted);\n            margin-bottom: 32px;\n            position: relative;\n            z-index: 1;\n        }\n\n        .facilities-list {\n            display: flex;\n            flex-direction: column;\n            gap: 20px;\n            margin-top: 32px;\n        }\n\n        .facility-item {\n            display: flex;\n            align-items: flex-start;\n            gap: 16px;\n        }\n\n        .facility-icon {\n            width: 32px;\n            height: 32px;\n            border-radius: 50%;\n            background: linear-gradient(135deg, var(--secondary), var(--accent));\n            color: var(--white);\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            flex-shrink: 0;\n            font-size: 0.875rem;\n        }\n\n        .facility-text {\n            font-weight: 600;\n            font-size: 1.1rem;\n            color: var(--primary);\n        }\n\n        .illustration-3d {\n            margin-top: 40px;\n            height: 200px;\n            background: url(\u0027https://images.unsplash.com/photo-1581093806997-124204d9fa9d?auto=format\u0026fit=crop\u0026q=80\u0026w=800\u0027) center/cover;\n            border-radius: var(--radius-md);\n            position: relative;\n            box-shadow: var(--shadow-soft);\n        }\n\n        .illustration-3d::after {\n            content: \u0027\u0027;\n            position: absolute;\n            inset: 0;\n            background: linear-gradient(135deg, rgba(0, 112, 243, 0.4), rgba(0, 223, 216, 0.4));\n            border-radius: var(--radius-md);\n        }\n\n        /* Vision Mission */\n        .vision-mission {\n            padding: 100px 0;\n            background: linear-gradient(135deg, var(--primary), #0e4e8a);\n            position: relative;\n            overflow: hidden;\n        }\n\n        .vision-mission::before {\n            content: \u0027\u0027;\n            position: absolute;\n            top: -50%;\n            left: -50%;\n            width: 200%;\n            height: 200%;\n            background: radial-gradient(circle at center, rgba(0, 48, 223, 0.1) 0%, transparent 50%);\n            animation: rotate 20s linear infinite;\n        }\n\n        .vm-grid {\n            display: grid;\n            grid-template-columns: 1fr 1fr;\n            gap: 32px;\n            position: relative;\n            z-index: 10;\n        }\n\n        .vm-card {\n            padding: 48px;\n            border-radius: var(--radius-lg);\n            transition: var(--transition);\n        }\n\n        .vm-card:hover {\n            transform: translateY(-5px);\n            box-shadow: 0 15px 40px rgba(0, 223, 216, 0.15);\n            border-color: rgba(0, 223, 216, 0.3);\n        }\n\n        .vm-title {\n            font-size: 2rem;\n            font-weight: 700;\n            color: #ffffff;\n            margin-bottom: 24px;\n            display: flex;\n            align-items: center;\n            gap: 12px;\n        }\n\n        .vm-text {\n            font-size: 1.1rem;\n            line-height: 1.8;\n            color: var(--light-blue);\n        }\n\n        .vm-list {\n            display: flex;\n            flex-direction: column;\n            gap: 16px;\n        }\n\n        .vm-list li {\n            display: flex;\n            align-items: flex-start;\n            gap: 12px;\n            color: var(--light-blue);\n            font-size: 1.1rem;\n        }\n\n        .vm-list li::before {\n            content: \u0027\\f058\u0027;\n            font-family: \u0027Font Awesome 6 Free\u0027;\n            font-weight: 900;\n            color:#0070F3;\n            margin-top: 4px;\n        }\n\n        /* Services Section */\n        .services-section {\n            padding: 100px 0;\n            text-align: center;\n        }\n\n        .services-header {\n            margin-bottom: 60px;\n        }\n\n        .carousel-container {\n            position: relative;\n            padding: 20px 0;\n            overflow: hidden;\n            width: 100%;\n        }\n\n        .services-track {\n            display: flex;\n            gap: 32px;\n            width: max-content;\n            animation: scroll-services 20s linear infinite;\n        }\n\n        .services-track:hover {\n            animation-play-state: paused;\n        }\n\n        @keyframes scroll-services {\n            0% { transform: translateX(0); }\n            100% { transform: translateX(calc(-50% - 16px)); }\n        }\n\n        .service-card {\n            width: 350px;\n            flex-shrink: 0;\n            border-radius: var(--radius-lg);\n            overflow: hidden;\n            text-align: left;\n            transition: var(--transition);\n            display: flex;\n            flex-direction: column;\n        }\n\n        .service-card:hover {\n            transform: scale(1.02);\n            box-shadow: var(--shadow-hover);\n        }\n\n        .service-img {\n            height: 200px;\n            width: 100%;\n            object-fit: cover;\n        }\n\n        .service-content {\n            padding: 32px;\n            flex-grow: 1;\n            display: flex;\n            flex-direction: column;\n        }\n\n        .service-title {\n            font-size: 1.25rem;\n            font-weight: 700;\n            color: var(--primary);\n            margin-bottom: 16px;\n        }\n\n        .service-btn {\n            margin-top: auto;\n            align-self: flex-start;\n            background: transparent;\n            color: var(--secondary);\n            font-weight: 600;\n            border: 1px solid rgba(0, 112, 243, 0.2);\n            padding: 8px 20px;\n            border-radius: var(--radius-pill);\n            transition: var(--transition);\n        }\n\n        .service-card:hover .service-btn {\n            background: var(--secondary);\n            color: var(--white);\n            border-color: var(--secondary);\n        }\n\n        /* Footer */\n        .footer {\n            position: relative;\n            padding: 80px 0 40px;\n            background: linear-gradient(135deg, var(--primary), #0e4e8a);\n            color: var(--white);\n            overflow: hidden;\n        }\n\n        .footer-panel {\n            position: relative;\n            z-index: 10;\n            padding: 60px;\n            border-radius: var(--radius-lg);\n        }\n\n        .footer-grid {\n            display: grid;\n            grid-template-columns: 2fr 1fr 1fr 1.5fr;\n            gap: 40px;\n        }\n\n        .footer-col-title {\n            font-size: 1.25rem;\n            font-weight: 700;\n            color:#FFFFFF;\n            margin-bottom: 24px;\n        }\n\n        .footer-text {\n            color: var(--light-blue);\n            margin-bottom: 16px;\n            display: flex;\n            align-items: center;\n            gap: 12px;\n        }\n\n        .footer-link {\n            color: var(--light-blue);\n            transition: var(--transition);\n            display: block;\n            margin-bottom: 12px;\n        }\n\n        .footer-link:hover {\n            color: var(--accent);\n            transform: translateX(5px);\n        }\n\n        .newsletter-form {\n            display: flex;\n            margin-top: 16px;\n            background: rgba(255, 255, 255, 0.1);\n            border-radius: var(--radius-pill);\n            padding: 4px;\n            border: 1px solid rgba(255, 255, 255, 0.2);\n        }\n\n        .newsletter-input {\n            flex-grow: 1;\n            background: transparent;\n            border: none;\n            padding: 10px 16px;\n            color: var(--white);\n            outline: none;\n        }\n\n        .newsletter-input::placeholder {\n            color: rgba(255, 255, 255, 0.5);\n        }\n\n        .newsletter-btn {\n            background: var(--secondary);\n            color: var(--white);\n            border: none;\n            width: 40px;\n            height: 40px;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            cursor: pointer;\n            transition: var(--transition);\n        }\n\n        .newsletter-btn:hover {\n            background: var(--accent);\n            transform: scale(1.05);\n        }\n\n        .footer-bottom {\n            position: relative;\n            z-index: 10;\n            text-align: center;\n            margin-top: 60px;\n            padding-top: 24px;\n            border-top: 1px solid rgba(255, 255, 255, 0.1);\n            color: rgba(255, 255, 255, 0.6);\n            font-size: 0.875rem;\n        }\n\n        /* Animations */\n        @keyframes fadeUp {\n            from {\n                opacity: 0;\n                transform: translateY(30px);\n            }\n\n            to {\n                opacity: 1;\n                transform: translateY(0);\n            }\n        }\n\n        @keyframes rotate {\n            from {\n                transform: rotate(0deg);\n            }\n\n            to {\n                transform: rotate(360deg);\n            }\n        }\n\n        .cursor {\n            display: inline-block;\n            width: 3px;\n            background-color: var(--primary);\n            margin-left: 4px;\n            animation: blinkCursor 1s step-end infinite;\n        }\n\n        @keyframes blinkCursor {\n\n            0%,\n            100% {\n                opacity: 1;\n            }\n\n            50% {\n                opacity: 0;\n            }\n        }\n\n        /* Responsive Design */\n        @media (max-width: 1024px) {\n            .hero-title {\n                font-size: 2.75rem;\n            }\n\n            .advantages-grid {\n                grid-template-columns: repeat(3, 1fr);\n                gap: 16px;\n            }\n\n            .about-grid,\n            .vm-grid {\n                grid-template-columns: 1fr;\n            }\n\n            .about-img-small {\n                display: none;\n            }\n\n            .services-grid {\n                grid-template-columns: repeat(2, 1fr);\n            }\n\n            .footer-grid {\n                grid-template-columns: 1fr 1fr;\n            }\n        }\n\n        @media (max-width: 768px) {\n            .navbar {\n                padding: 12px 20px;\n            }\n\n            .nav-menu {\n                position: absolute;\n                top: 100%;\n                left: 0;\n                right: 0;\n                background: rgba(255, 255, 255, 0.95);\n                backdrop-filter: blur(20px);\n                flex-direction: column;\n                padding: 20px;\n                border-radius: var(--radius-md);\n                box-shadow: var(--shadow-soft);\n                display: none;\n                margin-top: 10px;\n            }\n\n            .nav-menu.active {\n                display: flex;\n            }\n\n            .mobile-menu-btn {\n                display: block;\n            }\n\n            .hero-title {\n                font-size: 2rem;\n            }\n\n            .advantages-wrapper {\n                margin-top: 40px;\n            }\n\n            .advantages-grid {\n                grid-template-columns: 1fr;\n            }\n\n            .services-grid {\n                grid-template-columns: 1fr;\n            }\n\n            .footer-grid {\n                grid-template-columns: 1fr;\n            }\n\n            .footer-panel {\n                padding: 32px 20px;\n            }\n        }\n\n        /* Utility classes */\n        .reveal {\n            opacity: 0;\n            transform: translateY(30px);\n            transition: all 0.8s ease-out;\n        }\n\n        .reveal.active {\n            opacity: 1;\n            transform: translateY(0);\n        }\n    ",
-        "html":  "\n\n    \u003c!-- Navbar --\u003e\n    \u003cheader class=\"navbar-wrapper\" id=\"navbar\"\u003e\n        \u003cnav class=\"navbar\"\u003e\n            \u003ca href=\"/\" class=\"nav-brand\"\u003e\n                \u003cimg src=\"/landing/animation/logo-lab.png\" style=\"height: 28px; width: auto; transform: scale(1.8); transform-origin: left center; margin-right: 36px;\"\u003e\n                Global Inspeksi Sistem\n            \u003c/a\u003e\n            \u003cul class=\"nav-menu\" id=\"navMenu\"\u003e\n                \u003cli\u003e\u003ca href=\"#\" class=\"nav-link active\"\u003eBeranda\u003c/a\u003e\u003c/li\u003e\n                \u003cli\u003e\u003ca href=\"/profile\" class=\"nav-link\"\u003eProfile\u003c/a\u003e\u003c/li\u003e\n                \u003cli\u003e\u003ca href=\"/service\" class=\"nav-link\"\u003eLayanan\u003c/a\u003e\u003c/li\u003e\n                \u003cli\u003e\u003ca href=\"/ruang-lingkup-pengujian\" class=\"nav-link\"\u003eRuang Lingkup Pengujian\u003c/a\u003e\u003c/li\u003e\n                \u003cli\u003e\u003ca href=\"/informasi\" class=\"nav-link\"\u003eInformasi\u003c/a\u003e\u003c/li\u003e\n                \u003cli\u003e\u003ca href=\"/contact\" class=\"nav-link\"\u003eKontak\u003c/a\u003e\u003c/li\u003e\n            \u003c/ul\u003e\n            \u003cbutton class=\"mobile-menu-btn\" id=\"mobileMenuBtn\"\u003e\n                \u003ci class=\"fa-solid fa-bars\"\u003e\u003c/i\u003e\n            \u003c/button\u003e\n        \u003c/nav\u003e\n    \u003c/header\u003e\n\n    \u003c!-- Hero Section --\u003e\n    \u003csection class=\"hero\" id=\"beranda\"\u003e\n        \u003c!-- Animasi Video Background (Full Section) menyatu dari header ke bawah --\u003e\n        \u003cvideo autoplay loop muted playsinline\n            style=\"position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;\"\u003e\n            \u003csource src=\"/landing/animation/animasi.mp4\" type=\"video/mp4\"\u003e\n        \u003c/video\u003e\n\n        \u003c!-- Overlay gradien halus agar teks/card tetap kontras --\u003e\n        \u003cdiv\n            style=\"position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(250,252,255,0.8) 100%); z-index: 1;\"\u003e\n        \u003c/div\u003e\n\n        \u003c!-- Konten Card di tengah layar --\u003e\n        \u003cdiv class=\"container\" style=\"position: relative; z-index: 10;\"\u003e\n            \u003cdiv class=\"hero-content\"\u003e\n                \u003cdiv class=\"hero-panel glass\"\u003e\n                    \u003c!-- Area Judul --\u003e\n                    \u003cdiv class=\"hero-title-slot\"\u003e\n                        \u003ch1 class=\"hero-title\" aria-label=\"Laboratorium Pengujian Global Inspeksi Sistem\" style=\"margin: 0; line-height: 1.3;\"\u003e\n                            \u003cspan class=\"typing-ghost typing-neutral\" aria-hidden=\"true\"\u003e\n                                Laboratorium Pengujian \u003cspan class=\"typing-accent\"\u003eGlobal Inspeksi Sistem\u003c/span\u003e\n                            \u003c/span\u003e\n                            \u003cspan class=\"typing-live\" aria-hidden=\"true\"\u003e\n                                \u003cspan id=\"type-title-1\" class=\"typing-neutral\"\u003e\u003c/span\u003e\n                                \u003cspan id=\"type-title-2\" class=\"typing-accent\"\u003e\u003c/span\u003e\n                            \u003c/span\u003e\n                        \u003c/h1\u003e\n                    \u003c/div\u003e\n\n                    \u003c!-- Area Subjudul --\u003e\n                    \u003cdiv class=\"hero-subtitle-slot\"\u003e\n                        \u003cp class=\"hero-subtitle\" aria-label=\"Laboratorium kami menyediakan layanan pengujian yang akurat, terpercaya, dan didukung oleh tenaga ahli berpengalaman serta peralatan modern.\" style=\"margin: 0; font-weight: 600; text-shadow: 0 1px 2px rgba(255,255,255,0.8);\"\u003e\n                            \u003cspan class=\"typing-ghost\" aria-hidden=\"true\"\u003eLaboratorium kami menyediakan layanan pengujian yang akurat, terpercaya, dan didukung oleh tenaga ahli berpengalaman serta peralatan modern.\u003c/span\u003e\n                            \u003cspan id=\"type-sub\" class=\"typing-live\" aria-hidden=\"true\"\u003e\u003c/span\u003e\n                        \u003c/p\u003e\n                    \u003c/div\u003e\n\n                    \u003cbutton class=\"btn btn-primary\" style=\"flex-shrink: 0;\"\u003e\n                        Jelajahi Layanan \u003ci class=\"fa-solid fa-arrow-right ms-2\" style=\"margin-left: 8px;\"\u003e\u003c/i\u003e\n                    \u003c/button\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n    \u003c/section\u003e\n\n    \u003c!-- Keunggulan Section --\u003e\n    \u003cdiv class=\"advantages-wrapper\"\u003e\n        \u003cdiv class=\"container\"\u003e\n            \u003cdiv class=\"advantages-grid\"\u003e\n                \u003cdiv class=\"advantage-card glass\"\u003e\n                    \u003cdiv class=\"advantage-icon\"\u003e\n                        \u003ci class=\"fa-solid fa-shield-halved\"\u003e\u003c/i\u003e\n                    \u003c/div\u003e\n                    \u003ch3 class=\"advantage-title\"\u003ePengujian Mutu Produk\u003c/h3\u003e\n                \u003c/div\u003e\n                \u003cdiv class=\"advantage-card glass\"\u003e\n                    \u003cdiv class=\"advantage-icon\"\u003e\n                        \u003ci class=\"fa-solid fa-certificate\"\u003e\u003c/i\u003e\n                    \u003c/div\u003e\n                    \u003ch3 class=\"advantage-title\"\u003eSertifikasi SNI\u003c/h3\u003e\n                \u003c/div\u003e\n                \u003cdiv class=\"advantage-card glass\"\u003e\n                    \u003cdiv class=\"advantage-icon\"\u003e\n                        \u003ci class=\"fa-solid fa-globe\"\u003e\u003c/i\u003e\n                    \u003c/div\u003e\n                    \u003ch3 class=\"advantage-title\"\u003eBerstandar Internasional\u003c/h3\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n    \u003c/div\u003e\n\n    \u003c!-- Tentang Kami Section --\u003e\n    \u003csection class=\"about-section\" id=\"profile\"\u003e\n        \u003cdiv class=\"container\"\u003e\n            \u003cdiv class=\"about-grid\"\u003e\n                \u003c!-- Kolom Kiri --\u003e\n                \u003cdiv class=\"about-card glass reveal\"\u003e\n                    \u003ch2 class=\"section-title\"\u003eTentang Kami\u003c/h2\u003e\n                    \u003cp class=\"about-text\"\u003e\n                        GISLAB merupakan laboratorium pengujian yang berfokus pada layanan pengujian mutu produk,\n                        lingkungan, dan kebutuhan industri. Kami hadir untuk membantu perusahaan memastikan kualitas,\n                        keamanan, dan kesesuaian produk terhadap standar yang berlaku.\n                    \u003c/p\u003e\n                    \u003cdiv\u003e\n                        \u003cbutton class=\"btn btn-primary btn-sm\"\u003eLihat Selengkapnya\u003c/button\u003e\n                    \u003c/div\u003e\n                    \u003cimg src=\"https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\n                        alt=\"Petugas Laboratorium\" class=\"about-img-small\"\u003e\n                \u003c/div\u003e\n\n                \u003c!-- Kolom Kanan --\u003e\n                \u003cdiv class=\"about-card glass reveal\"\u003e\n                    \u003ch2 class=\"section-title\"\u003eFasilitas Keunggulan\u003c/h2\u003e\n                    \u003cdiv class=\"facilities-list\"\u003e\n                        \u003cdiv class=\"facility-item\"\u003e\n                            \u003cdiv class=\"facility-icon\"\u003e\u003ci class=\"fa-solid fa-check\"\u003e\u003c/i\u003e\u003c/div\u003e\n                            \u003cdiv class=\"facility-text\"\u003ePeralatan pengujian modern\u003c/div\u003e\n                        \u003c/div\u003e\n                        \u003cdiv class=\"facility-item\"\u003e\n                            \u003cdiv class=\"facility-icon\"\u003e\u003ci class=\"fa-solid fa-check\"\u003e\u003c/i\u003e\u003c/div\u003e\n                            \u003cdiv class=\"facility-text\"\u003eTenaga ahli berpengalaman\u003c/div\u003e\n                        \u003c/div\u003e\n                        \u003cdiv class=\"facility-item\"\u003e\n                            \u003cdiv class=\"facility-icon\"\u003e\u003ci class=\"fa-solid fa-check\"\u003e\u003c/i\u003e\u003c/div\u003e\n                            \u003cdiv class=\"facility-text\"\u003eProses pengujian akurat dan terdokumentasi\u003c/div\u003e\n                        \u003c/div\u003e\n                    \u003c/div\u003e\n                    \u003cdiv class=\"illustration-3d glass\"\u003e\u003c/div\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n    \u003c/section\u003e\n\n    \u003c!-- Visi Misi Section --\u003e\n    \u003csection class=\"vision-mission\" id=\"visi-misi\"\u003e\n        \u003cdiv class=\"container\"\u003e\n            \u003cdiv class=\"vm-grid\"\u003e\n                \u003cdiv class=\"vm-card glass-dark reveal\"\u003e\n                    \u003ch2 class=\"vm-title\"\u003e\u003ci class=\"fa-solid fa-eye\"\u003e\u003c/i\u003e Visi\u003c/h2\u003e\n                    \u003cp class=\"vm-text\"\u003e\n                        Menjadi laboratorium pengujian terpercaya yang mendukung kualitas, keamanan, dan daya saing\n                        industri melalui layanan yang profesional dan berintegritas.\n                    \u003c/p\u003e\n                \u003c/div\u003e\n                \u003cdiv class=\"vm-card glass-dark reveal\" style=\"transition-delay: 0.2s;\"\u003e\n                    \u003ch2 class=\"vm-title\"\u003e\u003ci class=\"fa-solid fa-bullseye\"\u003e\u003c/i\u003e Misi\u003c/h2\u003e\n                    \u003cul class=\"vm-list\"\u003e\n                        \u003cli\u003eMemberikan layanan pengujian yang akurat, objektif, dan tepat waktu.\u003c/li\u003e\n                        \u003cli\u003eMendukung pemenuhan standar nasional dan internasional.\u003c/li\u003e\n                        \u003cli\u003eMengembangkan kompetensi SDM dan teknologi laboratorium secara berkelanjutan.\u003c/li\u003e\n                        \u003cli\u003eMenjaga kepercayaan pelanggan melalui pelayanan yang transparan dan profesional.\u003c/li\u003e\n                    \u003c/ul\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n    \u003c/section\u003e\n\n    \u003c!-- Layanan Kami Section --\u003e\n    \u003csection class=\"services-section\" id=\"layanan\"\u003e\n        \u003cdiv class=\"container\"\u003e\n            \u003cdiv class=\"services-header reveal\"\u003e\n                \u003ch2 class=\"section-title\"\u003eLayanan Kami\u003c/h2\u003e\n            \u003c/div\u003e\n\n            \u003cdiv class=\"carousel-container reveal\"\u003e\n                \u003cdiv class=\"services-track\"\u003e\n                    \u003c!-- Set 1 --\u003e\n                    \u003cdiv class=\"service-card glass\"\u003e\n                        \u003cimg src=\"https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\n                            alt=\"Pengujian Kualitas\" class=\"service-img\"\u003e\n                        \u003cdiv class=\"service-content\"\u003e\n                            \u003ch3 class=\"service-title\"\u003ePengujian Kualitas\u003c/h3\u003e\n                            \u003cbutton class=\"service-btn\"\u003eRead More\u003c/button\u003e\n                        \u003c/div\u003e\n                    \u003c/div\u003e\n\n                    \u003cdiv class=\"service-card glass\"\u003e\n                        \u003cimg src=\"https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\n                            alt=\"Pengujian Lingkungan\" class=\"service-img\"\u003e\n                        \u003cdiv class=\"service-content\"\u003e\n                            \u003ch3 class=\"service-title\"\u003ePengujian Lingkungan\u003c/h3\u003e\n                            \u003cbutton class=\"service-btn\"\u003eRead More\u003c/button\u003e\n                        \u003c/div\u003e\n                    \u003c/div\u003e\n\n                    \u003cdiv class=\"service-card glass\"\u003e\n                        \u003cimg src=\"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\n                            alt=\"Pengujian Produk dan Izin Edar\" class=\"service-img\"\u003e\n                        \u003cdiv class=\"service-content\"\u003e\n                            \u003ch3 class=\"service-title\"\u003ePengujian Produk dan Izin Edar\u003c/h3\u003e\n                            \u003cbutton class=\"service-btn\"\u003eRead More\u003c/button\u003e\n                        \u003c/div\u003e\n                    \u003c/div\u003e\n\n                    \u003cdiv class=\"service-card glass\"\u003e\n                        \u003cimg src=\"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\n                            alt=\"Pengujian SNI Produk\" class=\"service-img\"\u003e\n                        \u003cdiv class=\"service-content\"\u003e\n                            \u003ch3 class=\"service-title\"\u003ePengujian SNI Produk\u003c/h3\u003e\n                            \u003cbutton class=\"service-btn\"\u003eRead More\u003c/button\u003e\n                        \u003c/div\u003e\n                    \u003c/div\u003e\n\n                    \u003c!-- Set 2 (Duplikat untuk Infinite Scroll) --\u003e\n                    \u003cdiv class=\"service-card glass\"\u003e\n                        \u003cimg src=\"https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\n                            alt=\"Pengujian Kualitas\" class=\"service-img\"\u003e\n                        \u003cdiv class=\"service-content\"\u003e\n                            \u003ch3 class=\"service-title\"\u003ePengujian Kualitas\u003c/h3\u003e\n                            \u003cbutton class=\"service-btn\"\u003eRead More\u003c/button\u003e\n                        \u003c/div\u003e\n                    \u003c/div\u003e\n\n                    \u003cdiv class=\"service-card glass\"\u003e\n                        \u003cimg src=\"https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\n                            alt=\"Pengujian Lingkungan\" class=\"service-img\"\u003e\n                        \u003cdiv class=\"service-content\"\u003e\n                            \u003ch3 class=\"service-title\"\u003ePengujian Lingkungan\u003c/h3\u003e\n                            \u003cbutton class=\"service-btn\"\u003eRead More\u003c/button\u003e\n                        \u003c/div\u003e\n                    \u003c/div\u003e\n\n                    \u003cdiv class=\"service-card glass\"\u003e\n                        \u003cimg src=\"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\n                            alt=\"Pengujian Produk dan Izin Edar\" class=\"service-img\"\u003e\n                        \u003cdiv class=\"service-content\"\u003e\n                            \u003ch3 class=\"service-title\"\u003ePengujian Produk dan Izin Edar\u003c/h3\u003e\n                            \u003cbutton class=\"service-btn\"\u003eRead More\u003c/button\u003e\n                        \u003c/div\u003e\n                    \u003c/div\u003e\n\n                    \u003cdiv class=\"service-card glass\"\u003e\n                        \u003cimg src=\"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\n                            alt=\"Pengujian SNI Produk\" class=\"service-img\"\u003e\n                        \u003cdiv class=\"service-content\"\u003e\n                            \u003ch3 class=\"service-title\"\u003ePengujian SNI Produk\u003c/h3\u003e\n                            \u003cbutton class=\"service-btn\"\u003eRead More\u003c/button\u003e\n                        \u003c/div\u003e\n                    \u003c/div\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n    \u003c/section\u003e\n\n    \u003c!-- Footer --\u003e\n    \u003cfooter class=\"footer\" id=\"kontak\"\u003e\n        \u003cdiv class=\"container\"\u003e\n            \u003cdiv class=\"footer-panel glass-dark\"\u003e\n                \u003cdiv class=\"footer-grid\"\u003e\n                    \u003cdiv\u003e\n                        \u003ch4 class=\"footer-col-title\"\u003eContact\u003c/h4\u003e\n                        \u003cdiv class=\"footer-text\"\u003e\n                            \u003ci class=\"fa-solid fa-envelope\"\u003e\u003c/i\u003e info@gislaboratorium.com\n                        \u003c/div\u003e\n                        \u003cdiv class=\"footer-text\"\u003e\n                            \u003ci class=\"fa-solid fa-phone\"\u003e\u003c/i\u003e +031 2355 5278\n                        \u003c/div\u003e\n                        \u003cdiv class=\"footer-text\"\u003e\n                            \u003ci class=\"fa-solid fa-globe\"\u003e\u003c/i\u003e www.gislaboratorium.com\n                        \u003c/div\u003e\n                    \u003c/div\u003e\n\n                    \u003cdiv\u003e\n                        \u003ch4 class=\"footer-col-title\"\u003eLink\u003c/h4\u003e\n                        \u003ca href=\"/profile\" class=\"footer-link\"\u003eProfile\u003c/a\u003e\n                        \u003ca href=\"/service\" class=\"footer-link\"\u003eLayanan\u003c/a\u003e\n                        \u003ca href=\"/ruang-lingkup-pengujian\" class=\"footer-link\"\u003eRuang Lingkup\u003c/a\u003e\n                        \u003ca href=\"/informasi\" class=\"footer-link\"\u003eInformasi\u003c/a\u003e\n                    \u003c/div\u003e\n\n                    \u003cdiv\u003e\n                        \u003ch4 class=\"footer-col-title\"\u003eKontak\u003c/h4\u003e\n                        \u003ca href=\"/informasi\" class=\"footer-link\"\u003eInformasi\u003c/a\u003e\n                        \u003ca href=\"/informasi\" class=\"footer-link\"\u003eBlog\u003c/a\u003e\n                        \u003ca href=\"/contact\" class=\"footer-link\"\u003eContact\u003c/a\u003e\n                    \u003c/div\u003e\n\n                    \u003cdiv\u003e\n                        \u003ch4 class=\"footer-col-title\"\u003eNewsletter\u003c/h4\u003e\n                        \u003cp class=\"footer-text\" style=\"font-size: 0.95rem;\"\u003eDapatkan informasi terbaru dari GISLAB.\u003c/p\u003e\n                        \u003cform class=\"newsletter-form\" onsubmit=\"event.preventDefault();\"\u003e\n                            \u003cinput type=\"email\" class=\"newsletter-input\" placeholder=\"Masukkan email\" required\u003e\n                            \u003cbutton type=\"submit\" class=\"newsletter-btn\"\u003e\n                                \u003ci class=\"fa-solid fa-paper-plane\"\u003e\u003c/i\u003e\n                            \u003c/button\u003e\n                        \u003c/form\u003e\n                    \u003c/div\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"footer-bottom\"\u003e\n                \u0026copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.\n            \u003c/div\u003e\n        \u003c/div\u003e\n    \u003c/footer\u003e\n\n    \n"
-    },
-    {
-        "key":  "profile",
-        "title":  "Profil Perusahaan - GIS Laboratorium",
-        "description":  "Profil Global Inspeksi Sistem Laboratorium, visi misi, fasilitas, kebijakan, dan komitmen perusahaan.",
-        "bodyClass":  "liquid-bg font-body-md text-on-background min-h-screen",
-        "styles":  "@import url(\u0027https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800\u0026display=swap\u0027);\n@import url(\u0027https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700\u0026family=Inter:wght@300;400;500;600;700\u0026display=swap\u0027);\n\r\n        :root {\r\n            --primary: #0A2540;\r\n            --secondary: #0070F3;\r\n            --accent: #00DFD8;\r\n            --light-blue: #EBF4F8;\r\n            --white: #FFFFFF;\r\n            --text-dark: #1E293B;\r\n            --text-muted: #64748B;\r\n            --glass-dark-bg: rgba(10, 37, 64, 0.4);\r\n            --glass-dark-border: rgba(255, 255, 255, 0.15);\r\n            --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);\r\n            --radius-pill: 100px;\r\n            --radius-md: 24px;\r\n            --radius-lg: 32px;\r\n            --font-main: \u0027Plus Jakarta Sans\u0027, sans-serif;\r\n            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);\r\n        }\r\n        body {\r\n            background-color: #FAFCFF;\r\n            overflow-x: hidden;\r\n            position: relative;\r\n        }\r\n        body::before {\r\n            content: \u0027\u0027;\r\n            position: fixed;\r\n            top: 0;\r\n            left: 0;\r\n            width: 100%;\r\n            height: 100%;\r\n            background: radial-gradient(circle at 15% 50%, rgba(0, 223, 216, 0.04), transparent 25%),\r\n                radial-gradient(circle at 85% 30%, rgba(0, 112, 243, 0.04), transparent 25%);\r\n            z-index: -1;\r\n            pointer-events: none;\r\n        }\r\n        .glass-card {\r\n            background: rgba(255, 255, 255, 0.6);\r\n            backdrop-filter: blur(20px);\r\n            border: 1px solid transparent;\r\n            border-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2)) 1;\r\n            box-shadow: 0px 0px 30px rgba(0, 122, 255, 0.1);\r\n        }\r\n        .glass-dark {\r\n            background: var(--glass-dark-bg);\r\n            backdrop-filter: blur(20px);\r\n            -webkit-backdrop-filter: blur(20px);\r\n            border: 1px solid var(--glass-dark-border);\r\n            color: var(--white);\r\n        }\r\n        .container {\r\n            max-width: 1280px;\r\n            margin: 0 auto;\r\n            padding: 0 24px;\r\n        }\r\n        .liquid-bg {\r\n            background: #FAFCFF;\r\n            background-attachment: fixed;\r\n        }\r\n        .navbar-wrapper {\r\n            position: fixed;\r\n            top: 24px;\r\n            left: 0;\r\n            width: 100%;\r\n            z-index: 1000;\r\n            display: flex;\r\n            justify-content: center;\r\n            padding: 0 24px;\r\n            transition: var(--transition);\r\n        }\r\n        .navbar-wrapper.scrolled {\r\n            top: 12px;\r\n        }\r\n        .navbar {\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: space-between;\r\n            width: 100%;\r\n            max-width: 1100px;\r\n            padding: 12px 24px;\r\n            border-radius: var(--radius-pill);\r\n            background: rgba(255, 255, 255, 0.75);\r\n            backdrop-filter: blur(20px);\r\n            -webkit-backdrop-filter: blur(20px);\r\n            border: 1px solid rgba(255, 255, 255, 0.6);\r\n            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);\r\n            font-family: var(--font-main);\r\n        }\r\n        .nav-brand {\r\n            display: flex;\r\n            align-items: center;\r\n            gap: 10px;\r\n            font-weight: 800;\r\n            font-size: 1.25rem;\r\n            color: var(--primary);\r\n            letter-spacing: -0.5px;\r\n            text-decoration: none;\r\n        }\r\n        .nav-menu {\r\n            display: flex;\r\n            gap: 8px;\r\n            list-style: none;\r\n            margin: 0;\r\n            padding: 0;\r\n        }\r\n        .nav-link {\r\n            display: block;\r\n            padding: 8px 16px;\r\n            border-radius: var(--radius-pill);\r\n            font-weight: 500;\r\n            font-size: 0.95rem;\r\n            color: var(--text-muted);\r\n            transition: var(--transition);\r\n            text-decoration: none;\r\n        }\r\n        .nav-link:hover {\r\n            color: var(--primary);\r\n            background: rgba(0, 112, 243, 0.05);\r\n        }\r\n        .nav-link.active {\r\n            background: rgba(0, 223, 216, 0.15);\r\n            color: var(--secondary);\r\n            font-weight: 600;\r\n        }\r\n        .mobile-menu-btn {\r\n            display: none;\r\n            font-size: 1.5rem;\r\n            color: var(--primary);\r\n            background: none;\r\n            border: none;\r\n            cursor: pointer;\r\n        }\r\n        .profile-main {\r\n            padding-top: 140px;\r\n        }\r\n        .specular-edge {\r\n            border: 1px solid;\r\n            border-image-source: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.1) 100%);\r\n            border-image-slice: 1;\r\n        }\r\n        .material-symbols-outlined {\r\n            font-variation-settings: \u0027FILL\u0027 0, \u0027wght\u0027 400, \u0027GRAD\u0027 0, \u0027opsz\u0027 24;\r\n        }\r\n        .policy-tabs {\r\n            position: relative;\r\n            overflow: hidden;\r\n        }\r\n        .policy-tabs::before {\r\n            content: \u0027\u0027;\r\n            position: absolute;\r\n            inset: 0;\r\n            background:\r\n                linear-gradient(135deg, rgba(0, 112, 243, 0.08), transparent 45%),\r\n                radial-gradient(circle at 90% 8%, rgba(0, 223, 216, 0.16), transparent 24%);\r\n            pointer-events: none;\r\n        }\r\n        .policy-tab-nav {\r\n            position: relative;\r\n            z-index: 2;\r\n            display: flex;\r\n            gap: 12px;\r\n            padding: 12px;\r\n            margin: 0;\r\n            list-style: none;\r\n            background: rgba(255, 255, 255, 0.58);\r\n            border: 1px solid rgba(255, 255, 255, 0.72);\r\n            border-radius: 28px;\r\n        }\r\n        .policy-tab-button {\r\n            flex: 1;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n            gap: 10px;\r\n            min-height: 56px;\r\n            padding: 14px 18px;\r\n            border: 0;\r\n            border-radius: 20px;\r\n            color: var(--text-muted);\r\n            background: transparent;\r\n            font-family: var(--font-main);\r\n            font-weight: 800;\r\n            font-size: 0.82rem;\r\n            letter-spacing: 0;\r\n            text-transform: uppercase;\r\n            cursor: pointer;\r\n            transition: var(--transition);\r\n        }\r\n        .policy-tab-button:hover {\r\n            color: var(--primary);\r\n            background: rgba(0, 112, 243, 0.06);\r\n        }\r\n        .policy-tab-button.active {\r\n            color: #ffffff;\r\n            background: linear-gradient(135deg, var(--primary), var(--secondary));\r\n            box-shadow: 0 16px 34px -18px rgba(0, 88, 188, 0.75);\r\n        }\r\n        .policy-tab-button .material-symbols-outlined {\r\n            font-size: 22px;\r\n        }\r\n        .policy-tab-panel {\r\n            display: none;\r\n            position: relative;\r\n            z-index: 1;\r\n            padding: 48px;\r\n        }\r\n        .policy-tab-panel.active {\r\n            display: block;\r\n        }\r\n        .policy-kicker {\r\n            display: inline-flex;\r\n            align-items: center;\r\n            gap: 10px;\r\n            color: var(--secondary);\r\n            font-family: var(--font-main);\r\n            font-size: 0.82rem;\r\n            font-weight: 800;\r\n            letter-spacing: 0;\r\n            text-transform: uppercase;\r\n        }\r\n        .policy-copy {\r\n            color: var(--text-dark);\r\n            font-family: \u0027Inter\u0027, sans-serif;\r\n            font-size: 1rem;\r\n            line-height: 1.85;\r\n            text-align: justify;\r\n        }\r\n        .policy-signature {\r\n            border-left: 4px solid var(--accent);\r\n            padding-left: 18px;\r\n            color: var(--primary);\r\n        }\r\n        .policy-contact-list {\r\n            display: grid;\r\n            gap: 10px;\r\n            margin-top: 28px;\r\n            padding: 0;\r\n            list-style: none;\r\n        }\r\n        .policy-contact-list li {\r\n            display: grid;\r\n            grid-template-columns: 110px 1fr;\r\n            gap: 14px;\r\n            padding: 12px 0;\r\n            border-top: 1px solid rgba(113, 119, 134, 0.18);\r\n            color: var(--text-dark);\r\n            font-family: \u0027Inter\u0027, sans-serif;\r\n            line-height: 1.55;\r\n        }\r\n        .policy-contact-list strong {\r\n            color: var(--primary);\r\n            font-family: var(--font-main);\r\n            font-size: 0.78rem;\r\n            letter-spacing: 0;\r\n            text-transform: uppercase;\r\n        }\r\n        .footer {\r\n            position: relative;\r\n            padding: 80px 0 40px;\r\n            background: linear-gradient(135deg, var(--primary), #0e4e8a);\r\n            color: var(--white);\r\n            overflow: hidden;\r\n            font-family: var(--font-main);\r\n        }\r\n        .footer-panel {\r\n            position: relative;\r\n            z-index: 10;\r\n            padding: 60px;\r\n            border-radius: var(--radius-lg);\r\n        }\r\n        .footer-grid {\r\n            display: grid;\r\n            grid-template-columns: 2fr 1fr 1fr 1.5fr;\r\n            gap: 40px;\r\n        }\r\n        .footer-col-title {\r\n            font-size: 1.25rem;\r\n            font-weight: 700;\r\n            color: #FFFFFF;\r\n            margin-bottom: 24px;\r\n        }\r\n        .footer-text {\r\n            color: var(--light-blue);\r\n            margin-bottom: 16px;\r\n            display: flex;\r\n            align-items: center;\r\n            gap: 12px;\r\n        }\r\n        .footer-link {\r\n            color: var(--light-blue);\r\n            transition: var(--transition);\r\n            display: block;\r\n            margin-bottom: 12px;\r\n            text-decoration: none;\r\n        }\r\n        .footer-link:hover {\r\n            color: var(--accent);\r\n            transform: translateX(5px);\r\n        }\r\n        .newsletter-form {\r\n            display: flex;\r\n            margin-top: 16px;\r\n            background: rgba(255, 255, 255, 0.1);\r\n            border-radius: var(--radius-pill);\r\n            padding: 4px;\r\n            border: 1px solid rgba(255, 255, 255, 0.2);\r\n        }\r\n        .newsletter-input {\r\n            flex-grow: 1;\r\n            background: transparent;\r\n            border: none;\r\n            padding: 10px 16px;\r\n            color: var(--white);\r\n            outline: none;\r\n            min-width: 0;\r\n        }\r\n        .newsletter-input::placeholder {\r\n            color: rgba(255, 255, 255, 0.5);\r\n        }\r\n        .newsletter-btn {\r\n            background: var(--secondary);\r\n            color: var(--white);\r\n            border: none;\r\n            width: 40px;\r\n            height: 40px;\r\n            border-radius: 50%;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n            cursor: pointer;\r\n            transition: var(--transition);\r\n            flex: 0 0 auto;\r\n        }\r\n        .newsletter-btn:hover {\r\n            background: var(--accent);\r\n            transform: scale(1.05);\r\n        }\r\n        .footer-bottom {\r\n            position: relative;\r\n            z-index: 10;\r\n            text-align: center;\r\n            margin-top: 60px;\r\n            padding-top: 24px;\r\n            border-top: 1px solid rgba(255, 255, 255, 0.1);\r\n            color: rgba(255, 255, 255, 0.6);\r\n            font-size: 0.875rem;\r\n        }\r\n        @media (max-width: 1024px) {\r\n            .footer-grid {\r\n                grid-template-columns: 1fr 1fr;\r\n            }\r\n        }\r\n        @media (max-width: 768px) {\r\n            .navbar {\r\n                padding: 12px 20px;\r\n            }\r\n            .nav-menu {\r\n                position: absolute;\r\n                top: 100%;\r\n                left: 0;\r\n                right: 0;\r\n                background: rgba(255, 255, 255, 0.95);\r\n                backdrop-filter: blur(20px);\r\n                flex-direction: column;\r\n                padding: 20px;\r\n                border-radius: var(--radius-md);\r\n                box-shadow: var(--shadow-soft);\r\n                display: none;\r\n                margin-top: 10px;\r\n            }\r\n            .nav-menu.active {\r\n                display: flex;\r\n            }\r\n            .mobile-menu-btn {\r\n                display: block;\r\n            }\r\n            .policy-tab-nav {\r\n                flex-direction: column;\r\n                border-radius: 24px;\r\n            }\r\n            .policy-tab-panel {\r\n                padding: 32px 24px;\r\n            }\r\n            .policy-contact-list li {\r\n                grid-template-columns: 1fr;\r\n                gap: 4px;\r\n            }\r\n            .footer-grid {\r\n                grid-template-columns: 1fr;\r\n            }\r\n            .footer-panel {\r\n                padding: 32px 20px;\r\n            }\r\n        }\r\n    ",
-        "html":  "\r\n\u003cheader class=\"navbar-wrapper\" id=\"navbar\"\u003e\r\n\u003cnav class=\"navbar\"\u003e\r\n\u003ca href=\"/\" class=\"nav-brand\"\u003e\r\n\u003cimg src=\"/landing/animation/logo-lab.png\" style=\"height: 28px; width: auto; transform: scale(1.8); transform-origin: left center; margin-right: 36px;\"\u003e\r\n                Global Inspeksi Sistem\r\n            \u003c/a\u003e\r\n\u003cul class=\"nav-menu\" id=\"navMenu\"\u003e\r\n\u003cli\u003e\u003ca href=\"/\" class=\"nav-link\"\u003eBeranda\u003c/a\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003ca href=\"/profile\" class=\"nav-link active\"\u003eProfile\u003c/a\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003ca href=\"/service\" class=\"nav-link\"\u003eLayanan\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"/ruang-lingkup-pengujian\" class=\"nav-link\"\u003eRuang Lingkup Pengujian\u003c/a\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003ca href=\"/informasi\" class=\"nav-link\"\u003eInformasi\u003c/a\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003ca href=\"/contact\" class=\"nav-link\"\u003eKontak\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\r\n\u003cbutton class=\"mobile-menu-btn\" id=\"mobileMenuBtn\"\u003e\r\n\u003ci class=\"fa-solid fa-bars\"\u003e\u003c/i\u003e\r\n\u003c/button\u003e\r\n\u003c/nav\u003e\r\n\u003c/header\u003e\r\n\u003cmain class=\"profile-main max-w-7xl mx-auto px-8 pb-16 space-y-[120px]\"\u003e\r\n\u003c!-- Hero Section --\u003e\r\n\u003csection class=\"relative h-[600px] rounded-[32px] overflow-hidden flex items-center justify-center\"\u003e\r\n\u003cdiv class=\"absolute inset-0 bg-cover bg-center\" data-alt=\"ultra-modern clean bright laboratory with futuristic glass equipment and scientific instruments in a soft blue atmospheric lighting\" style=\"background-image: url(\u0027https://lh3.googleusercontent.com/aida-public/AB6AXuAhd3SPju_EcKUitBiUGdi5LM2CgMzbO_Y0lve9StPIQEtp-TWzEIXHOct2041e55OyWnmQVRMZzLsTopIp5xR6ofX60AzBiea6EdGEjr1UTXN1bHqSJ06GIcVBl05Gm6mwCEWf4z28g5R6SYenB8t-wCPCjKBLhXA80G3C0IdAzyxyM9bbofzJo6S4a74EMngUosxO1bsbN3MyqfXdXDVm3yxgG08lmmImklFa1WfWzFBI53c-b2CXLkhfYYPar4fE-gC9Xo_Jjqs\u0027)\"\u003e\u003c/div\u003e\r\n\u003cdiv class=\"absolute inset-0 bg-blue-900/20 backdrop-blur-[2px]\"\u003e\u003c/div\u003e\r\n\u003cdiv class=\"relative z-10 glass-card p-16 rounded-[32px] text-center max-w-4xl mx-4\"\u003e\r\n\u003cspan class=\"font-label-caps text-label-caps text-primary tracking-[0.2em] mb-4 block\"\u003eIDENTITAS KAMI\u003c/span\u003e\r\n\u003ch1 class=\"font-display-lg text-display-lg text-on-surface mb-6\"\u003eProfil Perusahaan\u003c/h1\u003e\r\n\u003cp class=\"font-body-lg text-body-lg text-secondary max-w-2xl mx-auto\"\u003e\r\n                    Global Inspeksi Sistem (GIS) Laboratorium menghadirkan standar akurasi tertinggi dalam layanan pengujian lingkungan dan industri melalui inovasi teknologi masa depan.\r\n                \u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/section\u003e\r\n\u003c!-- Tentang Kami Section --\u003e\r\n\u003csection class=\"grid grid-cols-1 lg:grid-cols-2 gap-16 items-center\"\u003e\r\n\u003cdiv class=\"space-y-8\"\u003e\r\n\u003cdiv\u003e\r\n\u003ch2 class=\"font-headline-md text-headline-md text-primary mb-2\"\u003eTentang Kami\u003c/h2\u003e\r\n\u003cdiv class=\"h-1 w-24 bg-primary-container rounded-full\"\u003e\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003cdiv class=\"glass-card p-12 rounded-[32px] space-y-6\"\u003e\r\n\u003cp class=\"font-body-lg text-body-lg leading-relaxed text-on-surface\"\u003e\r\n                        Global Inspeksi Sistem (GIS) adalah lembaga pengujian independen yang didedikasikan untuk memberikan hasil analisis yang presisi dan tidak memihak. Didirikan dengan visi untuk menjadi standar emas dalam pengujian laboratorium di Indonesia.\r\n                    \u003c/p\u003e\r\n\u003cp class=\"font-body-lg text-body-lg leading-relaxed text-on-surface\"\u003e\r\n                        Sejak awal berdiri, kami telah berkomitmen pada kualitas dan integritas. Dengan tim ahli yang berpengalaman dan dukungan teknologi terkini, kami membantu industri memastikan kepatuhan terhadap standar lingkungan dan keselamatan kerja yang ketat.\r\n                    \u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003cdiv class=\"relative\"\u003e\r\n\u003cdiv class=\"absolute -inset-4 bg-primary/10 blur-[60px] rounded-full\"\u003e\u003c/div\u003e\r\n\u003cdiv class=\"relative glass-card rounded-[40px] overflow-hidden aspect-square\"\u003e\r\n\u003cimg class=\"w-full h-full object-cover\" data-alt=\"microscopic view of crystalline structures in high-resolution detail with blue light refraction and scientific aesthetics\" src=\"https://lh3.googleusercontent.com/aida-public/AB6AXuB6Pm37V_Jw3Efy8Fsq0z-MWl51-bYCkPs3dSIJfK6Qtho4LZZfhMJnd6_ciQRRKE8lepnmnAopX4DHExWK8OiHYpO3Ecx9GSD51MdC25swVUSoiUlloRQngbVpxUXXoj1uwilV183VLj1gm1rFeXBFJSikxcaCyLklULPQM_VDvYiyGUHFjy8uPHneNCVZNf_hzLrFq7W2MWwlnq2I6YdYaMniX5XNw__va4oFVwF27zLlwLIsqBMH7k04O7CEFhH2QGDFY94yF9Y\"/\u003e\r\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003c/section\u003e\r\n\u003c!-- Visi \u0026 Misi Section --\u003e\r\n\u003csection class=\"grid grid-cols-1 md:grid-cols-2 gap-8\"\u003e\r\n\u003cdiv class=\"glass-card p-12 rounded-[32px] border-l-4 border-l-primary flex flex-col items-center text-center\"\u003e\r\n\u003cdiv class=\"w-20 h-20 rounded-2xl bg-primary-container/20 flex items-center justify-center mb-8\"\u003e\r\n\u003cspan class=\"material-symbols-outlined text-primary text-4xl\" data-icon=\"visibility\"\u003evisibility\u003c/span\u003e\r\n\u003c/div\u003e\r\n\u003ch3 class=\"font-headline-sm text-headline-sm text-primary mb-6\"\u003eVisi Kami\u003c/h3\u003e\r\n\u003cp class=\"font-body-lg text-body-lg text-on-surface\"\u003e\r\n                    Menjadi laboratorium pengujian lingkungan dan industri terkemuka di Indonesia yang diakui secara internasional dalam hal akurasi, inovasi, dan integritas profesional.\r\n                \u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003cdiv class=\"glass-card p-12 rounded-[32px] border-l-4 border-l-primary-container flex flex-col items-center text-center\"\u003e\r\n\u003cdiv class=\"w-20 h-20 rounded-2xl bg-primary-container/20 flex items-center justify-center mb-8\"\u003e\r\n\u003cspan class=\"material-symbols-outlined text-primary text-4xl\" data-icon=\"rocket_launch\"\u003erocket_launch\u003c/span\u003e\r\n\u003c/div\u003e\r\n\u003ch3 class=\"font-headline-sm text-headline-sm text-primary mb-6\"\u003eMisi Kami\u003c/h3\u003e\r\n\u003cul class=\"font-body-lg text-body-lg text-on-surface text-left space-y-4 list-disc pl-5\"\u003e\r\n\u003cli\u003eMemberikan layanan pengujian dengan standar ISO/IEC 17025.\u003c/li\u003e\r\n\u003cli\u003eMengembangkan kompetensi sumber daya manusia secara berkelanjutan.\u003c/li\u003e\r\n\u003cli\u003eMengintegrasikan teknologi digital terbaru untuk efisiensi operasional.\u003c/li\u003e\r\n\u003cli\u003eMendukung pelestarian lingkungan melalui data analisis yang akurat.\u003c/li\u003e\r\n\u003c/ul\u003e\r\n\u003c/div\u003e\r\n\u003c/section\u003e\r\n\u003c!-- Fasilitas \u0026 Keunggulan (Bento Grid) --\u003e\r\n\u003csection class=\"space-y-16\"\u003e\r\n\u003cdiv class=\"text-center space-y-4\"\u003e\r\n\u003ch2 class=\"font-headline-md text-headline-md text-on-surface\"\u003eFasilitas \u0026amp; Keunggulan\u003c/h2\u003e\r\n\u003cp class=\"text-secondary font-body-lg\"\u003eStandar operasional dengan teknologi masa depan\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003cdiv class=\"grid grid-cols-1 md:grid-cols-3 gap-8\"\u003e\r\n\u003c!-- Card 1 --\u003e\r\n\u003cdiv class=\"glass-card p-8 rounded-[32px] group hover:bg-white/80 transition-all duration-500\"\u003e\r\n\u003cdiv class=\"mb-6 inline-block p-4 bg-primary/10 rounded-2xl group-hover:shadow-[0_0_20px_rgba(0,122,255,0.3)] transition-all\"\u003e\r\n\u003cspan class=\"material-symbols-outlined text-primary text-3xl\" data-icon=\"biotech\"\u003ebiotech\u003c/span\u003e\r\n\u003c/div\u003e\r\n\u003ch4 class=\"font-headline-sm text-headline-sm mb-4\"\u003ePeralatan Terbaik\u003c/h4\u003e\r\n\u003cp class=\"text-secondary font-body-md\"\u003eDidukung oleh instrumentasi analisis tercanggih dengan tingkat presisi tinggi untuk hasil yang tak terbantahkan.\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c!-- Card 2 --\u003e\r\n\u003cdiv class=\"glass-card p-8 rounded-[32px] group hover:bg-white/80 transition-all duration-500\"\u003e\r\n\u003cdiv class=\"mb-6 inline-block p-4 bg-primary/10 rounded-2xl group-hover:shadow-[0_0_20px_rgba(0,122,255,0.3)] transition-all\"\u003e\r\n\u003cspan class=\"material-symbols-outlined text-primary text-3xl\" data-icon=\"verified\"\u003everified\u003c/span\u003e\r\n\u003c/div\u003e\r\n\u003ch4 class=\"font-headline-sm text-headline-sm mb-4\"\u003ePengujian Standar\u003c/h4\u003e\r\n\u003cp class=\"text-secondary font-body-md\"\u003eSetiap prosedur pengujian mengacu pada standar nasional (SNI) dan internasional (Standard Methods) yang berlaku.\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c!-- Card 3 --\u003e\r\n\u003cdiv class=\"glass-card p-8 rounded-[32px] group hover:bg-white/80 transition-all duration-500\"\u003e\r\n\u003cdiv class=\"mb-6 inline-block p-4 bg-primary/10 rounded-2xl group-hover:shadow-[0_0_20px_rgba(0,122,255,0.3)] transition-all\"\u003e\r\n\u003cspan class=\"material-symbols-outlined text-primary text-3xl\" data-icon=\"sensors\"\u003esensors\u003c/span\u003e\r\n\u003c/div\u003e\r\n\u003ch4 class=\"font-headline-sm text-headline-sm mb-4\"\u003eTeknologi Terkini\u003c/h4\u003e\r\n\u003cp class=\"text-secondary font-body-md\"\u003eImplementasi sistem manajemen laboratorium berbasis digital untuk transparansi dan kecepatan akses data real-time.\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003c/section\u003e\r\n\u003c!-- Ketidakberpihakan \u0026 Komitmen --\u003e\r\n\u003csection class=\"space-y-10\"\u003e\r\n\u003cdiv class=\"text-center space-y-4\"\u003e\r\n\u003ch2 class=\"font-headline-md text-headline-md text-on-surface\"\u003eKebijakan \u0026amp; Komitmen\u003c/h2\u003e\r\n\u003cp class=\"text-secondary font-body-lg\"\u003eIntegritas layanan laboratorium dalam setiap proses pengujian\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003cdiv class=\"glass-card policy-tabs rounded-[32px] p-4\"\u003e\r\n\u003cul class=\"policy-tab-nav mx-auto max-w-fit justify-center\" role=\"tablist\" aria-label=\"Kebijakan dan komitmen perusahaan\"\u003e\r\n\u003cli\u003e\r\n\u003cbutton class=\"policy-tab-button active px-8\" type=\"button\" role=\"tab\" aria-selected=\"true\" aria-controls=\"planning-tab\" id=\"planning-tab-button\" data-policy-tab=\"planning-tab\"\u003e\r\n\u003cspan class=\"material-symbols-outlined\" data-icon=\"balance\"\u003ebalance\u003c/span\u003e\r\n\u003cspan\u003eKebijakan Ketidakberpihakan\u003c/span\u003e\r\n\u003c/button\u003e\r\n\u003c/li\u003e\r\n\u003cli\u003e\r\n\u003cbutton class=\"policy-tab-button px-8\" type=\"button\" role=\"tab\" aria-selected=\"false\" aria-controls=\"research-tab\" id=\"research-tab-button\" data-policy-tab=\"research-tab\"\u003e\r\n\u003cspan class=\"material-symbols-outlined\" data-icon=\"shield\"\u003eshield\u003c/span\u003e\r\n\u003cspan\u003eKomitmen Anti Suap\u003c/span\u003e\r\n\u003c/button\u003e\r\n\u003c/li\u003e\r\n\u003c/ul\u003e\r\n\u003cdiv class=\"tab-content\"\u003e\r\n\u003carticle id=\"planning-tab\" class=\"policy-tab-panel active\" role=\"tabpanel\" aria-labelledby=\"planning-tab-button\"\u003e\r\n\u003cdiv class=\"max-w-4xl mx-auto text-center md:text-left\"\u003e\r\n\u003cspan class=\"inline-block font-label-caps text-[14pt] bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent uppercase tracking-widest mb-3\"\u003eKebijakan\u003c/span\u003e\r\n\u003ch5 class=\"font-headline-md text-3xl font-bold text-slate-800 mb-8\"\u003eKetidakberpihakan\u003c/h5\u003e\r\n\u003cp class=\"text-justify text-on-surface font-body-lg leading-relaxed mb-6\"\u003e\r\n                    Layanan laboratorium pengujian yang diselenggarakan oleh PT. Global Inspeksi Sistem bertujuan untuk memastikan kepercayaan pemohon atau klien terhadap produk yang dihasilkan, sehingga memenuhi persyaratan Standar Nasional (SNI), Sistem Manajemen, dan persyaratan lainnya yang telah ditetapkan. Hal ini juga bertujuan untuk memberikan perlindungan kepada konsumen serta meningkatkan daya saing dalam pasar domestik. Setiap personel di PT. Global Inspeksi Sistem, sesuai dengan kompetensinya di semua tingkatan organisasi, wajib memenuhi tuntutan mutu layanan laboratorium pengujian produk dan sistem manajemen, dan menghindari segala bentuk tekanan, termasuk tekanan komersial, yang dapat mempengaruhi mutu pelayanan sertifikasi. Layanan laboratorium pengujian produk dan Sistem Manajemen oleh Lembaga Sertifikasi Global Inspeksi Sistem dilaksanakan sesuai dengan lingkup sertifikasi yang telah ditetapkan.\r\n                \u003c/p\u003e\r\n\u003cp class=\"text-justify text-on-surface font-body-lg leading-relaxed mb-6\"\u003e\r\n                    Tangerang, 1 December 2016 \u003cbr\u003e\r\n                    PT Global Inspeksi Sistem\r\n                \u003c/p\u003e\r\n\u003cp class=\"text-justify text-on-surface font-body-lg leading-relaxed\"\u003e\r\n\u003cspan class=\"font-bold\"\u003eDirector\u003c/span\u003e\u003cbr\u003e\u003cbr\u003e\r\n                    Vera Marini\r\n                \u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/article\u003e\r\n\u003carticle id=\"research-tab\" class=\"policy-tab-panel\" role=\"tabpanel\" aria-labelledby=\"research-tab-button\"\u003e\r\n\u003cdiv class=\"max-w-4xl mx-auto text-center md:text-left\"\u003e\r\n\u003cspan class=\"inline-block font-label-caps text-[14pt] bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent uppercase tracking-widest mb-3\"\u003eKomitmen\u003c/span\u003e\r\n\u003ch5 class=\"font-headline-md text-3xl font-bold text-slate-800 mb-8\"\u003eAnti Suap\u003c/h5\u003e\r\n\u003cp class=\"text-justify text-on-surface font-body-lg leading-relaxed mb-6\"\u003e\r\n                    PT. Global Inspeksi Sistem berkomitmen untuk menjalankan anti-suap dalam melaksanakan layanannya baik dalam sertifikasi, inspeksi, dan juga mengendalikan risiko suap. Setiap penipuan, penipuan, ketidakjujuran, pencurian/penggelapan, pelanggaran dalam proses pengadaan barang dan jasa, penyalahgunaan posisi/otoritas, penyuapan/gratifikasi yang terjadi di PT. Global Inspeksi Sistem atau terkait dengan PT. Global Inspeksi Sistem harap dapat dilaporkan agar dapat segera ditindaklanjuti. PT. Global Inspeksi Sistem menganalisis laporan dan menindaklanjuti laporan pelanggaran berdasarkan bukti yang diberikan dan melindungi Pelapor.\r\n                \u003c/p\u003e\r\n\u003cp class=\"text-justify text-on-surface font-body-lg leading-relaxed mb-6\"\u003e\r\n                    Pelaporan ini dilakukan dengan dukungan data yang relevan dan dimaksudkan untuk kepentingan Perusahaan, tidak dimaksudkan untuk memaksakan seseorang. Pelaporan dapat disampaikan kepada Direktur Global Konstruksi Sertifikasi atau Bagian Informasi Umum, melalui informasi sebagai berikut:\r\n                \u003c/p\u003e\r\n\u003cdiv class=\"bg-white/60 backdrop-blur-md border border-white shadow-sm rounded-2xl p-6 md:p-8 mb-6 font-body-md text-on-surface text-left\"\u003e\r\n\u003cdiv class=\"grid grid-cols-[100px_1fr] sm:grid-cols-[160px_1fr] gap-y-3 gap-x-4 break-words\"\u003e\r\n\u003cdiv class=\"font-bold text-primary\"\u003eMail\u003c/div\u003e\u003cdiv\u003eglobalinspeksisistem@gmail.com\u003c/div\u003e\r\n\u003cdiv class=\"font-bold text-primary\"\u003eTelp\u003c/div\u003e\u003cdiv\u003e+62 21 50208008\u003c/div\u003e\r\n\u003cdiv class=\"font-bold text-primary\"\u003eTelp\u003c/div\u003e\u003cdiv\u003e+62 21 50560008\u003c/div\u003e\r\n\u003cdiv class=\"font-bold text-primary\"\u003eFax\u003c/div\u003e\u003cdiv\u003e+62 21 50208009\u003c/div\u003e\r\n\u003cdiv class=\"font-bold text-primary\"\u003eFax\u003c/div\u003e\u003cdiv\u003e+62 21 50560009\u003c/div\u003e\r\n\u003cdiv class=\"font-bold text-primary\"\u003eSite web\u003c/div\u003e\u003cdiv\u003ewww.gislaboratorium.com\u003c/div\u003e\r\n\u003cdiv class=\"font-bold text-primary\"\u003eLetter\u003c/div\u003e\u003cdiv\u003ePT. Global Inspeksi Sistem\u003c/div\u003e\r\n\u003cdiv class=\"font-bold text-primary\"\u003eHead Office (Surabaya)\u003c/div\u003e\u003cdiv\u003eJl. Pahlawan No.2, Kwadengan Barat, Lemahputro, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213\u003c/div\u003e\r\n\u003cdiv class=\"font-bold text-primary\"\u003eBranch Office (Jakarta)\u003c/div\u003e\u003cdiv\u003eJl. Raya Daan Mogot No. 89 RT.2/RW.2, Wijaya Kusuma, Kec. Grogol Petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11460\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003cp class=\"text-justify text-on-surface font-body-lg leading-relaxed mb-8\"\u003e\r\n                    Pelapor harus memberikan identitas mereka dalam melaporkan keluhan dan memastikan bahwa setiap informasi tentang identitas pihak pelapor dan laporannya dijaga kerahasiaannya. Pelaporan dilakukan di bawah prinsip anonim, rahasia dan independen.\r\n                \u003c/p\u003e\r\n\u003cp class=\"text-justify text-on-surface font-body-lg leading-relaxed\"\u003e\r\n\u003cspan class=\"font-bold\"\u003eDirector\u003c/span\u003e\u003cbr\u003e\u003cbr\u003e\r\n                    Vera marini\r\n                \u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/article\u003e\r\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003c/section\u003e\r\n\u003c/main\u003e\r\n\u003c!-- Footer --\u003e\r\n\u003cfooter class=\"footer\" id=\"kontak\"\u003e\r\n\u003cdiv class=\"container\"\u003e\r\n\u003cdiv class=\"footer-panel glass-dark\"\u003e\r\n\u003cdiv class=\"footer-grid\"\u003e\r\n\u003cdiv\u003e\r\n\u003ch4 class=\"footer-col-title\"\u003eContact\u003c/h4\u003e\r\n\u003cdiv class=\"footer-text\"\u003e\r\n\u003ci class=\"fa-solid fa-envelope\"\u003e\u003c/i\u003e info@gislaboratorium.com\r\n\u003c/div\u003e\r\n\u003cdiv class=\"footer-text\"\u003e\r\n\u003ci class=\"fa-solid fa-phone\"\u003e\u003c/i\u003e +031 2355 5278\r\n\u003c/div\u003e\r\n\u003cdiv class=\"footer-text\"\u003e\r\n\u003ci class=\"fa-solid fa-globe\"\u003e\u003c/i\u003e www.gislaboratorium.com\r\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003cdiv\u003e\r\n\u003ch4 class=\"footer-col-title\"\u003eLink\u003c/h4\u003e\r\n\u003ca href=\"/profile\" class=\"footer-link\"\u003eProfile\u003c/a\u003e\n\u003ca href=\"/service\" class=\"footer-link\"\u003eLayanan\u003c/a\u003e\n\u003ca href=\"/ruang-lingkup-pengujian\" class=\"footer-link\"\u003eRuang Lingkup\u003c/a\u003e\r\n\u003ca href=\"/informasi\" class=\"footer-link\"\u003eInformasi\u003c/a\u003e\r\n\u003c/div\u003e\r\n\r\n\u003cdiv\u003e\r\n\u003ch4 class=\"footer-col-title\"\u003eKontak\u003c/h4\u003e\r\n\u003ca href=\"/informasi\" class=\"footer-link\"\u003eInformasi\u003c/a\u003e\r\n\u003ca href=\"/informasi\" class=\"footer-link\"\u003eBlog\u003c/a\u003e\r\n\u003ca href=\"/contact\" class=\"footer-link\"\u003eContact\u003c/a\u003e\n\u003c/div\u003e\r\n\r\n\u003cdiv\u003e\r\n\u003ch4 class=\"footer-col-title\"\u003eNewsletter\u003c/h4\u003e\r\n\u003cp class=\"footer-text\" style=\"font-size: 0.95rem;\"\u003eDapatkan informasi terbaru dari GISLAB.\u003c/p\u003e\r\n\u003cform class=\"newsletter-form\" onsubmit=\"event.preventDefault();\"\u003e\r\n\u003cinput type=\"email\" class=\"newsletter-input\" placeholder=\"Masukkan email\" required\u003e\r\n\u003cbutton type=\"submit\" class=\"newsletter-btn\"\u003e\r\n\u003ci class=\"fa-solid fa-paper-plane\"\u003e\u003c/i\u003e\r\n\u003c/button\u003e\r\n\u003c/form\u003e\n\u003c/div\u003e\n\u003c/div\u003e\n\u003c/div\u003e\n\u003cdiv class=\"footer-bottom\"\u003e\n\u0026copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.\n\u003c/div\u003e\n\u003c/div\u003e\n\u003c/footer\u003e\n\r\n\u003c!-- WhatsApp Widget --\u003e\r\n\u003cdiv id=\"whatsapp-widget\" class=\"fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 font-[\u0027Inter\u0027]\"\u003e\r\n    \u003cdiv id=\"whatsapp-window\" class=\"hidden w-[340px] bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 transition-all origin-bottom-right\"\u003e\r\n        \u003cdiv class=\"bg-[#075E54] p-4 flex items-center justify-between text-white\"\u003e\r\n            \u003cdiv class=\"flex items-center gap-3\"\u003e\r\n                \u003cdiv class=\"bg-white p-1 rounded-full\"\u003e\r\n                    \u003cimg src=\"https://giscert.com/assets/client/images/GISlogo.png\" class=\"w-8 h-8 object-contain\" alt=\"Logo\"\u003e\r\n                \u003c/div\u003e\r\n                \u003cdiv\u003e\r\n                    \u003cdiv class=\"font-bold text-sm\"\u003ePT Global Inspeksi Sistem\u003c/div\u003e\r\n                    \u003cdiv class=\"text-xs text-white/80\"\u003eMembalas secepatnya\u003c/div\u003e\r\n                \u003c/div\u003e\r\n            \u003c/div\u003e\r\n            \u003cbutton id=\"close-wa\" class=\"text-white/80 hover:text-white transition-colors\"\u003e\r\n                \u003cspan class=\"material-symbols-outlined text-[24px]\"\u003eclose\u003c/span\u003e\r\n            \u003c/button\u003e\r\n        \u003c/div\u003e\r\n        \u003cdiv class=\"bg-[#ECE5DD] p-4 min-h-[240px] relative before:content-[\u0027\u0027] before:absolute before:inset-0 before:bg-[url(\u0027https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg\u0027)] before:opacity-10 before:mix-blend-multiply before:pointer-events-none\"\u003e\r\n            \u003cdiv class=\"bg-white rounded-xl p-3 shadow-sm text-sm text-gray-800 w-[85%] mb-4 relative ml-0 border-l-4 border-[#25D366]\"\u003e\r\n                Halo! Ada yang bisa kami bantu mengenai layanan sertifikasi dan inspeksi GIS?\r\n            \u003c/div\u003e\r\n            \u003ca href=\"https://wa.me/6285281844641?text=Halo%20GIS%20Laboratorium\" target=\"_blank\" class=\"relative flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition-all group w-full border border-transparent hover:border-[#25D366]/30\"\u003e\r\n                \u003cdiv class=\"relative flex-shrink-0\"\u003e\r\n                    \u003cimg src=\"https://2.bp.blogspot.com/-y6xNA_8TpFo/XXWzkdYk0MI/AAAAAAAAA5s/RCzTBJ_FbMwVt5AEZKekwQqiDNqdNQJjgCLcBGAs/s70/supportmale.png\" class=\"w-12 h-12 rounded-full bg-blue-50 object-cover\" alt=\"CS\"\u003e\r\n                    \u003cdiv class=\"absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#25D366] rounded-full border-2 border-white\"\u003e\u003c/div\u003e\r\n                \u003c/div\u003e\r\n                \u003cdiv class=\"flex-1\"\u003e\r\n                    \u003cdiv class=\"text-[11px] font-bold text-gray-500 uppercase tracking-wide\"\u003eSupport\u003c/div\u003e\r\n                    \u003cdiv class=\"text-sm font-bold text-gray-800 group-hover:text-[#075E54]\"\u003eCustomer Service 1\u003c/div\u003e\r\n                \u003c/div\u003e\r\n                \u003cdiv class=\"w-8 h-8 rounded-full bg-[#25D366]/10 flex items-center justify-center text-[#25D366] group-hover:bg-[#25D366] group-hover:text-white transition-colors\"\u003e\r\n                    \u003ci class=\"fa-brands fa-whatsapp text-lg\"\u003e\u003c/i\u003e\r\n                \u003c/div\u003e\r\n            \u003c/a\u003e\r\n        \u003c/div\u003e\r\n    \u003c/div\u003e\r\n    \r\n    \u003cbutton id=\"toggle-wa\" class=\"w-14 h-14 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full shadow-lg shadow-[#25D366]/30 flex items-center justify-center transition-transform hover:scale-110 relative group\"\u003e\r\n        \u003cspan class=\"absolute right-full mr-4 bg-white text-gray-800 text-sm font-semibold px-4 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none after:content-[\u0027\u0027] after:absolute after:top-1/2 after:-translate-y-1/2 after:-right-2 after:border-8 after:border-transparent after:border-l-white\"\u003e\r\n            Butuh Bantuan?\r\n        \u003c/span\u003e\r\n        \u003ci class=\"fa-brands fa-whatsapp text-3xl\"\u003e\u003c/i\u003e\r\n    \u003c/button\u003e\r\n\u003c/div\u003e\r\n\r\n\r\n"
-    },
-    {
-        "key":  "service",
-        "title":  "Services | GIS Laboratorium",
-        "description":  "Layanan pengujian kualitas, lingkungan, produk dan izin edar, serta SNI produk GIS Laboratorium.",
-        "bodyClass":  "bg-background font-body-md text-on-background selection:bg-primary selection:text-white",
-        "styles":  "@import url(\u0027https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800\u0026display=swap\u0027);\n@import url(\u0027https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700\u0026family=Inter:wght@300;400;500;600;700\u0026display=swap\u0027);\n\r\n        :root {\r\n            --gis-primary: #0A2540;\r\n            --gis-secondary: #0070F3;\r\n            --gis-accent: #00DFD8;\r\n            --gis-light-blue: #EBF4F8;\r\n            --gis-white: #FFFFFF;\r\n            --gis-text-muted: #64748B;\r\n            --gis-glass-dark-bg: rgba(10, 37, 64, 0.4);\r\n            --gis-glass-dark-border: rgba(255, 255, 255, 0.15);\r\n            --gis-shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);\r\n            --gis-radius-pill: 100px;\r\n            --gis-radius-md: 24px;\r\n            --gis-radius-lg: 32px;\r\n            --gis-font-main: \u0027Plus Jakarta Sans\u0027, sans-serif;\r\n            --gis-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);\r\n        }\r\n        .navbar-wrapper {\r\n            position: fixed;\r\n            top: 24px;\r\n            left: 0;\r\n            width: 100%;\r\n            z-index: 1000;\r\n            display: flex;\r\n            justify-content: center;\r\n            padding: 0 24px;\r\n            transition: var(--gis-transition);\r\n        }\r\n        .navbar-wrapper.scrolled {\r\n            top: 12px;\r\n        }\r\n        .navbar {\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: space-between;\r\n            width: 100%;\r\n            max-width: 1100px;\r\n            padding: 12px 24px;\r\n            border-radius: var(--gis-radius-pill);\r\n            background: rgba(255, 255, 255, 0.75);\r\n            backdrop-filter: blur(20px);\r\n            -webkit-backdrop-filter: blur(20px);\r\n            border: 1px solid rgba(255, 255, 255, 0.6);\r\n            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);\r\n            font-family: var(--gis-font-main);\r\n        }\r\n        .nav-brand {\r\n            display: flex;\r\n            align-items: center;\r\n            gap: 10px;\r\n            font-weight: 800;\r\n            font-size: 1.25rem;\r\n            color: var(--gis-primary);\r\n            letter-spacing: -0.5px;\r\n            text-decoration: none;\r\n        }\r\n        .nav-brand img {\r\n            height: 28px;\r\n            width: auto;\r\n            transform: scale(1.8);\r\n            transform-origin: left center;\r\n            margin-right: 36px;\r\n        }\r\n        .nav-menu {\r\n            display: flex;\r\n            gap: 8px;\r\n            list-style: none;\r\n            margin: 0;\r\n            padding: 0;\r\n        }\r\n        .nav-link {\r\n            display: block;\r\n            padding: 8px 16px;\r\n            border-radius: var(--gis-radius-pill);\r\n            font-weight: 500;\r\n            font-size: 0.95rem;\r\n            color: var(--gis-text-muted);\r\n            transition: var(--gis-transition);\r\n            text-decoration: none;\r\n        }\r\n        .nav-link:hover {\r\n            color: var(--gis-primary);\r\n            background: rgba(0, 112, 243, 0.05);\r\n        }\r\n        .nav-link.active {\r\n            background: rgba(0, 223, 216, 0.15);\r\n            color: var(--gis-secondary);\r\n            font-weight: 600;\r\n        }\r\n        .mobile-menu-btn {\r\n            display: none;\r\n            font-size: 1.5rem;\r\n            color: var(--gis-primary);\r\n            background: none;\r\n            border: none;\r\n            cursor: pointer;\r\n        }\r\n        .gis-container {\r\n            max-width: 1280px;\r\n            margin: 0 auto;\r\n            padding: 0 24px;\r\n        }\r\n        .glass-dark {\r\n            background: var(--gis-glass-dark-bg);\r\n            backdrop-filter: blur(20px);\r\n            -webkit-backdrop-filter: blur(20px);\r\n            border: 1px solid var(--gis-glass-dark-border);\r\n            color: var(--gis-white);\r\n        }\r\n        .glass {\r\n            background: rgba(255, 255, 255, 0.65);\r\n            backdrop-filter: blur(16px);\r\n            -webkit-backdrop-filter: blur(16px);\r\n            border: 1px solid rgba(255, 255, 255, 0.8);\r\n            box-shadow: var(--gis-shadow-soft);\r\n        }\r\n        .services-section {\r\n            padding: 100px 0;\r\n            text-align: center;\r\n            font-family: var(--gis-font-main);\r\n        }\r\n        .services-header {\r\n            margin-bottom: 60px;\r\n        }\r\n        .section-title {\r\n            font-size: 2.5rem;\r\n            font-weight: 800;\r\n            color: var(--gis-primary);\r\n            margin-bottom: 24px;\r\n        }\r\n        .carousel-container {\r\n            position: relative;\r\n            padding: 20px 0;\r\n            overflow: hidden;\r\n            width: 100%;\r\n        }\r\n        .services-track {\r\n            display: flex;\r\n            gap: 32px;\r\n            width: max-content;\r\n            animation: scroll-services 20s linear infinite;\r\n        }\r\n        .services-track:hover {\r\n            animation-play-state: paused;\r\n        }\r\n        @keyframes scroll-services {\r\n            0% { transform: translateX(0); }\r\n            100% { transform: translateX(calc(-50% - 16px)); }\r\n        }\r\n        .service-card {\r\n            width: 350px;\r\n            flex-shrink: 0;\r\n            border-radius: var(--gis-radius-lg);\r\n            overflow: hidden;\r\n            text-align: left;\r\n            transition: var(--gis-transition);\r\n            display: flex;\r\n            flex-direction: column;\r\n        }\r\n        .service-card:hover {\r\n            transform: scale(1.02);\r\n            box-shadow: 0 20px 40px -10px rgba(0, 112, 243, 0.15);\r\n        }\r\n        .service-img {\r\n            height: 200px;\r\n            width: 100%;\r\n            object-fit: cover;\r\n        }\r\n        .service-content {\r\n            padding: 32px;\r\n            flex-grow: 1;\r\n            display: flex;\r\n            flex-direction: column;\r\n        }\r\n        .service-title {\r\n            font-size: 1.25rem;\r\n            font-weight: 700;\r\n            color: var(--gis-primary);\r\n            margin-bottom: 16px;\r\n        }\r\n        .service-btn {\r\n            margin-top: auto;\r\n            align-self: flex-start;\r\n            background: transparent;\r\n            color: var(--gis-secondary);\r\n            font-weight: 600;\r\n            border: 1px solid rgba(0, 112, 243, 0.2);\r\n            padding: 8px 20px;\r\n            border-radius: var(--gis-radius-pill);\r\n            transition: var(--gis-transition);\r\n        }\r\n        .service-card:hover .service-btn {\n            background: var(--gis-secondary);\n            color: var(--gis-white);\n            border-color: var(--gis-secondary);\n        }\n        .service-detail-section {\n            display: none;\n            padding: 24px 0 100px;\n            font-family: var(--gis-font-main);\n        }\n        .service-detail-section.active {\n            display: block;\n        }\n        .service-detail-layout {\n            display: grid;\n            grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.7fr);\n            gap: 32px;\n            align-items: start;\n        }\n        .service-detail-article,\n        .service-detail-sidebar {\n            border-radius: var(--gis-radius-lg);\n            background: rgba(255, 255, 255, 0.72);\n            backdrop-filter: blur(20px);\n            -webkit-backdrop-filter: blur(20px);\n            border: 1px solid rgba(255, 255, 255, 0.82);\n            box-shadow: var(--gis-shadow-soft);\n        }\n        .service-detail-article {\n            overflow: hidden;\n        }\n        .detail-cover {\n            width: 100%;\n            height: 360px;\n            object-fit: cover;\n            display: block;\n        }\n        .detail-body {\n            padding: 42px;\n        }\n        .detail-kicker {\n            display: inline-flex;\n            align-items: center;\n            gap: 10px;\n            color: var(--gis-secondary);\n            font-size: 0.78rem;\n            font-weight: 800;\n            letter-spacing: 0.08em;\n            text-transform: uppercase;\n        }\n        .detail-title {\n            margin-top: 14px;\n            color: var(--gis-primary);\n            font-size: clamp(2rem, 4vw, 3.35rem);\n            font-weight: 800;\n            line-height: 1.08;\n            letter-spacing: -0.02em;\n        }\n        .detail-copy {\n            margin-top: 22px;\n            color: #405a70;\n            font-size: 1.02rem;\n            font-weight: 600;\n            line-height: 1.85;\n            text-align: justify;\n        }\n        .detail-body h3 {\n            margin-top: 34px;\n            color: var(--gis-primary);\n            font-size: 1.4rem;\n            font-weight: 800;\n        }\n        .detail-list {\n            display: grid;\n            gap: 14px;\n            margin-top: 18px;\n            padding: 0;\n            list-style: none;\n        }\n        .detail-list li {\n            display: flex;\n            align-items: flex-start;\n            gap: 12px;\n            color: #405a70;\n            font-weight: 600;\n            line-height: 1.7;\n        }\n        .detail-list i {\n            margin-top: 6px;\n            color: var(--gis-accent);\n        }\n        .service-detail-sidebar {\n            position: sticky;\n            top: 110px;\n            padding: 28px;\n        }\n        .sidebar-box + .sidebar-box {\n            margin-top: 24px;\n            padding-top: 24px;\n            border-top: 1px solid rgba(10, 37, 64, 0.1);\n        }\n        .sidebar-title {\n            color: var(--gis-primary);\n            font-size: 1.1rem;\n            font-weight: 800;\n            margin-bottom: 14px;\n        }\n        .sidebar-link {\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n            gap: 12px;\n            width: 100%;\n            border: 0;\n            background: transparent;\n            padding: 12px 0;\n            color: #405a70;\n            font-weight: 700;\n            text-align: left;\n            cursor: pointer;\n            border-bottom: 1px solid rgba(10, 37, 64, 0.08);\n        }\n        .sidebar-link:hover {\n            color: var(--gis-secondary);\n        }\n        .download-btn,\n        .detail-contact-btn {\n            display: inline-flex;\n            align-items: center;\n            justify-content: center;\n            gap: 10px;\n            width: 100%;\n            margin-top: 12px;\n            padding: 12px 18px;\n            border-radius: var(--gis-radius-pill);\n            color: var(--gis-white);\n            background: linear-gradient(135deg, var(--gis-secondary), var(--gis-accent));\n            font-weight: 800;\n            text-decoration: none;\n            transition: var(--gis-transition);\n        }\n        .download-btn:hover,\n        .detail-contact-btn:hover {\n            transform: translateY(-2px);\n            box-shadow: 0 18px 34px -22px rgba(0, 112, 243, 0.7);\n        }\n        .sidebar-note {\n            color: var(--gis-text-muted);\n            font-size: 0.95rem;\n            font-weight: 600;\n            line-height: 1.7;\n        }\n        .footer {\n            position: relative;\n            padding: 80px 0 40px;\n            background: linear-gradient(135deg, var(--gis-primary), #0e4e8a);\r\n            color: var(--gis-white);\r\n            overflow: hidden;\r\n            font-family: var(--gis-font-main);\r\n        }\r\n        .footer-panel {\r\n            position: relative;\r\n            z-index: 10;\r\n            padding: 60px;\r\n            border-radius: var(--gis-radius-lg);\r\n        }\r\n        .footer-grid {\r\n            display: grid;\r\n            grid-template-columns: 2fr 1fr 1fr 1.5fr;\r\n            gap: 40px;\r\n        }\r\n        .footer-col-title {\r\n            font-size: 1.25rem;\r\n            font-weight: 700;\r\n            color: #FFFFFF;\r\n            margin-bottom: 24px;\r\n        }\r\n        .footer-text {\r\n            color: var(--gis-light-blue);\r\n            margin-bottom: 16px;\r\n            display: flex;\r\n            align-items: center;\r\n            gap: 12px;\r\n        }\r\n        .footer-link {\r\n            color: var(--gis-light-blue);\r\n            transition: var(--gis-transition);\r\n            display: block;\r\n            margin-bottom: 12px;\r\n            text-decoration: none;\r\n        }\r\n        .footer-link:hover {\r\n            color: var(--gis-accent);\r\n            transform: translateX(5px);\r\n        }\r\n        .newsletter-form {\r\n            display: flex;\r\n            margin-top: 16px;\r\n            background: rgba(255, 255, 255, 0.1);\r\n            border-radius: var(--gis-radius-pill);\r\n            padding: 4px;\r\n            border: 1px solid rgba(255, 255, 255, 0.2);\r\n        }\r\n        .newsletter-input {\r\n            flex-grow: 1;\r\n            min-width: 0;\r\n            background: transparent;\r\n            border: none;\r\n            padding: 10px 16px;\r\n            color: var(--gis-white);\r\n            outline: none;\r\n        }\r\n        .newsletter-input::placeholder {\r\n            color: rgba(255, 255, 255, 0.5);\r\n        }\r\n        .newsletter-btn {\r\n            background: var(--gis-secondary);\r\n            color: var(--gis-white);\r\n            border: none;\r\n            width: 40px;\r\n            height: 40px;\r\n            border-radius: 50%;\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n            cursor: pointer;\r\n            transition: var(--gis-transition);\r\n            flex: 0 0 auto;\r\n        }\r\n        .newsletter-btn:hover {\r\n            background: var(--gis-accent);\r\n            transform: scale(1.05);\r\n        }\r\n        .footer-bottom {\r\n            position: relative;\r\n            z-index: 10;\r\n            text-align: center;\r\n            margin-top: 60px;\r\n            padding-top: 24px;\r\n            border-top: 1px solid rgba(255, 255, 255, 0.1);\r\n            color: rgba(255, 255, 255, 0.6);\r\n            font-size: 0.875rem;\r\n        }\r\n        .glass-panel {\r\n            backdrop-filter: blur(20px);\r\n            background: rgba(255, 255, 255, 0.65);\r\n            border: 1px solid transparent;\r\n            border-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2)) 1;\r\n        }\r\n        .liquid-bg {\r\n            background: radial-gradient(circle at top left, #f8f9ff 0%, #e5eeff 50%, #d8e2ff 100%);\r\n            position: fixed;\r\n            inset: 0;\r\n            z-index: -1;\r\n        }\r\n        .glossy-button {\r\n            position: relative;\r\n            overflow: hidden;\r\n        }\r\n        .glossy-button::after {\r\n            content: \u0027\u0027;\r\n            position: absolute;\r\n            top: -50%;\r\n            left: -50%;\r\n            width: 200%;\r\n            height: 200%;\r\n            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);\r\n            transform: rotate(45deg);\r\n            transition: 0.5s;\r\n        }\r\n        .glossy-button:hover::after {\r\n            left: 100%;\r\n        }\r\n        .material-symbols-outlined {\r\n            font-variation-settings: \u0027FILL\u0027 0, \u0027wght\u0027 300, \u0027GRAD\u0027 0, \u0027opsz\u0027 24;\r\n        }\r\n        @media (max-width: 1024px) {\r\n            .footer-grid {\r\n                grid-template-columns: 1fr 1fr;\r\n            }\r\n        }\r\n        @media (max-width: 768px) {\r\n            .navbar {\r\n                padding: 12px 20px;\r\n            }\r\n            .nav-brand {\r\n                font-size: 1rem;\r\n            }\r\n            .nav-brand img {\r\n                margin-right: 26px;\r\n                transform: scale(1.55);\r\n            }\r\n            .nav-menu {\r\n                position: absolute;\r\n                top: 100%;\r\n                left: 24px;\r\n                right: 24px;\r\n                background: rgba(255, 255, 255, 0.95);\r\n                backdrop-filter: blur(20px);\r\n                flex-direction: column;\r\n                padding: 20px;\r\n                border-radius: var(--gis-radius-md);\r\n                box-shadow: var(--gis-shadow-soft);\r\n                display: none;\r\n                margin-top: 10px;\r\n            }\r\n            .nav-menu.active {\r\n                display: flex;\r\n            }\r\n            .mobile-menu-btn {\r\n                display: block;\r\n            }\r\n            .footer-grid {\r\n                grid-template-columns: 1fr;\r\n            }\r\n            .footer-panel {\n                padding: 32px 20px;\n            }\n            .service-detail-layout {\n                grid-template-columns: 1fr;\n            }\n            .service-detail-sidebar {\n                position: static;\n            }\n            .detail-cover {\n                height: 260px;\n            }\n            .detail-body {\n                padding: 28px 22px;\n            }\n        }\n    ",
-        "html":  "\r\n\u003cdiv class=\"liquid-bg\"\u003e\u003c/div\u003e\r\n\u003c!-- TopNavBar --\u003e\r\n\u003cheader class=\"navbar-wrapper\" id=\"navbar\"\u003e\r\n\u003cnav class=\"navbar\"\u003e\r\n\u003ca href=\"/\" class=\"nav-brand\"\u003e\r\n\u003cimg src=\"/landing/animation/logo-lab.png\" alt=\"GISLAB\"\u003e\r\n                Global Inspeksi Sistem\r\n            \u003c/a\u003e\r\n\u003cul class=\"nav-menu\" id=\"navMenu\"\u003e\r\n\u003cli\u003e\u003ca href=\"/\" class=\"nav-link\"\u003eBeranda\u003c/a\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003ca href=\"/profile\" class=\"nav-link\"\u003eProfile\u003c/a\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003ca href=\"/service\" class=\"nav-link active\"\u003eLayanan\u003c/a\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003ca href=\"/ruang-lingkup-pengujian\" class=\"nav-link\"\u003eRuang Lingkup Pengujian\u003c/a\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003ca href=\"/informasi\" class=\"nav-link\"\u003eInformasi\u003c/a\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003ca href=\"/contact\" class=\"nav-link\"\u003eKontak\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\r\n\u003cbutton class=\"mobile-menu-btn\" id=\"mobileMenuBtn\" aria-label=\"Buka menu\"\u003e\r\n\u003ci class=\"fa-solid fa-bars\"\u003e\u003c/i\u003e\r\n\u003c/button\u003e\r\n\u003c/nav\u003e\r\n\u003c/header\u003e\r\n\u003cmain\u003e\n\u003c!-- Hero Section --\u003e\r\n\u003csection class=\"relative h-[614px] flex items-center justify-center overflow-hidden\"\u003e\r\n\u003cdiv class=\"absolute inset-0 z-0\"\u003e\r\n\u003cimg class=\"w-full h-full object-cover opacity-30\" data-alt=\"A clean, futuristic laboratory interior with white surfaces and blue glowing ambient light. High-end scientific equipment like chromatographs and microscopes are arranged on sleek glass benches. The atmosphere is clinical, visionary, and hyper-modern, reflecting a top-tier digital biotech environment with soft depth of field.\" src=\"https://lh3.googleusercontent.com/aida-public/AB6AXuB8V5p_RQ85djBobSPDB33E4q8H_dWpqkxXSH1O0Ei07dCwGWxdVAv69f4vCt9keM2BFgJtW3FW10wSrdR9rcumQAL2tNoOUaDFoHsKyVZGpY88MifcLJU5lXEzM9vF44gKlzH2lwrTn3etldj38lFUBIkEbwLUgPuz02BPqaQZTIRNhWS892Pd2rKAqAXRgxlN8PcF5vnqWMtl4FkrIc2xXgmi11G-suRtv2EIlAnH6zE3kPDuZN72t2sIYRdnWa5Ln2QEI0fL57k\"/\u003e\r\n\u003c/div\u003e\r\n\u003cdiv class=\"relative z-10 text-center px-4 max-w-4xl\"\u003e\r\n\u003ch1 class=\"font-display-lg text-display-lg text-primary mb-4\"\u003eGIS Modern Laboratory Services\u003c/h1\u003e\r\n\u003cp class=\"font-body-lg text-body-lg text-secondary max-w-2xl mx-auto\"\u003e\r\n                    Pioneering precision analysis through high-fidelity diagnostic frameworks. We deliver absolute structural integrity in every chemical, biological, and environmental assessment.\r\n                \u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/section\u003e\r\n\u003c!-- Layanan Kami Section --\u003e\r\n\u003csection class=\"services-section\" id=\"layanan\"\u003e\r\n\u003cdiv class=\"gis-container\"\u003e\r\n\u003cdiv class=\"services-header\"\u003e\r\n\u003ch2 class=\"section-title\"\u003eLayanan Kami\u003c/h2\u003e\r\n\u003c/div\u003e\r\n\r\n\u003cdiv class=\"carousel-container\"\u003e\r\n\u003cdiv class=\"services-track\"\u003e\r\n\u003c!-- Set 1 --\u003e\r\n\u003cdiv class=\"service-card glass\"\u003e\r\n\u003cimg src=\"https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\r\nalt=\"Pengujian Kualitas\" class=\"service-img\"\u003e\r\n\u003cdiv class=\"service-content\"\u003e\r\n\u003ch3 class=\"service-title\"\u003ePengujian Kualitas\u003c/h3\u003e\r\n\u003cbutton class=\"service-btn\" type=\"button\" data-service-detail=\"quality\"\u003eRead More\u003c/button\u003e\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\r\n\u003cdiv class=\"service-card glass\"\u003e\r\n\u003cimg src=\"https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\r\nalt=\"Pengujian Lingkungan\" class=\"service-img\"\u003e\r\n\u003cdiv class=\"service-content\"\u003e\r\n\u003ch3 class=\"service-title\"\u003ePengujian Lingkungan\u003c/h3\u003e\r\n\u003cbutton class=\"service-btn\" type=\"button\" data-service-detail=\"environment\"\u003eRead More\u003c/button\u003e\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\r\n\u003cdiv class=\"service-card glass\"\u003e\r\n\u003cimg src=\"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\r\nalt=\"Pengujian Produk dan Izin Edar\" class=\"service-img\"\u003e\r\n\u003cdiv class=\"service-content\"\u003e\r\n\u003ch3 class=\"service-title\"\u003ePengujian Produk dan Izin Edar\u003c/h3\u003e\r\n\u003cbutton class=\"service-btn\" type=\"button\" data-service-detail=\"permit\"\u003eRead More\u003c/button\u003e\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\r\n\u003cdiv class=\"service-card glass\"\u003e\r\n\u003cimg src=\"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\r\nalt=\"Pengujian SNI Produk\" class=\"service-img\"\u003e\r\n\u003cdiv class=\"service-content\"\u003e\r\n\u003ch3 class=\"service-title\"\u003ePengujian SNI Produk\u003c/h3\u003e\r\n\u003cbutton class=\"service-btn\" type=\"button\" data-service-detail=\"sni\"\u003eRead More\u003c/button\u003e\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\r\n\u003c!-- Set 2 (Duplikat untuk Infinite Scroll) --\u003e\r\n\u003cdiv class=\"service-card glass\"\u003e\r\n\u003cimg src=\"https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\r\nalt=\"Pengujian Kualitas\" class=\"service-img\"\u003e\r\n\u003cdiv class=\"service-content\"\u003e\r\n\u003ch3 class=\"service-title\"\u003ePengujian Kualitas\u003c/h3\u003e\r\n\u003cbutton class=\"service-btn\" type=\"button\" data-service-detail=\"quality\"\u003eRead More\u003c/button\u003e\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\r\n\u003cdiv class=\"service-card glass\"\u003e\r\n\u003cimg src=\"https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\r\nalt=\"Pengujian Lingkungan\" class=\"service-img\"\u003e\r\n\u003cdiv class=\"service-content\"\u003e\r\n\u003ch3 class=\"service-title\"\u003ePengujian Lingkungan\u003c/h3\u003e\r\n\u003cbutton class=\"service-btn\" type=\"button\" data-service-detail=\"environment\"\u003eRead More\u003c/button\u003e\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\r\n\u003cdiv class=\"service-card glass\"\u003e\r\n\u003cimg src=\"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\r\nalt=\"Pengujian Produk dan Izin Edar\" class=\"service-img\"\u003e\r\n\u003cdiv class=\"service-content\"\u003e\r\n\u003ch3 class=\"service-title\"\u003ePengujian Produk dan Izin Edar\u003c/h3\u003e\r\n\u003cbutton class=\"service-btn\" type=\"button\" data-service-detail=\"permit\"\u003eRead More\u003c/button\u003e\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\r\n\u003cdiv class=\"service-card glass\"\u003e\r\n\u003cimg src=\"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format\u0026fit=crop\u0026q=80\u0026w=600\"\r\nalt=\"Pengujian SNI Produk\" class=\"service-img\"\u003e\r\n\u003cdiv class=\"service-content\"\u003e\r\n\u003ch3 class=\"service-title\"\u003ePengujian SNI Produk\u003c/h3\u003e\r\n\u003cbutton class=\"service-btn\" type=\"button\" data-service-detail=\"sni\"\u003eRead More\u003c/button\u003e\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003c/div\u003e\n\u003c/div\u003e\n\u003c/div\u003e\n\u003c/section\u003e\n\u003csection class=\"service-detail-section\" id=\"detail-layanan\" aria-live=\"polite\"\u003e\n\u003cdiv class=\"gis-container\"\u003e\n\u003cdiv class=\"service-detail-layout\"\u003e\n\u003carticle class=\"service-detail-article\"\u003e\n\u003cimg id=\"detailCover\" class=\"detail-cover\" src=\"https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format\u0026fit=crop\u0026q=80\u0026w=1200\" alt=\"Pengujian laboratorium\"\u003e\n\u003cdiv class=\"detail-body\"\u003e\n\u003cspan class=\"detail-kicker\"\u003e\u003ci class=\"fa-solid fa-flask-vial\"\u003e\u003c/i\u003e Detail Layanan\u003c/span\u003e\n\u003ch2 class=\"detail-title\" id=\"detailTitle\"\u003ePengujian Kualitas Tanah \u0026amp; Sedimen\u003c/h2\u003e\n\u003cp class=\"detail-copy\" id=\"detailIntro\"\u003e\nKualitas tanah dan sedimen yang baik sangat penting untuk menjaga kesehatan ekosistem, aktivitas industri, pertanian, dan sumber daya air. GISLAB menyediakan layanan pengujian komprehensif untuk membantu mendeteksi kontaminan berbahaya serta memastikan hasil analisis dapat digunakan sebagai dasar pengambilan keputusan.\n\u003c/p\u003e\n\n\u003ch3 id=\"detailWhyTitle\"\u003eMengapa pengujian ini penting?\u003c/h3\u003e\n\u003cp class=\"detail-copy\" id=\"detailWhy\"\u003e\nTanah atau sedimen yang terkontaminasi dapat memengaruhi produktivitas lahan, kualitas air tanah, keamanan produk, dan kesehatan ekosistem secara keseluruhan. Pengujian menjadi langkah penting untuk memantau kondisi lingkungan, mengelola risiko kontaminasi, dan memastikan kepatuhan terhadap standar yang berlaku.\n\u003c/p\u003e\n\n\u003ch3\u003eLayanan pengujian yang kami solusikan\u003c/h3\u003e\n\u003cul class=\"detail-list\" id=\"detailList\"\u003e\n\u003cli\u003e\u003ci class=\"fa-solid fa-check\"\u003e\u003c/i\u003e\u003cspan\u003ePengujian tanah untuk mendeteksi logam berat, pestisida, dan senyawa organik berbahaya.\u003c/span\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci class=\"fa-solid fa-check\"\u003e\u003c/i\u003e\u003cspan\u003ePengujian sedimen dari sungai, danau, area pesisir, atau area industri untuk mengetahui kadar kontaminan.\u003c/span\u003e\u003c/li\u003e\n\u003cli\u003e\u003ci class=\"fa-solid fa-check\"\u003e\u003c/i\u003e\u003cspan\u003eAnalisis kesuburan tanah untuk mendukung pengelolaan lahan yang lebih efektif dan berkelanjutan.\u003c/span\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3\u003eKonsultansi dan rekomendasi teknis\u003c/h3\u003e\n\u003cp class=\"detail-copy\" id=\"detailConsult\"\u003e\nSelain pengujian, GISLAB membantu perusahaan dan instansi memahami hasil analisis melalui konsultasi teknis. Tim kami dapat membantu menentukan parameter uji, menyusun rencana pemantauan, dan memberikan rekomendasi awal untuk pengelolaan kualitas lingkungan atau produk.\n\u003c/p\u003e\n\n\u003ch3\u003eKomitmen kami\u003c/h3\u003e\n\u003cp class=\"detail-copy\" id=\"detailCommitment\"\u003e\nGISLAB berkomitmen memberikan hasil yang akurat, layanan yang responsif, dan proses yang terdokumentasi. Kami hadir sebagai mitra pengujian profesional untuk mendukung mutu produk, kepatuhan regulasi, perlindungan lingkungan, dan kepercayaan pelanggan.\n\u003c/p\u003e\n\u003c/div\u003e\n\u003c/article\u003e\n\n\u003caside class=\"service-detail-sidebar\"\u003e\n\u003cdiv class=\"sidebar-box\"\u003e\n\u003ch3 class=\"sidebar-title\"\u003eLayanan GISLAB\u003c/h3\u003e\n\u003cbutton class=\"sidebar-link\" type=\"button\" data-service-detail=\"quality\"\u003ePengujian Kualitas \u003ci class=\"fa-solid fa-arrow-right\"\u003e\u003c/i\u003e\u003c/button\u003e\n\u003cbutton class=\"sidebar-link\" type=\"button\" data-service-detail=\"environment\"\u003ePengujian Lingkungan \u003ci class=\"fa-solid fa-arrow-right\"\u003e\u003c/i\u003e\u003c/button\u003e\n\u003cbutton class=\"sidebar-link\" type=\"button\" data-service-detail=\"permit\"\u003ePengujian Produk dan Izin Edar \u003ci class=\"fa-solid fa-arrow-right\"\u003e\u003c/i\u003e\u003c/button\u003e\n\u003cbutton class=\"sidebar-link\" type=\"button\" data-service-detail=\"sni\"\u003ePengujian SNI Produk \u003ci class=\"fa-solid fa-arrow-right\"\u003e\u003c/i\u003e\u003c/button\u003e\n\u003c/div\u003e\n\u003cdiv class=\"sidebar-box\"\u003e\n\u003ch3 class=\"sidebar-title\"\u003eDownload Profil GISLAB\u003c/h3\u003e\n\u003cp class=\"sidebar-note\"\u003eUnduh profil perusahaan untuk informasi lengkap mengenai layanan pengujian, analisis, dan dukungan laboratorium kami.\u003c/p\u003e\n\u003ca href=\"#\" class=\"download-btn\"\u003e\u003ci class=\"fa-solid fa-file-pdf\"\u003e\u003c/i\u003e Download PDF\u003c/a\u003e\n\u003ca href=\"#\" class=\"download-btn\"\u003e\u003ci class=\"fa-solid fa-file-word\"\u003e\u003c/i\u003e Download Doc\u003c/a\u003e\n\u003c/div\u003e\n\u003cdiv class=\"sidebar-box\"\u003e\n\u003ch3 class=\"sidebar-title\"\u003eButuh rekomendasi parameter?\u003c/h3\u003e\n\u003cp class=\"sidebar-note\"\u003eHubungi tim GISLAB untuk menentukan parameter uji yang paling sesuai dengan kebutuhan produk atau lingkungan Anda.\u003c/p\u003e\n\u003ca href=\"/contact\" class=\"detail-contact-btn\"\u003e\u003ci class=\"fa-solid fa-headset\"\u003e\u003c/i\u003e Kontak Kami\u003c/a\u003e\n\u003c/div\u003e\n\u003c/aside\u003e\n\u003c/div\u003e\n\u003c/div\u003e\n\u003c/section\u003e\n\u003c/main\u003e\n\u003c!-- Footer --\u003e\r\n\u003cfooter class=\"footer\" id=\"kontak\"\u003e\r\n\u003cdiv class=\"gis-container\"\u003e\r\n\u003cdiv class=\"footer-panel glass-dark\"\u003e\r\n\u003cdiv class=\"footer-grid\"\u003e\r\n\u003cdiv\u003e\r\n\u003ch4 class=\"footer-col-title\"\u003eContact\u003c/h4\u003e\r\n\u003cdiv class=\"footer-text\"\u003e\r\n\u003ci class=\"fa-solid fa-envelope\"\u003e\u003c/i\u003e info@gislaboratorium.com\r\n\u003c/div\u003e\r\n\u003cdiv class=\"footer-text\"\u003e\r\n\u003ci class=\"fa-solid fa-phone\"\u003e\u003c/i\u003e +031 2355 5278\r\n\u003c/div\u003e\r\n\u003cdiv class=\"footer-text\"\u003e\r\n\u003ci class=\"fa-solid fa-globe\"\u003e\u003c/i\u003e www.gislaboratorium.com\r\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\r\n\u003cdiv\u003e\r\n\u003ch4 class=\"footer-col-title\"\u003eLink\u003c/h4\u003e\r\n\u003ca href=\"/profile\" class=\"footer-link\"\u003eProfile\u003c/a\u003e\r\n\u003ca href=\"/service\" class=\"footer-link\"\u003eLayanan\u003c/a\u003e\r\n\u003ca href=\"/ruang-lingkup-pengujian\" class=\"footer-link\"\u003eRuang Lingkup\u003c/a\u003e\r\n\u003ca href=\"/informasi\" class=\"footer-link\"\u003eInformasi\u003c/a\u003e\r\n\u003c/div\u003e\r\n\r\n\u003cdiv\u003e\r\n\u003ch4 class=\"footer-col-title\"\u003eKontak\u003c/h4\u003e\r\n\u003ca href=\"/informasi\" class=\"footer-link\"\u003eInformasi\u003c/a\u003e\r\n\u003ca href=\"/informasi\" class=\"footer-link\"\u003eBlog\u003c/a\u003e\r\n\u003ca href=\"/contact\" class=\"footer-link\"\u003eContact\u003c/a\u003e\n\u003c/div\u003e\r\n\r\n\u003cdiv\u003e\r\n\u003ch4 class=\"footer-col-title\"\u003eNewsletter\u003c/h4\u003e\r\n\u003cp class=\"footer-text\" style=\"font-size: 0.95rem;\"\u003eDapatkan informasi terbaru dari GISLAB.\u003c/p\u003e\r\n\u003cform class=\"newsletter-form\" onsubmit=\"event.preventDefault();\"\u003e\r\n\u003cinput type=\"email\" class=\"newsletter-input\" placeholder=\"Masukkan email\" required\u003e\r\n\u003cbutton type=\"submit\" class=\"newsletter-btn\" aria-label=\"Kirim email newsletter\"\u003e\r\n\u003ci class=\"fa-solid fa-paper-plane\"\u003e\u003c/i\u003e\r\n\u003c/button\u003e\r\n\u003c/form\u003e\r\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003cdiv class=\"footer-bottom\"\u003e\r\n\u0026copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.\r\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003c/footer\u003e\r\n\n"
-    },
-    {
-        "key":  "contact",
-        "title":  "Kontak - GIS Laboratorium",
-        "description":  "Hubungi GIS Laboratorium untuk kebutuhan pengujian, sertifikasi, inspeksi, dan konsultasi parameter laboratorium.",
-        "bodyClass":  "",
-        "styles":  "@import url(\u0027https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800\u0026display=swap\u0027);\n@import url(\u0027https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700\u0026family=Inter:wght@300;400;500;600;700\u0026display=swap\u0027);\n\n        :root {\n            --primary: #0A2540;\n            --secondary: #0070F3;\n            --accent: #00DFD8;\n            --light-blue: #EBF4F8;\n            --white: #FFFFFF;\n            --text-dark: #1E293B;\n            --text-muted: #64748B;\n            --glass-bg: rgba(255, 255, 255, 0.72);\n            --glass-border: rgba(255, 255, 255, 0.82);\n            --glass-dark-bg: rgba(10, 37, 64, 0.4);\n            --glass-dark-border: rgba(255, 255, 255, 0.15);\n            --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);\n            --shadow-hover: 0 22px 46px -20px rgba(0, 112, 243, 0.28);\n            --radius-pill: 100px;\n            --radius-md: 24px;\n            --radius-lg: 32px;\n            --font-main: \u0027Plus Jakarta Sans\u0027, sans-serif;\n            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);\n        }\n\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        html {\n            scroll-behavior: smooth;\n        }\n\n        body {\n            font-family: var(--font-main);\n            color: var(--text-dark);\n            background-color: #FAFCFF;\n            line-height: 1.6;\n            overflow-x: hidden;\n            position: relative;\n        }\n\n        body::before {\n            content: \u0027\u0027;\n            position: fixed;\n            inset: 0;\n            background:\n                radial-gradient(circle at 14% 34%, rgba(0, 223, 216, 0.08), transparent 27%),\n                radial-gradient(circle at 88% 14%, rgba(0, 112, 243, 0.08), transparent 28%),\n                linear-gradient(180deg, #FAFCFF 0%, #EFF6FF 100%);\n            z-index: -2;\n            pointer-events: none;\n        }\n\n        a {\n            color: inherit;\n            text-decoration: none;\n        }\n\n        ul {\n            list-style: none;\n        }\n\n        .container {\n            max-width: 1280px;\n            margin: 0 auto;\n            padding: 0 24px;\n        }\n\n        .glass {\n            background: var(--glass-bg);\n            backdrop-filter: blur(18px);\n            -webkit-backdrop-filter: blur(18px);\n            border: 1px solid var(--glass-border);\n            box-shadow: var(--shadow-soft);\n        }\n\n        .glass-dark {\n            background: var(--glass-dark-bg);\n            backdrop-filter: blur(20px);\n            -webkit-backdrop-filter: blur(20px);\n            border: 1px solid var(--glass-dark-border);\n            color: var(--white);\n        }\n\n        .navbar-wrapper {\n            position: fixed;\n            top: 24px;\n            left: 0;\n            width: 100%;\n            z-index: 1000;\n            display: flex;\n            justify-content: center;\n            padding: 0 24px;\n            transition: var(--transition);\n        }\n\n        .navbar-wrapper.scrolled {\n            top: 12px;\n        }\n\n        .navbar {\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n            width: 100%;\n            max-width: 1100px;\n            padding: 12px 24px;\n            border-radius: var(--radius-pill);\n            background: rgba(255, 255, 255, 0.75);\n            backdrop-filter: blur(20px);\n            -webkit-backdrop-filter: blur(20px);\n            border: 1px solid rgba(255, 255, 255, 0.6);\n            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);\n        }\n\n        .nav-brand {\n            display: flex;\n            align-items: center;\n            gap: 10px;\n            font-weight: 800;\n            font-size: 1.25rem;\n            color: var(--primary);\n            letter-spacing: 0;\n        }\n\n        .nav-brand img {\n            height: 28px;\n            width: auto;\n            transform: scale(1.8);\n            transform-origin: left center;\n            margin-right: 36px;\n        }\n\n        .nav-menu {\n            display: flex;\n            gap: 8px;\n        }\n\n        .nav-link {\n            display: block;\n            padding: 8px 16px;\n            border-radius: var(--radius-pill);\n            font-weight: 500;\n            font-size: 0.95rem;\n            color: var(--text-muted);\n            transition: var(--transition);\n        }\n\n        .nav-link:hover {\n            color: var(--primary);\n            background: rgba(0, 112, 243, 0.05);\n        }\n\n        .nav-link.active {\n            background: rgba(0, 223, 216, 0.15);\n            color: var(--secondary);\n            font-weight: 600;\n        }\n\n        .mobile-menu-btn {\n            display: none;\n            font-size: 1.5rem;\n            color: var(--primary);\n            background: none;\n            border: none;\n            cursor: pointer;\n        }\n\n        .btn {\n            display: inline-flex;\n            align-items: center;\n            justify-content: center;\n            gap: 10px;\n            padding: 14px 24px;\n            border-radius: var(--radius-pill);\n            border: none;\n            cursor: pointer;\n            font-family: inherit;\n            font-size: 1rem;\n            font-weight: 800;\n            transition: var(--transition);\n        }\n\n        .btn-primary {\n            color: var(--white);\n            background: linear-gradient(135deg, var(--secondary), var(--accent));\n            box-shadow: 0 16px 34px -22px rgba(0, 112, 243, 0.85);\n        }\n\n        .btn-primary:hover {\n            transform: translateY(-2px);\n            box-shadow: var(--shadow-hover);\n        }\n\n        .contact-main {\n            padding-top: 118px;\n        }\n\n        .contact-hero {\n            position: relative;\n            min-height: 560px;\n            display: flex;\n            align-items: center;\n            overflow: hidden;\n            border-radius: var(--radius-lg);\n            margin: 24px auto 0;\n        }\n\n        .contact-hero::before {\n            content: \u0027\u0027;\n            position: absolute;\n            inset: 0;\n            background:\n                linear-gradient(90deg, rgba(10, 37, 64, 0.82), rgba(10, 37, 64, 0.42), rgba(250, 252, 255, 0.26)),\n                url(\u0027https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format\u0026fit=crop\u0026q=80\u0026w=1800\u0027) center/cover;\n            z-index: 0;\n        }\n\n        .contact-hero::after {\n            content: \u0027\u0027;\n            position: absolute;\n            inset: auto 0 0;\n            height: 40%;\n            background: linear-gradient(0deg, rgba(250, 252, 255, 0.96), transparent);\n            z-index: 1;\n        }\n\n        .hero-content {\n            position: relative;\n            z-index: 2;\n            width: min(680px, 100%);\n            padding: 72px 56px;\n            color: var(--white);\n        }\n\n        .eyebrow {\n            display: inline-flex;\n            align-items: center;\n            gap: 10px;\n            margin-bottom: 20px;\n            color: var(--accent);\n            font-size: 0.82rem;\n            font-weight: 800;\n            letter-spacing: 0.08em;\n            text-transform: uppercase;\n        }\n\n        .hero-title {\n            color: var(--white);\n            font-size: clamp(2.4rem, 5vw, 4.6rem);\n            font-weight: 800;\n            line-height: 1.05;\n            letter-spacing: 0;\n            margin-bottom: 22px;\n        }\n\n        .hero-text {\n            max-width: 600px;\n            color: rgba(255, 255, 255, 0.86);\n            font-size: 1.1rem;\n            font-weight: 600;\n        }\n\n        .quick-contact {\n            display: grid;\n            grid-template-columns: repeat(3, 1fr);\n            gap: 20px;\n            margin-top: -58px;\n            position: relative;\n            z-index: 5;\n        }\n\n        .quick-card {\n            min-height: 150px;\n            padding: 28px;\n            border-radius: var(--radius-md);\n            transition: var(--transition);\n        }\n\n        .quick-card:hover {\n            transform: translateY(-6px);\n            box-shadow: var(--shadow-hover);\n        }\n\n        .quick-icon {\n            width: 48px;\n            height: 48px;\n            display: inline-flex;\n            align-items: center;\n            justify-content: center;\n            border-radius: 16px;\n            color: var(--secondary);\n            background: rgba(0, 112, 243, 0.1);\n            font-size: 1.25rem;\n            margin-bottom: 18px;\n        }\n\n        .quick-label {\n            color: var(--primary);\n            font-size: 1.05rem;\n            font-weight: 800;\n            margin-bottom: 8px;\n        }\n\n        .quick-value {\n            color: #405a70;\n            font-weight: 700;\n            overflow-wrap: anywhere;\n        }\n\n        .section {\n            padding: 96px 0;\n        }\n\n        .section-header {\n            display: grid;\n            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);\n            gap: 40px;\n            align-items: end;\n            margin-bottom: 42px;\n        }\n\n        .section-title {\n            color: var(--primary);\n            font-size: clamp(2rem, 4vw, 3.2rem);\n            font-weight: 800;\n            line-height: 1.12;\n            letter-spacing: 0;\n        }\n\n        .section-copy {\n            color: #405a70;\n            font-size: 1.05rem;\n            font-weight: 600;\n            line-height: 1.8;\n        }\n\n        .office-grid {\n            display: grid;\n            grid-template-columns: repeat(2, 1fr);\n            gap: 28px;\n        }\n\n        .office-card {\n            display: grid;\n            grid-template-rows: 230px 1fr;\n            overflow: hidden;\n            border-radius: var(--radius-lg);\n        }\n\n        .office-image {\n            position: relative;\n            overflow: hidden;\n        }\n\n        .office-image img {\n            width: 100%;\n            height: 100%;\n            display: block;\n            object-fit: cover;\n            transition: transform 0.45s ease;\n        }\n\n        .office-card:hover .office-image img {\n            transform: scale(1.05);\n        }\n\n        .office-body {\n            padding: 34px;\n        }\n\n        .office-kicker {\n            color: var(--secondary);\n            font-size: 0.78rem;\n            font-weight: 800;\n            letter-spacing: 0.08em;\n            text-transform: uppercase;\n            margin-bottom: 10px;\n        }\n\n        .office-title {\n            color: var(--primary);\n            font-size: 1.5rem;\n            font-weight: 800;\n            margin-bottom: 18px;\n        }\n\n        .office-list {\n            display: grid;\n            gap: 14px;\n        }\n\n        .office-list li {\n            display: flex;\n            align-items: flex-start;\n            gap: 12px;\n            color: #405a70;\n            font-weight: 650;\n        }\n\n        .office-list i {\n            width: 20px;\n            margin-top: 5px;\n            color: var(--accent);\n        }\n\n        .contact-panel {\n            display: grid;\n            grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);\n            gap: 28px;\n            align-items: stretch;\n        }\n\n        .contact-info-panel,\n        .form-panel {\n            border-radius: var(--radius-lg);\n            padding: 38px;\n        }\n\n        .contact-info-panel {\n            color: var(--white);\n            background:\n                linear-gradient(135deg, rgba(10, 37, 64, 0.96), rgba(0, 88, 188, 0.84)),\n                url(\u0027https://images.unsplash.com/photo-1581092919535-7146ff1a590b?auto=format\u0026fit=crop\u0026q=80\u0026w=1200\u0027) center/cover;\n            box-shadow: var(--shadow-soft);\n        }\n\n        .contact-info-panel .section-title {\n            color: var(--white);\n            font-size: clamp(2rem, 4vw, 2.8rem);\n            margin-bottom: 18px;\n        }\n\n        .contact-info-panel p {\n            color: rgba(255, 255, 255, 0.82);\n            font-weight: 600;\n            margin-bottom: 28px;\n        }\n\n        .info-list {\n            display: grid;\n            gap: 18px;\n        }\n\n        .info-item {\n            display: flex;\n            gap: 14px;\n            align-items: flex-start;\n            padding-top: 18px;\n            border-top: 1px solid rgba(255, 255, 255, 0.16);\n        }\n\n        .info-item i {\n            width: 44px;\n            height: 44px;\n            flex: 0 0 44px;\n            display: inline-flex;\n            align-items: center;\n            justify-content: center;\n            border-radius: 14px;\n            background: rgba(255, 255, 255, 0.12);\n            color: var(--accent);\n        }\n\n        .info-item strong {\n            display: block;\n            color: var(--white);\n            font-weight: 800;\n            margin-bottom: 4px;\n        }\n\n        .info-item span {\n            color: rgba(255, 255, 255, 0.82);\n            font-weight: 600;\n            overflow-wrap: anywhere;\n        }\n\n        .form-panel {\n            position: relative;\n            overflow: hidden;\n        }\n\n        .form-panel::before {\n            content: \u0027\u0027;\n            position: absolute;\n            top: -80px;\n            right: -80px;\n            width: 220px;\n            height: 220px;\n            border-radius: 50%;\n            background: rgba(0, 223, 216, 0.12);\n            pointer-events: none;\n        }\n\n        .form-title {\n            position: relative;\n            color: var(--primary);\n            font-size: 2rem;\n            font-weight: 800;\n            margin-bottom: 10px;\n        }\n\n        .form-copy {\n            position: relative;\n            color: var(--text-muted);\n            font-weight: 600;\n            margin-bottom: 28px;\n        }\n\n        .contact-form {\n            position: relative;\n            display: grid;\n            gap: 18px;\n        }\n\n        .form-row {\n            display: grid;\n            grid-template-columns: 1fr 1fr;\n            gap: 18px;\n        }\n\n        .field {\n            display: grid;\n            gap: 8px;\n        }\n\n        .field label {\n            color: var(--primary);\n            font-size: 0.88rem;\n            font-weight: 800;\n        }\n\n        .field input,\n        .field textarea {\n            width: 100%;\n            border: 1px solid rgba(10, 37, 64, 0.1);\n            border-radius: 18px;\n            padding: 15px 16px;\n            color: var(--text-dark);\n            background: rgba(255, 255, 255, 0.82);\n            font: inherit;\n            outline: none;\n            transition: var(--transition);\n        }\n\n        .field textarea {\n            min-height: 150px;\n            resize: vertical;\n        }\n\n        .field input:focus,\n        .field textarea:focus {\n            border-color: rgba(0, 112, 243, 0.45);\n            box-shadow: 0 0 0 4px rgba(0, 112, 243, 0.1);\n        }\n\n        .form-message {\n            display: none;\n            color: #0f766e;\n            font-weight: 800;\n        }\n\n        .form-message.active {\n            display: block;\n        }\n\n        .map-section {\n            padding: 0 0 96px;\n        }\n\n        .map-shell {\n            overflow: hidden;\n            border-radius: var(--radius-lg);\n            min-height: 420px;\n        }\n\n        .map-shell iframe {\n            width: 100%;\n            height: 420px;\n            display: block;\n            border: 0;\n            filter: saturate(0.98) contrast(1.02);\n        }\n\n        .footer {\n            position: relative;\n            padding: 80px 0 40px;\n            background: linear-gradient(135deg, var(--primary), #0e4e8a);\n            color: var(--white);\n            overflow: hidden;\n        }\n\n        .footer-panel {\n            position: relative;\n            z-index: 10;\n            padding: 60px;\n            border-radius: var(--radius-lg);\n        }\n\n        .footer-grid {\n            display: grid;\n            grid-template-columns: 2fr 1fr 1fr 1.5fr;\n            gap: 40px;\n        }\n\n        .footer-col-title {\n            font-size: 1.25rem;\n            font-weight: 700;\n            color: #FFFFFF;\n            margin-bottom: 24px;\n        }\n\n        .footer-text {\n            color: var(--light-blue);\n            margin-bottom: 16px;\n            display: flex;\n            align-items: center;\n            gap: 12px;\n        }\n\n        .footer-link {\n            color: var(--light-blue);\n            transition: var(--transition);\n            display: block;\n            margin-bottom: 12px;\n        }\n\n        .footer-link:hover {\n            color: var(--accent);\n            transform: translateX(5px);\n        }\n\n        .newsletter-form {\n            display: flex;\n            margin-top: 16px;\n            background: rgba(255, 255, 255, 0.1);\n            border-radius: var(--radius-pill);\n            padding: 4px;\n            border: 1px solid rgba(255, 255, 255, 0.2);\n        }\n\n        .newsletter-input {\n            flex-grow: 1;\n            min-width: 0;\n            background: transparent;\n            border: none;\n            padding: 10px 16px;\n            color: var(--white);\n            outline: none;\n        }\n\n        .newsletter-input::placeholder {\n            color: rgba(255, 255, 255, 0.5);\n        }\n\n        .newsletter-btn {\n            background: var(--secondary);\n            color: var(--white);\n            border: none;\n            width: 40px;\n            height: 40px;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            cursor: pointer;\n            transition: var(--transition);\n            flex: 0 0 auto;\n        }\n\n        .newsletter-btn:hover {\n            background: var(--accent);\n            transform: scale(1.05);\n        }\n\n        .footer-bottom {\n            position: relative;\n            z-index: 10;\n            text-align: center;\n            margin-top: 60px;\n            padding-top: 24px;\n            border-top: 1px solid rgba(255, 255, 255, 0.1);\n            color: rgba(255, 255, 255, 0.6);\n            font-size: 0.875rem;\n        }\n\n        .whatsapp-widget {\n            position: fixed;\n            right: 24px;\n            bottom: 24px;\n            z-index: 1100;\n        }\n\n        .whatsapp-toggle {\n            width: 58px;\n            height: 58px;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            border: none;\n            border-radius: 50%;\n            color: var(--white);\n            background: #25D366;\n            font-size: 1.9rem;\n            box-shadow: 0 18px 34px -18px rgba(37, 211, 102, 0.9);\n            cursor: pointer;\n            transition: var(--transition);\n        }\n\n        .whatsapp-toggle:hover {\n            transform: scale(1.06);\n            background: #128C7E;\n        }\n\n        .whatsapp-window {\n            display: none;\n            position: absolute;\n            right: 0;\n            bottom: 72px;\n            width: min(340px, calc(100vw - 48px));\n            overflow: hidden;\n            border-radius: 22px;\n            background: var(--white);\n            box-shadow: 0 22px 55px -20px rgba(10, 37, 64, 0.42);\n        }\n\n        .whatsapp-window.active {\n            display: block;\n        }\n\n        .wa-header {\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n            gap: 16px;\n            padding: 16px;\n            color: var(--white);\n            background: #075E54;\n        }\n\n        .wa-brand {\n            display: flex;\n            align-items: center;\n            gap: 12px;\n            font-weight: 800;\n        }\n\n        .wa-brand img {\n            width: 34px;\n            height: 34px;\n            object-fit: contain;\n            border-radius: 50%;\n            background: var(--white);\n        }\n\n        .wa-close {\n            border: none;\n            color: var(--white);\n            background: transparent;\n            font-size: 1.1rem;\n            cursor: pointer;\n        }\n\n        .wa-body {\n            padding: 16px;\n            background: #ECE5DD;\n        }\n\n        .wa-bubble {\n            width: 86%;\n            padding: 12px;\n            border-radius: 14px;\n            background: var(--white);\n            color: #1f2937;\n            font-size: 0.9rem;\n            font-weight: 600;\n            margin-bottom: 14px;\n            border-left: 4px solid #25D366;\n        }\n\n        .wa-link {\n            display: flex;\n            align-items: center;\n            gap: 12px;\n            padding: 12px;\n            border-radius: 14px;\n            background: var(--white);\n            color: #1f2937;\n            font-weight: 800;\n        }\n\n        .wa-link i {\n            color: #25D366;\n            font-size: 1.5rem;\n        }\n\n        @media (max-width: 1024px) {\n            .quick-contact,\n            .footer-grid {\n                grid-template-columns: 1fr 1fr;\n            }\n\n            .section-header,\n            .contact-panel {\n                grid-template-columns: 1fr;\n            }\n        }\n\n        @media (max-width: 768px) {\n            .navbar {\n                padding: 12px 20px;\n            }\n\n            .nav-brand {\n                font-size: 1rem;\n            }\n\n            .nav-brand img {\n                margin-right: 26px;\n                transform: scale(1.55);\n            }\n\n            .nav-menu {\n                position: absolute;\n                top: 100%;\n                left: 24px;\n                right: 24px;\n                margin-top: 10px;\n                display: none;\n                flex-direction: column;\n                padding: 20px;\n                border-radius: var(--radius-md);\n                background: rgba(255, 255, 255, 0.95);\n                backdrop-filter: blur(20px);\n                box-shadow: var(--shadow-soft);\n            }\n\n            .nav-menu.active {\n                display: flex;\n            }\n\n            .mobile-menu-btn {\n                display: block;\n            }\n\n            .contact-main {\n                padding-top: 100px;\n            }\n\n            .contact-hero {\n                min-height: 500px;\n                border-radius: 24px;\n            }\n\n            .hero-content {\n                padding: 56px 24px;\n            }\n\n            .quick-contact,\n            .office-grid,\n            .form-row,\n            .footer-grid {\n                grid-template-columns: 1fr;\n            }\n\n            .quick-contact {\n                margin-top: 28px;\n            }\n\n            .section {\n                padding: 72px 0;\n            }\n\n            .office-body,\n            .contact-info-panel,\n            .form-panel,\n            .footer-panel {\n                padding: 28px 22px;\n            }\n        }\n    ",
-        "html":  "\n    \u003cheader class=\"navbar-wrapper\" id=\"navbar\"\u003e\n        \u003cnav class=\"navbar\"\u003e\n            \u003ca href=\"/\" class=\"nav-brand\"\u003e\n                \u003cimg src=\"/landing/animation/logo-lab.png\" alt=\"GISLAB\"\u003e\n                Global Inspeksi Sistem\n            \u003c/a\u003e\n            \u003cul class=\"nav-menu\" id=\"navMenu\"\u003e\n                \u003cli\u003e\u003ca href=\"/\" class=\"nav-link\"\u003eBeranda\u003c/a\u003e\u003c/li\u003e\n                \u003cli\u003e\u003ca href=\"/profile\" class=\"nav-link\"\u003eProfile\u003c/a\u003e\u003c/li\u003e\n                \u003cli\u003e\u003ca href=\"/service\" class=\"nav-link\"\u003eLayanan\u003c/a\u003e\u003c/li\u003e\n                \u003cli\u003e\u003ca href=\"/ruang-lingkup-pengujian\" class=\"nav-link\"\u003eRuang Lingkup Pengujian\u003c/a\u003e\u003c/li\u003e\n                \u003cli\u003e\u003ca href=\"/informasi\" class=\"nav-link\"\u003eInformasi\u003c/a\u003e\u003c/li\u003e\n                \u003cli\u003e\u003ca href=\"/contact\" class=\"nav-link active\"\u003eKontak\u003c/a\u003e\u003c/li\u003e\n            \u003c/ul\u003e\n            \u003cbutton class=\"mobile-menu-btn\" id=\"mobileMenuBtn\" aria-label=\"Buka menu\"\u003e\n                \u003ci class=\"fa-solid fa-bars\"\u003e\u003c/i\u003e\n            \u003c/button\u003e\n        \u003c/nav\u003e\n    \u003c/header\u003e\n\n    \u003cmain class=\"contact-main\"\u003e\n        \u003csection class=\"container\"\u003e\n            \u003cdiv class=\"contact-hero\"\u003e\n                \u003cdiv class=\"hero-content\"\u003e\n                    \u003cspan class=\"eyebrow\"\u003e\u003ci class=\"fa-solid fa-headset\"\u003e\u003c/i\u003e Kontak kami\u003c/span\u003e\n                    \u003ch1 class=\"hero-title\"\u003eMari diskusikan kebutuhan pengujian Anda.\u003c/h1\u003e\n                    \u003cp class=\"hero-text\"\u003e\n                        Tim GIS Laboratorium siap membantu kebutuhan pengujian produk, lingkungan, inspeksi, dan\n                        sertifikasi dengan proses yang profesional dan responsif.\n                    \u003c/p\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n\n            \u003cdiv class=\"quick-contact\"\u003e\n                \u003ca class=\"quick-card glass\" href=\"mailto:globalinspeksisistem@gmail.com\"\u003e\n                    \u003cspan class=\"quick-icon\"\u003e\u003ci class=\"fa-solid fa-envelope\"\u003e\u003c/i\u003e\u003c/span\u003e\n                    \u003ch2 class=\"quick-label\"\u003eEmail\u003c/h2\u003e\n                    \u003cp class=\"quick-value\"\u003eglobalinspeksisistem@gmail.com\u003c/p\u003e\n                \u003c/a\u003e\n                \u003ca class=\"quick-card glass\" href=\"tel:+622150208008\"\u003e\n                    \u003cspan class=\"quick-icon\"\u003e\u003ci class=\"fa-solid fa-phone\"\u003e\u003c/i\u003e\u003c/span\u003e\n                    \u003ch2 class=\"quick-label\"\u003eTelepon\u003c/h2\u003e\n                    \u003cp class=\"quick-value\"\u003e+62 21 50208008\u003c/p\u003e\n                \u003c/a\u003e\n                \u003ca class=\"quick-card glass\" href=\"https://wa.me/6285281844641?text=Halo%20GIS%20Laboratorium\"\n                    target=\"_blank\" rel=\"noopener\"\u003e\n                    \u003cspan class=\"quick-icon\"\u003e\u003ci class=\"fa-brands fa-whatsapp\"\u003e\u003c/i\u003e\u003c/span\u003e\n                    \u003ch2 class=\"quick-label\"\u003eWhatsApp\u003c/h2\u003e\n                    \u003cp class=\"quick-value\"\u003eCustomer Service GIS\u003c/p\u003e\n                \u003c/a\u003e\n            \u003c/div\u003e\n        \u003c/section\u003e\n\n        \u003csection class=\"section\"\u003e\n            \u003cdiv class=\"container\"\u003e\n                \u003cdiv class=\"section-header\"\u003e\n                    \u003cdiv\u003e\n                        \u003cspan class=\"eyebrow\"\u003e\u003ci class=\"fa-solid fa-building\"\u003e\u003c/i\u003e Office\u003c/span\u003e\n                        \u003ch2 class=\"section-title\"\u003eKunjungi kantor GIS Laboratorium.\u003c/h2\u003e\n                    \u003c/div\u003e\n                    \u003cp class=\"section-copy\"\u003e\n                        GIS Laboratorium melayani pelanggan melalui kantor Jakarta dan Surabaya. Pilih lokasi terdekat\n                        untuk koordinasi sampel, konsultasi parameter, atau kebutuhan administrasi pengujian.\n                    \u003c/p\u003e\n                \u003c/div\u003e\n\n                \u003cdiv class=\"office-grid\"\u003e\n                    \u003carticle class=\"office-card glass\"\u003e\n                        \u003cdiv class=\"office-image\"\u003e\n                            \u003cimg src=\"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format\u0026fit=crop\u0026q=80\u0026w=1100\"\n                                alt=\"Gedung perkantoran Jakarta\"\u003e\n                        \u003c/div\u003e\n                        \u003cdiv class=\"office-body\"\u003e\n                            \u003cp class=\"office-kicker\"\u003eHead Office\u003c/p\u003e\n                            \u003ch3 class=\"office-title\"\u003eJakarta\u003c/h3\u003e\n                            \u003cul class=\"office-list\"\u003e\n                                \u003cli\u003e\u003ci class=\"fa-solid fa-location-dot\"\u003e\u003c/i\u003e\u003cspan\u003eJl. Raya Daan Mogot No. 89 RT.2/RW.2,\n                                        Wijaya Kusuma, Kec. Grogol Petamburan, Kota Jakarta Barat, DKI Jakarta\n                                        11460\u003c/span\u003e\u003c/li\u003e\n                                \u003cli\u003e\u003ci class=\"fa-solid fa-phone\"\u003e\u003c/i\u003e\u003cspan\u003e031 99726239\u003c/span\u003e\u003c/li\u003e\n                                \u003cli\u003e\u003ci class=\"fa-solid fa-fax\"\u003e\u003c/i\u003e\u003cspan\u003e031 99726239\u003c/span\u003e\u003c/li\u003e\n                                \u003cli\u003e\u003ci class=\"fa-solid fa-envelope\"\u003e\u003c/i\u003e\u003cspan\u003eglobalinspeksisistem@gmail.com\u003c/span\u003e\n                                \u003c/li\u003e\n                            \u003c/ul\u003e\n                        \u003c/div\u003e\n                    \u003c/article\u003e\n\n                    \u003carticle class=\"office-card glass\"\u003e\n                        \u003cdiv class=\"office-image\"\u003e\n                            \u003cimg src=\"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format\u0026fit=crop\u0026q=80\u0026w=1100\"\n                                alt=\"Ruang kantor modern untuk layanan Surabaya\"\u003e\n                        \u003c/div\u003e\n                        \u003cdiv class=\"office-body\"\u003e\n                            \u003cp class=\"office-kicker\"\u003eBranch Office\u003c/p\u003e\n                            \u003ch3 class=\"office-title\"\u003eSurabaya\u003c/h3\u003e\n                            \u003cul class=\"office-list\"\u003e\n                                \u003cli\u003e\u003ci class=\"fa-solid fa-location-dot\"\u003e\u003c/i\u003e\u003cspan\u003eJl. Pahlawan No.2, Kwadengan Barat,\n                                        Lemahputro, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213\u003c/span\u003e\u003c/li\u003e\n                                \u003cli\u003e\u003ci class=\"fa-solid fa-phone\"\u003e\u003c/i\u003e\u003cspan\u003e+031 99726239\u003c/span\u003e\u003c/li\u003e\n                                \u003cli\u003e\u003ci class=\"fa-solid fa-fax\"\u003e\u003c/i\u003e\u003cspan\u003e+031 99726239\u003c/span\u003e\u003c/li\u003e\n                                \u003cli\u003e\u003ci class=\"fa-solid fa-envelope\"\u003e\u003c/i\u003e\u003cspan\u003eglobalinspeksisistem@gmail.com\u003c/span\u003e\n                                \u003c/li\u003e\n                            \u003c/ul\u003e\n                        \u003c/div\u003e\n                    \u003c/article\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        \u003c/section\u003e\n\n        \u003csection class=\"section\" id=\"discuss\"\u003e\n            \u003cdiv class=\"container\"\u003e\n                \u003cdiv class=\"contact-panel\"\u003e\n                    \u003caside class=\"contact-info-panel\"\u003e\n                        \u003cspan class=\"eyebrow\"\u003e\u003ci class=\"fa-solid fa-comments\"\u003e\u003c/i\u003e Discuss with us\u003c/span\u003e\n                        \u003ch2 class=\"section-title\"\u003eButuh rekomendasi parameter uji?\u003c/h2\u003e\n                        \u003cp\u003e\n                            Kirim kebutuhan Anda melalui form atau hubungi kontak langsung. Tim GIS akan membantu\n                            menentukan layanan dan parameter yang paling sesuai.\n                        \u003c/p\u003e\n                        \u003cdiv class=\"info-list\"\u003e\n                            \u003cdiv class=\"info-item\"\u003e\n                                \u003ci class=\"fa-solid fa-envelope\"\u003e\u003c/i\u003e\n                                \u003cdiv\u003e\n                                    \u003cstrong\u003eEmail\u003c/strong\u003e\n                                    \u003cspan\u003eglobalinspeksisistem@gmail.com\u003c/span\u003e\n                                \u003c/div\u003e\n                            \u003c/div\u003e\n                            \u003cdiv class=\"info-item\"\u003e\n                                \u003ci class=\"fa-solid fa-phone\"\u003e\u003c/i\u003e\n                                \u003cdiv\u003e\n                                    \u003cstrong\u003ePhone\u003c/strong\u003e\n                                    \u003cspan\u003e+62 21 50208008 / +62 21 50560008\u003c/span\u003e\n                                \u003c/div\u003e\n                            \u003c/div\u003e\n                            \u003cdiv class=\"info-item\"\u003e\n                                \u003ci class=\"fa-solid fa-globe\"\u003e\u003c/i\u003e\n                                \u003cdiv\u003e\n                                    \u003cstrong\u003eWebsite\u003c/strong\u003e\n                                    \u003cspan\u003ewww.gislaboratorium.com\u003c/span\u003e\n                                \u003c/div\u003e\n                            \u003c/div\u003e\n                            \u003cdiv class=\"info-item\"\u003e\n                                \u003ci class=\"fa-solid fa-location-dot\"\u003e\u003c/i\u003e\n                                \u003cdiv\u003e\n                                    \u003cstrong\u003eAlamat\u003c/strong\u003e\n                                    \u003cspan\u003eDELREY Biztown Blok B1 No. 5, Jl. Lingkar Bumi Botanika Utara, Desa Lengkong\n                                        Kulon, Kecamatan Pagedangan, Kabupaten Tangerang, Banten 15331\u003c/span\u003e\n                                \u003c/div\u003e\n                            \u003c/div\u003e\n                        \u003c/div\u003e\n                    \u003c/aside\u003e\n\n                    \u003csection class=\"form-panel glass\" aria-labelledby=\"contactFormTitle\"\u003e\n                        \u003ch2 class=\"form-title\" id=\"contactFormTitle\"\u003eKirim pesan\u003c/h2\u003e\n                        \u003cp class=\"form-copy\"\u003eIsi data singkat berikut agar tim kami bisa menghubungi Anda kembali.\u003c/p\u003e\n                        \u003cform class=\"contact-form\" id=\"contactForm\"\u003e\n                            \u003cdiv class=\"form-row\"\u003e\n                                \u003cdiv class=\"field\"\u003e\n                                    \u003clabel for=\"name\"\u003eNama\u003c/label\u003e\n                                    \u003cinput type=\"text\" id=\"name\" name=\"name\" placeholder=\"Nama Anda\" required\u003e\n                                \u003c/div\u003e\n                                \u003cdiv class=\"field\"\u003e\n                                    \u003clabel for=\"email\"\u003eEmail\u003c/label\u003e\n                                    \u003cinput type=\"email\" id=\"email\" name=\"email\" placeholder=\"email@perusahaan.com\"\n                                        required\u003e\n                                \u003c/div\u003e\n                            \u003c/div\u003e\n                            \u003cdiv class=\"field\"\u003e\n                                \u003clabel for=\"subject\"\u003eSubjek\u003c/label\u003e\n                                \u003cinput type=\"text\" id=\"subject\" name=\"subject\" placeholder=\"Kebutuhan pengujian\"\u003e\n                            \u003c/div\u003e\n                            \u003cdiv class=\"field\"\u003e\n                                \u003clabel for=\"message\"\u003ePesan\u003c/label\u003e\n                                \u003ctextarea id=\"message\" name=\"message\"\n                                    placeholder=\"Ceritakan sampel, parameter, atau layanan yang Anda butuhkan.\"\n                                    required\u003e\u003c/textarea\u003e\n                            \u003c/div\u003e\n                            \u003cbutton class=\"btn btn-primary\" type=\"submit\"\u003e\n                                Kirim Pesan \u003ci class=\"fa-solid fa-paper-plane\"\u003e\u003c/i\u003e\n                            \u003c/button\u003e\n                            \u003cp class=\"form-message\" id=\"formMessage\"\u003eTerima kasih. Draft pesan sudah siap di email Anda.\n                            \u003c/p\u003e\n                        \u003c/form\u003e\n                    \u003c/section\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        \u003c/section\u003e\n\n        \u003csection class=\"map-section\"\u003e\n            \u003cdiv class=\"container\"\u003e\n                \u003cdiv class=\"map-shell glass\"\u003e\n                    \u003ciframe title=\"Peta lokasi kantor GIS Laboratorium\"\n                        src=\"https://www.google.com/maps?q=Jl.%20Raya%20Daan%20Mogot%20No.%2089%20Wijaya%20Kusuma%20Grogol%20Petamburan%20Jakarta%20Barat\u0026output=embed\"\n                        loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"\u003e\u003c/iframe\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        \u003c/section\u003e\n    \u003c/main\u003e\n\n    \u003cfooter class=\"footer\" id=\"kontak\"\u003e\n        \u003cdiv class=\"container\"\u003e\n            \u003cdiv class=\"footer-panel glass-dark\"\u003e\n                \u003cdiv class=\"footer-grid\"\u003e\n                    \u003cdiv\u003e\n                        \u003ch4 class=\"footer-col-title\"\u003eContact\u003c/h4\u003e\n                        \u003cdiv class=\"footer-text\"\u003e\n                            \u003ci class=\"fa-solid fa-envelope\"\u003e\u003c/i\u003e info@gislaboratorium.com\n                        \u003c/div\u003e\n                        \u003cdiv class=\"footer-text\"\u003e\n                            \u003ci class=\"fa-solid fa-phone\"\u003e\u003c/i\u003e +031 2355 5278\n                        \u003c/div\u003e\n                        \u003cdiv class=\"footer-text\"\u003e\n                            \u003ci class=\"fa-solid fa-globe\"\u003e\u003c/i\u003e www.gislaboratorium.com\n                        \u003c/div\u003e\n                    \u003c/div\u003e\n\n                    \u003cdiv\u003e\n                        \u003ch4 class=\"footer-col-title\"\u003eLink\u003c/h4\u003e\n                        \u003ca href=\"/profile\" class=\"footer-link\"\u003eProfile\u003c/a\u003e\n                        \u003ca href=\"/service\" class=\"footer-link\"\u003eLayanan\u003c/a\u003e\n                        \u003ca href=\"/ruang-lingkup-pengujian\" class=\"footer-link\"\u003eRuang Lingkup\u003c/a\u003e\n                        \u003ca href=\"/informasi\" class=\"footer-link\"\u003eInformasi\u003c/a\u003e\n                    \u003c/div\u003e\n\n                    \u003cdiv\u003e\n                        \u003ch4 class=\"footer-col-title\"\u003eKontak\u003c/h4\u003e\n                        \u003ca href=\"/informasi\" class=\"footer-link\"\u003eInformasi\u003c/a\u003e\n                        \u003ca href=\"/informasi\" class=\"footer-link\"\u003eBlog\u003c/a\u003e\n                        \u003ca href=\"/contact\" class=\"footer-link\"\u003eContact\u003c/a\u003e\n                    \u003c/div\u003e\n\n                    \u003cdiv\u003e\n                        \u003ch4 class=\"footer-col-title\"\u003eNewsletter\u003c/h4\u003e\n                        \u003cp class=\"footer-text\" style=\"font-size: 0.95rem;\"\u003eDapatkan informasi terbaru dari GISLAB.\u003c/p\u003e\n                        \u003cform class=\"newsletter-form\" onsubmit=\"event.preventDefault();\"\u003e\n                            \u003cinput type=\"email\" class=\"newsletter-input\" placeholder=\"Masukkan email\" required\u003e\n                            \u003cbutton type=\"submit\" class=\"newsletter-btn\" aria-label=\"Kirim email newsletter\"\u003e\n                                \u003ci class=\"fa-solid fa-paper-plane\"\u003e\u003c/i\u003e\n                            \u003c/button\u003e\n                        \u003c/form\u003e\n                    \u003c/div\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"footer-bottom\"\u003e\n                \u0026copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.\n            \u003c/div\u003e\n        \u003c/div\u003e\n    \u003c/footer\u003e\n\n    \u003cdiv class=\"whatsapp-widget\"\u003e\n        \u003cdiv class=\"whatsapp-window\" id=\"whatsappWindow\"\u003e\n            \u003cdiv class=\"wa-header\"\u003e\n                \u003cdiv class=\"wa-brand\"\u003e\n                    \u003cimg src=\"/landing/animation/logo-lab.png\" alt=\"GISLAB\"\u003e\n                    \u003cspan\u003ePT Global Inspeksi Sistem\u003c/span\u003e\n                \u003c/div\u003e\n                \u003cbutton class=\"wa-close\" id=\"closeWhatsapp\" aria-label=\"Tutup WhatsApp\"\u003e\n                    \u003ci class=\"fa-solid fa-xmark\"\u003e\u003c/i\u003e\n                \u003c/button\u003e\n            \u003c/div\u003e\n            \u003cdiv class=\"wa-body\"\u003e\n                \u003cdiv class=\"wa-bubble\"\u003eHalo! Ada yang bisa kami bantu mengenai layanan pengujian GIS?\u003c/div\u003e\n                \u003ca class=\"wa-link\" href=\"https://wa.me/6285281844641?text=Halo%20GIS%20Laboratorium\" target=\"_blank\"\n                    rel=\"noopener\"\u003e\n                    \u003ci class=\"fa-brands fa-whatsapp\"\u003e\u003c/i\u003e\n                    \u003cspan\u003eCustomer Service 1\u003c/span\u003e\n                \u003c/a\u003e\n            \u003c/div\u003e\n        \u003c/div\u003e\n        \u003cbutton class=\"whatsapp-toggle\" id=\"toggleWhatsapp\" aria-label=\"Buka WhatsApp\"\u003e\n            \u003ci class=\"fa-brands fa-whatsapp\"\u003e\u003c/i\u003e\n        \u003c/button\u003e\n    \u003c/div\u003e\n\n    \n"
-    }
+  {
+    key: "home",
+    title: "GISLAB - Laboratorium Pengujian Global Inspeksi Sistem",
+    description:
+      "Laboratorium pengujian akurat, terpercaya, didukung tenaga ahli berpengalaman dan peralatan modern.",
+    bodyClass: "",
+    styles: `@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #0A2540;
+            --secondary: #0070F3;
+            --accent: #00DFD8;
+            --light-blue: #EBF4F8;
+            --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --text-light: #F8FAFC;
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-dark-bg: rgba(10, 37, 64, 0.4);
+            --glass-dark-border: rgba(255, 255, 255, 0.15);
+            --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px -10px rgba(0, 112, 243, 0.15);
+            --shadow-glow: 0 0 20px rgba(0, 223, 216, 0.4);
+            --radius-pill: 100px;
+            --radius-md: 24px;
+            --radius-lg: 32px;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-main); color: var(--text-dark); background-color: #FAFCFF; line-height: 1.6; overflow-x: hidden; position: relative; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 15% 50%, rgba(0, 223, 216, 0.04), transparent 25%), radial-gradient(circle at 85% 30%, rgba(0, 112, 243, 0.04), transparent 25%); z-index: -1; pointer-events: none; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .glass { background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); box-shadow: var(--shadow-soft); }
+        .glass-dark { background: var(--glass-dark-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-dark-border); color: var(--white); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: var(--radius-pill); font-weight: 600; font-size: 1rem; transition: var(--transition); cursor: pointer; border: none; outline: none; }
+        .btn-primary { background: linear-gradient(135deg, var(--secondary), var(--accent)); color: var(--white); box-shadow: 0 4px 15px rgba(0, 112, 243, 0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-glow); }
+        .btn-sm { padding: 10px 20px; font-size: 0.875rem; }
+        .navbar-wrapper { position: fixed; top: 24px; left: 0; width: 100%; z-index: 1000; display: flex; justify-content: center; padding: 0 24px; transition: var(--transition); }
+        .navbar-wrapper.scrolled { top: 12px; }
+        .navbar { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1100px; padding: 12px 24px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); }
+        .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; color: var(--primary); letter-spacing: -0.5px; }
+        .nav-brand i { color: var(--secondary); font-size: 1.5rem; }
+        .nav-menu { display: flex; gap: 8px; }
+        .nav-link { padding: 8px 16px; border-radius: var(--radius-pill); font-weight: 500; font-size: 0.95rem; color: var(--text-muted); transition: var(--transition); }
+        .nav-link:hover { color: var(--primary); background: rgba(0, 112, 243, 0.05); }
+        .nav-link.active { background: rgba(0, 223, 216, 0.15); color: var(--secondary); font-weight: 600; }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--primary); background: none; border: none; cursor: pointer; }
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 100px; overflow: hidden; }
+        .hero-content { position: relative; z-index: 10; text-align: center; width: 100%; max-width: 800px; margin: 0 auto; }
+        .hero-panel { padding: 60px 40px; border-radius: var(--radius-lg); margin-bottom: 40px; background: rgba(255, 255, 255, 0.25); border: 1px solid rgba(255, 255, 255, 0.3); box-sizing: border-box; height: 500px !important; min-height: 500px !important; max-height: 500px !important; width: 100% !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; text-align: center; overflow: hidden !important; }
+        .hero-title-slot, .hero-subtitle-slot { width: 100%; flex-shrink: 0; overflow: hidden; }
+        .hero-title-slot { min-height: 160px; }
+        .hero-subtitle-slot { min-height: 100px; margin-top: 16px; margin-bottom: 32px; }
+        .hero-title { font-size: 3.5rem; font-weight: 800; color: var(--primary); line-height: 1.2; margin-bottom: 24px; letter-spacing: -1px; position: relative; width: 100%; }
+        .hero-title span { background: linear-gradient(135deg, var(--secondary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.125rem; color: var(--text-dark); margin-bottom: 32px; font-weight: 500; position: relative; width: 100%; }
+        .typing-ghost { visibility: hidden; }
+        .typing-live { position: absolute; inset: 0; display: block;}
+        .typing-neutral { background: none !important; color: inherit !important; -webkit-text-fill-color: initial !important; }
+        .typing-accent { background: linear-gradient(135deg, var(--secondary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .advantages-wrapper { position: relative; z-index: 20; margin-top: -60px; padding-bottom: 60px; }
+        .advantages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .advantage-card { padding: 32px; border-radius: var(--radius-md); text-align: center; transition: var(--transition); display: flex; flex-direction: column; align-items: center; gap: 16px; animation: fadeUp 1s ease-out backwards; }
+        .advantage-card:nth-child(2) { animation-delay: 0.2s; }
+        .advantage-card:nth-child(3) { animation-delay: 0.4s; }
+        .advantage-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
+        .advantage-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(0, 112, 243, 0.1); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; color: var(--secondary); margin-bottom: 8px; }
+        .advantage-title { font-size: 1.25rem; font-weight: 700; color: var(--primary); }
+        .about-section { padding: 100px 0; position: relative; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: stretch; }
+        .about-card { padding: 48px; border-radius: var(--radius-lg); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; }
+        .about-img-small { position: absolute; right: -20px; bottom: -20px; width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 8px solid var(--white); box-shadow: var(--shadow-soft); opacity: 0.8; }
+        .section-title { font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 24px; }
+        .about-text { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 32px; position: relative; z-index: 1; }
+        .facilities-list { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+        .facility-item { display: flex; align-items: flex-start; gap: 16px; }
+        .facility-icon { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--secondary), var(--accent)); color: var(--white); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.875rem; }
+        .facility-text { font-weight: 600; font-size: 1.1rem; color: var(--primary); }
+        .illustration-3d { margin-top: 40px; height: 200px; background: url('https://images.unsplash.com/photo-1581093806997-124204d9fa9d?auto=format&fit=crop&q=80&w=800') center/cover; border-radius: var(--radius-md); position: relative; box-shadow: var(--shadow-soft); }
+        .illustration-3d::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0, 112, 243, 0.4), rgba(0, 223, 216, 0.4)); border-radius: var(--radius-md); }
+        .vision-mission { padding: 100px 0; background: linear-gradient(135deg, var(--primary), #0e4e8a); position: relative; overflow: hidden; }
+        .vision-mission::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at center, rgba(0, 48, 223, 0.1) 0%, transparent 50%); animation: rotate 20s linear infinite; }
+        .vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; position: relative; z-index: 10; }
+        .vm-card { padding: 48px; border-radius: var(--radius-lg); transition: var(--transition); }
+        .vm-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0, 223, 216, 0.15); border-color: rgba(0, 223, 216, 0.3); }
+        .vm-title { font-size: 2rem; font-weight: 700; color: #ffffff; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        .vm-text { font-size: 1.1rem; line-height: 1.8; color: var(--light-blue); }
+        .vm-list { display: flex; flex-direction: column; gap: 16px; }
+        .vm-list li { display: flex; align-items: flex-start; gap: 12px; color: var(--light-blue); font-size: 1.1rem; }
+        .vm-list li::before { content: '\\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color:#0070F3; margin-top: 4px; }
+        .services-section { padding: 100px 0; text-align: center; }
+        .services-header { margin-bottom: 60px; }
+        .carousel-container { position: relative; padding: 20px 0; overflow: hidden; width: 100%; }
+        .services-track { display: flex; gap: 32px; width: max-content; animation: scroll-services 20s linear infinite; }
+        .services-track:hover { animation-play-state: paused; }
+        @keyframes scroll-services { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 16px)); } }
+        .service-card { width: 350px; flex-shrink: 0; border-radius: var(--radius-lg); overflow: hidden; text-align: left; transition: var(--transition); display: flex; flex-direction: column; cursor: pointer; color: inherit; text-decoration: none; }
+        .service-card:hover { transform: scale(1.02); box-shadow: var(--shadow-hover); }
+        .service-card:focus-visible { outline: 4px solid rgba(0, 112, 243, 0.18); outline-offset: 4px; }
+        .service-img { height: 200px; width: 100%; object-fit: cover; }
+        .service-content { padding: 32px; flex-grow: 1; display: flex; flex-direction: column; }
+        .service-title { font-size: 1.25rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .service-desc { color: var(--text-muted); font-size: 0.95rem; font-weight: 600; line-height: 1.65; margin-bottom: 22px; }
+        .service-btn { margin-top: auto; align-self: flex-start; background: transparent; color: var(--secondary); font-weight: 600; border: 1px solid rgba(0, 112, 243, 0.2); padding: 8px 20px; border-radius: var(--radius-pill); transition: var(--transition); }
+        .service-card:hover .service-btn { background: var(--secondary); color: var(--white); border-color: var(--secondary); }
+        .service-card, .service-btn { position: relative; z-index: 2; pointer-events: auto; cursor: pointer; }
+        .service-detail-section { display: none; padding: 24px 0 100px; font-family: var(--font-main); text-align: left; }
+        .service-detail-section.active { display: block; }
+        .service-detail-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.7fr); gap: 32px; align-items: start; }
+        .service-detail-article, .service-detail-sidebar { border-radius: var(--radius-lg); background: rgba(255, 255, 255, 0.72); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.82); box-shadow: var(--shadow-soft); }
+        .service-detail-article { overflow: hidden; }
+        .detail-cover { width: 100%; height: 360px; object-fit: cover; display: block; }
+        .detail-body { padding: 42px; }
+        .detail-kicker { display: inline-flex; align-items: center; gap: 10px; color: var(--secondary); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+        .detail-title { margin-top: 14px; color: var(--primary); font-size: clamp(2rem, 4vw, 3.35rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; }
+        .detail-copy { margin-top: 22px; color: #405a70; font-size: 1.02rem; font-weight: 600; line-height: 1.85; text-align: justify; }
+        .detail-body h3 { margin-top: 34px; color: var(--primary); font-size: 1.4rem; font-weight: 800; }
+        .detail-list { display: grid; gap: 14px; margin-top: 18px; padding: 0; list-style: none; }
+        .detail-list li { display: flex; align-items: flex-start; gap: 12px; color: #405a70; font-weight: 600; line-height: 1.7; }
+        .detail-list i { margin-top: 6px; color: var(--accent); }
+        .service-detail-sidebar { position: sticky; top: 110px; padding: 28px; }
+        .sidebar-box + .sidebar-box { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(10, 37, 64, 0.1); }
+        .sidebar-title { color: var(--primary); font-size: 1.1rem; font-weight: 800; margin-bottom: 14px; }
+        .sidebar-link { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; border: 0; background: transparent; padding: 12px 0; color: #405a70; font-weight: 700; text-align: left; cursor: pointer; border-bottom: 1px solid rgba(10, 37, 64, 0.08); }
+        .sidebar-link:hover { color: var(--secondary); }
+        .download-btn, .detail-contact-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 12px; padding: 12px 18px; border-radius: var(--radius-pill); color: var(--white); background: linear-gradient(135deg, var(--secondary), var(--accent)); font-weight: 800; text-decoration: none; transition: var(--transition); }
+        .download-btn:hover, .detail-contact-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 34px -22px rgba(0, 112, 243, 0.7); }
+        .sidebar-note { color: var(--text-muted); font-size: 0.95rem; font-weight: 600; line-height: 1.7; }
+
+
+        .home-service-details { padding: 0 0 96px; margin-top: -18px; text-align: left; }
+        .home-service-detail-card { display: none; overflow: hidden; border-radius: var(--radius-lg); scroll-margin-top: 120px; }
+        .home-service-details:has(.home-service-detail-card:target) .home-service-detail-card { display: none; }
+        .home-service-detail-card:target { display: grid; grid-template-columns: minmax(280px, 430px) minmax(0, 1fr); }
+        .home-service-detail-card:not(:target).default-detail { display: grid; grid-template-columns: minmax(280px, 430px) minmax(0, 1fr); }
+        .home-service-details:has(.home-service-detail-card:target) .home-service-detail-card.default-detail:not(:target) { display: none; }
+        .home-detail-img { width: 100%; height: 100%; min-height: 430px; object-fit: cover; display: block; }
+        .home-detail-body { padding: 42px; }
+        .home-detail-kicker { display: inline-flex; align-items: center; gap: 10px; color: var(--secondary); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+        .home-detail-title { margin-top: 14px; color: var(--primary); font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+        .home-detail-copy { margin-top: 18px; color: #405a70; font-size: 1rem; font-weight: 600; line-height: 1.82; text-align: justify; }
+        .home-detail-body h3 { margin-top: 28px; color: var(--primary); font-size: 1.28rem; font-weight: 800; }
+        .home-detail-list { display: grid; gap: 12px; margin-top: 16px; padding: 0; list-style: none; }
+        .home-detail-list li { display: flex; align-items: flex-start; gap: 12px; color: #405a70; font-weight: 600; line-height: 1.7; }
+        .home-detail-list i { margin-top: 6px; color: var(--accent); }
+        .footer { position: relative; padding: 80px 0 40px; background: linear-gradient(135deg, var(--primary), #0e4e8a); color: var(--white); overflow: hidden; }
+        .footer-panel { position: relative; z-index: 10; padding: 60px; border-radius: var(--radius-lg); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
+        .footer-col-title { font-size: 1.25rem; font-weight: 700; color:#FFFFFF; margin-bottom: 24px; }
+        .footer-text { color: var(--light-blue); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+        .footer-link { color: var(--light-blue); transition: var(--transition); display: block; margin-bottom: 12px; text-decoration: none; }
+        .footer-link:hover { color: var(--accent); transform: translateX(5px); }
+        .footer-bottom { position: relative; z-index: 10; text-align: center; margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .cursor { display: inline-block; width: 3px; background-color: var(--primary); margin-left: 4px; animation: blinkCursor 1s step-end infinite; }
+        @keyframes blinkCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 2.75rem; }
+            .advantages-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+            .about-grid, .vm-grid { grid-template-columns: 1fr; }
+            .about-img-small { display: none; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .navbar { padding: 12px 20px; }
+            .nav-menu { position: absolute; top: 100%; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); flex-direction: column; padding: 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-soft); display: none; margin-top: 10px; }
+            .nav-menu.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero-title { font-size: 2rem; }
+            .advantages-wrapper { margin-top: 40px; }
+            .advantages-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-panel { padding: 32px 20px; }
+            .service-detail-layout { grid-template-columns: 1fr; }
+            .service-detail-sidebar { position: static; }
+            .detail-cover { height: 260px; }
+            .detail-body { padding: 28px 22px; }
+            .home-service-detail-card:target, .home-service-detail-card:not(:target).default-detail { grid-template-columns: 1fr; }
+            .home-detail-img { min-height: 240px; height: 240px; }
+            .home-detail-body { padding: 28px 22px; }
+        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    `,
+    html: `
+    <header class="navbar-wrapper" id="navbar">
+        <nav class="navbar">
+            <a href="/" class="nav-brand">
+                <img src="/landing/animation/logo-lab.png" style="height: 28px; width: auto; transform: scale(1.8); transform-origin: left center; margin-right: 36px;">
+                Global Inspeksi Sistem
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/" class="nav-link active">Beranda</a></li>
+                <li><a href="/profile" class="nav-link">Profile</a></li>
+                <li><a href="/service" class="nav-link">Layanan</a></li>
+                <li><a href="/ruang-lingkup-pengujian" class="nav-link">Ruang Lingkup Pengujian</a></li>
+                <li><a href="/informasi" class="nav-link">Informasi</a></li>
+                <li><a href="/contact" class="nav-link">Kontak</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <section class="hero" id="beranda">
+        <video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+            <source src="/landing/animation/animasi.mp4" type="video/mp4">
+        </video>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(250,252,255,0.8) 100%); z-index: 1;"></div>
+        <div class="container" style="position: relative; z-index: 10;">
+            <div class="hero-content">
+                <div class="hero-panel glass">
+                    <div class="hero-title-slot">
+                        <h1 class="hero-title" aria-label="Laboratorium Pengujian Global Inspeksi Sistem" style="margin: 0; line-height: 1.3;">
+                            <span class="typing-ghost typing-neutral" aria-hidden="true">
+                                Laboratorium Pengujian <span class="typing-accent">Global Inspeksi Sistem</span>
+                            </span>
+                            <span class="typing-live" aria-hidden="true">
+                                <span id="type-title-1" class="typing-neutral"></span>
+                                <span id="type-title-2" class="typing-accent"></span>
+                            </span>
+                        </h1>
+                    </div>
+                    <div class="hero-subtitle-slot">
+                        <p class="hero-subtitle" aria-label="Laboratorium kami menyediakan layanan pengujian yang akurat, terpercaya, dan didukung oleh tenaga ahli berpengalaman serta peralatan modern." style="margin: 0; font-weight: 600; text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
+                            <span class="typing-ghost" aria-hidden="true">Laboratorium kami menyediakan layanan pengujian yang akurat, terpercaya, dan didukung oleh tenaga ahli berpengalaman serta peralatan modern.</span>
+                            <span id="type-sub" class="typing-live" aria-hidden="true"></span>
+                        </p>
+                    </div>
+                    <a href="/service" class="btn btn-primary" style="flex-shrink: 0;">
+                        Jelajahi Layanan <i class="fa-solid fa-arrow-right ms-2" style="margin-left: 8px;"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="advantages-wrapper">
+        <div class="container">
+            <div class="advantages-grid">
+                <div class="advantage-card glass">
+                    <div class="advantage-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="advantage-title">Pengujian Mutu Produk</h3>
+                </div>
+                <div class="advantage-card glass">
+                    <div class="advantage-icon"><i class="fa-solid fa-certificate"></i></div>
+                    <h3 class="advantage-title">Sertifikasi SNI</h3>
+                </div>
+                <div class="advantage-card glass">
+                    <div class="advantage-icon"><i class="fa-solid fa-globe"></i></div>
+                    <h3 class="advantage-title">Berstandar Internasional</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="about-section" id="profile">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-card glass reveal">
+                    <h2 class="section-title">Tentang Kami</h2>
+                    <p class="about-text">
+                        GISLAB merupakan laboratorium pengujian yang berfokus pada layanan pengujian mutu produk, lingkungan, dan kebutuhan industri. Kami hadir untuk membantu perusahaan memastikan kualitas, keamanan, dan kesesuaian produk terhadap standar yang berlaku.
+                    </p>
+                    <div>
+                        <a href="/contact" class="btn btn-primary btn-sm">Lihat Selengkapnya</a>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=600" alt="Petugas Laboratorium" class="about-img-small">
+                </div>
+
+                <div class="about-card glass reveal">
+                    <h2 class="section-title">Fasilitas Keunggulan</h2>
+                    <div class="facilities-list">
+                        <div class="facility-item">
+                            <div class="facility-icon"><i class="fa-solid fa-check"></i></div>
+                            <div class="facility-text">Peralatan pengujian modern</div>
+                        </div>
+                        <div class="facility-item">
+                            <div class="facility-icon"><i class="fa-solid fa-check"></i></div>
+                            <div class="facility-text">Tenaga ahli berpengalaman</div>
+                        </div>
+                        <div class="facility-item">
+                            <div class="facility-icon"><i class="fa-solid fa-check"></i></div>
+                            <div class="facility-text">Proses pengujian akurat dan terdokumentasi</div>
+                        </div>
+                    </div>
+                    <div class="illustration-3d glass"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="vision-mission" id="visi-misi">
+        <div class="container">
+            <div class="vm-grid">
+                <div class="vm-card glass-dark reveal">
+                    <h2 class="vm-title"><i class="fa-solid fa-eye"></i> Visi</h2>
+                    <p class="vm-text">Menjadi laboratorium pengujian terpercaya yang mendukung kualitas, keamanan, dan daya saing industri melalui layanan yang profesional dan berintegritas.</p>
+                </div>
+                <div class="vm-card glass-dark reveal" style="transition-delay: 0.2s;">
+                    <h2 class="vm-title"><i class="fa-solid fa-bullseye"></i> Misi</h2>
+                    <ul class="vm-list">
+                        <li>Memberikan layanan pengujian yang akurat, objektif, dan tepat waktu.</li>
+                        <li>Mendukung pemenuhan standar nasional dan internasional.</li>
+                        <li>Mengembangkan kompetensi SDM dan teknologi laboratorium secara berkelanjutan.</li>
+                        <li>Menjaga kepercayaan pelanggan melalui pelayanan yang transparan dan profesional.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="layanan">
+        <div class="container">
+            <div class="services-header reveal"><h2 class="section-title">Layanan Kami</h2></div>
+            <div class="carousel-container reveal">
+                <div class="services-track">
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="quality" aria-label="Lihat detail Pengujian Kualitas">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600" alt="Pengujian Kualitas" class="service-img">
+                        <div class="service-content">
+                            <h3 class="service-title">Pengujian Kualitas</h3>
+                            <p class="service-desc">Pengujian mutu bahan, produk, dan sampel untuk memastikan kualitas sesuai standar teknis.</p>
+                            <button class="service-btn" type="button" data-service-detail="quality">Read More</button>
+                        </div>
+                    </article>
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="environment" aria-label="Lihat detail Pengujian Lingkungan">
+                        <img src="https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=600" alt="Pengujian Lingkungan" class="service-img">
+                        <div class="service-content">
+                            <h3 class="service-title">Pengujian Lingkungan</h3>
+                            <p class="service-desc">Analisis parameter lingkungan untuk mendukung kepatuhan, pemantauan, dan pengelolaan risiko.</p>
+                            <button class="service-btn" type="button" data-service-detail="environment">Read More</button>
+                        </div>
+                    </article>
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="permit" aria-label="Lihat detail Pengujian Produk dan Izin Edar">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=600" alt="Pengujian Produk dan Izin Edar" class="service-img">
+                        <div class="service-content">
+                            <h3 class="service-title">Pengujian Produk dan Izin Edar</h3>
+                            <p class="service-desc">Dukungan pengujian produk untuk kebutuhan dokumen teknis, registrasi, dan izin edar.</p>
+                            <button class="service-btn" type="button" data-service-detail="permit">Read More</button>
+                        </div>
+                    </article>
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="sni" aria-label="Lihat detail Pengujian SNI Produk">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" alt="Pengujian SNI Produk" class="service-img">
+                        <div class="service-content">
+                            <h3 class="service-title">Pengujian SNI Produk</h3>
+                            <p class="service-desc">Pengujian produk berdasarkan persyaratan SNI untuk mendukung proses sertifikasi dan kepatuhan.</p>
+                            <button class="service-btn" type="button" data-service-detail="sni">Read More</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-detail-section" id="detail-layanan" aria-live="polite">
+        <div class="container">
+            <div class="service-detail-layout">
+                <article class="service-detail-article">
+                    <img id="detailCover" class="detail-cover" src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1200" alt="Pengujian laboratorium">
+                    <div class="detail-body">
+                        <span class="detail-kicker"><i class="fa-solid fa-flask-vial"></i> Detail Layanan</span>
+                        <h2 class="detail-title" id="detailTitle">Pengujian Kualitas</h2>
+                        <p class="detail-copy" id="detailIntro">Pengujian kualitas membantu memastikan bahan, produk, atau sampel memiliki mutu yang konsisten dan sesuai standar teknis. GISLAB mendukung kebutuhan pengujian untuk kontrol mutu, evaluasi produk, dan pembuktian kesesuaian sebelum digunakan atau dipasarkan.</p>
+
+                        <h3 id="detailWhyTitle">Mengapa pengujian ini penting?</h3>
+                        <p class="detail-copy" id="detailWhy">Tanpa pengujian yang terdokumentasi, perusahaan berisiko mengambil keputusan berdasarkan asumsi visual saja. Pengujian kualitas memberikan data objektif untuk mengurangi risiko produk gagal, komplain pelanggan, dan ketidaksesuaian terhadap standar.</p>
+
+                        <h3>Layanan pengujian yang kami solusikan</h3>
+                        <ul class="detail-list" id="detailList">
+                            <li><i class="fa-solid fa-check"></i><span>Pengujian karakteristik fisik dan kimia sesuai kebutuhan produk atau material.</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>Pemeriksaan mutu sampel untuk mendukung quality control dan quality assurance.</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>Analisis hasil uji sebagai dasar evaluasi kesesuaian terhadap spesifikasi teknis.</span></li>
+                        </ul>
+
+                        <h3>Konsultansi dan rekomendasi teknis</h3>
+                        <p class="detail-copy" id="detailConsult">Selain pengujian, GISLAB membantu perusahaan dan instansi memahami hasil analisis melalui konsultasi teknis. Tim kami dapat membantu menentukan parameter uji, menyusun rencana pemantauan, dan memberikan rekomendasi awal untuk pengelolaan kualitas lingkungan atau produk.</p>
+
+                        <h3>Komitmen kami</h3>
+                        <p class="detail-copy" id="detailCommitment">GISLAB berkomitmen memberikan hasil yang akurat, layanan yang responsif, dan proses yang terdokumentasi. Kami hadir sebagai mitra pengujian profesional untuk mendukung mutu produk, kepatuhan regulasi, perlindungan lingkungan, dan kepercayaan pelanggan.</p>
+                    </div>
+                </article>
+
+                <aside class="service-detail-sidebar">
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Layanan GISLAB</h3>
+                        <button class="sidebar-link" type="button" data-service-detail="quality">Pengujian Kualitas <i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="sidebar-link" type="button" data-service-detail="environment">Pengujian Lingkungan <i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="sidebar-link" type="button" data-service-detail="permit">Pengujian Produk dan Izin Edar <i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="sidebar-link" type="button" data-service-detail="sni">Pengujian SNI Produk <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Download Profil GISLAB</h3>
+                        <p class="sidebar-note">Unduh profil perusahaan untuk informasi lengkap mengenai layanan pengujian, analisis, dan dukungan laboratorium kami.</p>
+                        <a href="#" class="download-btn"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>
+                        <a href="#" class="download-btn"><i class="fa-solid fa-file-word"></i> Download Doc</a>
+                    </div>
+                    <div class="sidebar-box">
+                        <h3 class="sidebar-title">Butuh rekomendasi parameter?</h3>
+                        <p class="sidebar-note">Hubungi tim GISLAB untuk menentukan parameter uji yang paling sesuai dengan kebutuhan produk atau lingkungan Anda.</p>
+                        <a href="/contact" class="detail-contact-btn"><i class="fa-solid fa-headset"></i> Kontak Kami</a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="kontak">
+        <div class="container">
+            <div class="footer-panel glass-dark">
+                <div class="footer-grid">
+                    <div>
+                        <h4 class="footer-col-title">Contact</h4>
+                        <div class="footer-text"><i class="fa-solid fa-envelope"></i> info@gislaboratorium.com</div>
+                        <div class="footer-text" style="align-items: flex-start;">
+                            <i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
+                            <div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+                        </div>
+                        <div class="footer-text"><i class="fa-solid fa-globe"></i> www.gislaboratorium.com</div>
+                    </div>
+                    <div>
+                        <h4 class="footer-col-title">Link</h4>
+                        <a href="/" class="footer-link">Beranda</a>
+                        <a href="/profile" class="footer-link">Profile</a>
+                        <a href="/service" class="footer-link">Layanan</a>
+                        <a href="/ruang-lingkup-pengujian" class="footer-link">Ruang Lingkup Pengujian</a>
+                        <a href="/informasi" class="footer-link">Informasi</a>
+                        <a href="/contact" class="footer-link">Kontak</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.</div>
+        </div>
+    </footer>
+`,
+  },
+  {
+    key: "profile",
+    title: "Profil Perusahaan - GIS Laboratorium",
+    description:
+      "Profil Global Inspeksi Sistem Laboratorium, visi misi, fasilitas, kebijakan, dan komitmen perusahaan.",
+    bodyClass: "liquid-bg font-body-md text-on-background min-h-screen",
+    styles: `@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #0A2540; --secondary: #0070F3; --accent: #00DFD8; --light-blue: #EBF4F8;
+            --white: #FFFFFF; --text-dark: #1E293B; --text-muted: #64748B;
+            --glass-dark-bg: rgba(10, 37, 64, 0.4); --glass-dark-border: rgba(255, 255, 255, 0.15);
+            --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+            --radius-pill: 100px; --radius-md: 24px; --radius-lg: 32px;
+            --font-main: 'Plus Jakarta Sans', sans-serif; --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        body { background-color: #FAFCFF; overflow-x: hidden; position: relative; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 15% 50%, rgba(0, 223, 216, 0.04), transparent 25%), radial-gradient(circle at 85% 30%, rgba(0, 112, 243, 0.04), transparent 25%); z-index: -1; pointer-events: none; }
+        .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px); border: 1px solid transparent; border-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2)) 1; box-shadow: 0px 0px 30px rgba(0, 122, 255, 0.1); }
+        .glass-dark { background: var(--glass-dark-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-dark-border); color: var(--white); }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .liquid-bg { background: #FAFCFF; background-attachment: fixed; }
+        .navbar-wrapper { position: fixed; top: 24px; left: 0; width: 100%; z-index: 1000; display: flex; justify-content: center; padding: 0 24px; transition: var(--transition); }
+        .navbar-wrapper.scrolled { top: 12px; }
+        .navbar { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1100px; padding: 12px 24px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); font-family: var(--font-main); }
+        .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; color: var(--primary); letter-spacing: -0.5px; text-decoration: none; }
+        .nav-menu { display: flex; gap: 8px; list-style: none; margin: 0; padding: 0; }
+        .nav-link { display: block; padding: 8px 16px; border-radius: var(--radius-pill); font-weight: 500; font-size: 0.95rem; color: var(--text-muted); transition: var(--transition); text-decoration: none; }
+        .nav-link:hover { color: var(--primary); background: rgba(0, 112, 243, 0.05); }
+        .nav-link.active { background: rgba(0, 223, 216, 0.15); color: var(--secondary); font-weight: 600; }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--primary); background: none; border: none; cursor: pointer; }
+        .profile-main { padding-top: 140px; }
+        .specular-edge { border: 1px solid; border-image-source: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.1) 100%); border-image-slice: 1; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .policy-tabs { position: relative; overflow: hidden; }
+        .policy-tabs::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0, 112, 243, 0.08), transparent 45%), radial-gradient(circle at 90% 8%, rgba(0, 223, 216, 0.16), transparent 24%); pointer-events: none; }
+        .policy-tab-nav { position: relative; z-index: 2; display: flex; gap: 12px; padding: 12px; margin: 0; list-style: none; background: rgba(255, 255, 255, 0.58); border: 1px solid rgba(255, 255, 255, 0.72); border-radius: 28px; }
+        .policy-tab-button { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 14px 18px; border: 0; border-radius: 20px; color: var(--text-muted); background: transparent; font-family: var(--font-main); font-weight: 800; font-size: 0.82rem; letter-spacing: 0; text-transform: uppercase; cursor: pointer; transition: var(--transition); }
+        .policy-tab-button:hover { color: var(--primary); background: rgba(0, 112, 243, 0.06); }
+        .policy-tab-button.active { color: #ffffff; background: linear-gradient(135deg, var(--primary), var(--secondary)); box-shadow: 0 16px 34px -18px rgba(0, 88, 188, 0.75); }
+        .policy-tab-button .material-symbols-outlined { font-size: 22px; }
+        .policy-tab-panel { display: none; position: relative; z-index: 1; padding: 48px; }
+        .policy-tab-panel.active { display: block; }
+        .policy-kicker { display: inline-flex; align-items: center; gap: 10px; color: var(--secondary); font-family: var(--font-main); font-size: 0.82rem; font-weight: 800; letter-spacing: 0; text-transform: uppercase; }
+        .policy-copy { color: var(--text-dark); font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 1.85; text-align: justify; }
+        .policy-signature { border-left: 4px solid var(--accent); padding-left: 18px; color: var(--primary); }
+        .policy-contact-list { display: grid; gap: 10px; margin-top: 28px; padding: 0; list-style: none; }
+        .policy-contact-list li { display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(113, 119, 134, 0.18); color: var(--text-dark); font-family: 'Inter', sans-serif; line-height: 1.55; }
+        .policy-contact-list strong { color: var(--primary); font-family: var(--font-main); font-size: 0.78rem; letter-spacing: 0; text-transform: uppercase; }
+
+        .footer { position: relative; padding: 80px 0 40px; background: linear-gradient(135deg, var(--primary), #0e4e8a); color: var(--white); overflow: hidden; font-family: var(--font-main); }
+        .footer-panel { position: relative; z-index: 10; padding: 60px; border-radius: var(--radius-lg); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
+        .footer-col-title { font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 24px; }
+        .footer-text { color: var(--light-blue); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+        .footer-link { color: var(--light-blue); transition: var(--transition); display: block; margin-bottom: 12px; text-decoration: none; }
+        .footer-link:hover { color: var(--accent); transform: translateX(5px); }
+        .footer-bottom { position: relative; z-index: 10; text-align: center; margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; }
+
+        @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) {
+            .navbar { padding: 12px 20px; }
+            .nav-menu { position: absolute; top: 100%; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); flex-direction: column; padding: 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-soft); display: none; margin-top: 10px; }
+            .nav-menu.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .policy-tab-nav { flex-direction: column; border-radius: 24px; }
+            .policy-tab-panel { padding: 32px 24px; }
+            .policy-contact-list li { grid-template-columns: 1fr; gap: 4px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-panel { padding: 32px 20px; }
+        }
+    `,
+    html: `
+<header class="navbar-wrapper" id="navbar">
+<nav class="navbar">
+<a href="/" class="nav-brand">
+<img src="/landing/animation/logo-lab.png" style="height: 28px; width: auto; transform: scale(1.8); transform-origin: left center; margin-right: 36px;">
+                Global Inspeksi Sistem
+            </a>
+<ul class="nav-menu" id="navMenu">
+<li><a href="/" class="nav-link">Beranda</a></li>
+<li><a href="/profile" class="nav-link active">Profile</a></li>
+<li><a href="/service" class="nav-link">Layanan</a></li>
+<li><a href="/ruang-lingkup-pengujian" class="nav-link">Ruang Lingkup Pengujian</a></li>
+<li><a href="/informasi" class="nav-link">Informasi</a></li>
+<li><a href="/contact" class="nav-link">Kontak</a></li>
+</ul>
+<button class="mobile-menu-btn" id="mobileMenuBtn">
+<i class="fa-solid fa-bars"></i>
+</button>
+</nav>
+</header>
+<main class="profile-main max-w-7xl mx-auto px-8 pb-16 space-y-[120px]">
+<section class="relative h-[600px] rounded-[32px] overflow-hidden flex items-center justify-center">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="ultra-modern clean bright laboratory with futuristic glass equipment and scientific instruments in a soft blue atmospheric lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhd3SPju_EcKUitBiUGdi5LM2CgMzbO_Y0lve9StPIQEtp-TWzEIXHOct2041e55OyWnmQVRMZzLsTopIp5xR6ofX60AzBiea6EdGEjr1UTXN1bHqSJ06GIcVBl05Gm6mwCEWf4z28g5R6SYenB8t-wCPCjKBLhXA80G3C0IdAzyxyM9bbofzJo6S4a74EMngUosxO1bsbN3MyqfXdXDVm3yxgG08lmmImklFa1WfWzFBI53c-b2CXLkhfYYPar4fE-gC9Xo_Jjqs\u0027')"></div>
+<div class="absolute inset-0 bg-blue-900/20 backdrop-blur-[2px]"></div>
+<div class="relative z-10 glass-card p-16 rounded-[32px] text-center max-w-4xl mx-4">
+<span class="font-label-caps text-label-caps text-primary tracking-[0.2em] mb-4 block">IDENTITAS KAMI</span>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-6">Profil Perusahaan</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto">
+                    Global Inspeksi Sistem (GIS) Laboratorium menghadirkan standar akurasi tertinggi dalam layanan pengujian lingkungan dan industri melalui inovasi teknologi masa depan.
+                </p>
+</div>
+</section>
+
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary mb-2">Tentang Kami</h2>
+<div class="h-1 w-24 bg-primary-container rounded-full"></div>
+</div>
+<div class="glass-card p-12 rounded-[32px] space-y-6">
+<p class="font-body-lg text-body-lg leading-relaxed text-on-surface">
+                        Global Inspeksi Sistem (GIS) adalah lembaga pengujian independen yang didedikasikan untuk memberikan hasil analisis yang presisi dan tidak memihak. Didirikan dengan visi untuk menjadi standar emas dalam pengujian laboratorium di Indonesia.
+                    </p>
+<p class="font-body-lg text-body-lg leading-relaxed text-on-surface">
+                        Sejak awal berdiri, kami telah berkomitmen pada kualitas dan integritas. Dengan tim ahli yang berpengalaman dan dukungan teknologi terkini, kami membantu industri memastikan kepatuhan terhadap standar lingkungan dan keselamatan kerja yang ketat.
+                    </p>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -inset-4 bg-primary/10 blur-[60px] rounded-full"></div>
+<div class="relative glass-card rounded-[40px] overflow-hidden aspect-square">
+<img class="w-full h-full object-cover" data-alt="microscopic view of crystalline structures in high-resolution detail with blue light refraction and scientific aesthetics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6Pm37V_Jw3Efy8Fsq0z-MWl51-bYCkPs3dSIJfK6Qtho4LZZfhMJnd6_ciQRRKE8lepnmnAopX4DHExWK8OiHYpO3Ecx9GSD51MdC25swVUSoiUlloRQngbVpxUXXoj1uwilV183VLj1gm1rFeXBFJSikxcaCyLklULPQM_VDvYiyGUHFjy8uPHneNCVZNf_hzLrFq7W2MWwlnq2I6YdYaMniX5XNw__va4oFVwF27zLlwLIsqBMH7k04O7CEFhH2QGDFY94yF9Y"/>
+</div>
+</div>
+</section>
+
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="glass-card p-12 rounded-[32px] border-l-4 border-l-primary flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-2xl bg-primary-container/20 flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="visibility">visibility</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-6">Visi Kami</h3>
+<p class="font-body-lg text-body-lg text-on-surface">
+                    Menjadi laboratorium pengujian lingkungan dan industri terkemuka di Indonesia yang diakui secara internasional dalam hal akurasi, inovasi, dan integritas profesional.
+                </p>
+</div>
+<div class="glass-card p-12 rounded-[32px] border-l-4 border-l-primary-container flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-2xl bg-primary-container/20 flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-6">Misi Kami</h3>
+<ul class="font-body-lg text-body-lg text-on-surface text-left space-y-4 list-disc pl-5">
+<li>Memberikan layanan pengujian dengan standar ISO/IEC 17025.</li>
+<li>Mengembangkan kompetensi sumber daya manusia secara berkelanjutan.</li>
+<li>Mengintegrasikan teknologi digital terbaru untuk efisiensi operasional.</li>
+<li>Mendukung pelestarian lingkungan melalui data analisis yang akurat.</li>
+</ul>
+</div>
+</section>
+
+<section class="space-y-16">
+<div class="text-center space-y-4">
+<h2 class="font-headline-md text-headline-md text-on-surface">Fasilitas & Keunggulan</h2>
+<p class="text-secondary font-body-lg">Standar operasional dengan teknologi masa depan</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="glass-card p-8 rounded-[32px] group hover:bg-white/80 transition-all duration-500">
+<div class="mb-6 inline-block p-4 bg-primary/10 rounded-2xl group-hover:shadow-[0_0_20px_rgba(0,122,255,0.3)] transition-all">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="biotech">biotech</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm mb-4">Peralatan Terbaik</h4>
+<p class="text-secondary font-body-md">Didukung oleh instrumentasi analisis tercanggih dengan tingkat presisi tinggi untuk hasil yang tak terbantahkan.</p>
+</div>
+<div class="glass-card p-8 rounded-[32px] group hover:bg-white/80 transition-all duration-500">
+<div class="mb-6 inline-block p-4 bg-primary/10 rounded-2xl group-hover:shadow-[0_0_20px_rgba(0,122,255,0.3)] transition-all">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="verified">verified</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm mb-4">Pengujian Standar</h4>
+<p class="text-secondary font-body-md">Setiap prosedur pengujian mengacu pada standar nasional (SNI) dan internasional (Standard Methods) yang berlaku.</p>
+</div>
+<div class="glass-card p-8 rounded-[32px] group hover:bg-white/80 transition-all duration-500">
+<div class="mb-6 inline-block p-4 bg-primary/10 rounded-2xl group-hover:shadow-[0_0_20px_rgba(0,122,255,0.3)] transition-all">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="sensors">sensors</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm mb-4">Teknologi Terkini</h4>
+<p class="text-secondary font-body-md">Implementasi sistem manajemen laboratorium berbasis digital untuk transparansi dan kecepatan akses data real-time.</p>
+</div>
+</div>
+</section>
+
+<section class="space-y-10">
+<div class="text-center space-y-4">
+<h2 class="font-headline-md text-headline-md text-on-surface">Kebijakan & Komitmen</h2>
+<p class="text-secondary font-body-lg">Integritas layanan laboratorium dalam setiap proses pengujian</p>
+</div>
+<div class="glass-card policy-tabs rounded-[32px] p-4">
+<ul class="policy-tab-nav mx-auto max-w-fit justify-center" role="tablist" aria-label="Kebijakan dan komitmen perusahaan">
+<li>
+<button class="policy-tab-button active px-8" type="button" role="tab" aria-selected="true" aria-controls="planning-tab" id="planning-tab-button" data-policy-tab="planning-tab">
+<span class="material-symbols-outlined" data-icon="balance">balance</span>
+<span>Kebijakan Ketidakberpihakan</span>
+</button>
+</li>
+<li>
+<button class="policy-tab-button px-8" type="button" role="tab" aria-selected="false" aria-controls="research-tab" id="research-tab-button" data-policy-tab="research-tab">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+<span>Komitmen Anti Suap</span>
+</button>
+</li>
+</ul>
+<div class="tab-content">
+<article id="planning-tab" class="policy-tab-panel active" role="tabpanel" aria-labelledby="planning-tab-button">
+<div class="max-w-4xl mx-auto text-center md:text-left">
+<span class="inline-block font-label-caps text-[14pt] bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent uppercase tracking-widest mb-3">Kebijakan</span>
+<h5 class="font-headline-md text-3xl font-bold text-slate-800 mb-8">Ketidakberpihakan</h5>
+<p class="text-justify text-on-surface font-body-lg leading-relaxed mb-6">
+                    Layanan laboratorium pengujian yang diselenggarakan oleh PT. Global Inspeksi Sistem bertujuan untuk memastikan kepercayaan pemohon atau klien terhadap produk yang dihasilkan, sehingga memenuhi persyaratan Standar Nasional (SNI), Sistem Manajemen, dan persyaratan lainnya yang telah ditetapkan. Hal ini juga bertujuan untuk memberikan perlindungan kepada konsumen serta meningkatkan daya saing dalam pasar domestik. Setiap personel di PT. Global Inspeksi Sistem, sesuai dengan kompetensinya di semua tingkatan organisasi, wajib memenuhi tuntutan mutu layanan laboratorium pengujian produk dan sistem manajemen, dan menghindari segala bentuk tekanan, termasuk tekanan komersial, yang dapat mempengaruhi mutu pelayanan sertifikasi. Layanan laboratorium pengujian produk dan Sistem Manajemen oleh Lembaga Sertifikasi Global Inspeksi Sistem dilaksanakan sesuai dengan lingkup sertifikasi yang telah ditetapkan.
+                </p>
+<p class="text-justify text-on-surface font-body-lg leading-relaxed mb-6">
+                    Tangerang, 1 December 2016 <br>
+                    PT Global Inspeksi Sistem
+                </p>
+<p class="text-justify text-on-surface font-body-lg leading-relaxed">
+<span class="font-bold">Director</span><br><br>
+                    Vera Marini
+                </p>
+</div>
+</article>
+
+<article id="research-tab" class="policy-tab-panel" role="tabpanel" aria-labelledby="research-tab-button">
+<div class="max-w-4xl mx-auto text-center md:text-left">
+<span class="inline-block font-label-caps text-[14pt] bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent uppercase tracking-widest mb-3">Komitmen</span>
+<h5 class="font-headline-md text-3xl font-bold text-slate-800 mb-8">Anti Suap</h5>
+<p class="text-justify text-on-surface font-body-lg leading-relaxed mb-6">
+                    PT. Global Inspeksi Sistem berkomitmen untuk menjalankan anti-suap dalam melaksanakan layanannya baik dalam sertifikasi, inspeksi, dan juga mengendalikan risiko suap. Setiap penipuan, penipuan, ketidakjujuran, pencurian/penggelapan, pelanggaran dalam proses pengadaan barang dan jasa, penyalahgunaan posisi/otoritas, penyuapan/gratifikasi yang terjadi di PT. Global Inspeksi Sistem atau terkait dengan PT. Global Inspeksi Sistem harap dapat dilaporkan agar dapat segera ditindaklanjuti. PT. Global Inspeksi Sistem menganalisis laporan dan menindaklanjuti laporan pelanggaran berdasarkan bukti yang diberikan dan melindungi Pelapor.
+                </p>
+<p class="text-justify text-on-surface font-body-lg leading-relaxed mb-6">
+                    Pelaporan ini dilakukan dengan dukungan data yang relevan dan dimaksudkan untuk kepentingan Perusahaan, tidak dimaksudkan untuk memaksakan seseorang. Pelaporan dapat disampaikan kepada Direktur Global Konstruksi Sertifikasi atau Bagian Informasi Umum, melalui informasi sebagai berikut:
+                </p>
+<div class="bg-white/60 backdrop-blur-md border border-white shadow-sm rounded-2xl p-6 md:p-8 mb-6 font-body-md text-on-surface text-left">
+<div class="grid grid-cols-[100px_1fr] sm:grid-cols-[160px_1fr] gap-y-3 gap-x-4 break-words">
+<div class="font-bold text-primary">Mail</div><div>globalinspeksisistem@gmail.com</div>
+<div class="font-bold text-primary">Telp</div><div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+<div class="font-bold text-primary">Site web</div><div>www.gislaboratorium.com</div>
+<div class="font-bold text-primary">Letter</div><div>PT. Global Inspeksi Sistem</div>
+<div class="font-bold text-primary">Head Office (Surabaya)</div><div>Jl. Pahlawan No.2, Kwadengan Barat, Lemahputro, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213</div>
+<div class="font-bold text-primary">Branch Office (Jakarta)</div><div>Jl. Raya Daan Mogot No. 89 RT.2/RW.2, Wijaya Kusuma, Kec. Grogol Petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11460</div>
+</div>
+</div>
+<p class="text-justify text-on-surface font-body-lg leading-relaxed mb-8">
+                    Pelapor harus memberikan identitas mereka dalam melaporkan keluhan dan memastikan bahwa setiap informasi tentang identitas pihak pelapor dan laporannya dijaga kerahasiaannya. Pelaporan dilakukan di bawah prinsip anonim, rahasia dan independen.
+                </p>
+<p class="text-justify text-on-surface font-body-lg leading-relaxed">
+<span class="font-bold">Director</span><br><br>
+                    Vera marini
+                </p>
+</div>
+</article>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="footer" id="kontak">
+<div class="container">
+<div class="footer-panel glass-dark">
+<div class="footer-grid">
+<div>
+<h4 class="footer-col-title">Contact</h4>
+<div class="footer-text"><i class="fa-solid fa-envelope"></i> info@gislaboratorium.com</div>
+<div class="footer-text" style="align-items: flex-start;">
+<i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
+<div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+</div>
+<div class="footer-text"><i class="fa-solid fa-globe"></i> www.gislaboratorium.com</div>
+</div>
+<div>
+<h4 class="footer-col-title">Link</h4>
+<a href="/" class="footer-link">Beranda</a>
+<a href="/profile" class="footer-link">Profile</a>
+<a href="/service" class="footer-link">Layanan</a>
+<a href="/ruang-lingkup-pengujian" class="footer-link">Ruang Lingkup Pengujian</a>
+<a href="/informasi" class="footer-link">Informasi</a>
+<a href="/contact" class="footer-link">Kontak</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+© 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
+</div>
+</div>
+</footer>
+
+<div id="whatsapp-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 font-['Inter']">
+    <div id="whatsapp-window" class="hidden w-[340px] bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 transition-all origin-bottom-right">
+        <div class="bg-[#075E54] p-4 flex items-center justify-between text-white">
+            <div class="flex items-center gap-3">
+                <div class="bg-white p-1 rounded-full">
+                    <img src="https://giscert.com/assets/client/images/GISlogo.png" class="w-8 h-8 object-contain" alt="Logo">
+                </div>
+                <div>
+                    <div class="font-bold text-sm">PT Global Inspeksi Sistem</div>
+                    <div class="text-xs text-white/80">Membalas secepatnya</div>
+                </div>
+            </div>
+            <button id="close-wa" class="text-white/80 hover:text-white transition-colors">
+                <span class="material-symbols-outlined text-[24px]">close</span>
+            </button>
+        </div>
+        <div class="bg-[#ECE5DD] p-4 min-h-[240px] relative before:content-[''] before:absolute before:inset-0 before:bg-[url('https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg')] before:opacity-10 before:mix-blend-multiply before:pointer-events-none">
+            <div class="bg-white rounded-xl p-3 shadow-sm text-sm text-gray-800 w-[85%] mb-4 relative ml-0 border-l-4 border-[#25D366]">
+                Halo! Ada yang bisa kami bantu mengenai layanan sertifikasi dan inspeksi GIS?
+            </div>
+            <a href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium" target="_blank" class="relative flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition-all group w-full border border-transparent hover:border-[#25D366]/30">
+                <div class="relative flex-shrink-0">
+                    <img src="https://2.bp.blogspot.com/-y6xNA_8TpFo/XXWzkdYk0MI/AAAAAAAAA5s/RCzTBJ_FbMwVt5AEZKekwQqiDNqdNQJjgCLcBGAs/s70/supportmale.png" class="w-12 h-12 rounded-full bg-blue-50 object-cover" alt="CS">
+                    <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#25D366] rounded-full border-2 border-white"></div>
+                </div>
+                <div class="flex-1">
+                    <div class="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Support</div>
+                    <div class="text-sm font-bold text-gray-800 group-hover:text-[#075E54]">Customer Service 1</div>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-[#25D366]/10 flex items-center justify-center text-[#25D366] group-hover:bg-[#25D366] group-hover:text-white transition-colors">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <button id="toggle-wa" class="w-14 h-14 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full shadow-lg shadow-[#25D366]/30 flex items-center justify-center transition-transform hover:scale-110 relative group">
+        <span class="absolute right-full mr-4 bg-white text-gray-800 text-sm font-semibold px-4 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 after:-right-2 after:border-8 after:border-transparent after:border-l-white">
+            Butuh Bantuan?
+        </span>
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </button>
+</div>
+`,
+  },
+  {
+    key: "service",
+    title: "Services | GIS Laboratorium",
+    description:
+      "Layanan pengujian kualitas, lingkungan, produk dan izin edar, serta SNI produk GIS Laboratorium.",
+    bodyClass:
+      "bg-background font-body-md text-on-background selection:bg-primary selection:text-white",
+    styles: `@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --gis-primary: #0A2540; --gis-secondary: #0070F3; --gis-accent: #00DFD8; --gis-light-blue: #EBF4F8;
+            --gis-white: #FFFFFF; --gis-text-muted: #64748B;
+            --gis-glass-dark-bg: rgba(10, 37, 64, 0.4); --gis-glass-dark-border: rgba(255, 255, 255, 0.15);
+            --gis-shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+            --gis-radius-pill: 100px; --gis-radius-md: 24px; --gis-radius-lg: 32px;
+            --gis-font-main: 'Plus Jakarta Sans', sans-serif; --gis-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .navbar-wrapper { position: fixed; top: 24px; left: 0; width: 100%; z-index: 1000; display: flex; justify-content: center; padding: 0 24px; transition: var(--gis-transition); }
+        .navbar-wrapper.scrolled { top: 12px; }
+        .navbar { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1100px; padding: 12px 24px; border-radius: var(--gis-radius-pill); background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); font-family: var(--gis-font-main); }
+        .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; color: var(--gis-primary); letter-spacing: -0.5px; text-decoration: none; }
+        .nav-brand img { height: 28px; width: auto; transform: scale(1.8); transform-origin: left center; margin-right: 36px; }
+        .nav-menu { display: flex; gap: 8px; list-style: none; margin: 0; padding: 0; }
+        .nav-link { display: block; padding: 8px 16px; border-radius: var(--gis-radius-pill); font-weight: 500; font-size: 0.95rem; color: var(--gis-text-muted); transition: var(--gis-transition); text-decoration: none; }
+        .nav-link:hover { color: var(--gis-primary); background: rgba(0, 112, 243, 0.05); }
+        .nav-link.active { background: rgba(0, 223, 216, 0.15); color: var(--gis-secondary); font-weight: 600; }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--gis-primary); background: none; border: none; cursor: pointer; }
+        .gis-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .glass-dark { background: var(--gis-glass-dark-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--gis-glass-dark-border); color: var(--gis-white); }
+        .glass { background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: var(--gis-shadow-soft); }
+        .services-section { padding: 100px 0 58px; text-align: center; font-family: var(--gis-font-main); }
+        .services-header { margin-bottom: 42px; }
+        .section-title { font-size: 2.5rem; font-weight: 800; color: var(--gis-primary); margin-bottom: 24px; }
+        .carousel-container { position: relative; padding: 0; overflow: visible; width: 100%; }
+        .services-track { display: flex; flex-direction: column; gap: 24px; width: 100%; animation: none; }
+        .services-track:hover { animation-play-state: initial; }
+        .service-card { width: 100%; min-height: 220px; border-radius: var(--gis-radius-lg); overflow: hidden; text-align: left; transition: var(--gis-transition); display: grid; grid-template-columns: minmax(260px, 360px) minmax(0, 1fr); cursor: pointer; color: inherit; }
+        .service-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -10px rgba(0, 112, 243, 0.15); }
+        .service-card.active-service { border-color: rgba(0, 112, 243, 0.35); box-shadow: 0 22px 46px -18px rgba(0, 112, 243, 0.25); }
+        .service-card:focus-visible { outline: 4px solid rgba(0, 112, 243, 0.18); outline-offset: 4px; }
+        .service-img { height: 100%; min-height: 220px; width: 100%; object-fit: cover; display: block; }
+        .service-content { padding: 34px 38px; min-height: 220px; display: flex; flex-direction: column; justify-content: center; }
+        .service-title { font-size: clamp(1.35rem, 2.6vw, 2rem); font-weight: 800; color: var(--gis-primary); margin-bottom: 12px; letter-spacing: -0.01em; }
+        .service-desc { max-width: 760px; color: #405a70; font-size: 1rem; font-weight: 600; line-height: 1.75; margin-bottom: 22px; }
+        .service-btn { margin-top: auto; align-self: flex-start; background: transparent; color: var(--gis-secondary); font-weight: 800; border: 1px solid rgba(0, 112, 243, 0.2); padding: 10px 22px; border-radius: var(--gis-radius-pill); transition: var(--gis-transition); }
+        .service-card:hover .service-btn { background: var(--gis-secondary); color: var(--gis-white); border-color: var(--gis-secondary); }
+        .service-detail-section { display: none; padding: 24px 0 100px; font-family: var(--gis-font-main); }
+        .service-detail-section.active { display: block; }
+        .service-detail-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.7fr); gap: 32px; align-items: start; }
+        .service-detail-article, .service-detail-sidebar { border-radius: var(--gis-radius-lg); background: rgba(255, 255, 255, 0.72); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.82); box-shadow: var(--gis-shadow-soft); }
+        .service-detail-article { overflow: hidden; }
+        .detail-cover { width: 100%; height: 360px; object-fit: cover; display: block; }
+        .detail-body { padding: 42px; }
+        .detail-kicker { display: inline-flex; align-items: center; gap: 10px; color: var(--gis-secondary); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+        .detail-title { margin-top: 14px; color: var(--gis-primary); font-size: clamp(2rem, 4vw, 3.35rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; }
+        .detail-copy { margin-top: 22px; color: #405a70; font-size: 1.02rem; font-weight: 600; line-height: 1.85; text-align: justify; }
+        .detail-body h3 { margin-top: 34px; color: var(--gis-primary); font-size: 1.4rem; font-weight: 800; }
+        .detail-list { display: grid; gap: 14px; margin-top: 18px; padding: 0; list-style: none; }
+        .detail-list li { display: flex; align-items: flex-start; gap: 12px; color: #405a70; font-weight: 600; line-height: 1.7; }
+        .detail-list i { margin-top: 6px; color: var(--gis-accent); }
+        .service-detail-sidebar { position: sticky; top: 110px; padding: 28px; }
+        .sidebar-box + .sidebar-box { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(10, 37, 64, 0.1); }
+        .sidebar-title { color: var(--gis-primary); font-size: 1.1rem; font-weight: 800; margin-bottom: 14px; }
+        .sidebar-link { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; border: 0; background: transparent; padding: 12px 0; color: #405a70; font-weight: 700; text-align: left; cursor: pointer; border-bottom: 1px solid rgba(10, 37, 64, 0.08); }
+        .sidebar-link:hover { color: var(--gis-secondary); }
+        .download-btn, .detail-contact-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 12px; padding: 12px 18px; border-radius: var(--gis-radius-pill); color: var(--gis-white); background: linear-gradient(135deg, var(--gis-secondary), var(--gis-accent)); font-weight: 800; text-decoration: none; transition: var(--gis-transition); }
+        .download-btn:hover, .detail-contact-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 34px -22px rgba(0, 112, 243, 0.7); }
+        .sidebar-note { color: var(--gis-text-muted); font-size: 0.95rem; font-weight: 600; line-height: 1.7; }
+
+        .footer { position: relative; padding: 80px 0 40px; background: linear-gradient(135deg, var(--gis-primary), #0e4e8a); color: var(--gis-white); overflow: hidden; font-family: var(--gis-font-main); }
+        .footer-panel { position: relative; z-index: 10; padding: 60px; border-radius: var(--gis-radius-lg); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
+        .footer-col-title { font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 24px; }
+        .footer-text { color: var(--gis-light-blue); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+        .footer-link { color: var(--gis-light-blue); transition: var(--gis-transition); display: block; margin-bottom: 12px; text-decoration: none; }
+        .footer-link:hover { color: var(--gis-accent); transform: translateX(5px); }
+        .footer-bottom { position: relative; z-index: 10; text-align: center; margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; }
+
+        .glass-panel { backdrop-filter: blur(20px); background: rgba(255, 255, 255, 0.65); border: 1px solid transparent; border-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2)) 1; }
+        .liquid-bg { background: radial-gradient(circle at top left, #f8f9ff 0%, #e5eeff 50%, #d8e2ff 100%); position: fixed; inset: 0; z-index: -1; }
+        .glossy-button { position: relative; overflow: hidden; }
+        .glossy-button::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent); transform: rotate(45deg); transition: 0.5s; }
+        .glossy-button:hover::after { left: 100%; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) {
+            .navbar { padding: 12px 20px; }
+            .nav-brand { font-size: 1rem; }
+            .nav-brand img { margin-right: 26px; transform: scale(1.55); }
+            .nav-menu { position: absolute; top: 100%; left: 24px; right: 24px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); flex-direction: column; padding: 20px; border-radius: var(--gis-radius-md); box-shadow: var(--gis-shadow-soft); display: none; margin-top: 10px; }
+            .nav-menu.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-panel { padding: 32px 20px; }
+            .service-card { grid-template-columns: 1fr; min-height: auto; }
+            .service-img { min-height: 220px; height: 220px; }
+            .service-content { padding: 26px 22px; min-height: auto; }
+            .service-detail-layout { grid-template-columns: 1fr; }
+            .service-detail-sidebar { position: static; }
+            .detail-cover { height: 260px; }
+            .detail-body { padding: 28px 22px; }
+        }
+    `,
+    html: `
+<div class="liquid-bg"></div>
+<header class="navbar-wrapper" id="navbar">
+<nav class="navbar">
+<a href="/" class="nav-brand">
+<img src="/landing/animation/logo-lab.png" alt="GISLAB">
+                Global Inspeksi Sistem
+            </a>
+<ul class="nav-menu" id="navMenu">
+<li><a href="/" class="nav-link">Beranda</a></li>
+<li><a href="/profile" class="nav-link">Profile</a></li>
+<li><a href="/service" class="nav-link active">Layanan</a></li>
+<li><a href="/ruang-lingkup-pengujian" class="nav-link">Ruang Lingkup Pengujian</a></li>
+<li><a href="/informasi" class="nav-link">Informasi</a></li>
+<li><a href="/contact" class="nav-link">Kontak</a></li>
+</ul>
+<button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka menu">
+<i class="fa-solid fa-bars"></i>
+</button>
+</nav>
+</header>
+<main>
+<section class="relative h-[614px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30" data-alt="A clean, futuristic laboratory interior with white surfaces and blue glowing ambient light. High-end scientific equipment like chromatographs and microscopes are arranged on sleek glass benches. The atmosphere is clinical, visionary, and hyper-modern, reflecting a top-tier digital biotech environment with soft depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8V5p_RQ85djBobSPDB33E4q8H_dWpqkxXSH1O0Ei07dCwGWxdVAv69f4vCt9keM2BFgJtW3FW10wSrdR9rcumQAL2tNoOUaDFoHsKyVZGpY88MifcLJU5lXEzM9vF44gKlzH2lwrTn3etldj38lFUBIkEbwLUgPuz02BPqaQZTIRNhWS892Pd2rKAqAXRgxlN8PcF5vnqWMtl4FkrIc2xXgmi11G-suRtv2EIlAnH6zE3kPDuZN72t2sIYRdnWa5Ln2QEI0fL57k"/>
+</div>
+<div class="relative z-10 text-center px-4 max-w-4xl">
+<h1 class="font-display-lg text-display-lg text-primary mb-4">GIS Modern Laboratory Services</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto">
+                    Merintis analisis presisi melalui kerangka diagnostik berakurasi tinggi. Kami memberikan integritas struktural absolut dalam setiap penilaian kimia, biologi, dan lingkungan.
+                </p>
+</div>
+</section>
+<section class="services-section" id="layanan">
+<div class="gis-container">
+<div class="services-header">
+<h2 class="section-title">Layanan Kami</h2>
+</div>
+
+<div class="carousel-container">
+<div class="services-track">
+<article class="service-card glass" role="button" tabindex="0" data-service-detail="quality" aria-label="Lihat detail Pengujian Kualitas">
+<img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=900"
+alt="Pengujian Kualitas" class="service-img">
+<div class="service-content">
+<h3 class="service-title">Pengujian Kualitas</h3>
+<p class="service-desc">Layanan pengujian mutu bahan, produk, dan sampel untuk membantu perusahaan memastikan kualitas, keamanan, konsistensi, serta kesesuaian terhadap standar teknis yang berlaku.</p>
+<span class="service-btn">Read More</span>
+</div>
+</article>
+
+<article class="service-card glass" role="button" tabindex="0" data-service-detail="environment" aria-label="Lihat detail Pengujian Lingkungan">
+<img src="https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=900"
+alt="Pengujian Lingkungan" class="service-img">
+<div class="service-content">
+<h3 class="service-title">Pengujian Lingkungan</h3>
+<p class="service-desc">Analisis parameter lingkungan untuk mendukung pemantauan kualitas, kepatuhan regulasi, pengendalian pencemaran, dan pengambilan keputusan berbasis data laboratorium.</p>
+<span class="service-btn">Read More</span>
+</div>
+</article>
+
+<article class="service-card glass" role="button" tabindex="0" data-service-detail="permit" aria-label="Lihat detail Pengujian Produk dan Izin Edar">
+<img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=900"
+alt="Pengujian Produk dan Izin Edar" class="service-img">
+<div class="service-content">
+<h3 class="service-title">Pengujian Produk dan Izin Edar</h3>
+<p class="service-desc">Dukungan pengujian produk sebagai dasar teknis dokumen registrasi, izin edar, evaluasi kesesuaian, dan pemenuhan persyaratan administrasi produk.</p>
+<span class="service-btn">Read More</span>
+</div>
+</article>
+
+<article class="service-card glass" role="button" tabindex="0" data-service-detail="sni" aria-label="Lihat detail Pengujian SNI Produk">
+<img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=900"
+alt="Pengujian SNI Produk" class="service-img">
+<div class="service-content">
+<h3 class="service-title">Pengujian SNI Produk</h3>
+<p class="service-desc">Pengujian produk berdasarkan persyaratan SNI untuk mendukung proses sertifikasi, pembuktian mutu, serta kepercayaan konsumen dan pasar.</p>
+<span class="service-btn">Read More</span>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="service-detail-section" id="detail-layanan" aria-live="polite">
+<div class="gis-container">
+<div class="service-detail-layout">
+<article class="service-detail-article">
+<img id="detailCover" class="detail-cover" src="https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=1200" alt="Pengujian laboratorium">
+<div class="detail-body">
+<span class="detail-kicker"><i class="fa-solid fa-flask-vial"></i> Detail Layanan</span>
+<h2 class="detail-title" id="detailTitle">Pengujian Kualitas Tanah & Sedimen</h2>
+<p class="detail-copy" id="detailIntro">
+Kualitas tanah dan sedimen yang baik sangat penting untuk menjaga kesehatan ekosistem, aktivitas industri, pertanian, dan sumber daya air. GISLAB menyediakan layanan pengujian komprehensif untuk membantu mendeteksi kontaminan berbahaya serta memastikan hasil analisis dapat digunakan sebagai dasar pengambilan keputusan.
+</p>
+
+<h3 id="detailWhyTitle">Mengapa pengujian ini penting?</h3>
+<p class="detail-copy" id="detailWhy">
+Tanah atau sedimen yang terkontaminasi dapat memengaruhi produktivitas lahan, kualitas air tanah, keamanan produk, dan kesehatan ekosistem secara keseluruhan. Pengujian menjadi langkah penting untuk memantau kondisi lingkungan, mengelola risiko kontaminasi, dan memastikan kepatuhan terhadap standar yang berlaku.
+</p>
+
+<h3>Layanan pengujian yang kami solusikan</h3>
+<ul class="detail-list" id="detailList">
+<li><i class="fa-solid fa-check"></i><span>Pengujian tanah untuk mendeteksi logam berat, pestisida, dan senyawa organik berbahaya.</span></li>
+<li><i class="fa-solid fa-check"></i><span>Pengujian sedimen dari sungai, danau, area pesisir, atau area industri untuk mengetahui kadar kontaminan.</span></li>
+<li><i class="fa-solid fa-check"></i><span>Analisis kesuburan tanah untuk mendukung pengelolaan lahan yang lebih efektif dan berkelanjutan.</span></li>
+</ul>
+
+<h3>Konsultansi dan rekomendasi teknis</h3>
+<p class="detail-copy" id="detailConsult">
+Selain pengujian, GISLAB membantu perusahaan dan instansi memahami hasil analisis melalui konsultasi teknis. Tim kami dapat membantu menentukan parameter uji, menyusun rencana pemantauan, dan memberikan rekomendasi awal untuk pengelolaan kualitas lingkungan atau produk.
+</p>
+
+<h3>Komitmen kami</h3>
+<p class="detail-copy" id="detailCommitment">
+GISLAB berkomitmen memberikan hasil yang akurat, layanan yang responsif, dan proses yang terdokumentasi. Kami hadir sebagai mitra pengujian profesional untuk mendukung mutu produk, kepatuhan regulasi, perlindungan lingkungan, dan kepercayaan pelanggan.
+</p>
+</div>
+</article>
+
+<aside class="service-detail-sidebar">
+<div class="sidebar-box">
+<h3 class="sidebar-title">Layanan GISLAB</h3>
+<button class="sidebar-link" type="button" data-service-detail="quality">Pengujian Kualitas <i class="fa-solid fa-arrow-right"></i></button>
+<button class="sidebar-link" type="button" data-service-detail="environment">Pengujian Lingkungan <i class="fa-solid fa-arrow-right"></i></button>
+<button class="sidebar-link" type="button" data-service-detail="permit">Pengujian Produk dan Izin Edar <i class="fa-solid fa-arrow-right"></i></button>
+<button class="sidebar-link" type="button" data-service-detail="sni">Pengujian SNI Produk <i class="fa-solid fa-arrow-right"></i></button>
+</div>
+<div class="sidebar-box">
+<h3 class="sidebar-title">Download Profil GISLAB</h3>
+<p class="sidebar-note">Unduh profil perusahaan untuk informasi lengkap mengenai layanan pengujian, analisis, dan dukungan laboratorium kami.</p>
+<a href="#" class="download-btn"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>
+<a href="#" class="download-btn"><i class="fa-solid fa-file-word"></i> Download Doc</a>
+</div>
+<div class="sidebar-box">
+<h3 class="sidebar-title">Butuh rekomendasi parameter?</h3>
+<p class="sidebar-note">Hubungi tim GISLAB untuk menentukan parameter uji yang paling sesuai dengan kebutuhan produk atau lingkungan Anda.</p>
+<a href="/contact" class="detail-contact-btn"><i class="fa-solid fa-headset"></i> Kontak Kami</a>
+</div>
+</aside>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer" id="kontak">
+<div class="gis-container">
+<div class="footer-panel glass-dark">
+<div class="footer-grid">
+<div>
+<h4 class="footer-col-title">Contact</h4>
+<div class="footer-text"><i class="fa-solid fa-envelope"></i> info@gislaboratorium.com</div>
+<div class="footer-text" style="align-items: flex-start;">
+<i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
+<div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+</div>
+<div class="footer-text"><i class="fa-solid fa-globe"></i> www.gislaboratorium.com</div>
+</div>
+
+<div>
+<h4 class="footer-col-title">Link</h4>
+<a href="/" class="footer-link">Beranda</a>
+<a href="/profile" class="footer-link">Profile</a>
+<a href="/service" class="footer-link">Layanan</a>
+<a href="/ruang-lingkup-pengujian" class="footer-link">Ruang Lingkup Pengujian</a>
+<a href="/informasi" class="footer-link">Informasi</a>
+<a href="/contact" class="footer-link">Kontak</a>
+</div>
+
+</div>
+</div>
+<div class="footer-bottom">
+© 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
+</div>
+</div>
+</footer>
+`,
+  },
+  {
+    key: "contact",
+    title: "Kontak - GIS Laboratorium",
+    description:
+      "Hubungi GIS Laboratorium untuk kebutuhan pengujian, sertifikasi, inspeksi, dan konsultasi parameter laboratorium.",
+    bodyClass: "",
+    styles: `@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #0A2540; --secondary: #0070F3; --accent: #00DFD8; --light-blue: #EBF4F8;
+            --white: #FFFFFF; --text-dark: #1E293B; --text-muted: #64748B;
+            --glass-bg: rgba(255, 255, 255, 0.72); --glass-border: rgba(255, 255, 255, 0.82);
+            --glass-dark-bg: rgba(10, 37, 64, 0.4); --glass-dark-border: rgba(255, 255, 255, 0.15);
+            --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08); --shadow-hover: 0 22px 46px -20px rgba(0, 112, 243, 0.28);
+            --radius-pill: 100px; --radius-md: 24px; --radius-lg: 32px;
+            --font-main: 'Plus Jakarta Sans', sans-serif; --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-main); color: var(--text-dark); background-color: #FAFCFF; line-height: 1.6; overflow-x: hidden; position: relative; }
+        body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(circle at 14% 34%, rgba(0, 223, 216, 0.08), transparent 27%), radial-gradient(circle at 88% 14%, rgba(0, 112, 243, 0.08), transparent 28%), linear-gradient(180deg, #FAFCFF 0%, #EFF6FF 100%); z-index: -2; pointer-events: none; }
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .glass { background: var(--glass-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--glass-border); box-shadow: var(--shadow-soft); }
+        .glass-dark { background: var(--glass-dark-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-dark-border); color: var(--white); }
+        .navbar-wrapper { position: fixed; top: 24px; left: 0; width: 100%; z-index: 1000; display: flex; justify-content: center; padding: 0 24px; transition: var(--transition); }
+        .navbar-wrapper.scrolled { top: 12px; }
+        .navbar { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1100px; padding: 12px 24px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); }
+        .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; color: var(--primary); letter-spacing: 0; }
+        .nav-brand img { height: 28px; width: auto; transform: scale(1.8); transform-origin: left center; margin-right: 36px; }
+        .nav-menu { display: flex; gap: 8px; }
+        .nav-link { display: block; padding: 8px 16px; border-radius: var(--radius-pill); font-weight: 500; font-size: 0.95rem; color: var(--text-muted); transition: var(--transition); }
+        .nav-link:hover { color: var(--primary); background: rgba(0, 112, 243, 0.05); }
+        .nav-link.active { background: rgba(0, 223, 216, 0.15); color: var(--secondary); font-weight: 600; }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--primary); background: none; border: none; cursor: pointer; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 24px; border-radius: var(--radius-pill); border: none; cursor: pointer; font-family: inherit; font-size: 1rem; font-weight: 800; transition: var(--transition); }
+        .btn-primary { color: var(--white); background: linear-gradient(135deg, var(--secondary), var(--accent)); box-shadow: 0 16px 34px -22px rgba(0, 112, 243, 0.85); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+        .contact-main { padding-top: 118px; }
+        .contact-hero { position: relative; min-height: 560px; display: flex; align-items: center; overflow: hidden; border-radius: var(--radius-lg); margin: 24px auto 0; }
+        .contact-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10, 37, 64, 0.82), rgba(10, 37, 64, 0.42), rgba(250, 252, 255, 0.26)), url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80&w=1800') center/cover; z-index: 0; }
+        .contact-hero::after { content: ''; position: absolute; inset: auto 0 0; height: 40%; background: linear-gradient(0deg, rgba(250, 252, 255, 0.96), transparent); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; width: min(680px, 100%); padding: 72px 56px; color: var(--white); }
+        .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px; color: var(--accent); font-size: 0.82rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+        .hero-title { color: var(--white); font-size: clamp(2.4rem, 5vw, 4.6rem); font-weight: 800; line-height: 1.05; letter-spacing: 0; margin-bottom: 22px; }
+        .hero-text { max-width: 600px; color: rgba(255, 255, 255, 0.86); font-size: 1.1rem; font-weight: 600; }
+        .quick-contact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: -58px; position: relative; z-index: 5; }
+        .quick-card { min-height: 150px; padding: 28px; border-radius: var(--radius-md); transition: var(--transition); }
+        .quick-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+        .quick-icon { width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; border-radius: 16px; color: var(--secondary); background: rgba(0, 112, 243, 0.1); font-size: 1.25rem; margin-bottom: 18px; }
+        .quick-label { color: var(--primary); font-size: 1.05rem; font-weight: 800; margin-bottom: 8px; }
+        .quick-value { color: #405a70; font-weight: 700; overflow-wrap: anywhere; }
+        .section { padding: 96px 0; }
+        .section-header { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 40px; align-items: end; margin-bottom: 42px; }
+        .section-title { color: var(--primary); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; line-height: 1.12; letter-spacing: 0; }
+        .section-copy { color: #405a70; font-size: 1.05rem; font-weight: 600; line-height: 1.8; }
+        .office-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+        .office-card { display: grid; grid-template-rows: 230px 1fr; overflow: hidden; border-radius: var(--radius-lg); }
+        .office-image { position: relative; overflow: hidden; }
+        .office-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 0.45s ease; }
+        .office-card:hover .office-image img { transform: scale(1.05); }
+        .office-body { padding: 34px; }
+        .office-kicker { color: var(--secondary); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+        .office-title { color: var(--primary); font-size: 1.5rem; font-weight: 800; margin-bottom: 18px; }
+        .office-list { display: grid; gap: 14px; }
+        .office-list li { display: flex; align-items: flex-start; gap: 12px; color: #405a70; font-weight: 650; }
+        .office-list i { width: 20px; margin-top: 5px; color: var(--accent); }
+        .contact-panel { display: grid; grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr); gap: 28px; align-items: stretch; }
+        .contact-info-panel, .form-panel { border-radius: var(--radius-lg); padding: 38px; }
+        .contact-info-panel { color: var(--white); background: linear-gradient(135deg, rgba(10, 37, 64, 0.96), rgba(0, 88, 188, 0.84)), url('https://images.unsplash.com/photo-1581092919535-7146ff1a590b?auto=format&fit=crop&q=80&w=1200') center/cover; box-shadow: var(--shadow-soft); }
+        .contact-info-panel .section-title { color: var(--white); font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 18px; }
+        .contact-info-panel p { color: rgba(255, 255, 255, 0.82); font-weight: 600; margin-bottom: 28px; }
+        .info-list { display: grid; gap: 18px; }
+        .info-item { display: flex; gap: 14px; align-items: flex-start; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.16); }
+        .info-item i { width: 44px; height: 44px; flex: 0 0 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 14px; background: rgba(255, 255, 255, 0.12); color: var(--accent); }
+        .info-item strong { display: block; color: var(--white); font-weight: 800; margin-bottom: 4px; }
+        .info-item span { color: rgba(255, 255, 255, 0.82); font-weight: 600; overflow-wrap: anywhere; }
+        .form-panel { position: relative; overflow: hidden; }
+        .form-panel::before { content: ''; position: absolute; top: -80px; right: -80px; width: 220px; height: 220px; border-radius: 50%; background: rgba(0, 223, 216, 0.12); pointer-events: none; }
+        .form-title { position: relative; color: var(--primary); font-size: 2rem; font-weight: 800; margin-bottom: 10px; }
+        .form-copy { position: relative; color: var(--text-muted); font-weight: 600; margin-bottom: 28px; }
+        .contact-form { position: relative; display: grid; gap: 18px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .field { display: grid; gap: 8px; }
+        .field label { color: var(--primary); font-size: 0.88rem; font-weight: 800; }
+        .field input, .field textarea { width: 100%; border: 1px solid rgba(10, 37, 64, 0.1); border-radius: 18px; padding: 15px 16px; color: var(--text-dark); background: rgba(255, 255, 255, 0.82); font: inherit; outline: none; transition: var(--transition); }
+        .field textarea { min-height: 150px; resize: vertical; }
+        .field input:focus, .field textarea:focus { border-color: rgba(0, 112, 243, 0.45); box-shadow: 0 0 0 4px rgba(0, 112, 243, 0.1); }
+        .form-message { display: none; color: #0f766e; font-weight: 800; }
+        .form-message.active { display: block; }
+        .map-section { padding: 0 0 96px; }
+        .map-shell { overflow: hidden; border-radius: var(--radius-lg); min-height: 420px; }
+        .map-shell iframe { width: 100%; height: 420px; display: block; border: 0; filter: saturate(0.98) contrast(1.02); }
+
+        .footer { position: relative; padding: 80px 0 40px; background: linear-gradient(135deg, var(--primary), #0e4e8a); color: var(--white); overflow: hidden; }
+        .footer-panel { position: relative; z-index: 10; padding: 60px; border-radius: var(--radius-lg); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
+        .footer-col-title { font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 24px; }
+        .footer-text { color: var(--light-blue); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+        .footer-link { color: var(--light-blue); transition: var(--transition); display: block; margin-bottom: 12px; text-decoration: none; }
+        .footer-link:hover { color: var(--accent); transform: translateX(5px); }
+        .footer-bottom { position: relative; z-index: 10; text-align: center; margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; }
+
+        .whatsapp-widget { position: fixed; right: 24px; bottom: 24px; z-index: 1100; }
+        .whatsapp-toggle { width: 58px; height: 58px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 50%; color: var(--white); background: #25D366; font-size: 1.9rem; box-shadow: 0 18px 34px -18px rgba(37, 211, 102, 0.9); cursor: pointer; transition: var(--transition); }
+        .whatsapp-toggle:hover { transform: scale(1.06); background: #128C7E; }
+        .whatsapp-window { display: none; position: absolute; right: 0; bottom: 72px; width: min(340px, calc(100vw - 48px)); overflow: hidden; border-radius: 22px; background: var(--white); box-shadow: 0 22px 55px -20px rgba(10, 37, 64, 0.42); }
+        .whatsapp-window.active { display: block; }
+        .wa-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px; color: var(--white); background: #075E54; }
+        .wa-brand { display: flex; align-items: center; gap: 12px; font-weight: 800; }
+        .wa-brand img { width: 34px; height: 34px; object-fit: contain; border-radius: 50%; background: var(--white); }
+        .wa-close { border: none; color: var(--white); background: transparent; font-size: 1.1rem; cursor: pointer; }
+        .wa-body { padding: 16px; background: #ECE5DD; }
+        .wa-bubble { width: 86%; padding: 12px; border-radius: 14px; background: var(--white); color: #1f2937; font-size: 0.9rem; font-weight: 600; margin-bottom: 14px; border-left: 4px solid #25D366; }
+        .wa-link { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 14px; background: var(--white); color: #1f2937; font-weight: 800; }
+        .wa-link i { color: #25D366; font-size: 1.5rem; }
+
+        @media (max-width: 1024px) {
+            .quick-contact, .footer-grid { grid-template-columns: 1fr 1fr; }
+            .section-header, .contact-panel { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .navbar { padding: 12px 20px; }
+            .nav-brand { font-size: 1rem; }
+            .nav-brand img { margin-right: 26px; transform: scale(1.55); }
+            .nav-menu { position: absolute; top: 100%; left: 24px; right: 24px; margin-top: 10px; display: none; flex-direction: column; padding: 20px; border-radius: var(--radius-md); background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); box-shadow: var(--shadow-soft); }
+            .nav-menu.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .contact-main { padding-top: 100px; }
+            .contact-hero { min-height: 500px; border-radius: 24px; }
+            .hero-content { padding: 56px 24px; }
+            .quick-contact, .office-grid, .form-row, .footer-grid { grid-template-columns: 1fr; }
+            .quick-contact { margin-top: 28px; }
+            .section { padding: 72px 0; }
+            .office-body, .contact-info-panel, .form-panel, .footer-panel { padding: 28px 22px; }
+        }
+    `,
+    html: `
+    <header class="navbar-wrapper" id="navbar">
+        <nav class="navbar">
+            <a href="/" class="nav-brand">
+                <img src="/landing/animation/logo-lab.png" alt="GISLAB">
+                Global Inspeksi Sistem
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/" class="nav-link">Beranda</a></li>
+                <li><a href="/profile" class="nav-link">Profile</a></li>
+                <li><a href="/service" class="nav-link">Layanan</a></li>
+                <li><a href="/ruang-lingkup-pengujian" class="nav-link">Ruang Lingkup Pengujian</a></li>
+                <li><a href="/informasi" class="nav-link">Informasi</a></li>
+                <li><a href="/contact" class="nav-link active">Kontak</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main class="contact-main">
+        <section class="container">
+            <div class="contact-hero">
+                <div class="hero-content">
+                    <span class="eyebrow"><i class="fa-solid fa-headset"></i> Kontak kami</span>
+                    <h1 class="hero-title">Mari diskusikan kebutuhan pengujian Anda.</h1>
+                    <p class="hero-text">
+                        Tim GIS Laboratorium siap membantu kebutuhan pengujian produk, lingkungan, inspeksi, dan
+                        sertifikasi dengan proses yang profesional dan responsif.
+                    </p>
+                </div>
+            </div>
+
+            <div class="quick-contact">
+                <a class="quick-card glass" href="mailto:globalinspeksisistem@gmail.com">
+                    <span class="quick-icon"><i class="fa-solid fa-envelope"></i></span>
+                    <h2 class="quick-label">Email</h2>
+                    <p class="quick-value">globalinspeksisistem@gmail.com</p>
+                </a>
+                <a class="quick-card glass" href="tel:+6281285328232">
+                    <span class="quick-icon"><i class="fa-solid fa-phone"></i></span>
+                    <h2 class="quick-label">Telepon</h2>
+                    <p class="quick-value">+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</p>
+                </a>
+                <a class="quick-card glass" href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium"
+                    target="_blank" rel="noopener">
+                    <span class="quick-icon"><i class="fa-brands fa-whatsapp"></i></span>
+                    <h2 class="quick-label">WhatsApp</h2>
+                    <p class="quick-value">Customer Service GIS</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="eyebrow"><i class="fa-solid fa-building"></i> Office</span>
+                        <h2 class="section-title">Kunjungi kantor GIS Laboratorium.</h2>
+                    </div>
+                    <p class="section-copy">
+                        GIS Laboratorium melayani pelanggan melalui kantor Jakarta dan Surabaya. Pilih lokasi terdekat
+                        untuk koordinasi sampel, konsultasi parameter, atau kebutuhan administrasi pengujian.
+                    </p>
+                </div>
+
+                <div class="office-grid">
+                    <article class="office-card glass">
+                        <div class="office-image">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1100"
+                                alt="Gedung perkantoran Jakarta">
+                        </div>
+                        <div class="office-body">
+                            <p class="office-kicker">Head Office</p>
+                            <h3 class="office-title">Jakarta</h3>
+                            <ul class="office-list">
+                                <li><i class="fa-solid fa-location-dot"></i><span>Jl. Raya Daan Mogot No. 89 RT.2/RW.2,
+                                        Wijaya Kusuma, Kec. Grogol Petamburan, Kota Jakarta Barat, DKI Jakarta
+                                        11460</span></li>
+                                <li><i class="fa-solid fa-phone"></i><span>031 99726239</span></li>
+                                <li><i class="fa-solid fa-fax"></i><span>031 99726239</span></li>
+                                <li><i class="fa-solid fa-envelope"></i><span>globalinspeksisistem@gmail.com</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="office-card glass">
+                        <div class="office-image">
+                            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1100"
+                                alt="Ruang kantor modern untuk layanan Surabaya">
+                        </div>
+                        <div class="office-body">
+                            <p class="office-kicker">Branch Office</p>
+                            <h3 class="office-title">Surabaya</h3>
+                            <ul class="office-list">
+                                <li><i class="fa-solid fa-location-dot"></i><span>Jl. Pahlawan No.2, Kwadengan Barat,
+                                        Lemahputro, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213</span></li>
+                                <li><i class="fa-solid fa-phone"></i><span>+031 99726239</span></li>
+                                <li><i class="fa-solid fa-fax"></i><span>+031 99726239</span></li>
+                                <li><i class="fa-solid fa-envelope"></i><span>globalinspeksisistem@gmail.com</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="discuss">
+            <div class="container">
+                <div class="contact-panel">
+                    <aside class="contact-info-panel">
+                        <span class="eyebrow"><i class="fa-solid fa-comments"></i> Discuss with us</span>
+                        <h2 class="section-title">Butuh rekomendasi parameter uji?</h2>
+                        <p>
+                            Kirim kebutuhan Anda melalui form atau hubungi kontak langsung. Tim GIS akan membantu
+                            menentukan layanan dan parameter yang paling sesuai.
+                        </p>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <i class="fa-solid fa-envelope"></i>
+                                <div>
+                                    <strong>Email</strong>
+                                    <span>globalinspeksisistem@gmail.com</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <div>
+                                    <strong>Phone</strong>
+                                    <span>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fa-solid fa-globe"></i>
+                                <div>
+                                    <strong>Website</strong>
+                                    <span>www.gislaboratorium.com</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div>
+                                    <strong>Alamat</strong>
+                                    <span>DELREY Biztown Blok B1 No. 5, Jl. Lingkar Bumi Botanika Utara, Desa Lengkong
+                                        Kulon, Kecamatan Pagedangan, Kabupaten Tangerang, Banten 15331</span>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <section class="form-panel glass" aria-labelledby="contactFormTitle">
+                        <h2 class="form-title" id="contactFormTitle">Kirim pesan</h2>
+                        <p class="form-copy">Isi data singkat berikut agar tim kami bisa menghubungi Anda kembali.</p>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="field">
+                                    <label for="name">Nama</label>
+                                    <input type="text" id="name" name="name" placeholder="Nama Anda" required>
+                                </div>
+                                <div class="field">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" placeholder="email@perusahaan.com"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="subject">Subjek</label>
+                                <input type="text" id="subject" name="subject" placeholder="Kebutuhan pengujian">
+                            </div>
+                            <div class="field">
+                                <label for="message">Pesan</label>
+                                <textarea id="message" name="message"
+                                    placeholder="Ceritakan sampel, parameter, atau layanan yang Anda butuhkan."
+                                    required></textarea>
+                            </div>
+                            <button class="btn btn-primary" type="submit">
+                                Kirim Pesan <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                            <p class="form-message" id="formMessage">Terima kasih. Draft pesan sudah siap di email Anda.
+                            </p>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <div class="container">
+                <div class="map-shell glass">
+                    <iframe title="Peta lokasi kantor GIS Laboratorium"
+                        src="https://www.google.com/maps?q=Jl.%20Raya%20Daan%20Mogot%20No.%2089%20Wijaya%20Kusuma%20Grogol%20Petamburan%20Jakarta%20Barat\u0026output=embed"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="kontak">
+        <div class="container">
+            <div class="footer-panel glass-dark">
+                <div class="footer-grid">
+                    <div>
+                        <h4 class="footer-col-title">Contact</h4>
+                        <div class="footer-text">
+                            <i class="fa-solid fa-envelope"></i> info@gislaboratorium.com
+                        </div>
+                        <div class="footer-text" style="align-items: flex-start;">
+                            <i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
+                            <div>
+                                +62 812-8532-8232<br>
+                                +62 817-888-879<br>
+                                +62 812-1704-7976
+                            </div>
+                        </div>
+                        <div class="footer-text">
+                            <i class="fa-solid fa-globe"></i> www.gislaboratorium.com
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="footer-col-title">Link</h4>
+                        <a href="/" class="footer-link">Beranda</a>
+                        <a href="/profile" class="footer-link">Profile</a>
+                        <a href="/service" class="footer-link">Layanan</a>
+                        <a href="/ruang-lingkup-pengujian" class="footer-link">Ruang Lingkup Pengujian</a>
+                        <a href="/informasi" class="footer-link">Informasi</a>
+                        <a href="/contact" class="footer-link">Kontak</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-widget">
+        <div class="whatsapp-window" id="whatsappWindow">
+            <div class="wa-header">
+                <div class="wa-brand">
+                    <img src="/landing/animation/logo-lab.png" alt="GISLAB">
+                    <span>PT Global Inspeksi Sistem</span>
+                </div>
+                <button class="wa-close" id="closeWhatsapp" aria-label="Tutup WhatsApp">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-body">
+                <div class="wa-bubble">Halo! Ada yang bisa kami bantu mengenai layanan pengujian GIS?</div>
+                <a class="wa-link" href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium" target="_blank"
+                    rel="noopener">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Customer Service 1</span>
+                </a>
+            </div>
+        </div>
+        <button class="whatsapp-toggle" id="toggleWhatsapp" aria-label="Buka WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </button>
+    </div>
+
+
+`,
+  },
 ] as LandingStaticPage[];
 
 export const landingPages = Object.fromEntries(
   pageList.map((page) => [page.key, page]),
 ) as Record<LandingPageKey, LandingStaticPage>;
-
-
