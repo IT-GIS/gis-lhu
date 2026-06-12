@@ -69,6 +69,15 @@ function tableRow(cells: string[], { header = false, centerIndexes = [] }: { hea
     .join("")}</w:tr>`;
 }
 
+function mergedTableRow(value: string, columnCount: number) {
+  const paragraphs = value
+    .split(/\r?\n/)
+    .map((line) => paragraph(line, { size: 16, after: 0 }))
+    .join("");
+
+  return `<w:tr><w:tc><w:tcPr><w:gridSpan w:val="${columnCount}"/><w:tcW w:w="0" w:type="auto"/><w:tcMar><w:top w:w="80" w:type="dxa"/><w:left w:w="80" w:type="dxa"/><w:bottom w:w="80" w:type="dxa"/><w:right w:w="80" w:type="dxa"/></w:tcMar></w:tcPr>${paragraphs}</w:tc></w:tr>`;
+}
+
 function resultTable(formType: AppFormType, payload: LhuPayload) {
   const columns = getResultColumns(formType);
   const rows = payload.results.map((row, index) => {
@@ -131,7 +140,9 @@ function resultTable(formType: AppFormType, payload: LhuPayload) {
         ? `${tableRow(["No", "Parameter", "Method", "Unit", "Result", "Limit (TB)"], { header: true })}${tableRow(["", "", "", "", "", "Min", "Max"], { header: true })}`
       : tableRow(columns, { header: true });
 
-  return `<w:tbl><w:tblPr><w:tblW w:w="10000" w:type="pct"/><w:tblBorders><w:top w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:left w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:insideH w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:insideV w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:tblBorders><w:tblLook w:firstRow="1" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/></w:tblPr>${headers}${rows.join("")}</w:tbl>`;
+  const footer = payload.resultFooter ? mergedTableRow(payload.resultFooter, columns.length) : "";
+
+  return `<w:tbl><w:tblPr><w:tblW w:w="10000" w:type="pct"/><w:tblBorders><w:top w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:left w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:insideH w:val="single" w:sz="6" w:space="0" w:color="000000"/><w:insideV w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:tblBorders><w:tblLook w:firstRow="1" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/></w:tblPr>${headers}${rows.join("")}${footer}</w:tbl>`;
 }
 
 function buildBodyContent({

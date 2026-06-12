@@ -194,6 +194,13 @@ export function LhuDocumentPreview({
                   )}
                 </tr>
               ))}
+              {payload.resultFooter ? (
+                <tr>
+                  <td colSpan={columns.length} className="whitespace-pre-line border border-slate-950 px-2 py-2 text-left">
+                    {payload.resultFooter}
+                  </td>
+                </tr>
+              ) : null}
             </tbody>
           </table>
         </div>

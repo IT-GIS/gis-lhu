@@ -197,6 +197,13 @@ function ResultTable({
               )}
             </tr>
           ))}
+          {payload.resultFooter ? (
+            <tr className="bg-sky-50">
+              <td colSpan={columns.length} className="whitespace-pre-line border border-slate-200 px-4 py-3 font-semibold text-slate-900">
+                {payload.resultFooter}
+              </td>
+            </tr>
+          ) : null}
         </tbody>
       </table>
     </div>

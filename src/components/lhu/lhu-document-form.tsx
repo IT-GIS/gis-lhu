@@ -11,6 +11,7 @@ import type { AppFormType } from "@/lib/domain";
 import { formTypeLabels, formTypes } from "@/lib/domain";
 import {
   createEmptyLhuPayload,
+  getResultColumns,
   type LhuAdditionalInfo,
   type LhuPayload,
   type LhuResultRow,
@@ -63,6 +64,7 @@ function mergePayloadForType(nextFormType: AppFormType, current: LhuPayload): Lh
       limitTbMin: nextFormType === "TYPE_4" ? row.limitTbMin ?? "" : "",
       limitTbMax: nextFormType === "TYPE_4" ? row.limitTbMax ?? "" : "",
     })),
+    resultFooter: current.resultFooter,
     notes: current.notes,
     signer: current.signer,
   };
@@ -249,6 +251,7 @@ export function LhuDocumentForm({
 
   const usesSniNumber = formType === "TYPE_3" || formType === "TYPE_4";
   const usesLimitTable = formType === "TYPE_3" || formType === "TYPE_4";
+  const resultColumnCount = getResultColumns(formType).length;
 
   return (
     <form action={action} className="space-y-8">
@@ -269,6 +272,7 @@ export function LhuDocumentForm({
       <input type="hidden" name="sampling" value={payload.sample.sampling ?? ""} />
       <input type="hidden" name="additionalInfoJson" value={JSON.stringify(payload.sample.additionalInfo)} />
       <input type="hidden" name="resultsJson" value={JSON.stringify(payload.results)} />
+      <input type="hidden" name="resultFooter" value={payload.resultFooter ?? ""} />
       <input type="hidden" name="notes" value={payload.notes ?? ""} />
       <input type="hidden" name="signerCompany" value={payload.signer.company ?? ""} />
       <input type="hidden" name="signerName" value={payload.signer.name ?? ""} />
@@ -633,6 +637,19 @@ export function LhuDocumentForm({
                     ) : null}
                   </tr>
                 ))}
+                {canEdit || payload.resultFooter ? (
+                  <tr className="border-t border-slate-200 dark:border-slate-800">
+                    <td colSpan={resultColumnCount + (canEdit ? 1 : 0)} className="px-3 py-3">
+                      <Textarea
+                        className="min-h-[76px] rounded-xl"
+                        value={payload.resultFooter ?? ""}
+                        onChange={(event) => setPayloadField("resultFooter", event.target.value)}
+                        placeholder={'*Tidak Termasuk Ruang Lingkup Akreditasi\n"<" Under Limit Of Quantification'}
+                        disabled={!canEdit}
+                      />
+                    </td>
+                  </tr>
+                ) : null}
               </tbody>
             </table>
           </div>

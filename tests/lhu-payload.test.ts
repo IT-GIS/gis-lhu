@@ -28,6 +28,7 @@ function baseInput(overrides: Record<string, string> = {}) {
         methods: "AOAC 957.02:2023 dan AOAC 958.01:2023",
       },
     ]),
+    resultFooter: '*Tidak Termasuk Ruang Lingkup Akreditasi\n"<" Under Limit Of Quantification',
     notes: "Catatan uji",
     signerCompany: "PT. Global Inspeksi Sistem",
     signerName: "Wina",
@@ -76,6 +77,7 @@ describe("LHU payload parser", () => {
     );
 
     expect(parsed.formPayload.results[0]?.specification).toBe("");
+    expect(parsed.formPayload.resultFooter).toContain("Under Limit Of Quantification");
     expect(parsed.clientName).toBe("PT. Permata Agro Persada");
     expect(parsed.title).toBe("PT. Permata Agro Persada");
   });

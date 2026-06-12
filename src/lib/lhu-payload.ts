@@ -67,6 +67,7 @@ const basePayloadSchema = z.object({
     sampling: z.string().trim().max(500).optional().or(z.literal("")),
   }),
   results: z.array(resultRowSchema),
+  resultFooter: z.string().trim().max(4000).optional().or(z.literal("")),
   notes: z.string().trim().max(4000).optional().or(z.literal("")),
   signer: z.object({
     company: z.string().trim().max(200).optional().or(z.literal("")),
@@ -119,6 +120,7 @@ export function createEmptyLhuPayload(formType: AppFormType): LhuPayload {
         limitTbMax: formType === "TYPE_4" ? "" : undefined,
       },
     ],
+    resultFooter: "",
     notes: defaultNotes,
     signer: {
       company: "PT. Global Inspeksi Sistem",
@@ -182,6 +184,7 @@ function normalizePayload(formType: AppFormType, payload: LhuPayload): LhuPayloa
       })),
     },
     results: compactResults(results),
+    resultFooter: payload.resultFooter ?? "",
     notes: payload.notes || defaultNotes,
     signer: {
       company: payload.signer.company || "PT. Global Inspeksi Sistem",
@@ -220,6 +223,7 @@ export function parseLhuDocumentInput(input: Record<string, string>) {
       additionalInfo,
     },
     results,
+    resultFooter: input.resultFooter ?? "",
     notes: input.notes ?? "",
     signer: {
       company: input.signerCompany ?? "PT. Global Inspeksi Sistem",

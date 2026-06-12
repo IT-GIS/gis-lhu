@@ -144,6 +144,7 @@ function extractIssue(lines: string[]) {
 
 function parseResults(rows: string[][], formType: AppFormType) {
   const results: LhuResultRow[] = [];
+  let resultFooter = "";
   let notes = "";
   const header = rows[0] ?? [];
   const parameterIndex = header.findIndex((cell) => /^PARAMETER$/i.test(cell));
@@ -154,6 +155,15 @@ function parseResults(rows: string[][], formType: AppFormType) {
 
   rows.slice(1).forEach((cells) => {
     const firstCell = cells[0] ?? "";
+
+    if (cells.length === 1 && firstCell && results.length) {
+      if (/^Catatan\s*:?/i.test(firstCell)) {
+        notes = firstCell.replace(/^Catatan\s*:?\s*/i, "");
+      } else {
+        resultFooter = firstCell;
+      }
+      return;
+    }
 
     if (/^\d+$/.test(firstCell)) {
       if (formType === "TYPE_3" || formType === "TYPE_4") {
@@ -253,7 +263,7 @@ function parseResults(rows: string[][], formType: AppFormType) {
     }
   });
 
-  return { results, notes };
+  return { results, resultFooter, notes };
 }
 
 function isResultTableStopLine(line: string) {
@@ -489,6 +499,7 @@ function parseLhuFromText(lines: string[], table: string[][]): ParsedDocx {
   payload.analysisDate = extractLooseValue(lines, /Date of Analysis|Tanggal Uji/i, nextSectionPattern);
   payload.sample.sampling = extractLooseValue(lines, /Sampling\/Pengambilan Sample/i, nextSectionPattern) || "-";
   payload.results = parsedResults.results.length ? parsedResults.results : payload.results;
+  payload.resultFooter = parsedResults.resultFooter;
   payload.notes = parsedResults.notes || payload.notes;
   payload.issue = issue.issue;
   payload.signer = issue.signer;
