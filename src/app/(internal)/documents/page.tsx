@@ -6,7 +6,6 @@ import { FormTypeBadge } from "@/components/form-type-badge";
 import { DeleteDocumentForm } from "@/components/lhu/delete-document-form";
 import { PageHeader } from "@/components/shared/page-header";
 import { SectionCard } from "@/components/section-card";
-import { StatusBadge } from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { requireAuthenticatedUser } from "@/lib/auth";
@@ -120,49 +119,69 @@ export default async function DocumentsPage({
                         <h2 className="text-lg font-bold text-[var(--color-gis-navy)] dark:text-slate-100">
                           {principalName}
                         </h2>
-                        <StatusBadge status={document.status} />
                         <FormTypeBadge formType={document.formType} />
                       </div>
 
-                    <div className="grid gap-3 text-sm text-slate-600 sm:grid-cols-2 xl:grid-cols-3 dark:text-slate-300">
-                      <div>
-                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400">No. laporan</p>
-                        <p className="mt-1 font-semibold text-slate-800 dark:text-slate-100">{reportNo}</p>
+                      <div className="grid gap-3 text-sm text-slate-600 sm:grid-cols-2 xl:grid-cols-3 dark:text-slate-300">
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                            No. laporan
+                          </p>
+                          <p className="mt-1 font-semibold text-slate-800 dark:text-slate-100">
+                            {reportNo}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                            Klien
+                          </p>
+                          <p className="mt-1 font-semibold text-slate-800 dark:text-slate-100">
+                            {principalName}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                            Sampel
+                          </p>
+                          <p className="mt-1 font-semibold text-slate-800 dark:text-slate-100">
+                            {sampleName}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Klien</p>
-                        <p className="mt-1 font-semibold text-slate-800 dark:text-slate-100">{principalName}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Sampel</p>
-                        <p className="mt-1 font-semibold text-slate-800 dark:text-slate-100">{sampleName}</p>
+
+                      <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs font-medium text-slate-500">
+                        <span>Creator: {document.creator.name}</span>
+                        <span>Updated: {formatDate(document.updatedAt)}</span>
+                        <span>
+                          {document.verification?.isActive
+                            ? "Barcode aktif"
+                            : "Barcode tidak aktif"}
+                        </span>
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs font-medium text-slate-500">
-                      <span>Creator: {document.creator.name}</span>
-                      <span>Updated: {formatDate(document.updatedAt)}</span>
-                      <span>{document.verification?.isActive ? "Barcode aktif" : "Barcode tidak aktif"}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-2 xl:justify-end">
-                    <Button asChild size="sm" variant="outline">
-                      <Link href={`/documents/${document.id}`}>Buka</Link>
-                    </Button>
-                    {document.verification ? (
+                    <div className="flex flex-wrap items-center gap-2 xl:justify-end">
                       <Button asChild size="sm" variant="outline">
-                        <Link href={`/documents/${document.id}/barcode`}>Barcode</Link>
+                        <Link href={`/documents/${document.id}`}>Buka</Link>
                       </Button>
-                    ) : (
-                      <Button size="sm" variant="outline" disabled>
-                        Barcode
-                      </Button>
-                    )}
-                    {canDelete ? (
-                      <DeleteDocumentForm documentId={document.id} documentLabel={principalName} />
-                    ) : null}
-                  </div>
+                      {document.verification ? (
+                        <Button asChild size="sm" variant="outline">
+                          <Link href={`/documents/${document.id}/barcode`}>
+                            Barcode
+                          </Link>
+                        </Button>
+                      ) : (
+                        <Button size="sm" variant="outline" disabled>
+                          Barcode
+                        </Button>
+                      )}
+                      {canDelete ? (
+                        <DeleteDocumentForm
+                          documentId={document.id}
+                          documentLabel={principalName}
+                        />
+                      ) : null}
+                    </div>
                   </div>
                 </article>
               );

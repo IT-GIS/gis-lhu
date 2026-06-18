@@ -30,11 +30,13 @@ export function AppShellClient({
     <div className="min-h-screen bg-[radial-gradient(circle_at_12%_10%,rgba(0,223,216,0.18),transparent_30%),radial-gradient(circle_at_88%_8%,rgba(0,112,243,0.16),transparent_32%),linear-gradient(180deg,#f8fcff_0%,#eef7fb_48%,#ffffff_100%)] transition-colors duration-500 dark:bg-[radial-gradient(circle_at_12%_10%,rgba(0,223,216,0.12),transparent_30%),linear-gradient(180deg,#061827_0%,#0f172a_100%)]">
       <div
         className={`mx-auto grid min-h-screen max-w-[1600px] gap-6 p-4 transition-all duration-500 ease-in-out ${
-          isCollapsed ? "grid-cols-1 lg:grid-cols-[104px_1fr]" : "grid-cols-1 lg:grid-cols-[280px_1fr]"
+          isCollapsed
+            ? "grid-cols-1 lg:grid-cols-[104px_1fr]"
+            : "grid-cols-1 lg:grid-cols-[280px_1fr]"
         }`}
       >
         <aside
-          className={`relative z-40 flex flex-col overflow-visible rounded-[32px] border border-white/80 bg-white/86 p-5 shadow-glass backdrop-blur-2xl transition-all duration-500 dark:border-slate-800/80 dark:bg-slate-950/72 lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] ${
+          className={`relative z-40 flex flex-col overflow-visible rounded-[32px] border border-white/80 bg-white/86 p-5 shadow-glass backdrop-blur-2xl transition-all duration-500 dark:border-slate-700/80 dark:bg-[#07111f]/92 lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] ${
             isCollapsed ? "items-center px-4" : ""
           }`}
         >
@@ -44,13 +46,19 @@ export function AppShellClient({
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="absolute -right-4 top-10 z-50 hidden h-8 w-8 items-center justify-center rounded-full border border-white/80 bg-white text-slate-600 shadow-md transition-transform hover:scale-110 hover:text-[var(--color-gis-blue)] dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 lg:flex"
           >
-            {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+            {isCollapsed ? (
+              <ChevronRight className="h-4 w-4" />
+            ) : (
+              <ChevronLeft className="h-4 w-4" />
+            )}
           </Button>
 
           <div className="group relative mb-8 flex h-12 w-full cursor-pointer items-center justify-center">
             <div
               className={`absolute left-0 flex items-center justify-center overflow-hidden rounded-2xl border border-white/80 bg-white shadow-[0_16px_34px_rgba(10,37,64,0.12)] transition-all duration-500 group-hover:scale-105 group-hover:shadow-glow dark:border-slate-800 dark:bg-slate-100 ${
-                isCollapsed ? "h-12 w-12 translate-x-[12px] p-1.5" : "h-12 w-12 translate-x-0 p-1.5"
+                isCollapsed
+                  ? "h-12 w-12 translate-x-[12px] p-1.5"
+                  : "h-12 w-12 translate-x-0 p-1.5"
               }`}
             >
               <Image
@@ -65,7 +73,9 @@ export function AppShellClient({
 
             <div
               className={`absolute flex flex-col justify-center overflow-hidden whitespace-nowrap pl-16 transition-all duration-500 ${
-                isCollapsed ? "w-0 -translate-x-4 opacity-0" : "w-full translate-x-0 opacity-100"
+                isCollapsed
+                  ? "w-0 -translate-x-4 opacity-0"
+                  : "w-full translate-x-0 opacity-100"
               }`}
             >
               <div className="text-base font-extrabold tracking-tight text-[var(--color-gis-navy)] dark:text-slate-100">
@@ -88,15 +98,19 @@ export function AppShellClient({
             <form action={logoutAction} className={isCollapsed ? "" : "w-full"}>
               <Button
                 variant="secondary"
-                className={`overflow-hidden transition-all duration-500 ${
-                  isCollapsed ? "h-10 w-10 rounded-xl bg-white/80 p-0 dark:bg-slate-900" : "w-full rounded-xl"
+                className={`overflow-hidden transition-all duration-500 dark:text-slate-100 dark:hover:text-white ${
+                  isCollapsed
+                    ? "h-10 w-10 rounded-xl bg-white/80 p-0 dark:bg-slate-900"
+                    : "w-full rounded-xl"
                 }`}
                 title={isCollapsed ? "Logout" : undefined}
               >
                 <LogOut className="h-4 w-4 shrink-0" />
                 <span
                   className={`whitespace-nowrap transition-all duration-500 ${
-                    isCollapsed ? "hidden max-w-0 opacity-0" : "ml-2 max-w-[100px] opacity-100"
+                    isCollapsed
+                      ? "hidden max-w-0 opacity-0"
+                      : "ml-2 max-w-[100px] opacity-100"
                   }`}
                 >
                   Logout
@@ -111,7 +125,9 @@ export function AppShellClient({
             <div className="hidden text-sm font-bold text-[var(--color-gis-navy)] dark:text-slate-200 sm:block">
               Workflow LHU GIS: Draft {"->"} Review {"->"} Publish {"->"} Verify
             </div>
-            <div className="text-sm font-bold text-[var(--color-gis-navy)] dark:text-slate-200 sm:hidden">LHU Panel</div>
+            <div className="text-sm font-bold text-[var(--color-gis-navy)] dark:text-slate-200 sm:hidden">
+              LHU Panel
+            </div>
 
             <div className="group flex items-center gap-3 rounded-full border border-white/85 bg-white/75 px-2 py-2 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-md dark:border-slate-700 dark:bg-slate-900/80 dark:hover:bg-slate-900 sm:px-3 sm:py-1.5">
               <div className="hidden text-right md:block">

@@ -7,7 +7,7 @@ import { getPublishedBlogPostsForLanding } from "@/lib/blog-posts";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Informasi - GISLAB",
+  title: "Artikel - GISLAB",
   description: "Kumpulan artikel dan informasi terbaru dari GIS Laboratorium.",
 };
 

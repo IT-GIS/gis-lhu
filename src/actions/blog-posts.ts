@@ -10,7 +10,10 @@ import { buildMessageUrl } from "@/lib/utils";
 
 function getFormValues(formData: FormData) {
   return Object.fromEntries(
-    Array.from(formData.entries()).map(([key, value]) => [key, typeof value === "string" ? value : ""]),
+    Array.from(formData.entries()).map(([key, value]) => [
+      key,
+      typeof value === "string" ? value : "",
+    ]),
   ) as Record<string, string>;
 }
 
@@ -35,10 +38,11 @@ export async function createBlogPostAction(formData: FormData) {
     revalidatePath("/posts");
     revalidatePath("/informasi");
     revalidatePath(`/informasi/${post.slug}`);
-    redirect(buildMessageUrl(`/posts/${post.id}`, "success", "Post berhasil dibuat."));
   } catch (error) {
     redirect(buildMessageUrl("/posts/new", "error", getErrorMessage(error)));
   }
+
+  redirect(buildMessageUrl("/posts", "success", "Post berhasil dibuat."));
 }
 
 export async function updateBlogPostAction(formData: FormData) {
@@ -50,11 +54,14 @@ export async function updateBlogPostAction(formData: FormData) {
     const post = await updateBlogPost(actor, values);
 
     revalidatePath("/posts");
-    revalidatePath(`/posts/${postId}`);
+    revalidatePath(`/posts/${postId}/edit`);
     revalidatePath("/informasi");
     revalidatePath(`/informasi/${post.slug}`);
-    redirect(buildMessageUrl(`/posts/${post.id}`, "success", "Post berhasil diperbarui."));
   } catch (error) {
-    redirect(buildMessageUrl(`/posts/${postId}`, "error", getErrorMessage(error)));
+    redirect(
+      buildMessageUrl(`/posts/${postId}/edit`, "error", getErrorMessage(error)),
+    );
   }
+
+  redirect(buildMessageUrl("/posts", "success", "Post berhasil diperbarui."));
 }

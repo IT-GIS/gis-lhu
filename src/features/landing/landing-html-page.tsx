@@ -251,64 +251,61 @@ const LANDING_PROFILE_POLICY_CSS = `
 
 const serviceDetails = {
   quality: {
-    title: "Pengujian Kualitas Tanah & Sedimen",
+    title: "Pengujian Mutu Produk & Bahan",
     cover:
-      "https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=1200",
-    alt: "Pengujian kualitas tanah dan sedimen di laboratorium",
+      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1200",
+    alt: "Pengujian mutu produk dan bahan di laboratorium",
     intro:
-      "Kualitas tanah dan sedimen yang baik sangat penting untuk menjaga kesehatan ekosistem, aktivitas industri, pertanian, dan sumber daya air. GISLAB menyediakan layanan pengujian komprehensif untuk membantu mendeteksi kontaminan berbahaya serta memastikan hasil analisis dapat digunakan sebagai dasar pengambilan keputusan.",
-    whyTitle: "Mengapa pengujian kualitas tanah & sedimen penting?",
-    why:
-      "Tanah atau sedimen yang terkontaminasi dapat memengaruhi produktivitas lahan, kualitas air tanah, keamanan produk, dan kesehatan ekosistem secara keseluruhan. Pengujian menjadi langkah penting untuk memantau kondisi lingkungan, mengelola risiko kontaminasi, dan memastikan kepatuhan terhadap standar yang berlaku.",
+      "Pengujian mutu produk dan bahan membantu perusahaan memastikan karakteristik produk sesuai dengan standar, spesifikasi teknis, dan kebutuhan pelanggan. Layanan ini disesuaikan dengan ruang lingkup pengujian GISLAB, termasuk pelumas, produk sawit, pupuk, minyak goreng sawit, minyak makan merah, serta produk teknis lainnya.",
+    whyTitle: "Mengapa pengujian mutu produk & bahan penting?",
+    why: "Mutu produk tidak cukup dinilai dari tampilan visual. Data laboratorium diperlukan untuk membuktikan parameter seperti kadar air, kadar kotoran, viskositas, titik nyala, titik tuang, kadar unsur, dan parameter teknis lain yang dipersyaratkan dalam standar. Hasil pengujian membantu perusahaan mengendalikan kualitas dan mengurangi risiko ketidaksesuaian produk.",
     items: [
-      "Pengujian tanah untuk mendeteksi logam berat, pestisida, dan senyawa organik berbahaya.",
-      "Pengujian sedimen dari sungai, danau, area pesisir, atau area industri untuk mengetahui kadar kontaminan.",
-      "Analisis kesuburan tanah untuk mendukung pengelolaan lahan yang lebih efektif dan berkelanjutan.",
+      "Pengujian minyak lumas dan pelumas, seperti viskositas kinematik, flash point, pour point, copper test, total base number, density, dan parameter unsur tertentu.",
+      "Pengujian produk sawit dan turunannya, seperti Crude Palm Oil, Palm Kernel, RBD Palm Olein, minyak goreng sawit, dan minyak makan merah.",
+      "Pengujian pupuk, seperti NPK, Urea, KCl, Fosfat Alam, ZA, TSP, SP36, Borat, dan Kieserit sesuai parameter yang tersedia dalam ruang lingkup.",
     ],
     consult:
-      "Selain pengujian, GISLAB membantu perusahaan dan instansi memahami hasil analisis melalui konsultasi teknis. Tim kami dapat membantu menentukan parameter uji, menyusun rencana pemantauan, dan memberikan rekomendasi awal untuk pengelolaan kualitas lingkungan atau produk.",
+      "Tim GISLAB dapat membantu pelanggan menentukan parameter uji yang relevan berdasarkan jenis produk, standar acuan, dan kebutuhan dokumen teknis. Dengan begitu, pengujian tidak dilakukan secara asal, tetapi mengikuti ruang lingkup dan kebutuhan aktual produk.",
     commitment:
-      "GISLAB berkomitmen memberikan hasil yang akurat, layanan yang responsif, dan proses yang terdokumentasi. Kami hadir sebagai mitra pengujian profesional untuk mendukung mutu produk, kepatuhan regulasi, perlindungan lingkungan, dan kepercayaan pelanggan.",
+      "GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras dengan ruang lingkup pengujian yang tersedia, sehingga pelanggan memperoleh dasar teknis yang dapat dipertanggungjawabkan.",
   },
   environment: {
-    title: "Pengujian Lingkungan",
+    title: "Pengujian Air & Lingkungan",
     cover:
       "https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=1200",
-    alt: "Pengujian sampel lingkungan di laboratorium modern",
+    alt: "Pengujian air dan lingkungan di laboratorium",
     intro:
-      "Pengujian lingkungan membantu perusahaan memahami kondisi air, limbah, tanah, sedimen, dan parameter lingkungan lain yang berpengaruh terhadap kepatuhan serta keberlanjutan operasional.",
-    whyTitle: "Mengapa pengujian lingkungan penting?",
-    why:
-      "Data lingkungan yang akurat membantu mencegah pencemaran, memantau dampak kegiatan industri, dan memastikan aktivitas bisnis berjalan sesuai standar yang berlaku. Hasil pengujian juga menjadi dasar tindakan korektif dan pelaporan.",
+      "Pengujian air dan lingkungan dilakukan untuk memantau kualitas air, air limbah, air bersih, air minum, air mineral, serta sumber air alami. Layanan ini membantu pelanggan memahami kondisi sampel berdasarkan parameter fisika dan kimia yang tercantum dalam ruang lingkup pengujian GISLAB.",
+    whyTitle: "Mengapa pengujian air & lingkungan penting?",
+    why: "Kualitas air dan air limbah berpengaruh terhadap kepatuhan regulasi, keamanan penggunaan, dan pengendalian dampak lingkungan. Pengujian laboratorium memberikan data objektif untuk mengetahui kondisi parameter seperti pH, suhu, TDS, TSS, COD, sulfat, klorida, nitrit, amoniak, logam terlarut, minyak dan lemak, serta parameter lain sesuai ruang lingkup.",
     items: [
-      "Pengujian air dan air limbah untuk memantau parameter fisika, kimia, dan mikrobiologi.",
-      "Pengujian tanah dan sedimen untuk mendeteksi kontaminan yang berpotensi mengganggu ekosistem.",
-      "Pemantauan kualitas lingkungan berkala untuk mendukung dokumen kepatuhan dan evaluasi internal.",
+      "Pengujian air sungai, air danau, air muara, air rawa, air akuifer, air situ, air mata air, air waduk, dan air sumur.",
+      "Pengujian air bersih, air limbah, air minum, air mineral, dan air demineral berdasarkan parameter yang tersedia.",
+      "Pengambilan contoh uji air untuk kebutuhan pengujian fisika dan kimia sesuai metode yang tercantum dalam ruang lingkup.",
     ],
     consult:
-      "Tim GISLAB dapat membantu memilih parameter pengujian yang relevan, membaca tren hasil, dan menyusun rekomendasi teknis untuk pengelolaan kualitas lingkungan yang lebih terukur.",
+      "GISLAB dapat membantu memilih parameter pengujian sesuai jenis sampel air dan tujuan pengujian, baik untuk pemantauan kualitas, evaluasi internal, maupun kebutuhan dokumen teknis.",
     commitment:
-      "Kami mengutamakan ketelitian, keterlacakan data, dan komunikasi hasil yang jelas agar setiap pelanggan dapat mengambil keputusan berbasis analisis yang dapat dipertanggungjawabkan.",
+      "Kami menjaga ketelitian proses pengujian, keterlacakan data, dan kejelasan hasil agar pelanggan dapat mengambil keputusan berdasarkan data laboratorium yang dapat dipercaya.",
   },
   permit: {
-    title: "Pengujian Produk dan Izin Edar",
+    title: "Pengujian Udara Ambient & Emisi",
     cover:
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200",
-    alt: "Pengujian produk untuk kebutuhan izin edar",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&q=80&w=1200",
+    alt: "Pengujian udara ambient dan emisi",
     intro:
-      "Pengujian produk dan izin edar membantu memastikan produk memenuhi parameter mutu, keamanan, dan persyaratan teknis sebelum masuk ke pasar atau digunakan secara luas.",
-    whyTitle: "Mengapa pengujian izin edar penting?",
-    why:
-      "Produk yang tidak memenuhi standar dapat menimbulkan risiko terhadap konsumen, proses distribusi, dan reputasi perusahaan. Pengujian menjadi bukti teknis untuk mendukung kelayakan produk dan proses administrasi izin edar.",
+      "Pengujian udara ambient dan emisi membantu pelanggan memantau kualitas udara serta emisi dari sumber tidak bergerak. Layanan ini mengacu pada parameter yang tersedia dalam ruang lingkup GISLAB, termasuk gas, partikulat, kebisingan, dan pengambilan contoh uji udara.",
+    whyTitle: "Mengapa pengujian udara & emisi penting?",
+    why: "Pemantauan kualitas udara dan emisi diperlukan untuk mengetahui potensi pencemaran, mengevaluasi kinerja pengendalian emisi, serta mendukung kepatuhan terhadap persyaratan lingkungan. Hasil uji menjadi dasar teknis untuk pelaporan, evaluasi, dan tindakan korektif.",
     items: [
-      "Verifikasi parameter mutu produk sesuai kebutuhan regulasi atau spesifikasi pelanggan.",
-      "Pengujian keamanan untuk mendukung dokumen teknis dan kelengkapan izin edar.",
-      "Penyusunan hasil analisis yang jelas agar mudah digunakan dalam proses evaluasi dan pengambilan keputusan.",
+      "Pengujian udara ambient, seperti SO₂, NO₂, NH₃, TSP, PM10, PM2.5, ozon, timbal, dan kebisingan.",
+      "Pengujian emisi sumber tidak bergerak, seperti opasitas, NO₂, SO₂, H₂S, NO, O₂, CO₂, CO, methane, kecepatan linier, kadar air, dan partikulat.",
+      "Pengambilan contoh uji udara ambient dan udara emisi sumber tidak bergerak sesuai metode dalam ruang lingkup.",
     ],
     consult:
-      "GISLAB membantu pelanggan menentukan paket pengujian yang relevan dengan jenis produk, kebutuhan pasar, dan dokumen pendukung yang dibutuhkan.",
+      "Tim GISLAB dapat membantu menentukan titik, parameter, dan kebutuhan pengujian udara sesuai tujuan pemantauan dan jenis sumber emisi.",
     commitment:
-      "Kami menjaga objektivitas hasil pengujian dan memberikan layanan yang transparan untuk mendukung proses izin edar yang lebih tertata.",
+      "GISLAB berkomitmen memberikan layanan pengujian udara dan emisi yang objektif, tertata, dan terdokumentasi untuk mendukung pengelolaan lingkungan pelanggan.",
   },
   sni: {
     title: "Pengujian SNI Produk",
@@ -316,19 +313,18 @@ const serviceDetails = {
       "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200",
     alt: "Pengujian SNI produk di laboratorium",
     intro:
-      "Pengujian SNI produk membantu memastikan produk memenuhi Standar Nasional Indonesia, baik untuk kebutuhan sertifikasi, evaluasi mutu, maupun pemenuhan persyaratan pelanggan.",
+      "Pengujian SNI produk membantu memastikan produk memenuhi persyaratan Standar Nasional Indonesia yang relevan. Layanan ini disesuaikan dengan ruang lingkup GISLAB, seperti minyak lumas, air mineral, air demineral, pupuk, minyak goreng sawit, minyak makan merah, serta alat sprayer.",
     whyTitle: "Mengapa pengujian SNI produk penting?",
-    why:
-      "Kesesuaian terhadap SNI meningkatkan kepercayaan pasar, membantu proses sertifikasi, dan memastikan produk memiliki mutu serta keamanan yang sesuai standar. Pengujian juga menjadi bukti objektif dalam pengendalian kualitas.",
+    why: "Pengujian SNI memberikan bukti objektif bahwa produk telah diperiksa berdasarkan metode dan parameter yang dipersyaratkan. Data ini penting untuk pengendalian mutu, evaluasi kesesuaian, proses sertifikasi, dan peningkatan kepercayaan pelanggan.",
     items: [
-      "Pengujian karakteristik produk berdasarkan parameter SNI yang relevan.",
-      "Dukungan data laboratorium untuk proses sertifikasi dan evaluasi mutu.",
-      "Analisis hasil uji untuk membantu produsen memahami kesesuaian produk terhadap standar.",
+      "Pengujian produk berbasis SNI untuk minyak lumas, pupuk, minyak goreng sawit, minyak makan merah, air mineral, air demineral, dan produk lain sesuai ruang lingkup.",
+      "Pengujian alat pemeliharaan tanaman seperti sprayer gendong elektrik berdasarkan parameter dimensi, spesifikasi, dan verifikasi yang tercantum dalam ruang lingkup.",
+      "Penyediaan data hasil uji sebagai dasar evaluasi mutu, kesesuaian produk, dan kebutuhan dokumen teknis pelanggan.",
     ],
     consult:
-      "Tim GISLAB dapat membantu mengidentifikasi standar yang sesuai dengan kategori produk dan menyarankan parameter uji yang dibutuhkan.",
+      "GISLAB dapat membantu mengidentifikasi standar dan parameter yang sesuai dengan produk pelanggan, sehingga pengujian lebih tepat sasaran dan sesuai ruang lingkup yang tersedia.",
     commitment:
-      "Kami berkomitmen menghadirkan layanan pengujian yang akurat, profesional, dan terdokumentasi untuk mendukung daya saing produk pelanggan.",
+      "Kami menjaga objektivitas hasil uji, ketepatan metode, dan dokumentasi proses untuk mendukung kesesuaian produk terhadap standar yang berlaku.",
   },
 };
 
@@ -434,11 +430,17 @@ function bindHomeTyping() {
       charIndexSub -= 1;
       typingSpeed = 10;
     } else if (charIndexTitle2 > 0) {
-      title2El.textContent = currentData.title2.substring(0, charIndexTitle2 - 1);
+      title2El.textContent = currentData.title2.substring(
+        0,
+        charIndexTitle2 - 1,
+      );
       charIndexTitle2 -= 1;
       typingSpeed = 15;
     } else if (charIndexTitle1 > 0) {
-      title1El.textContent = currentData.title1.substring(0, charIndexTitle1 - 1);
+      title1El.textContent = currentData.title1.substring(
+        0,
+        charIndexTitle1 - 1,
+      );
       charIndexTitle1 -= 1;
       typingSpeed = 15;
     } else {
@@ -459,8 +461,18 @@ function bindHomeTyping() {
 
 function bindServiceDetails() {
   const detailSection = document.getElementById("detail-layanan");
-  const detailCover = document.getElementById("detailCover") as HTMLImageElement | null;
+  const detailCover = document.getElementById(
+    "detailCover",
+  ) as HTMLImageElement | null;
   if (!detailSection || !detailCover) return () => undefined;
+
+  const escapeHtml = (value: string) =>
+    value
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
 
   const renderServiceDetail = (key: ServiceKey) => {
     const detail = serviceDetails[key] ?? serviceDetails.quality;
@@ -482,30 +494,74 @@ function bindServiceDetails() {
     const detailList = document.getElementById("detailList");
     if (detailList) {
       detailList.innerHTML = detail.items
-        .map((item) => `<li><i class="fa-solid fa-check"></i><span>${item}</span></li>`)
+        .map(
+          (item) =>
+            `<li><i class="fa-solid fa-check"></i><span>${escapeHtml(item)}</span></li>`,
+        )
         .join("");
     }
+
+    document
+      .querySelectorAll<HTMLElement>("[data-service-detail]")
+      .forEach((element) => {
+        element.classList.toggle(
+          "active-service",
+          element.dataset.serviceDetail === key,
+        );
+      });
 
     detailSection.classList.add("active");
     window.history.replaceState(null, "", "#detail-layanan");
     detailSection.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const buttons = Array.from(document.querySelectorAll<HTMLElement>("[data-service-detail]"));
-  const handlers = buttons.map((button) => {
-    const handler = () => renderServiceDetail((button.dataset.serviceDetail ?? "quality") as ServiceKey);
-    button.addEventListener("click", handler);
-    return { button, handler };
-  });
+  const handleClick = (event: Event) => {
+    const target = event.target as HTMLElement | null;
+    const trigger = target?.closest<HTMLElement>("[data-service-detail]");
+    if (!trigger) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    renderServiceDetail(
+      (trigger.dataset.serviceDetail ?? "quality") as ServiceKey,
+    );
+  };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    const target = event.target as HTMLElement | null;
+    const trigger = target?.closest<HTMLElement>(
+      '[role="button"][data-service-detail]',
+    );
+    if (!trigger) return;
+
+    event.preventDefault();
+    renderServiceDetail(
+      (trigger.dataset.serviceDetail ?? "quality") as ServiceKey,
+    );
+  };
+
+  document.addEventListener("click", handleClick);
+  document.addEventListener("keydown", handleKeyDown);
+
+  if (window.location.hash === "#detail-layanan") {
+    renderServiceDetail("quality");
+  }
 
   return () => {
-    handlers.forEach(({ button, handler }) => button.removeEventListener("click", handler));
+    document.removeEventListener("click", handleClick);
+    document.removeEventListener("keydown", handleKeyDown);
   };
 }
 
 function bindProfileTabs() {
-  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-policy-tab]"));
-  const panels = Array.from(document.querySelectorAll<HTMLElement>(".policy-tab-panel"));
+  const buttons = Array.from(
+    document.querySelectorAll<HTMLButtonElement>("[data-policy-tab]"),
+  );
+  const panels = Array.from(
+    document.querySelectorAll<HTMLElement>(".policy-tab-panel"),
+  );
   if (buttons.length === 0) return () => undefined;
 
   const handlers = buttons.map((button) => {
@@ -516,14 +572,18 @@ function bindProfileTabs() {
         item.classList.toggle("active", isActive);
         item.setAttribute("aria-selected", String(isActive));
       });
-      panels.forEach((panel) => panel.classList.toggle("active", panel.id === targetId));
+      panels.forEach((panel) =>
+        panel.classList.toggle("active", panel.id === targetId),
+      );
     };
     button.addEventListener("click", handler);
     return { button, handler };
   });
 
   return () => {
-    handlers.forEach(({ button, handler }) => button.removeEventListener("click", handler));
+    handlers.forEach(({ button, handler }) =>
+      button.removeEventListener("click", handler),
+    );
   };
 }
 
@@ -534,14 +594,21 @@ function injectProfilePolicyPortraits() {
   panelIds.forEach((id) => {
     const panel = document.getElementById(id);
     const content = panel?.firstElementChild;
-    if (!panel || !content || content.classList.contains("policy-with-portrait")) return;
+    if (
+      !panel ||
+      !content ||
+      content.classList.contains("policy-with-portrait")
+    )
+      return;
 
     content.classList.add("policy-with-portrait");
     content.classList.remove("max-w-4xl");
 
     const copyColumn = document.createElement("div");
     copyColumn.className = "policy-copy-column";
-    Array.from(content.childNodes).forEach((child) => copyColumn.appendChild(child));
+    Array.from(content.childNodes).forEach((child) =>
+      copyColumn.appendChild(child),
+    );
 
     const portrait = document.createElement("figure");
     portrait.className = "policy-portrait";
@@ -587,11 +654,16 @@ function bindContactForm() {
     event.preventDefault();
     const formData = new FormData(form);
     const name = encodeURIComponent(String(formData.get("name") ?? "").trim());
-    const email = encodeURIComponent(String(formData.get("email") ?? "").trim());
-    const subject = encodeURIComponent(
-      String(formData.get("subject") ?? "").trim() || "Kebutuhan pengujian GIS Laboratorium",
+    const email = encodeURIComponent(
+      String(formData.get("email") ?? "").trim(),
     );
-    const message = encodeURIComponent(String(formData.get("message") ?? "").trim());
+    const subject = encodeURIComponent(
+      String(formData.get("subject") ?? "").trim() ||
+        "Kebutuhan pengujian GIS Laboratorium",
+    );
+    const message = encodeURIComponent(
+      String(formData.get("message") ?? "").trim(),
+    );
     const body = `Nama:%20${name}%0AEmail:%20${email}%0A%0APesan:%0A${message}`;
 
     document.getElementById("formMessage")?.classList.add("active");
