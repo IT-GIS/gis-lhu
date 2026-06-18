@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import { resolveVerificationToken } from "@/lib/documents";
-import { getResultColumns, resolveLhuPayload, type LhuPayload, usesLimitResultTable, usesNumberColumn, usesSpecificationColumn } from "@/lib/lhu-payload";
+import { getResultColumns, resolveLhuPayload, type LhuPayload, usesLimitResultTable, usesNumberColumn, usesSpecificationColumn, usesUnitColumn } from "@/lib/lhu-payload";
 import { getVerificationView } from "@/lib/verification";
 import { formatDate } from "@/lib/utils";
 
@@ -121,6 +121,7 @@ function ResultTable({
   const usesLimitTable = usesLimitResultTable(formType);
   const usesNumber = usesNumberColumn(formType);
   const usesSpecification = usesSpecificationColumn(formType);
+  const usesUnit = usesUnitColumn(formType);
 
   return (
     <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
@@ -177,7 +178,7 @@ function ResultTable({
               {usesLimitTable ? (
                 <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.methods || "-"}</td>
               ) : null}
-              <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.unit || "-"}</td>
+              {usesUnit ? <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.unit || "-"}</td> : null}
               {usesSpecification ? (
                 <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.specification || "-"}</td>
               ) : null}
