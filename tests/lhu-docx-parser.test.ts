@@ -56,4 +56,20 @@ describe("LHU DOCX parser", () => {
       methods: "SNI 7709:2019, Lamp A.6",
     });
   });
+
+  it("rejects unsupported result table shapes instead of guessing a form type", async () => {
+    const documentXml = `<w:document><w:body>
+      ${paragraph("No. LP/ J-9999/26")}
+      ${paragraph("2.1. Name / Nama : PT Contoh")}
+      ${paragraph("3.2. Sample Name / Nama Sampel : Sample Baru")}
+      <w:tbl>
+        ${row(["PARAMETER", "BATAS", "HASIL"])}
+        ${row(["Contoh parameter", "Max 1", "0,5"])}
+      </w:tbl>
+    </w:body></w:document>`;
+
+    await expect(parseLhuImportFile(await createDocxFile(documentXml))).rejects.toThrow(
+      "Tipe form LHU tidak dikenali",
+    );
+  });
 });

@@ -17,6 +17,8 @@ type ParsedDocx = {
 
 const pdfTextDecoder = new TextDecoder("latin1");
 const specificationHeaderPattern = /^SPE[CS]IFICATION/i;
+const unsupportedFormTypeMessage =
+  "Tipe form LHU tidak dikenali. Sistem hanya mendukung Form Tipe 1 sampai 6. Periksa header/bentuk tabel dokumen atau tambahkan tipe form baru sebelum import.";
 
 function normalizeText(value: string) {
   return value.replace(/\s+/g, " ").trim();
@@ -68,6 +70,17 @@ function findLine(lines: string[], pattern: RegExp) {
 
 function findIndex(lines: string[], pattern: RegExp) {
   return lines.findIndex((line) => pattern.test(line));
+}
+
+function hasOrderedLines(lines: string[], patterns: RegExp[]) {
+  let startIndex = 0;
+
+  return patterns.every((pattern) => {
+    const nextIndex = lines.findIndex((line, index) => index >= startIndex && pattern.test(line));
+    if (nextIndex < 0) return false;
+    startIndex = nextIndex + 1;
+    return true;
+  });
 }
 
 function collectContinuation(lines: string[], startIndex: number, stopPattern: RegExp) {
@@ -482,24 +495,30 @@ function extractAdditionalInfo(lines: string[]) {
   return items;
 }
 
-function detectFormType(lines: string[], table: string[][]): AppFormType {
+function detectFormType(lines: string[], table: string[][]): AppFormType | null {
   const headerRows = table.slice(0, 2);
   const header = headerRows.flat();
   const firstHeaderRow = headerRows[0] ?? [];
   const secondHeaderRow = headerRows[1] ?? [];
   const hasNumberColumn = firstHeaderRow.some((cell) => /^No$/i.test(cell));
   const hasMethodColumn = firstHeaderRow.some((cell) => /^Method$/i.test(cell));
+  const hasParameterColumn = header.some((cell) => /^Parameter$/i.test(cell));
   const hasUnitColumn = header.some((cell) => /^Unit$/i.test(cell));
   const hasSpecificationColumn = header.some((cell) => specificationHeaderPattern.test(cell));
+  const hasResultColumn = header.some((cell) => /^Result$/i.test(cell));
+  const hasMethodsColumn = header.some((cell) => /^Methods?$/i.test(cell));
   const limitGroupCount = firstHeaderRow.filter((cell) => /^Limit\b/i.test(cell)).length;
   const limitSubcolumnCount = secondHeaderRow.filter((cell) => /^(Min|Max)$/i.test(cell)).length;
   const isMinyakGorengSample = lines.some((line) => /Sample Name\s*\/\s*Nama (?:Contoh|Sampel)\s*:?\s*.*Minyak Goreng/i.test(line));
-  const hasInlineType6Header = lines.some((line) => /PARAMETER\b.*SPE[CS]IFICATION\b.*RESULT\b.*METHODS\b/i.test(line));
+  const hasInlineType1Header = lines.some((line) => /NO\b.*PARAMETER\b.*UNIT\b.*SPE[CS]IFICATION\b.*RESULT\b.*METHODS\b/i.test(line));
+  const hasInlineType2Header = lines.some((line) => /NO\b.*PARAMETER\b.*UNIT\b.*RESULT\b.*METHODS\b/i.test(line));
+  const hasInlineType5Header = lines.some((line) => /PARAMETER\b.*UNIT\b.*SPE[CS]IFICATION\b.*RESULT\b.*METHODS\b/i.test(line));
+  const hasInlineType6Header = lines.some((line) => /PARAMETER\b.*SPE[CS]IFICATION\b.*RESULT\b.*METHODS\b/i.test(line) && !/\bUNIT\b/i.test(line));
+  const hasSeparateType1Header = hasOrderedLines(lines, [/^NO$/i, /^PARAMETER$/i, /^UNIT$/i, specificationHeaderPattern, /^RESULT$/i, /^METHODS$/i]);
+  const hasSeparateType2Header = hasOrderedLines(lines, [/^NO$/i, /^PARAMETER$/i, /^UNIT$/i, /^RESULT$/i, /^METHODS$/i]);
+  const hasSeparateType5Header = hasOrderedLines(lines, [/^PARAMETER$/i, /^UNIT$/i, specificationHeaderPattern, /^RESULT$/i, /^METHODS$/i]);
   const hasSeparateType6Header =
-    findIndex(lines, /^PARAMETER$/i) >= 0 &&
-    findIndex(lines, specificationHeaderPattern) >= 0 &&
-    findIndex(lines, /^RESULT$/i) >= 0 &&
-    findIndex(lines, /^METHODS$/i) >= 0;
+    !hasSeparateType5Header && hasOrderedLines(lines, [/^PARAMETER$/i, specificationHeaderPattern, /^RESULT$/i, /^METHODS$/i]);
 
   if (
     isMinyakGorengSample &&
@@ -510,7 +529,11 @@ function detectFormType(lines: string[], table: string[][]): AppFormType {
     return "TYPE_6";
   }
 
-  if (!hasNumberColumn && !hasMethodColumn && hasSpecificationColumn) {
+  if (
+    (!hasNumberColumn && !hasMethodColumn && hasParameterColumn && hasUnitColumn && hasSpecificationColumn && hasResultColumn && hasMethodsColumn) ||
+    hasInlineType5Header ||
+    hasSeparateType5Header
+  ) {
     return "TYPE_5";
   }
 
@@ -537,18 +560,30 @@ function detectFormType(lines: string[], table: string[][]): AppFormType {
   }
 
   if (
-    header.some((cell) => specificationHeaderPattern.test(cell)) ||
-    lines.some((line) => specificationHeaderPattern.test(line)) ||
-    lines.some((line) => /\bPARAMETER\b.*\bSPE[CS]IFICATION\b.*\bRESULT\b/i.test(line))
+    (hasNumberColumn && hasParameterColumn && hasUnitColumn && hasSpecificationColumn && hasResultColumn && hasMethodsColumn) ||
+    hasInlineType1Header ||
+    hasSeparateType1Header
   ) {
     return "TYPE_1";
   }
 
-  return "TYPE_2";
+  if (
+    (hasNumberColumn && hasParameterColumn && hasUnitColumn && !hasSpecificationColumn && hasResultColumn && hasMethodsColumn) ||
+    hasInlineType2Header ||
+    hasSeparateType2Header
+  ) {
+    return "TYPE_2";
+  }
+
+  return null;
 }
 
 function parseLhuFromText(lines: string[], table: string[][]): ParsedDocx {
   const formType = detectFormType(lines, table);
+  if (!formType) {
+    throw new Error(unsupportedFormTypeMessage);
+  }
+
   const resultTable = table.length ? table : extractPdfResultRows(lines, formType);
   const payload = createEmptyLhuPayload(formType);
   const parsedResults = parseResults(resultTable, formType);
