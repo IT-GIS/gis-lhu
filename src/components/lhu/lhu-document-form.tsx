@@ -18,6 +18,7 @@ import {
   usesLimitResultTable,
   usesNumberColumn,
   usesSpecificationColumn,
+  usesUnitColumn,
 } from "@/lib/lhu-payload";
 import { parseLhuImportFile } from "@/lib/lhu-docx-parser";
 
@@ -59,6 +60,7 @@ function mergePayloadForType(nextFormType: AppFormType, current: LhuPayload): Lh
     results: current.results.map((row) => ({
       ...row,
       no: usesLimitResultTable(nextFormType) ? row.no ?? "" : "",
+      unit: usesUnitColumn(nextFormType) ? row.unit ?? "" : "",
       specification: usesSpecificationColumn(nextFormType) ? row.specification ?? "" : "",
       limitCfMin: nextFormType === "TYPE_3" ? row.limitCfMin ?? "" : "",
       limitCfMax: nextFormType === "TYPE_3" ? row.limitCfMax ?? "" : "",
@@ -213,7 +215,7 @@ export function LhuDocumentForm({
         {
           no: usesLimitResultTable(formType) ? String(current.results.length + 1) : "",
           parameter: "",
-          unit: "",
+          unit: usesUnitColumn(formType) ? "" : undefined,
           specification: usesSpecificationColumn(formType) ? "" : undefined,
           result: "",
           methods: "",
@@ -256,6 +258,7 @@ export function LhuDocumentForm({
   const usesLimitTable = usesLimitResultTable(formType);
   const usesNumber = usesNumberColumn(formType);
   const usesSpecification = usesSpecificationColumn(formType);
+  const usesUnit = usesUnitColumn(formType);
   const resultColumnCount = getResultColumns(formType).length;
 
   return (
@@ -511,7 +514,7 @@ export function LhuDocumentForm({
                 {usesNumber ? <col className="w-[64px]" /> : null}
                 <col className="w-[250px]" />
                 {usesLimitTable ? <col className="w-[180px]" /> : null}
-                <col className="w-[110px]" />
+                {usesUnit ? <col className="w-[110px]" /> : null}
                 {usesSpecification ? <col className="w-[170px]" /> : null}
                 <col className="w-[140px]" />
                 {formType === "TYPE_3" ? (
@@ -538,7 +541,7 @@ export function LhuDocumentForm({
                   {usesLimitTable ? (
                     <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">METHOD</th>
                   ) : null}
-                  <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">UNIT</th>
+                  {usesUnit ? <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">UNIT</th> : null}
                   {usesSpecification ? (
                     <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">{formType === "TYPE_5" ? "SPESIFICATION* (MAX)" : "SPECIFICATION"}</th>
                   ) : null}
@@ -581,9 +584,11 @@ export function LhuDocumentForm({
                         <Input className="rounded-xl" value={row.methods ?? ""} onChange={(event) => setResultRow(index, { ...row, methods: event.target.value })} disabled={!canEdit} />
                       </td>
                     ) : null}
-                    <td className="px-3 py-3">
-                      <Input className="rounded-xl" value={row.unit ?? ""} onChange={(event) => setResultRow(index, { ...row, unit: event.target.value })} disabled={!canEdit} />
-                    </td>
+                    {usesUnit ? (
+                      <td className="px-3 py-3">
+                        <Input className="rounded-xl" value={row.unit ?? ""} onChange={(event) => setResultRow(index, { ...row, unit: event.target.value })} disabled={!canEdit} />
+                      </td>
+                    ) : null}
                     {usesSpecification ? (
                       <td className="px-3 py-3">
                         <Input className="rounded-xl" value={row.specification ?? ""} onChange={(event) => setResultRow(index, { ...row, specification: event.target.value })} disabled={!canEdit} />

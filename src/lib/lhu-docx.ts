@@ -112,6 +112,13 @@ function resultTable(formType: AppFormType, payload: LhuPayload) {
             row.result || "-",
             row.methods || "-",
           ]
+        : formType === "TYPE_6"
+        ? [
+            row.parameter || "-",
+            row.specification || "-",
+            row.result || "-",
+            row.methods || "-",
+          ]
         : formType === "TYPE_1"
         ? [
             String(index + 1),
@@ -137,6 +144,8 @@ function resultTable(formType: AppFormType, payload: LhuPayload) {
             ? [0, 3, 4, 5, 6]
             : formType === "TYPE_5"
               ? [1, 2, 3]
+            : formType === "TYPE_6"
+              ? [1, 2]
             : formType === "TYPE_1"
               ? [0, 2, 3, 4]
               : [0, 2, 3],
@@ -185,7 +194,7 @@ function buildBodyContent({
     line("3.5. Date of Received/Tanggal Terima", payload.receivedDate),
     line("3.6. Date of Analysis /Tanggal Uji", payload.analysisDate),
     usesLimitResultTable(formType) ? line("3.7. Number of SNI /Nomor SNI", payload.sample.sniNo) : "",
-    formType === "TYPE_2" || formType === "TYPE_5" ? line("3.7. Sampling/Pengambilan Sample", payload.sample.sampling) : "",
+    formType === "TYPE_2" || formType === "TYPE_5" || formType === "TYPE_6" ? line("3.7. Sampling/Pengambilan Sample", payload.sample.sampling) : "",
     sectionTitle("IV. Result / Hasil Uji:"),
     resultTable(formType, payload),
     paragraph(`Catatan : ${payload.notes || "-"}`, { size: 16, after: 160 }),

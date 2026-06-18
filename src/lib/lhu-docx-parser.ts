@@ -230,17 +230,17 @@ function parseResults(rows: string[][], formType: AppFormType) {
     }
 
     if (
-      formType === "TYPE_5" &&
+      (formType === "TYPE_5" || formType === "TYPE_6") &&
       parameterIndex >= 0 &&
-      unitIndex >= 0 &&
       specificationIndex >= 0 &&
       resultIndex >= 0 &&
       methodsIndex >= 0 &&
+      (formType === "TYPE_6" || unitIndex >= 0) &&
       cells[parameterIndex]
     ) {
       results.push({
         parameter: cells[parameterIndex] ?? "",
-        unit: cells[unitIndex] ?? "",
+        unit: formType === "TYPE_6" ? "" : cells[unitIndex] ?? "",
         specification: cells[specificationIndex] ?? "",
         result: cells[resultIndex] ?? "",
         methods: cells[methodsIndex] ?? "",
@@ -306,9 +306,9 @@ function isResultTableStopLine(line: string) {
 
 function parsePdfInlineResultRow(line: string, formType: AppFormType) {
   const cells = line.split(/\s{2,}|\t+/).map(normalizeText).filter(Boolean);
-  const expectedCells = formType === "TYPE_1" ? 6 : formType === "TYPE_3" ? 9 : formType === "TYPE_4" ? 7 : formType === "TYPE_5" ? 5 : 5;
+  const expectedCells = formType === "TYPE_1" ? 6 : formType === "TYPE_3" ? 9 : formType === "TYPE_4" ? 7 : formType === "TYPE_5" ? 5 : formType === "TYPE_6" ? 4 : 5;
 
-  if (cells.length >= expectedCells && (formType === "TYPE_5" || /^\d+$/.test(cells[0] ?? ""))) {
+  if (cells.length >= expectedCells && (formType === "TYPE_5" || formType === "TYPE_6" || /^\d+$/.test(cells[0] ?? ""))) {
     return cells.slice(0, expectedCells);
   }
 
@@ -326,6 +326,8 @@ function extractPdfResultRows(lines: string[], formType: AppFormType) {
           ? /NO\b.*PARAMETER\b.*METHOD\b.*UNIT\b.*RESULT\b.*LIMIT/i
           : formType === "TYPE_5"
             ? /PARAMETER\b.*UNIT\b.*SPE[CS]IFICATION\b.*RESULT\b.*METHODS\b/i
+            : formType === "TYPE_6"
+              ? /PARAMETER\b.*SPE[CS]IFICATION\b.*RESULT\b.*METHODS\b/i
             : /NO\b.*PARAMETER\b.*UNIT\b.*RESULT\b.*METHODS\b/i,
   );
   const separateHeaderIndex =
@@ -346,6 +348,8 @@ function extractPdfResultRows(lines: string[], formType: AppFormType) {
         ? ["NO", "PARAMETER", "METHOD", "UNIT", "RESULT", "LIMIT (TB) MIN", "LIMIT (TB) MAX"]
       : formType === "TYPE_5"
         ? ["PARAMETER", "UNIT", "SPESIFICATION* (MAX)", "RESULT", "METHODS"]
+      : formType === "TYPE_6"
+        ? ["PARAMETER", "SPECIFICATION", "RESULT", "METHODS"]
       : ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"];
   const startIndex = headerIndex >= 0 ? headerIndex + 1 : separateHeaderIndex + headerCells.length;
   const tableRows: string[][] = [headerCells];
@@ -360,7 +364,7 @@ function extractPdfResultRows(lines: string[], formType: AppFormType) {
       continue;
     }
 
-    if (formType === "TYPE_5") {
+    if (formType === "TYPE_5" || formType === "TYPE_6") {
       const row: string[] = [];
 
       for (let offset = 0; offset < headerCells.length; offset += 1) {
@@ -485,9 +489,26 @@ function detectFormType(lines: string[], table: string[][]): AppFormType {
   const secondHeaderRow = headerRows[1] ?? [];
   const hasNumberColumn = firstHeaderRow.some((cell) => /^No$/i.test(cell));
   const hasMethodColumn = firstHeaderRow.some((cell) => /^Method$/i.test(cell));
+  const hasUnitColumn = header.some((cell) => /^Unit$/i.test(cell));
   const hasSpecificationColumn = header.some((cell) => specificationHeaderPattern.test(cell));
   const limitGroupCount = firstHeaderRow.filter((cell) => /^Limit\b/i.test(cell)).length;
   const limitSubcolumnCount = secondHeaderRow.filter((cell) => /^(Min|Max)$/i.test(cell)).length;
+  const isMinyakGorengSample = lines.some((line) => /Sample Name\s*\/\s*Nama (?:Contoh|Sampel)\s*:?\s*.*Minyak Goreng/i.test(line));
+  const hasInlineType6Header = lines.some((line) => /PARAMETER\b.*SPE[CS]IFICATION\b.*RESULT\b.*METHODS\b/i.test(line));
+  const hasSeparateType6Header =
+    findIndex(lines, /^PARAMETER$/i) >= 0 &&
+    findIndex(lines, specificationHeaderPattern) >= 0 &&
+    findIndex(lines, /^RESULT$/i) >= 0 &&
+    findIndex(lines, /^METHODS$/i) >= 0;
+
+  if (
+    isMinyakGorengSample &&
+    ((!hasNumberColumn && !hasMethodColumn && !hasUnitColumn && hasSpecificationColumn) ||
+      hasInlineType6Header ||
+      hasSeparateType6Header)
+  ) {
+    return "TYPE_6";
+  }
 
   if (!hasNumberColumn && !hasMethodColumn && hasSpecificationColumn) {
     return "TYPE_5";

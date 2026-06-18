@@ -33,7 +33,7 @@ async function ensureLatestFormTypeEnum() {
     return;
   }
 
-  const alterSql = "MODIFY `formType` ENUM('TYPE_1','TYPE_2','TYPE_3','TYPE_4','TYPE_5') NOT NULL";
+  const alterSql = "MODIFY `formType` ENUM('TYPE_1','TYPE_2','TYPE_3','TYPE_4','TYPE_5','TYPE_6') NOT NULL";
 
   try {
     await prisma.$executeRawUnsafe(`ALTER TABLE \`document\` ${alterSql}`);
@@ -46,7 +46,7 @@ async function ensureLatestFormTypeEnum() {
       return;
     } catch {
       throw new Error(
-        `Database enum FormType belum mendukung tipe form terbaru. Jalankan migration 20260608000000_add_form_type_3, 20260608000001_add_form_type_4, dan 20260618000000_add_form_type_5 terlebih dahulu. Detail: ${
+        `Database enum FormType belum mendukung tipe form terbaru. Jalankan migration 20260608000000_add_form_type_3, 20260608000001_add_form_type_4, 20260618000000_add_form_type_5, dan 20260618000001_add_form_type_6_mgs terlebih dahulu. Detail: ${
           lowercaseError instanceof Error ? lowercaseError.message : "ALTER TABLE document gagal"
         }`,
       );
@@ -266,7 +266,7 @@ export async function createDocument(actor: AuthUser, input: Record<string, stri
 
   const parsed = parseLhuDocumentInput(input);
 
-  if (parsed.formType === "TYPE_3" || parsed.formType === "TYPE_4" || parsed.formType === "TYPE_5") {
+  if (parsed.formType === "TYPE_3" || parsed.formType === "TYPE_4" || parsed.formType === "TYPE_5" || parsed.formType === "TYPE_6") {
     await ensureLatestFormTypeEnum();
   }
 
@@ -322,7 +322,7 @@ export async function updateDocument(actor: AuthUser, input: Record<string, stri
     throw new Error("Dokumen tidak ditemukan.");
   }
 
-  if (parsed.formType === "TYPE_3" || parsed.formType === "TYPE_4" || parsed.formType === "TYPE_5") {
+  if (parsed.formType === "TYPE_3" || parsed.formType === "TYPE_4" || parsed.formType === "TYPE_5" || parsed.formType === "TYPE_6") {
     await ensureLatestFormTypeEnum();
   }
 

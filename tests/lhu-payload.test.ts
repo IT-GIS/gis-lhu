@@ -109,6 +109,33 @@ describe("LHU payload parser", () => {
     expect(parsed.formPayload.results[0]?.no).toBe("");
   });
 
+  it("accepts Form Tipe 6 minyak goreng rows without unit column", () => {
+    const parsed = parseLhuDocumentInput(
+      baseInput({
+        formType: "TYPE_6",
+        reportNo: "LP/ J-0016F/26",
+        principalName: "PT. Sardana Nusantara Indonesia",
+        sampleName: "Minyak Goreng Sawit",
+        sampleNo: "J/MG-0016",
+        packaging: "Plastik 1000 ml",
+        sampling: "-",
+        resultsJson: JSON.stringify([
+          {
+            parameter: "Bilangan peroksida",
+            specification: "Max 10",
+            result: "5,85",
+            methods: "SNI 7709:2019, Lamp A.6",
+          },
+        ]),
+      }),
+    );
+
+    expect(parsed.formType).toBe("TYPE_6");
+    expect(parsed.formPayload.results[0]?.unit).toBe("");
+    expect(parsed.formPayload.results[0]?.specification).toBe("Max 10");
+    expect(parsed.formPayload.results[0]?.no).toBe("");
+  });
+
   it("keeps Wina and Technical Manager as editable defaults", () => {
     const parsed = parseLhuDocumentInput(
       baseInput({

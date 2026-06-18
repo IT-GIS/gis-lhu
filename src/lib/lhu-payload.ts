@@ -48,11 +48,15 @@ export function usesLimitResultTable(formType: AppFormType) {
 }
 
 export function usesSpecificationColumn(formType: AppFormType) {
-  return formType === "TYPE_1" || formType === "TYPE_5";
+  return formType === "TYPE_1" || formType === "TYPE_5" || formType === "TYPE_6";
 }
 
 export function usesNumberColumn(formType: AppFormType) {
-  return formType !== "TYPE_5";
+  return formType !== "TYPE_5" && formType !== "TYPE_6";
+}
+
+export function usesUnitColumn(formType: AppFormType) {
+  return formType !== "TYPE_6";
 }
 
 const basePayloadSchema = z.object({
@@ -120,7 +124,7 @@ export function createEmptyLhuPayload(formType: AppFormType): LhuPayload {
       {
         no: usesNumberColumn(formType) ? "1" : "",
         parameter: "",
-        unit: "",
+        unit: usesUnitColumn(formType) ? "" : undefined,
         specification: usesSpecificationColumn(formType) ? "" : undefined,
         result: "",
         methods: "",
@@ -172,7 +176,7 @@ function normalizePayload(formType: AppFormType, payload: LhuPayload): LhuPayloa
   const results = payload.results.map((row) => ({
     no: row.no ?? "",
     parameter: row.parameter ?? "",
-    unit: row.unit ?? "",
+    unit: usesUnitColumn(formType) ? row.unit ?? "" : "",
     specification: usesSpecificationColumn(formType) ? row.specification ?? "" : "",
     result: row.result ?? "",
     methods: row.methods ?? "",
@@ -310,6 +314,10 @@ export function getResultColumns(formType: AppFormType) {
 
   if (formType === "TYPE_5") {
     return ["PARAMETER", "UNIT", "SPESIFICATION* (MAX)", "RESULT", "METHODS"];
+  }
+
+  if (formType === "TYPE_6") {
+    return ["PARAMETER", "SPECIFICATION", "RESULT", "METHODS"];
   }
 
   return ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"];

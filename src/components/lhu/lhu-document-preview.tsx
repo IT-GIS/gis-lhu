@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import type { AppFormType } from "@/lib/domain";
-import { getResultColumns, type LhuPayload, usesLimitResultTable, usesNumberColumn, usesSpecificationColumn } from "@/lib/lhu-payload";
+import { getResultColumns, type LhuPayload, usesLimitResultTable, usesNumberColumn, usesSpecificationColumn, usesUnitColumn } from "@/lib/lhu-payload";
 
 type LhuDocumentPreviewProps = {
   formType: AppFormType;
@@ -32,6 +32,7 @@ export function LhuDocumentPreview({
   const usesLimitTable = usesLimitResultTable(formType);
   const usesNumber = usesNumberColumn(formType);
   const usesSpecification = usesSpecificationColumn(formType);
+  const usesUnit = usesUnitColumn(formType);
 
   return (
     <article className={`relative h-[297mm] w-[210mm] overflow-hidden bg-white text-slate-950 ${className}`}>
@@ -174,7 +175,7 @@ export function LhuDocumentPreview({
                   {usesLimitTable ? (
                     <td className="border border-slate-950 px-2 py-2">{row.methods || "-"}</td>
                   ) : null}
-                  <td className="border border-slate-950 px-2 py-2 text-center">{row.unit || "-"}</td>
+                  {usesUnit ? <td className="border border-slate-950 px-2 py-2 text-center">{row.unit || "-"}</td> : null}
                   {usesSpecification ? (
                     <td className="border border-slate-950 px-2 py-2 text-center">{row.specification || "-"}</td>
                   ) : null}
