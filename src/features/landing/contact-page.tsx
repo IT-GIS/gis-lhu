@@ -985,10 +985,23 @@ export function ContactPage() {
                 Ruang Lingkup Pengujian
               </Link>
             </li>
-            <li>
-              <Link href="/informasi" className="nav-link">
-                Informasi
-              </Link>
+            <li className="nav-dropdown">
+              <details>
+                <summary className="nav-link nav-dropdown-trigger">
+                  Informasi <i className="fa-solid fa-chevron-down" />
+                </summary>
+                <div className="nav-dropdown-menu">
+                  <Link href="/informasi" className="nav-dropdown-link">
+                    Artikel <i className="fa-solid fa-newspaper" />
+                  </Link>
+                  <Link
+                    href="/informasi/keluhan-dan-banding"
+                    className="nav-dropdown-link"
+                  >
+                    Keluhan dan Banding <i className="fa-solid fa-comments" />
+                  </Link>
+                </div>
+              </details>
             </li>
             <li>
               <Link href="/contact" className="nav-link active">

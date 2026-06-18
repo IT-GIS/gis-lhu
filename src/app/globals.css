@@ -68,6 +68,15 @@
 }
 
 .dark {
+
+  --background: #061827;
+  --foreground: #eaf6ff;
+
+  --color-foreground: #eaf6ff;
+  --color-card-foreground: #eaf6ff;
+  --color-muted-foreground: #cbd5e1;
+  --color-secondary-foreground: #eaf6ff;
+  --color-accent-foreground: #bffcff;
   /* Dark mode neumorphic uses slate tones */
   --neu-bg:       #1e2535;
   --neu-white:    #252d3d;
@@ -214,3 +223,199 @@ select {
 .stagger-3 { animation-delay: 300ms; opacity: 0; }
 .stagger-4 { animation-delay: 400ms; opacity: 0; }
 .stagger-5 { animation-delay: 500ms; opacity: 0; }
+
+
+/* Landing navbar dropdown */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown details {
+  position: relative;
+}
+
+.nav-dropdown summary {
+  list-style: none;
+}
+
+.nav-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-dropdown-trigger {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav-dropdown-trigger i {
+  font-size: 0.75rem;
+  transition: transform 0.25s ease;
+}
+
+.nav-dropdown details[open] .nav-dropdown-trigger i {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 1200;
+  min-width: 240px;
+  padding: 10px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  box-shadow: 0 24px 60px rgba(10, 37, 64, 0.16);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.nav-dropdown-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  color: #0A2540;
+  font-weight: 700;
+  font-size: 0.92rem;
+  transition: all 0.25s ease;
+}
+
+.nav-dropdown-link:hover,
+.nav-dropdown-link.active {
+  color: #0070F3;
+  background: rgba(0, 112, 243, 0.08);
+}
+
+@media (max-width: 768px) {
+  .nav-dropdown,
+  .nav-dropdown details {
+    width: 100%;
+  }
+
+  .nav-dropdown-trigger {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    min-width: 100%;
+    margin-top: 8px;
+    box-shadow: none;
+    background: rgba(248, 252, 255, 0.88);
+  }
+
+  .nav-dropdown-link {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* Fix landing dropdown alignment */
+.nav-menu > li {
+  display: flex;
+  align-items: center;
+}
+
+.nav-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-dropdown details {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-dropdown summary {
+  list-style: none;
+}
+
+.nav-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-dropdown-trigger {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center;
+  gap: 8px;
+  line-height: 1 !important;
+  min-height: 38px;
+  cursor: pointer;
+}
+
+.nav-dropdown-trigger i {
+  font-size: 0.72rem;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.nav-dropdown details[open] .nav-dropdown-trigger i {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 1200;
+  min-width: 288px;
+  padding: 14px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  box-shadow: 0 24px 60px rgba(10, 37, 64, 0.16);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.nav-dropdown-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  color: #0A2540;
+  font-weight: 800;
+  font-size: 0.94rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.nav-dropdown-link:hover,
+.nav-dropdown-link.active {
+  color: #0070F3;
+  background: rgba(0, 112, 243, 0.08);
+}
+
+@media (max-width: 768px) {
+  .nav-dropdown,
+  .nav-dropdown details {
+    width: 100%;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    min-width: 100%;
+    margin-top: 8px;
+    box-shadow: none;
+    background: rgba(248, 252, 255, 0.92);
+  }
+
+  .nav-dropdown-link {
+    justify-content: center;
+  }
+}

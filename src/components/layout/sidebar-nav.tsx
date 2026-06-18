@@ -83,8 +83,8 @@ export function SidebarNav({ isCollapsed = false, userRole }: { isCollapsed?: bo
           isCollapsed ? "justify-center px-0" : "justify-between gap-3 px-3"
         } ${
           isActive
-            ? "border border-[var(--color-gis-blue)]/24 bg-white text-[var(--color-gis-blue)] shadow-[0_12px_32px_-18px_rgba(0,112,243,0.55)] dark:border-[var(--color-gis-cyan)]/24 dark:bg-slate-900 dark:text-[var(--color-gis-cyan)]"
-            : "border border-white/45 bg-white/42 text-[var(--color-gis-navy)] shadow-none hover:bg-white/88 hover:text-[var(--color-gis-blue)] dark:border-slate-800/60 dark:bg-slate-900/48 dark:text-slate-200 dark:hover:bg-slate-900/90 dark:hover:text-[var(--color-gis-cyan)]"
+            ? "border border-[var(--color-gis-blue)]/30 bg-white text-[var(--color-gis-blue)] shadow-[0_12px_32px_-18px_rgba(0,112,243,0.55)] dark:border-cyan-300/50 dark:bg-cyan-400/12 dark:text-cyan-100 dark:shadow-[0_0_24px_rgba(0,223,216,0.18)]"
+            : "border border-white/45 bg-white/42 text-[var(--color-gis-navy)] shadow-none hover:bg-white/88 hover:text-[var(--color-gis-blue)] dark:border-slate-700/80 dark:bg-slate-800/72 dark:text-slate-100 dark:hover:border-cyan-300/45 dark:hover:bg-slate-800 dark:hover:text-cyan-200"
         }`}
         title={isCollapsed ? item.label : undefined}
       >
@@ -92,7 +92,9 @@ export function SidebarNav({ isCollapsed = false, userRole }: { isCollapsed?: bo
           <div className="absolute left-0 top-1/2 h-8 w-1.5 -translate-y-1/2 rounded-r-lg bg-[var(--color-gis-blue)] shadow-[0_0_14px_rgba(0,112,243,0.55)] transition-all duration-500 dark:bg-[var(--color-gis-cyan)]" />
         ) : null}
 
-        <div className={`relative z-10 flex w-full items-center ${isCollapsed ? "justify-center pl-0" : "gap-3 pl-1"}`}>
+        <div
+          className={`relative z-10 flex w-full items-center ${isCollapsed ? "justify-center pl-0" : "gap-3 pl-1"}`}
+        >
           <div
             className={`rounded-xl p-1.5 transition-all duration-500 ${
               isActive
@@ -102,7 +104,9 @@ export function SidebarNav({ isCollapsed = false, userRole }: { isCollapsed?: bo
           >
             <Icon
               className={`h-4 w-4 shrink-0 transition-all duration-300 ${
-                isActive ? "scale-110 rotate-[-10deg]" : "group-hover:scale-110 group-hover:rotate-[10deg]"
+                isActive
+                  ? "scale-110 rotate-[-10deg]"
+                  : "group-hover:scale-110 group-hover:rotate-[10deg]"
               }`}
             />
           </div>
@@ -147,13 +151,17 @@ export function SidebarNav({ isCollapsed = false, userRole }: { isCollapsed?: bo
       {visibleBottomNavItems.length > 0 ? (
         <div className="mt-8 border-t border-slate-200/70 pt-4 dark:border-slate-800">
           <div
-            className={`overflow-hidden whitespace-nowrap px-2 text-xs font-extrabold uppercase tracking-widest text-slate-600 transition-all duration-500 dark:text-slate-300 ${
-              isCollapsed ? "mb-0 max-h-0 opacity-0" : "mb-3 max-h-10 opacity-100"
+            className={`overflow-hidden whitespace-nowrap px-2 text-xs font-extrabold uppercase tracking-widest text-slate-600 transition-all duration-500 dark:text-slate-100 ${
+              isCollapsed
+                ? "mb-0 max-h-0 opacity-0"
+                : "mb-3 max-h-10 opacity-100"
             }`}
           >
             Website
           </div>
-          {visibleBottomNavItems.map((item) => renderNavItem(item, visibleBottomNavItems))}
+          {visibleBottomNavItems.map((item) =>
+            renderNavItem(item, visibleBottomNavItems),
+          )}
         </div>
       ) : null}
     </nav>
