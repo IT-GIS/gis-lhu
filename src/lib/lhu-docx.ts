@@ -4,7 +4,7 @@ import path from "path";
 import JSZip from "jszip";
 
 import type { AppFormType } from "@/lib/domain";
-import { getResultColumns, type LhuPayload } from "@/lib/lhu-payload";
+import { getResultColumns, type LhuPayload, usesLimitResultTable } from "@/lib/lhu-payload";
 
 const templatePath = path.join(process.cwd(), "public", "templates", "template-gis-lhu.docx");
 
@@ -104,6 +104,14 @@ function resultTable(formType: AppFormType, payload: LhuPayload) {
             row.limitTbMin || "-",
             row.limitTbMax || "-",
           ]
+        : formType === "TYPE_5"
+        ? [
+            row.parameter || "-",
+            row.unit || "-",
+            row.specification || "-",
+            row.result || "-",
+            row.methods || "-",
+          ]
         : formType === "TYPE_1"
         ? [
             String(index + 1),
@@ -127,6 +135,8 @@ function resultTable(formType: AppFormType, payload: LhuPayload) {
           ? [0, 3, 4, 5, 6, 7, 8]
           : formType === "TYPE_4"
             ? [0, 3, 4, 5, 6]
+            : formType === "TYPE_5"
+              ? [1, 2, 3]
             : formType === "TYPE_1"
               ? [0, 2, 3, 4]
               : [0, 2, 3],
@@ -174,8 +184,8 @@ function buildBodyContent({
     additionalInfo,
     line("3.5. Date of Received/Tanggal Terima", payload.receivedDate),
     line("3.6. Date of Analysis /Tanggal Uji", payload.analysisDate),
-    formType === "TYPE_3" || formType === "TYPE_4" ? line("3.7. Number of SNI /Nomor SNI", payload.sample.sniNo) : "",
-    formType === "TYPE_2" ? line("3.7. Sampling/Pengambilan Sample", payload.sample.sampling) : "",
+    usesLimitResultTable(formType) ? line("3.7. Number of SNI /Nomor SNI", payload.sample.sniNo) : "",
+    formType === "TYPE_2" || formType === "TYPE_5" ? line("3.7. Sampling/Pengambilan Sample", payload.sample.sampling) : "",
     sectionTitle("IV. Result / Hasil Uji:"),
     resultTable(formType, payload),
     paragraph(`Catatan : ${payload.notes || "-"}`, { size: 16, after: 160 }),

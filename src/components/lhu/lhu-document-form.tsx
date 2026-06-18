@@ -15,6 +15,9 @@ import {
   type LhuAdditionalInfo,
   type LhuPayload,
   type LhuResultRow,
+  usesLimitResultTable,
+  usesNumberColumn,
+  usesSpecificationColumn,
 } from "@/lib/lhu-payload";
 import { parseLhuImportFile } from "@/lib/lhu-docx-parser";
 
@@ -55,8 +58,8 @@ function mergePayloadForType(nextFormType: AppFormType, current: LhuPayload): Lh
     },
     results: current.results.map((row) => ({
       ...row,
-      no: nextFormType === "TYPE_3" || nextFormType === "TYPE_4" ? row.no ?? "" : "",
-      specification: nextFormType === "TYPE_1" ? row.specification ?? "" : "",
+      no: usesLimitResultTable(nextFormType) ? row.no ?? "" : "",
+      specification: usesSpecificationColumn(nextFormType) ? row.specification ?? "" : "",
       limitCfMin: nextFormType === "TYPE_3" ? row.limitCfMin ?? "" : "",
       limitCfMax: nextFormType === "TYPE_3" ? row.limitCfMax ?? "" : "",
       limitSfMin: nextFormType === "TYPE_3" ? row.limitSfMin ?? "" : "",
@@ -208,10 +211,10 @@ export function LhuDocumentForm({
       results: [
         ...current.results,
         {
-          no: formType === "TYPE_3" || formType === "TYPE_4" ? String(current.results.length + 1) : "",
+          no: usesLimitResultTable(formType) ? String(current.results.length + 1) : "",
           parameter: "",
           unit: "",
-          specification: formType === "TYPE_1" ? "" : undefined,
+          specification: usesSpecificationColumn(formType) ? "" : undefined,
           result: "",
           methods: "",
           limitCfMin: formType === "TYPE_3" ? "" : undefined,
@@ -249,8 +252,10 @@ export function LhuDocumentForm({
     }
   };
 
-  const usesSniNumber = formType === "TYPE_3" || formType === "TYPE_4";
-  const usesLimitTable = formType === "TYPE_3" || formType === "TYPE_4";
+  const usesSniNumber = usesLimitResultTable(formType);
+  const usesLimitTable = usesLimitResultTable(formType);
+  const usesNumber = usesNumberColumn(formType);
+  const usesSpecification = usesSpecificationColumn(formType);
   const resultColumnCount = getResultColumns(formType).length;
 
   return (
@@ -503,11 +508,11 @@ export function LhuDocumentForm({
           <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950/55">
             <table className="w-full min-w-[1040px] table-fixed border-collapse text-sm">
               <colgroup>
-                <col className="w-[64px]" />
+                {usesNumber ? <col className="w-[64px]" /> : null}
                 <col className="w-[250px]" />
                 {usesLimitTable ? <col className="w-[180px]" /> : null}
                 <col className="w-[110px]" />
-                {formType === "TYPE_1" ? <col className="w-[170px]" /> : null}
+                {usesSpecification ? <col className="w-[170px]" /> : null}
                 <col className="w-[140px]" />
                 {formType === "TYPE_3" ? (
                   <>
@@ -528,14 +533,14 @@ export function LhuDocumentForm({
               </colgroup>
               <thead className="bg-slate-100 text-xs font-bold uppercase tracking-[0.08em] text-slate-600 dark:bg-slate-900 dark:text-slate-300">
                 <tr>
-                  <th className="border-b border-slate-200 px-3 py-3 text-center dark:border-slate-800">NO</th>
+                  {usesNumber ? <th className="border-b border-slate-200 px-3 py-3 text-center dark:border-slate-800">NO</th> : null}
                   <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">PARAMETER</th>
                   {usesLimitTable ? (
                     <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">METHOD</th>
                   ) : null}
                   <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">UNIT</th>
-                  {formType === "TYPE_1" ? (
-                    <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">SPECIFICATION</th>
+                  {usesSpecification ? (
+                    <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">{formType === "TYPE_5" ? "SPESIFICATION* (MAX)" : "SPECIFICATION"}</th>
                   ) : null}
                   <th className="border-b border-slate-200 px-3 py-3 text-left dark:border-slate-800">RESULT</th>
                   {formType === "TYPE_3" ? (
@@ -559,13 +564,15 @@ export function LhuDocumentForm({
               <tbody>
                 {payload.results.map((row, index) => (
                   <tr key={index} className="border-t border-slate-100 align-top dark:border-slate-800">
-                    <td className="px-3 py-3 text-center font-semibold text-slate-600 dark:text-slate-300">
-                      {usesLimitTable ? (
-                        <Input className="rounded-xl text-center" value={row.no ?? ""} onChange={(event) => setResultRow(index, { ...row, no: event.target.value })} disabled={!canEdit} />
-                      ) : (
-                        index + 1
-                      )}
-                    </td>
+                    {usesNumber ? (
+                      <td className="px-3 py-3 text-center font-semibold text-slate-600 dark:text-slate-300">
+                        {usesLimitTable ? (
+                          <Input className="rounded-xl text-center" value={row.no ?? ""} onChange={(event) => setResultRow(index, { ...row, no: event.target.value })} disabled={!canEdit} />
+                        ) : (
+                          index + 1
+                        )}
+                      </td>
+                    ) : null}
                     <td className="px-3 py-3">
                       <Input className="rounded-xl" value={row.parameter ?? ""} onChange={(event) => setResultRow(index, { ...row, parameter: event.target.value })} disabled={!canEdit} />
                     </td>
@@ -577,7 +584,7 @@ export function LhuDocumentForm({
                     <td className="px-3 py-3">
                       <Input className="rounded-xl" value={row.unit ?? ""} onChange={(event) => setResultRow(index, { ...row, unit: event.target.value })} disabled={!canEdit} />
                     </td>
-                    {formType === "TYPE_1" ? (
+                    {usesSpecification ? (
                       <td className="px-3 py-3">
                         <Input className="rounded-xl" value={row.specification ?? ""} onChange={(event) => setResultRow(index, { ...row, specification: event.target.value })} disabled={!canEdit} />
                       </td>

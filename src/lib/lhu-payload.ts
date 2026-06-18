@@ -43,6 +43,18 @@ const resultRowSchema = z.object({
   limitTbMax: z.string().trim().max(100).optional().or(z.literal("")),
 });
 
+export function usesLimitResultTable(formType: AppFormType) {
+  return formType === "TYPE_3" || formType === "TYPE_4";
+}
+
+export function usesSpecificationColumn(formType: AppFormType) {
+  return formType === "TYPE_1" || formType === "TYPE_5";
+}
+
+export function usesNumberColumn(formType: AppFormType) {
+  return formType !== "TYPE_5";
+}
+
 const basePayloadSchema = z.object({
   reportNo: z.string().trim().min(1, "Nomor laporan wajib diisi.").max(100),
   orderNo: z.string().trim().max(100).optional().or(z.literal("")),
@@ -106,10 +118,10 @@ export function createEmptyLhuPayload(formType: AppFormType): LhuPayload {
     },
     results: [
       {
-        no: "1",
+        no: usesNumberColumn(formType) ? "1" : "",
         parameter: "",
         unit: "",
-        specification: formType === "TYPE_1" ? "" : undefined,
+        specification: usesSpecificationColumn(formType) ? "" : undefined,
         result: "",
         methods: "",
         limitCfMin: formType === "TYPE_3" ? "" : undefined,
@@ -161,7 +173,7 @@ function normalizePayload(formType: AppFormType, payload: LhuPayload): LhuPayloa
     no: row.no ?? "",
     parameter: row.parameter ?? "",
     unit: row.unit ?? "",
-    specification: formType === "TYPE_1" ? row.specification ?? "" : "",
+    specification: usesSpecificationColumn(formType) ? row.specification ?? "" : "",
     result: row.result ?? "",
     methods: row.methods ?? "",
     limitCfMin: formType === "TYPE_3" ? row.limitCfMin ?? "" : "",
@@ -243,16 +255,16 @@ export function parseLhuDocumentInput(input: Record<string, string>) {
       throw new Error(`Parameter wajib diisi pada baris hasil uji ${index + 1}.`);
     }
 
-    if (formType !== "TYPE_3" && formType !== "TYPE_4" && !row.result?.trim()) {
+    if (!usesLimitResultTable(formType) && !row.result?.trim()) {
       throw new Error(`Result wajib diisi pada baris hasil uji ${index + 1}.`);
     }
 
-    if (formType !== "TYPE_3" && formType !== "TYPE_4" && !row.methods?.trim()) {
+    if (!usesLimitResultTable(formType) && !row.methods?.trim()) {
       throw new Error(`Methods wajib diisi pada baris hasil uji ${index + 1}.`);
     }
   });
 
-  if (formType === "TYPE_1") {
+  if (usesSpecificationColumn(formType)) {
     payload.results.forEach((row, index) => {
       if (!row.specification?.trim()) {
         throw new Error(`Specification wajib diisi pada baris hasil uji ${index + 1}.`);
@@ -294,6 +306,10 @@ export function getResultColumns(formType: AppFormType) {
 
   if (formType === "TYPE_4") {
     return ["NO", "PARAMETER", "METHOD", "UNIT", "RESULT", "LIMIT (TB) MIN", "LIMIT (TB) MAX"];
+  }
+
+  if (formType === "TYPE_5") {
+    return ["PARAMETER", "UNIT", "SPESIFICATION* (MAX)", "RESULT", "METHODS"];
   }
 
   return ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"];

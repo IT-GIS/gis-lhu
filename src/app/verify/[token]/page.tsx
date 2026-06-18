@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import { resolveVerificationToken } from "@/lib/documents";
-import { getResultColumns, resolveLhuPayload, type LhuPayload } from "@/lib/lhu-payload";
+import { getResultColumns, resolveLhuPayload, type LhuPayload, usesLimitResultTable, usesNumberColumn, usesSpecificationColumn } from "@/lib/lhu-payload";
 import { getVerificationView } from "@/lib/verification";
 import { formatDate } from "@/lib/utils";
 
@@ -118,7 +118,9 @@ function ResultTable({
   payload: LhuPayload;
 }) {
   const columns = getResultColumns(formType);
-  const usesLimitTable = formType === "TYPE_3" || formType === "TYPE_4";
+  const usesLimitTable = usesLimitResultTable(formType);
+  const usesNumber = usesNumberColumn(formType);
+  const usesSpecification = usesSpecificationColumn(formType);
 
   return (
     <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
@@ -170,13 +172,13 @@ function ResultTable({
         <tbody>
           {payload.results.map((row, index) => (
             <tr key={index} className="odd:bg-white even:bg-slate-50">
-              <td className="border border-slate-200 px-4 py-3 font-semibold text-slate-900">{usesLimitTable ? row.no || "" : index + 1}</td>
+              {usesNumber ? <td className="border border-slate-200 px-4 py-3 font-semibold text-slate-900">{usesLimitTable ? row.no || "" : index + 1}</td> : null}
               <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.parameter || "-"}</td>
               {usesLimitTable ? (
                 <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.methods || "-"}</td>
               ) : null}
               <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.unit || "-"}</td>
-              {formType === "TYPE_1" ? (
+              {usesSpecification ? (
                 <td className="border border-slate-200 px-4 py-3 text-slate-800">{row.specification || "-"}</td>
               ) : null}
               <td className="border border-slate-200 px-4 py-3 font-semibold text-slate-950">{row.result || "-"}</td>

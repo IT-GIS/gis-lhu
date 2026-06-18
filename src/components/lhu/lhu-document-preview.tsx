@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import type { AppFormType } from "@/lib/domain";
-import { getResultColumns, type LhuPayload } from "@/lib/lhu-payload";
+import { getResultColumns, type LhuPayload, usesLimitResultTable, usesNumberColumn, usesSpecificationColumn } from "@/lib/lhu-payload";
 
 type LhuDocumentPreviewProps = {
   formType: AppFormType;
@@ -29,7 +29,9 @@ export function LhuDocumentPreview({
   className = "",
 }: LhuDocumentPreviewProps) {
   const columns = getResultColumns(formType);
-  const usesLimitTable = formType === "TYPE_3" || formType === "TYPE_4";
+  const usesLimitTable = usesLimitResultTable(formType);
+  const usesNumber = usesNumberColumn(formType);
+  const usesSpecification = usesSpecificationColumn(formType);
 
   return (
     <article className={`relative h-[297mm] w-[210mm] overflow-hidden bg-white text-slate-950 ${className}`}>
@@ -167,13 +169,13 @@ export function LhuDocumentPreview({
             <tbody>
               {payload.results.map((row, index) => (
                 <tr key={index}>
-                  <td className="border border-slate-950 px-2 py-2 text-center">{usesLimitTable ? row.no || "" : index + 1}</td>
+                  {usesNumber ? <td className="border border-slate-950 px-2 py-2 text-center">{usesLimitTable ? row.no || "" : index + 1}</td> : null}
                   <td className="border border-slate-950 px-2 py-2">{row.parameter || "-"}</td>
                   {usesLimitTable ? (
                     <td className="border border-slate-950 px-2 py-2">{row.methods || "-"}</td>
                   ) : null}
                   <td className="border border-slate-950 px-2 py-2 text-center">{row.unit || "-"}</td>
-                  {formType === "TYPE_1" ? (
+                  {usesSpecification ? (
                     <td className="border border-slate-950 px-2 py-2 text-center">{row.specification || "-"}</td>
                   ) : null}
                   <td className="border border-slate-950 px-2 py-2 text-center">{row.result || "-"}</td>

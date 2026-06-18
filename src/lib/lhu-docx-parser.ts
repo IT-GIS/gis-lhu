@@ -1,7 +1,13 @@
 import JSZip from "jszip";
 
 import type { AppFormType } from "@/lib/domain";
-import { createEmptyLhuPayload, type LhuAdditionalInfo, type LhuPayload, type LhuResultRow } from "@/lib/lhu-payload";
+import {
+  createEmptyLhuPayload,
+  type LhuAdditionalInfo,
+  type LhuPayload,
+  type LhuResultRow,
+  usesLimitResultTable,
+} from "@/lib/lhu-payload";
 
 type ParsedDocx = {
   formType: AppFormType;
@@ -10,6 +16,7 @@ type ParsedDocx = {
 };
 
 const pdfTextDecoder = new TextDecoder("latin1");
+const specificationHeaderPattern = /^SPE[CS]IFICATION/i;
 
 function normalizeText(value: string) {
   return value.replace(/\s+/g, " ").trim();
@@ -149,7 +156,7 @@ function parseResults(rows: string[][], formType: AppFormType) {
   const header = rows[0] ?? [];
   const parameterIndex = header.findIndex((cell) => /^PARAMETER$/i.test(cell));
   const unitIndex = header.findIndex((cell) => /^UNIT$/i.test(cell));
-  const specificationIndex = header.findIndex((cell) => /^SPECIFICATION$/i.test(cell));
+  const specificationIndex = header.findIndex((cell) => specificationHeaderPattern.test(cell));
   const resultIndex = header.findIndex((cell) => /^RESULT$/i.test(cell));
   const methodsIndex = header.findIndex((cell) => /^METHODS?$/i.test(cell));
 
@@ -166,7 +173,7 @@ function parseResults(rows: string[][], formType: AppFormType) {
     }
 
     if (/^\d+$/.test(firstCell)) {
-      if (formType === "TYPE_3" || formType === "TYPE_4") {
+      if (usesLimitResultTable(formType)) {
         results.push({
           no: firstCell,
           parameter: cells[1] ?? "",
@@ -223,6 +230,25 @@ function parseResults(rows: string[][], formType: AppFormType) {
     }
 
     if (
+      formType === "TYPE_5" &&
+      parameterIndex >= 0 &&
+      unitIndex >= 0 &&
+      specificationIndex >= 0 &&
+      resultIndex >= 0 &&
+      methodsIndex >= 0 &&
+      cells[parameterIndex]
+    ) {
+      results.push({
+        parameter: cells[parameterIndex] ?? "",
+        unit: cells[unitIndex] ?? "",
+        specification: cells[specificationIndex] ?? "",
+        result: cells[resultIndex] ?? "",
+        methods: cells[methodsIndex] ?? "",
+      });
+      return;
+    }
+
+    if (
       formType === "TYPE_2" &&
       parameterIndex >= 0 &&
       unitIndex >= 0 &&
@@ -240,7 +266,7 @@ function parseResults(rows: string[][], formType: AppFormType) {
       return;
     }
 
-    if ((formType === "TYPE_3" || formType === "TYPE_4") && cells[1]) {
+    if (usesLimitResultTable(formType) && cells[1]) {
       results.push({
         no: "",
         parameter: cells[1] ?? "",
@@ -280,9 +306,9 @@ function isResultTableStopLine(line: string) {
 
 function parsePdfInlineResultRow(line: string, formType: AppFormType) {
   const cells = line.split(/\s{2,}|\t+/).map(normalizeText).filter(Boolean);
-  const expectedCells = formType === "TYPE_1" ? 6 : formType === "TYPE_3" ? 9 : formType === "TYPE_4" ? 7 : 5;
+  const expectedCells = formType === "TYPE_1" ? 6 : formType === "TYPE_3" ? 9 : formType === "TYPE_4" ? 7 : formType === "TYPE_5" ? 5 : 5;
 
-  if (cells.length >= expectedCells && /^\d+$/.test(cells[0] ?? "")) {
+  if (cells.length >= expectedCells && (formType === "TYPE_5" || /^\d+$/.test(cells[0] ?? ""))) {
     return cells.slice(0, expectedCells);
   }
 
@@ -298,7 +324,9 @@ function extractPdfResultRows(lines: string[], formType: AppFormType) {
         ? /NO\b.*PARAMETER\b.*METHOD\b.*UNIT\b.*RESULT\b.*LIMIT/i
         : formType === "TYPE_4"
           ? /NO\b.*PARAMETER\b.*METHOD\b.*UNIT\b.*RESULT\b.*LIMIT/i
-        : /NO\b.*PARAMETER\b.*UNIT\b.*RESULT\b.*METHODS\b/i,
+          : formType === "TYPE_5"
+            ? /PARAMETER\b.*UNIT\b.*SPE[CS]IFICATION\b.*RESULT\b.*METHODS\b/i
+            : /NO\b.*PARAMETER\b.*UNIT\b.*RESULT\b.*METHODS\b/i,
   );
   const separateHeaderIndex =
     headerIndex >= 0
@@ -316,6 +344,8 @@ function extractPdfResultRows(lines: string[], formType: AppFormType) {
         ? ["NO", "PARAMETER", "METHOD", "UNIT", "RESULT", "LIMIT (CF) MIN", "LIMIT (CF) MAX", "LIMIT (SF) MIN", "LIMIT (SF) MAX"]
       : formType === "TYPE_4"
         ? ["NO", "PARAMETER", "METHOD", "UNIT", "RESULT", "LIMIT (TB) MIN", "LIMIT (TB) MAX"]
+      : formType === "TYPE_5"
+        ? ["PARAMETER", "UNIT", "SPESIFICATION* (MAX)", "RESULT", "METHODS"]
       : ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"];
   const startIndex = headerIndex >= 0 ? headerIndex + 1 : separateHeaderIndex + headerCells.length;
   const tableRows: string[][] = [headerCells];
@@ -327,6 +357,22 @@ function extractPdfResultRows(lines: string[], formType: AppFormType) {
     const inlineRow = parsePdfInlineResultRow(line, formType);
     if (inlineRow) {
       tableRows.push(inlineRow);
+      continue;
+    }
+
+    if (formType === "TYPE_5") {
+      const row: string[] = [];
+
+      for (let offset = 0; offset < headerCells.length; offset += 1) {
+        const value = lines[index + offset];
+        if (!value || isResultTableStopLine(value)) break;
+        row.push(value);
+      }
+
+      if (row.length === headerCells.length) {
+        tableRows.push(row);
+        index += headerCells.length - 1;
+      }
       continue;
     }
 
@@ -437,9 +483,15 @@ function detectFormType(lines: string[], table: string[][]): AppFormType {
   const header = headerRows.flat();
   const firstHeaderRow = headerRows[0] ?? [];
   const secondHeaderRow = headerRows[1] ?? [];
+  const hasNumberColumn = firstHeaderRow.some((cell) => /^No$/i.test(cell));
   const hasMethodColumn = firstHeaderRow.some((cell) => /^Method$/i.test(cell));
+  const hasSpecificationColumn = header.some((cell) => specificationHeaderPattern.test(cell));
   const limitGroupCount = firstHeaderRow.filter((cell) => /^Limit\b/i.test(cell)).length;
   const limitSubcolumnCount = secondHeaderRow.filter((cell) => /^(Min|Max)$/i.test(cell)).length;
+
+  if (!hasNumberColumn && !hasMethodColumn && hasSpecificationColumn) {
+    return "TYPE_5";
+  }
 
   if (hasMethodColumn && limitGroupCount >= 2 && limitSubcolumnCount >= 4) {
     return "TYPE_3";
@@ -464,9 +516,9 @@ function detectFormType(lines: string[], table: string[][]): AppFormType {
   }
 
   if (
-    header.some((cell) => /SPECIFICATION/i.test(cell)) ||
-    lines.some((line) => /^SPECIFICATION$/i.test(line)) ||
-    lines.some((line) => /\bPARAMETER\b.*\bSPECIFICATION\b.*\bRESULT\b/i.test(line))
+    header.some((cell) => specificationHeaderPattern.test(cell)) ||
+    lines.some((line) => specificationHeaderPattern.test(line)) ||
+    lines.some((line) => /\bPARAMETER\b.*\bSPE[CS]IFICATION\b.*\bRESULT\b/i.test(line))
   ) {
     return "TYPE_1";
   }

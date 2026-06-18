@@ -82,6 +82,33 @@ describe("LHU payload parser", () => {
     expect(parsed.title).toBe("PT. Permata Agro Persada");
   });
 
+  it("accepts Form Tipe 5 rows with specification max column", () => {
+    const parsed = parseLhuDocumentInput(
+      baseInput({
+        formType: "TYPE_5",
+        reportNo: "LP/ J-0027B/26",
+        principalName: "PT Prakasa Good Well",
+        sampleName: "STP",
+        sampleNo: "J/AL-0027",
+        packaging: "Bottle 1000 ml",
+        sampling: "-",
+        resultsJson: JSON.stringify([
+          {
+            parameter: "pH (Insitu)",
+            unit: "-",
+            specification: "6 - 9",
+            result: "6,8",
+            methods: "SNI 6989.11.2019",
+          },
+        ]),
+      }),
+    );
+
+    expect(parsed.formType).toBe("TYPE_5");
+    expect(parsed.formPayload.results[0]?.specification).toBe("6 - 9");
+    expect(parsed.formPayload.results[0]?.no).toBe("");
+  });
+
   it("keeps Wina and Technical Manager as editable defaults", () => {
     const parsed = parseLhuDocumentInput(
       baseInput({
