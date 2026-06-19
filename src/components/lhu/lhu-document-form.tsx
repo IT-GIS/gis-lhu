@@ -32,6 +32,21 @@ type LhuDocumentFormProps = {
   canChangeFormType?: boolean;
 };
 
+type AiImportResponse =
+  | {
+      ok: true;
+      parsed: {
+        formType: AppFormType;
+        payload: LhuPayload;
+        confidence: number;
+        warnings: string[];
+      };
+    }
+  | {
+      ok: false;
+      error: string;
+    };
+
 const labelClass = "mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-200";
 const selectClass =
   "h-11 w-full rounded-2xl border border-[var(--color-border)] bg-white/90 px-4 text-sm outline-none transition focus:border-[var(--color-gis-blue)] dark:bg-slate-950/70 disabled:bg-slate-100 disabled:text-slate-500";
@@ -230,6 +245,41 @@ export function LhuDocumentForm({
     }));
   };
 
+  const applyParsedImport = (parsed: { formType: AppFormType; payload: LhuPayload }) => {
+    setFormType(parsed.formType);
+    setPayload(parsed.payload);
+  };
+
+  const importLhuFileWithAi = async (file: File, parserErrorMessage: string) => {
+    setImportStatus({
+      tone: "loading",
+      message: `Parser tidak dapat mengisi dokumen ini: ${parserErrorMessage} Mencoba bantuan AI...`,
+    });
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch("/api/lhu/ai-import", {
+      method: "POST",
+      body: formData,
+    });
+    const result = (await response.json()) as AiImportResponse;
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.ok ? "AI tidak dapat membaca dokumen ini dengan aman." : result.error);
+    }
+
+    applyParsedImport(result.parsed);
+
+    const confidence = Math.round(result.parsed.confidence * 100);
+    const warningText = result.parsed.warnings.length ? ` Catatan: ${result.parsed.warnings.join("; ")}` : "";
+
+    setImportStatus({
+      tone: "success",
+      message: `${file.name} berhasil dibaca dengan bantuan AI sebagai ${formTypeLabels[result.parsed.formType]} (${confidence}% confidence). Cek ulang sebelum simpan.${warningText}`,
+    });
+  };
+
   const importLhuFile = async (file?: File | null) => {
     if (!file) return;
 
@@ -240,17 +290,26 @@ export function LhuDocumentForm({
 
     try {
       const parsed = await parseLhuImportFile(file);
-      setFormType(parsed.formType);
-      setPayload(parsed.payload);
+      applyParsedImport(parsed);
       setImportStatus({
         tone: "success",
         message: `${file.name} berhasil dianalisis sebagai ${formTypeLabels[parsed.formType]}. Form dan tabel sudah diisi otomatis.`,
       });
     } catch (error) {
-      setImportStatus({
-        tone: "error",
-        message: error instanceof Error ? error.message : "File tidak dapat dianalisis.",
-      });
+      const parserErrorMessage = error instanceof Error ? error.message : "File tidak dapat dianalisis.";
+
+      try {
+        await importLhuFileWithAi(file, parserErrorMessage);
+        return;
+      } catch (aiError) {
+        const aiErrorMessage = aiError instanceof Error ? aiError.message : "AI tidak dapat membaca dokumen ini dengan aman.";
+
+        setImportStatus({
+          tone: "error",
+          message: `${aiErrorMessage} Form tidak diisi otomatis.`,
+        });
+        return;
+      }
     }
   };
 
@@ -320,7 +379,7 @@ export function LhuDocumentForm({
                 Drop file Word/PDF LHU di sini atau klik untuk upload
               </span>
               <span className="mt-1 text-xs text-slate-500">
-                Sistem akan membaca tipe form, data pelanggan, sampel, tabel hasil, catatan, dan tanda tangan dari DOCX atau PDF berbasis teks.
+                Sistem membaca dokumen dengan parser lokal terlebih dahulu. Jika gagal, AI akan mencoba membantu mengisi draft dan tetap divalidasi sebelum form diisi.
               </span>
               <span
                 className={`mt-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ${

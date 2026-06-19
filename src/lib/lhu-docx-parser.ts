@@ -15,6 +15,12 @@ type ParsedDocx = {
   payload: LhuPayload;
 };
 
+export type LhuImportContext = {
+  lines: string[];
+  table: string[][];
+  text: string;
+};
+
 const pdfTextDecoder = new TextDecoder("latin1");
 const specificationHeaderPattern = /^SPE[CS]IFICATION/i;
 const unsupportedFormTypeMessage =
@@ -633,10 +639,9 @@ export async function parseLhuDocxFile(file: File): Promise<ParsedDocx> {
     throw new Error("Isi dokumen Word tidak dapat dibaca.");
   }
 
-  const lines = extractWordParagraphs(documentText);
-  const table = extractWordTables(documentText)[0] ?? [];
+  const context = extractLhuDocxContext(documentText);
 
-  return parseLhuFromText(lines, table);
+  return parseLhuFromText(context.lines, context.table);
 }
 
 function decodePdfLiteralString(value: string) {
@@ -804,14 +809,61 @@ export async function parseLhuPdfFile(file: File): Promise<ParsedDocx> {
     throw new Error("File harus berformat .pdf.");
   }
 
-  const text = await extractPdfText(file);
-  const lines = text.split(/\r?\n+/).map(normalizeText).filter(Boolean);
+  const context = extractLhuPdfContext(await extractPdfText(file));
 
-  if (!lines.length) {
+  if (!context.lines.length) {
     throw new Error("Teks PDF tidak dapat dibaca. Untuk PDF hasil scan gambar, lakukan OCR atau upload file Word/PDF yang masih berisi teks.");
   }
 
-  return parseLhuFromText(lines, []);
+  return parseLhuFromText(context.lines, context.table);
+}
+
+export function extractLhuDocxContext(documentText: string): LhuImportContext {
+  const lines = extractWordParagraphs(documentText);
+  const table = extractWordTables(documentText)[0] ?? [];
+
+  return {
+    lines,
+    table,
+    text: lines.join("\n"),
+  };
+}
+
+export function extractLhuPdfContext(text: string): LhuImportContext {
+  const lines = text.split(/\r?\n+/).map(normalizeText).filter(Boolean);
+
+  return {
+    lines,
+    table: [],
+    text: lines.join("\n"),
+  };
+}
+
+export async function extractLhuImportContext(file: File): Promise<LhuImportContext> {
+  const name = file.name.toLowerCase();
+
+  if (name.endsWith(".docx")) {
+    const zip = await JSZip.loadAsync(await file.arrayBuffer());
+    const documentText = await zip.file("word/document.xml")?.async("text");
+
+    if (!documentText) {
+      throw new Error("Isi dokumen Word tidak dapat dibaca.");
+    }
+
+    return extractLhuDocxContext(documentText);
+  }
+
+  if (name.endsWith(".pdf") || file.type === "application/pdf") {
+    const context = extractLhuPdfContext(await extractPdfText(file));
+
+    if (!context.lines.length) {
+      throw new Error("Teks PDF tidak dapat dibaca. Untuk PDF hasil scan gambar, lakukan OCR atau upload file Word/PDF yang masih berisi teks.");
+    }
+
+    return context;
+  }
+
+  throw new Error("File harus berformat .docx atau .pdf.");
 }
 
 export async function parseLhuImportFile(file: File): Promise<ParsedDocx> {
