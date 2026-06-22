@@ -217,8 +217,8 @@ function ResultTable({
 
 function SignatureBlock({ payload }: { payload: LhuPayload }) {
   return (
-    <div className="flex justify-start md:justify-end">
-      <div className="w-full max-w-sm border-t border-slate-200 pt-6 text-left md:text-center">
+    <div className="flex justify-start">
+      <div className="w-full max-w-sm border-t border-slate-200 pt-6 text-left">
         <p className="text-base font-semibold leading-7 text-slate-950">
           {payload.issue.place || "Jakarta"}, {payload.issue.date || "-"}
         </p>
