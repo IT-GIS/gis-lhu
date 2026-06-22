@@ -23,6 +23,7 @@ enum FormType {
   TYPE_4
   TYPE_5
   TYPE_6
+  TYPE_7
 }
 
 enum DocumentStatus {

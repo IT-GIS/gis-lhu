@@ -78,4 +78,37 @@ describe("LHU AI import guard", () => {
       ),
     ).toThrow("struktur tabel tidak sesuai");
   });
+  it("accepts Form Tipe 7 as a TYPE_2-shaped table with Address of Sampling and no sampling field", () => {
+    const base = baseAiResult();
+    const validated = validateAiImportResult(
+      baseAiResult({
+        formType: "TYPE_7",
+        sourceTableColumns: ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"],
+        payload: {
+          ...base.payload,
+          sample: {
+            ...base.payload.sample,
+            sampling: "",
+            additionalInfo: [
+              {
+                label: "Address of Sampling/Lokasi Pengambilan",
+                value: "Quzhou Juhua Polymide Fibre Co., Ltd Junhua Factory",
+              },
+            ],
+          },
+          results: [
+            {
+              ...base.payload.results[0],
+              no: "1",
+              unit: "%",
+              specification: "",
+            },
+          ],
+        },
+      }),
+      0.8,
+    );
+
+    expect(validated.formType).toBe("TYPE_7");
+  });
 });

@@ -33,7 +33,7 @@ async function ensureLatestFormTypeEnum() {
     return;
   }
 
-  const alterSql = "MODIFY `formType` ENUM('TYPE_1','TYPE_2','TYPE_3','TYPE_4','TYPE_5','TYPE_6') NOT NULL";
+  const alterSql = "MODIFY `formType` ENUM('TYPE_1','TYPE_2','TYPE_3','TYPE_4','TYPE_5','TYPE_6','TYPE_7') NOT NULL";
 
   try {
     await prisma.$executeRawUnsafe(`ALTER TABLE \`document\` ${alterSql}`);
@@ -46,7 +46,7 @@ async function ensureLatestFormTypeEnum() {
       return;
     } catch {
       throw new Error(
-        `Database enum FormType belum mendukung tipe form terbaru. Jalankan migration 20260608000000_add_form_type_3, 20260608000001_add_form_type_4, 20260618000000_add_form_type_5, dan 20260618000001_add_form_type_6_mgs terlebih dahulu. Detail: ${
+        `Database enum FormType belum mendukung tipe form terbaru. Jalankan migration form type terbaru sampai 20260622000000_add_form_type_7_za terlebih dahulu. Detail: ${
           lowercaseError instanceof Error ? lowercaseError.message : "ALTER TABLE document gagal"
         }`,
       );
@@ -61,19 +61,31 @@ function normalizeOptionalString(value?: string | null) {
 
 async function generateDocumentNumber(tx: Prisma.TransactionClient) {
   const year = new Date().getFullYear();
-  const start = new Date(`${year}-01-01T00:00:00.000Z`);
-  const end = new Date(`${year + 1}-01-01T00:00:00.000Z`);
-
-  const totalThisYear = await tx.document.count({
+  const prefix = `GIS-LHU/${year}/`;
+  const documents = await tx.document.findMany({
     where: {
-      createdAt: {
-        gte: start,
-        lt: end,
+      documentNumber: {
+        startsWith: prefix,
       },
+    },
+    select: {
+      documentNumber: true,
     },
   });
 
-  return `GIS-LHU/${year}/${String(totalThisYear + 1).padStart(4, "0")}`;
+  const latestSequence = documents.reduce((latest, document) => {
+    const sequence = Number.parseInt(document.documentNumber.slice(prefix.length), 10);
+    return Number.isFinite(sequence) ? Math.max(latest, sequence) : latest;
+  }, 0);
+
+  return `${prefix}${String(latestSequence + 1).padStart(4, "0")}`;
+}
+
+function isDocumentNumberUniqueError(error: unknown) {
+  const candidate = error as { code?: string; meta?: { target?: unknown }; message?: string };
+  const target = Array.isArray(candidate.meta?.target) ? candidate.meta.target.join(" ") : String(candidate.meta?.target ?? "");
+
+  return candidate.code === "P2002" && /documentNumber|Document_documentNumber_key/i.test(`${target} ${candidate.message ?? ""}`);
 }
 
 function createVerificationToken() {
@@ -266,52 +278,64 @@ export async function createDocument(actor: AuthUser, input: Record<string, stri
 
   const parsed = parseLhuDocumentInput(input);
 
-  if (parsed.formType === "TYPE_3" || parsed.formType === "TYPE_4" || parsed.formType === "TYPE_5" || parsed.formType === "TYPE_6") {
+  if (parsed.formType !== "TYPE_1" && parsed.formType !== "TYPE_2") {
     await ensureLatestFormTypeEnum();
   }
 
-  return prisma.$transaction(async (tx) => {
-    const documentNumber = await generateDocumentNumber(tx);
+  for (let attempt = 1; attempt <= 5; attempt += 1) {
+    try {
+      return await prisma.$transaction(async (tx) => {
+        const documentNumber = await generateDocumentNumber(tx);
 
-    const created = await tx.document.create({
-      data: {
-        documentNumber,
-        title: parsed.title,
-        formType: parsed.formType,
-        referenceNo: normalizeOptionalString(parsed.referenceNo),
-        clientName: normalizeOptionalString(parsed.clientName),
-        sampleName: normalizeOptionalString(parsed.sampleName),
-        notes: normalizeOptionalString(parsed.notes),
-        assignedToId: normalizeOptionalString(parsed.assignedToId),
-        formPayload: parsed.formPayload as Prisma.InputJsonValue,
-        createdById: actor.id,
-      },
-    });
+        const created = await tx.document.create({
+          data: {
+            documentNumber,
+            title: parsed.title,
+            formType: parsed.formType,
+            referenceNo: normalizeOptionalString(parsed.referenceNo),
+            clientName: normalizeOptionalString(parsed.clientName),
+            sampleName: normalizeOptionalString(parsed.sampleName),
+            notes: normalizeOptionalString(parsed.notes),
+            assignedToId: normalizeOptionalString(parsed.assignedToId),
+            formPayload: parsed.formPayload as Prisma.InputJsonValue,
+            createdById: actor.id,
+          },
+        });
 
-    const token = createVerificationToken();
-    await tx.verificationToken.create({
-      data: {
-        documentId: created.id,
-        token,
-        isActive: true,
-        publishedAt: new Date(),
-      },
-    });
+        const token = createVerificationToken();
+        await tx.verificationToken.create({
+          data: {
+            documentId: created.id,
+            token,
+            isActive: true,
+            publishedAt: new Date(),
+          },
+        });
 
-    await recordAudit(tx, {
-      actorId: actor.id,
-      action: "document.create",
-      entityType: "document",
-      entityId: created.id,
-      metadata: {
-        documentNumber,
-        formTypeLabel: formTypeLabels[created.formType],
-        verificationToken: token,
-      },
-    });
+        await recordAudit(tx, {
+          actorId: actor.id,
+          action: "document.create",
+          entityType: "document",
+          entityId: created.id,
+          metadata: {
+            documentNumber,
+            formTypeLabel: formTypeLabels[created.formType],
+            verificationToken: token,
+          },
+        });
 
-    return created;
-  });
+        return created;
+      });
+    } catch (error) {
+      if (attempt < 5 && isDocumentNumberUniqueError(error)) {
+        continue;
+      }
+
+      throw error;
+    }
+  }
+
+  throw new Error("Nomor dokumen gagal dibuat. Silakan coba simpan ulang.");
 }
 
 export async function updateDocument(actor: AuthUser, input: Record<string, string>) {
@@ -322,7 +346,7 @@ export async function updateDocument(actor: AuthUser, input: Record<string, stri
     throw new Error("Dokumen tidak ditemukan.");
   }
 
-  if (parsed.formType === "TYPE_3" || parsed.formType === "TYPE_4" || parsed.formType === "TYPE_5" || parsed.formType === "TYPE_6") {
+  if (parsed.formType !== "TYPE_1" && parsed.formType !== "TYPE_2") {
     await ensureLatestFormTypeEnum();
   }
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import { resolveVerificationToken } from "@/lib/documents";
-import { getResultColumns, resolveLhuPayload, type LhuPayload, usesLimitResultTable, usesNumberColumn, usesSpecificationColumn, usesUnitColumn } from "@/lib/lhu-payload";
+import { getResultColumns, resolveLhuPayload, type LhuPayload, usesLimitResultTable, usesNumberColumn, usesSamplingField, usesSpecificationColumn, usesUnitColumn } from "@/lib/lhu-payload";
 import { getVerificationView } from "@/lib/verification";
 import { formatDate } from "@/lib/utils";
 
@@ -85,8 +85,8 @@ function LaboratoryIdentityCard() {
   );
 }
 
-function AdditionalInfoList({ payload }: { payload: LhuPayload }) {
-  const items = [
+function AdditionalInfoList({ formType, payload }: { formType: NonNullable<Awaited<ReturnType<typeof resolveVerificationToken>>>["document"]["formType"]; payload: LhuPayload }) {
+  const items = ([
     { label: "Sample Number / Nomor Contoh", value: payload.sample.sampleNo },
     { label: "Sample Name / Nama Contoh", value: payload.sample.sampleName },
     { label: "Packaging / Kemasan", value: payload.sample.packaging },
@@ -98,8 +98,10 @@ function AdditionalInfoList({ payload }: { payload: LhuPayload }) {
     { label: "Date of Analysis / Tanggal Uji", value: payload.analysisDate },
     payload.sample.sniNo?.trim()
       ? { label: "Number of SNI / Nomor SNI", value: payload.sample.sniNo }
-      : { label: "Sampling / Pengambilan Sample", value: payload.sample.sampling },
-  ].filter((item) => item.value?.trim());
+      : usesSamplingField(formType)
+        ? { label: "Sampling / Pengambilan Sample", value: payload.sample.sampling }
+        : null,
+  ] as Array<{ label: string; value?: string | null } | null>).filter((item): item is { label: string; value?: string | null } => Boolean(item?.value?.trim()));
 
   return (
     <div className="grid gap-4 md:grid-cols-2">
@@ -295,7 +297,7 @@ export default async function VerifyPage({
                 </PublicSection>
 
                 <PublicSection title="III. Sample / Contoh Uji">
-                  <AdditionalInfoList payload={payload} />
+                  <AdditionalInfoList formType={verification.document.formType} payload={payload} />
                 </PublicSection>
 
                 <PublicSection title="IV. Result / Hasil Uji">

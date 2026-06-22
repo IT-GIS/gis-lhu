@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import type { AppFormType } from "@/lib/domain";
-import { getResultColumns, type LhuPayload, usesLimitResultTable, usesNumberColumn, usesSpecificationColumn, usesUnitColumn } from "@/lib/lhu-payload";
+import { getResultColumns, type LhuPayload, usesLimitResultTable, usesNumberColumn, usesSamplingField, usesSpecificationColumn, usesUnitColumn } from "@/lib/lhu-payload";
 
 type LhuDocumentPreviewProps = {
   formType: AppFormType;
@@ -30,6 +30,7 @@ export function LhuDocumentPreview({
 }: LhuDocumentPreviewProps) {
   const columns = getResultColumns(formType);
   const usesLimitTable = usesLimitResultTable(formType);
+  const usesSampling = usesSamplingField(formType);
   const usesNumber = usesNumberColumn(formType);
   const usesSpecification = usesSpecificationColumn(formType);
   const usesUnit = usesUnitColumn(formType);
@@ -114,9 +115,9 @@ export function LhuDocumentPreview({
         <InfoLine number="3.6." label="Date of Analysis /Tanggal Uji" value={payload.analysisDate} />
         {usesLimitTable ? (
           <InfoLine number="3.7." label="Number of SNI /Nomor SNI" value={payload.sample.sniNo} />
-        ) : (
+        ) : usesSampling ? (
           <InfoLine number="3.7." label="Sampling/Pengambilan Sample" value={payload.sample.sampling} />
-        )}
+        ) : null}
       </section>
 
       <section className="mt-6">

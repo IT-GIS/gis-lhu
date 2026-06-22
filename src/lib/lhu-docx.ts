@@ -4,7 +4,7 @@ import path from "path";
 import JSZip from "jszip";
 
 import type { AppFormType } from "@/lib/domain";
-import { getResultColumns, type LhuPayload, usesLimitResultTable } from "@/lib/lhu-payload";
+import { getResultColumns, type LhuPayload, usesLimitResultTable, usesSamplingField } from "@/lib/lhu-payload";
 
 const templatePath = path.join(process.cwd(), "public", "templates", "template-gis-lhu.docx");
 
@@ -194,7 +194,7 @@ function buildBodyContent({
     line("3.5. Date of Received/Tanggal Terima", payload.receivedDate),
     line("3.6. Date of Analysis /Tanggal Uji", payload.analysisDate),
     usesLimitResultTable(formType) ? line("3.7. Number of SNI /Nomor SNI", payload.sample.sniNo) : "",
-    formType === "TYPE_2" || formType === "TYPE_5" || formType === "TYPE_6" ? line("3.7. Sampling/Pengambilan Sample", payload.sample.sampling) : "",
+    usesSamplingField(formType) ? line("3.7. Sampling/Pengambilan Sample", payload.sample.sampling) : "",
     sectionTitle("IV. Result / Hasil Uji:"),
     resultTable(formType, payload),
     paragraph(`Catatan : ${payload.notes || "-"}`, { size: 16, after: 160 }),

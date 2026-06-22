@@ -7,6 +7,7 @@ import {
   type LhuPayload,
   type LhuResultRow,
   usesLimitResultTable,
+  usesSamplingField,
 } from "@/lib/lhu-payload";
 
 type ParsedDocx = {
@@ -24,7 +25,7 @@ export type LhuImportContext = {
 const pdfTextDecoder = new TextDecoder("latin1");
 const specificationHeaderPattern = /^SPE[CS]IFICATION/i;
 const unsupportedFormTypeMessage =
-  "Tipe form LHU tidak dikenali. Sistem hanya mendukung Form Tipe 1 sampai 6. Periksa header/bentuk tabel dokumen atau tambahkan tipe form baru sebelum import.";
+  "Tipe form LHU tidak dikenali. Sistem hanya mendukung Form Tipe 1 sampai 7. Periksa header/bentuk tabel dokumen atau tambahkan tipe form baru sebelum import.";
 
 function normalizeText(value: string) {
   return value.replace(/\s+/g, " ").trim();
@@ -478,6 +479,15 @@ function extractAdditionalInfo(lines: string[]) {
       return;
     }
 
+    const lastItem = items[items.length - 1];
+    const samplingAddressContinuation = line.match(/^Lokasi Pengambilan\b\s*:?\s*(.*)$/i);
+    if (lastItem?.label && /Address of Sampling\s*\/\s*$/i.test(lastItem.label) && samplingAddressContinuation) {
+      lastItem.label = normalizeText(`${lastItem.label}Lokasi Pengambilan`);
+      lastItem.value = normalizeText(`${lastItem.value ?? ""} ${samplingAddressContinuation[1] ?? ""}`);
+      pendingLabel = "";
+      return;
+    }
+
     if (pendingLabel) {
       items.push({
         label: pendingLabel,
@@ -492,7 +502,6 @@ function extractAdditionalInfo(lines: string[]) {
       return;
     }
 
-    const lastItem = items[items.length - 1];
     if (lastItem?.value) {
       lastItem.value = normalizeText(`${lastItem.value} ${line}`);
     }
@@ -525,6 +534,8 @@ function detectFormType(lines: string[], table: string[][]): AppFormType | null 
   const hasSeparateType5Header = hasOrderedLines(lines, [/^PARAMETER$/i, /^UNIT$/i, specificationHeaderPattern, /^RESULT$/i, /^METHODS$/i]);
   const hasSeparateType6Header =
     !hasSeparateType5Header && hasOrderedLines(lines, [/^PARAMETER$/i, specificationHeaderPattern, /^RESULT$/i, /^METHODS$/i]);
+  const hasSamplingField = lines.some((line) => /Sampling\s*\/\s*Pengambilan Sample/i.test(line));
+  const hasAddressOfSamplingInfo = lines.some((line) => /Address of Sampling\s*\//i.test(line));
 
   if (
     isMinyakGorengSample &&
@@ -574,6 +585,16 @@ function detectFormType(lines: string[], table: string[][]): AppFormType | null 
   }
 
   if (
+    hasAddressOfSamplingInfo &&
+    !hasSamplingField &&
+    ((hasNumberColumn && hasParameterColumn && hasUnitColumn && !hasSpecificationColumn && hasResultColumn && hasMethodsColumn) ||
+      hasInlineType2Header ||
+      hasSeparateType2Header)
+  ) {
+    return "TYPE_7";
+  }
+
+  if (
     (hasNumberColumn && hasParameterColumn && hasUnitColumn && !hasSpecificationColumn && hasResultColumn && hasMethodsColumn) ||
     hasInlineType2Header ||
     hasSeparateType2Header
@@ -611,7 +632,7 @@ function parseLhuFromText(lines: string[], table: string[][]): ParsedDocx {
   payload.sample.additionalInfo = extractAdditionalInfo(lines);
   payload.receivedDate = extractLooseValue(lines, /Date of Received|Tanggal Terima/i, nextSectionPattern);
   payload.analysisDate = extractLooseValue(lines, /Date of Analysis|Tanggal Uji/i, nextSectionPattern);
-  payload.sample.sampling = extractLooseValue(lines, /Sampling\/Pengambilan Sample/i, nextSectionPattern) || "-";
+  payload.sample.sampling = usesSamplingField(formType) ? extractLooseValue(lines, /Sampling\/Pengambilan Sample/i, nextSectionPattern) || "-" : "";
   payload.results = parsedResults.results.length ? parsedResults.results : payload.results;
   payload.resultFooter = parsedResults.resultFooter;
   payload.notes = parsedResults.notes || payload.notes;

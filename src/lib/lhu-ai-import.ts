@@ -139,6 +139,10 @@ export function inferFormTypeFromColumns(sourceTableColumns: string[]): AppFormT
   return null;
 }
 
+function hasAddressOfSamplingInfo(result: LhuAiImportResult) {
+  return result.payload.sample.additionalInfo.some((item) => /Address of Sampling|Lokasi Pengambilan/i.test(`${item.label} ${item.value}`));
+}
+
 function validateRowForType(row: LhuAiImportResult["payload"]["results"][number], formType: AppFormType, index: number) {
   const rowLabel = `Baris hasil uji ${index + 1}`;
 
@@ -179,10 +183,12 @@ export function validateAiImportResult(result: LhuAiImportResult, minConfidence:
   const inferredFormType = inferFormTypeFromColumns(result.sourceTableColumns);
 
   if (!inferredFormType) {
-    throw new Error("AI membaca dokumen, tetapi struktur tabel tidak sesuai Form Tipe 1 sampai 6. Form tidak diisi otomatis.");
+    throw new Error("AI membaca dokumen, tetapi struktur tabel tidak sesuai Form Tipe 1 sampai 7. Form tidak diisi otomatis.");
   }
 
-  if (inferredFormType !== result.formType) {
+  const acceptsType7Variant = inferredFormType === "TYPE_2" && result.formType === "TYPE_7" && hasAddressOfSamplingInfo(result) && !compact(result.payload.sample.sampling);
+
+  if (inferredFormType !== result.formType && !acceptsType7Variant) {
     throw new Error(`AI membaca tabel seperti ${formTypeLabels[inferredFormType]}, tetapi hasil AI memilih ${formTypeLabels[result.formType]}. Form tidak diisi otomatis.`);
   }
 
@@ -231,6 +237,7 @@ export function buildLhuAiImportPrompt(context: LhuImportContext) {
     "- TYPE_4: NO, PARAMETER, METHOD, UNIT, RESULT, LIMIT (TB) Min/Max.",
     "- TYPE_5: PARAMETER, UNIT, SPECIFICATION, RESULT, METHODS tanpa NO.",
     "- TYPE_6: PARAMETER, SPECIFICATION, RESULT, METHODS tanpa NO dan tanpa UNIT.",
+    "- TYPE_7: NO, PARAMETER, UNIT, RESULT, METHODS seperti TYPE_2, tetapi dokumen tidak punya Sampling/Pengambilan Sample dan punya Address of Sampling/Lokasi Pengambilan di Other Information.",
     "- Jika struktur tabel tidak cocok, tetap pilih tipe terdekat hanya bila benar-benar sama. Turunkan confidence dan tulis warning.",
     "- Untuk field resultFooter, masukkan catatan footer tabel seperti tanda akreditasi, under limit, atau kesimpulan jika ada.",
     "- Untuk notes, masukkan catatan umum laporan jika ada.",

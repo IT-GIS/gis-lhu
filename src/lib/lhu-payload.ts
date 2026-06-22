@@ -59,6 +59,10 @@ export function usesUnitColumn(formType: AppFormType) {
   return formType !== "TYPE_6";
 }
 
+export function usesSamplingField(formType: AppFormType) {
+  return formType !== "TYPE_7" && !usesLimitResultTable(formType);
+}
+
 const basePayloadSchema = z.object({
   reportNo: z.string().trim().min(1, "Nomor laporan wajib diisi.").max(100),
   orderNo: z.string().trim().max(100).optional().or(z.literal("")),
@@ -318,6 +322,10 @@ export function getResultColumns(formType: AppFormType) {
 
   if (formType === "TYPE_6") {
     return ["PARAMETER", "SPECIFICATION", "RESULT", "METHODS"];
+  }
+
+  if (formType === "TYPE_7") {
+    return ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"];
   }
 
   return ["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"];

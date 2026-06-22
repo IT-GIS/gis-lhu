@@ -72,4 +72,45 @@ describe("LHU DOCX parser", () => {
       "Tipe form LHU tidak dikenali",
     );
   });
+  it("detects ZA table without sampling field as Form Tipe 7 and merges split sampling address label", async () => {
+    const documentXml = `<w:document><w:body>
+      ${paragraph("No. LP/J-0025D/26")}
+      ${paragraph("No. Order/ Nomor Pekerjaan : GIS2603HOF0009")}
+      ${paragraph("2.1. Name / Nama : PT Rolimex Kimia Nusamas")}
+      ${paragraph("2.2. Address / Alamat : ITC Cempaka Mas Mega Grosir Lt.11")}
+      ${paragraph("III. Sampel / Contoh Uji")}
+      ${paragraph("3.1. Sample Nomer/ Nomor Contoh : J/FE-0025")}
+      ${paragraph("3.2. Sample Name / Nama Contoh : Pupuk Amonium Sulfat (ZA)")}
+      ${paragraph("3.3. Packaging / Kemasan : Plastik 1 kg")}
+      ${paragraph("3.4. Other Information /Keterangan lain")}
+      ${paragraph("3.4.1. Commodity/Komoditi : Fertilizer")}
+      ${paragraph("3.4.2. Address of Sampling/ : Quzhou Juhua Polymide Fibre Co., Ltd")}
+      ${paragraph("Lokasi Pengambilan Junhua Factory, Kecheng District, Quzhou, Zhejiang 324004")}
+      ${paragraph("3.5. Date of Received/Tanggal Terima : 16 Maret 2026")}
+      ${paragraph("3.6. Date of Analysis /Tanggal Uji : 16 - 24 Maret 2026")}
+      <w:tbl>
+        ${row(["NO", "PARAMETER", "UNIT", "RESULT", "METHODS"])}
+        ${row(["1", "Kadar nitrogen", "%", "21,43", "SNI 02-1760-2005 Butir 6.1"])}
+      </w:tbl>
+      ${paragraph("Jakarta, 25 Maret 2026")}
+      ${paragraph("PT. Global Inspeksi Sistem")}
+      ${paragraph("Dwimas")}
+      ${paragraph("Technical Manager")}
+    </w:body></w:document>`;
+
+    const parsed = await parseLhuImportFile(await createDocxFile(documentXml));
+
+    expect(parsed.formType).toBe("TYPE_7");
+    expect(parsed.payload.sample.sampling).toBe("");
+    expect(parsed.payload.sample.additionalInfo).toContainEqual({
+      label: "Address of Sampling/Lokasi Pengambilan",
+      value: "Quzhou Juhua Polymide Fibre Co., Ltd Junhua Factory, Kecheng District, Quzhou, Zhejiang 324004",
+    });
+    expect(parsed.payload.results[0]).toMatchObject({
+      parameter: "Kadar nitrogen",
+      unit: "%",
+      result: "21,43",
+      methods: "SNI 02-1760-2005 Butir 6.1",
+    });
+  });
 });

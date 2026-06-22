@@ -17,6 +17,7 @@ import {
   type LhuResultRow,
   usesLimitResultTable,
   usesNumberColumn,
+  usesSamplingField,
   usesSpecificationColumn,
   usesUnitColumn,
 } from "@/lib/lhu-payload";
@@ -70,6 +71,7 @@ function mergePayloadForType(nextFormType: AppFormType, current: LhuPayload): Lh
       commodity: current.sample.commodity,
       type: current.sample.type,
       sniNo: current.sample.sniNo,
+      additionalInfo: current.sample.additionalInfo,
       sampling: current.sample.sampling || "-",
     },
     results: current.results.map((row) => ({
@@ -314,6 +316,7 @@ export function LhuDocumentForm({
   };
 
   const usesSniNumber = usesLimitResultTable(formType);
+  const usesSampling = usesSamplingField(formType);
   const usesLimitTable = usesLimitResultTable(formType);
   const usesNumber = usesNumberColumn(formType);
   const usesSpecification = usesSpecificationColumn(formType);
@@ -556,11 +559,11 @@ export function LhuDocumentForm({
               <Field label="Number of SNI /Nomor SNI" className="lg:col-span-2">
                 <Input value={payload.sample.sniNo ?? ""} onChange={(event) => setSampleField("sniNo", event.target.value)} placeholder={formType === "TYPE_4" ? "SNI 7069-3:2020" : "SNI 7069-1:2020"} disabled={!canEdit} />
               </Field>
-            ) : (
+            ) : usesSampling ? (
               <Field label="Sampling/Pengambilan Sample" className="lg:col-span-2">
                 <Input value={payload.sample.sampling ?? ""} onChange={(event) => setSampleField("sampling", event.target.value)} placeholder="-" disabled={!canEdit} />
               </Field>
-            )}
+            ) : null}
           </div>
         </div>
       </FormSection>
