@@ -63,17 +63,16 @@ async function generateDocumentNumber(tx: Prisma.TransactionClient) {
   const year = new Date().getFullYear();
   const prefix = `GIS-LHU/${year}/`;
   const documents = await tx.document.findMany({
-    where: {
-      documentNumber: {
-        startsWith: prefix,
-      },
-    },
     select: {
       documentNumber: true,
     },
   });
 
   const latestSequence = documents.reduce((latest, document) => {
+    if (!document.documentNumber.startsWith(prefix)) {
+      return latest;
+    }
+
     const sequence = Number.parseInt(document.documentNumber.slice(prefix.length), 10);
     return Number.isFinite(sequence) ? Math.max(latest, sequence) : latest;
   }, 0);
