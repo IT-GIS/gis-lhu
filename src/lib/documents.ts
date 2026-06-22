@@ -19,7 +19,7 @@ import {
   canSubmitForReview,
 } from "@/lib/permissions";
 import { prisma } from "@/lib/prisma";
-import { parseLhuDocumentInput } from "@/lib/lhu-payload";
+import { parseLhuDocumentInput, resolveLhuPayload } from "@/lib/lhu-payload";
 import {
   reviewCommentSchema,
   transitionSchema,
@@ -57,6 +57,151 @@ async function ensureLatestFormTypeEnum() {
 function normalizeOptionalString(value?: string | null) {
   const trimmed = value?.trim();
   return trimmed ? trimmed : null;
+}
+
+function normalizeSampleText(value?: string | null) {
+  return (value ?? "").toUpperCase().replace(/\s+/g, " ").trim();
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function hasExactWord(text: string, keyword: string) {
+  return new RegExp(`(^|[^A-Z0-9])${escapeRegExp(keyword)}([^A-Z0-9]|$)`).test(
+    text,
+  );
+}
+
+function hasAnyKeyword(text: string, keywords: string[]) {
+  return keywords.some((keyword) => text.includes(keyword));
+}
+
+export function categorizeSampleName(sampleName?: string | null) {
+  const text = normalizeSampleText(sampleName);
+
+  if (!text) {
+    return "Lainnya";
+  }
+
+  if (
+    hasAnyKeyword(text, [
+      "CPO",
+      "CRUDE PALM OIL",
+      "PALM OIL",
+      "PALM KERNEL",
+      "RBD",
+      "OLEIN",
+      "SAWIT",
+      "MINYAK GORENG",
+      "MINYAK MAKAN MERAH",
+      "MINYAK NABATI",
+      "COOKING OIL",
+      "VEGETABLE OIL",
+    ])
+  ) {
+    return "Sawit & Minyak Nabati";
+  }
+
+  if (
+    hasAnyKeyword(text, [
+      "MINYAK LUMAS",
+      "PELUMAS",
+      "LUBRICANT",
+      "LUBRICATING",
+      "ENGINE OIL",
+      "MOTOR OIL",
+      "GEAR OIL",
+      "HYDRAULIC OIL",
+      "TWO STROKE",
+      "STROKE",
+      "SAE",
+      "API",
+      "JASO",
+    ]) ||
+    hasExactWord(text, "4T") ||
+    hasExactWord(text, "2T")
+  ) {
+    return "Minyak Lumas / Pelumas";
+  }
+
+  if (
+    hasAnyKeyword(text, [
+      "PUPUK",
+      "FERTILIZER",
+      "TRIPLE SUPER PHOSPHATE",
+      "SUPER PHOSPHATE",
+      "PHOSPHATE",
+      "FOSFAT",
+      "UREA",
+      "KCL",
+      "ZA",
+      "SP36",
+      "SP-36",
+    ]) ||
+    hasExactWord(text, "TSP") ||
+    hasExactWord(text, "NPK")
+  ) {
+    return "Pupuk";
+  }
+
+  if (
+    hasExactWord(text, "STP") ||
+    hasExactWord(text, "WWTP") ||
+    hasExactWord(text, "IPAL") ||
+    hasAnyKeyword(text, [
+      "AIR LIMBAH",
+      "AIR BERSIH",
+      "AIR MINUM",
+      "AIR SUNGAI",
+      "AIR DANAU",
+      "AIR SUMUR",
+      "AIR MINERAL",
+      "WASTEWATER",
+      "SEWAGE",
+      "LIMBAH CAIR",
+    ])
+  ) {
+    return "Air & Lingkungan";
+  }
+
+  if (
+    hasAnyKeyword(text, [
+      "UDARA",
+      "AMBIEN",
+      "AMBIENT",
+      "EMISI",
+      "CEROBONG",
+      "OPASITAS",
+      "KEBISINGAN",
+      "PARTIKULAT",
+      "PM10",
+      "PM2.5",
+    ]) ||
+    hasExactWord(text, "NO2") ||
+    hasExactWord(text, "SO2") ||
+    hasExactWord(text, "NH3") ||
+    hasExactWord(text, "H2S") ||
+    hasExactWord(text, "CO") ||
+    hasExactWord(text, "CO2") ||
+    hasExactWord(text, "O2")
+  ) {
+    return "Udara & Emisi";
+  }
+
+  if (
+    hasAnyKeyword(text, [
+      "SPRAYER",
+      "ALAT SEMPROT",
+      "SEMPROT",
+      "GENDONG ELEKTRIK",
+      "KNAPSACK",
+    ])
+  ) {
+    return "Alat Sprayer";
+  }
+
+  return "Lainnya";
 }
 
 async function generateDocumentNumber(tx: Prisma.TransactionClient) {
@@ -103,37 +248,109 @@ export async function getAssignableUsers() {
 }
 
 export async function getDashboardData() {
-  const [documentsByStatus, latestDocuments, latestActivities] = await Promise.all([
-    prisma.document.groupBy({
-      by: ["status"],
-      _count: {
-        status: true,
-      },
-    }),
-    prisma.document.findMany({
-      take: 5,
-      orderBy: { updatedAt: "desc" },
-      include: {
-        creator: {
-          select: { name: true },
+  const monthLabels = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "Mei",
+    "Jun",
+    "Jul",
+    "Agu",
+    "Sep",
+    "Okt",
+    "Nov",
+    "Des",
+  ];
+
+  const [documentsByStatus, latestDocuments, latestActivities, chartDocuments] =
+    await Promise.all([
+      prisma.document.groupBy({
+        by: ["status"],
+        _count: {
+          status: true,
         },
-      },
-    }),
-    prisma.auditLog.findMany({
-      take: 8,
-      orderBy: { createdAt: "desc" },
-      include: {
-        actor: {
-          select: { name: true },
+      }),
+      prisma.document.findMany({
+        take: 5,
+        orderBy: { updatedAt: "desc" },
+        include: {
+          creator: {
+            select: { name: true },
+          },
         },
-      },
-    }),
-  ]);
+      }),
+      prisma.auditLog.findMany({
+        take: 8,
+        orderBy: { createdAt: "desc" },
+        include: {
+          actor: {
+            select: { name: true },
+          },
+        },
+      }),
+      prisma.document.findMany({
+        orderBy: { createdAt: "asc" },
+        select: {
+          id: true,
+          formType: true,
+          formPayload: true,
+          sampleName: true,
+          createdAt: true,
+        },
+      }),
+    ]);
+
+  const monthlyMap = new Map<
+    string,
+    {
+      year: string;
+      month: string;
+      monthIndex: number;
+      published: number;
+    }
+  >();
+
+  const sampleCategoryDocuments = chartDocuments.map((document) => {
+    const createdAt = document.createdAt;
+    const year = String(createdAt.getFullYear());
+    const monthIndex = createdAt.getMonth();
+    const month = monthLabels[monthIndex];
+    const monthlyKey = `${year}-${monthIndex}`;
+
+    const currentMonthly = monthlyMap.get(monthlyKey) ?? {
+      year,
+      month,
+      monthIndex,
+      published: 0,
+    };
+
+    currentMonthly.published += 1;
+    monthlyMap.set(monthlyKey, currentMonthly);
+
+    const payload = resolveLhuPayload(document.formType, document.formPayload);
+
+    const sampleName =
+      payload.sample.sampleName?.trim() || document.sampleName?.trim() || "";
+
+    return {
+      year,
+      month,
+      monthIndex,
+      sampleName: sampleName || "Tanpa Nama Sampel",
+      sampleCategory: categorizeSampleName(sampleName),
+    };
+  });
 
   return {
     documentsByStatus,
     latestDocuments,
     latestActivities,
+    monthlyDocuments: Array.from(monthlyMap.values()).sort((a, b) => {
+      if (a.year !== b.year) return Number(a.year) - Number(b.year);
+      return a.monthIndex - b.monthIndex;
+    }),
+    sampleCategoryDocuments,
   };
 }
 

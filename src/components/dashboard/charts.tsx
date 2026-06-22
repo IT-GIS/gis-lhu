@@ -22,37 +22,43 @@ const colors = [
   "#60a5fa",
   "#f87171",
   "#fbbf24",
+  "#a78bfa",
+  "#fb7185",
 ];
 
 export interface DocumentData {
   month: string;
-  draft: number;
-  review: number;
   published: number;
 }
 
-export interface StatusData {
+export interface SampleCategoryData {
   name: string;
   value: number;
 }
 
-// ─── Empty fallback data ───────────────────────────────────────────────────────
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "Mei",
+  "Jun",
+  "Jul",
+  "Agu",
+  "Sep",
+  "Okt",
+  "Nov",
+  "Des",
+];
 
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
 const emptyMonthlyData: DocumentData[] = MONTHS.map((month) => ({
   month,
-  draft: 0,
-  review: 0,
   published: 0,
 }));
 
-const emptyStatusData: StatusData[] = [
-  { name: "Draft", value: 0 },
-  { name: "Review", value: 0 },
-  { name: "Published", value: 0 },
+const emptySampleCategoryData: SampleCategoryData[] = [
+  { name: "Belum ada data", value: 1 },
 ];
-
-// ─── Components ───────────────────────────────────────────────────────────────
 
 export function DocumentsBarChart({
   data = emptyMonthlyData,
@@ -63,24 +69,31 @@ export function DocumentsBarChart({
     <div className="h-80 w-full">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            vertical={false}
+            stroke="#e5e7eb"
+          />
           <XAxis dataKey="month" stroke="#6b7280" />
           <YAxis stroke="#6b7280" allowDecimals={false} />
           <Tooltip />
           <Legend />
-          <Bar dataKey="draft" name="Draft" radius={[8, 8, 0, 0]} fill={colors[0]} />
-          <Bar dataKey="review" name="Review" radius={[8, 8, 0, 0]} fill={colors[1]} />
-          <Bar dataKey="published" name="Published" radius={[8, 8, 0, 0]} fill={colors[4]} />
+          <Bar
+            dataKey="published"
+            name="Published"
+            radius={[8, 8, 0, 0]}
+            fill={colors[0]}
+          />
         </BarChart>
       </ResponsiveContainer>
     </div>
   );
 }
 
-export function StatusPieChart({
-  data = emptyStatusData,
+export function SampleCategoryPieChart({
+  data = emptySampleCategoryData,
 }: {
-  data?: StatusData[];
+  data?: SampleCategoryData[];
 }) {
   return (
     <div className="h-80 w-full">

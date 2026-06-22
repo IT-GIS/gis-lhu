@@ -586,7 +586,6 @@ const pageList = [
 <div class="absolute inset-0 bg-cover bg-center" data-alt="ultra-modern clean bright laboratory with futuristic glass equipment and scientific instruments in a soft blue atmospheric lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhd3SPju_EcKUitBiUGdi5LM2CgMzbO_Y0lve9StPIQEtp-TWzEIXHOct2041e55OyWnmQVRMZzLsTopIp5xR6ofX60AzBiea6EdGEjr1UTXN1bHqSJ06GIcVBl05Gm6mwCEWf4z28g5R6SYenB8t-wCPCjKBLhXA80G3C0IdAzyxyM9bbofzJo6S4a74EMngUosxO1bsbN3MyqfXdXDVm3yxgG08lmmImklFa1WfWzFBI53c-b2CXLkhfYYPar4fE-gC9Xo_Jjqs\u0027')"></div>
 <div class="absolute inset-0 bg-blue-900/20 backdrop-blur-[2px]"></div>
 <div class="relative z-10 glass-card p-16 rounded-[32px] text-center max-w-4xl mx-4">
-<span class="font-label-caps text-label-caps text-primary tracking-[0.2em] mb-4 block">IDENTITAS KAMI</span>
 <h1 class="font-display-lg text-display-lg text-on-surface mb-6">Profil Perusahaan</h1>
 <p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto">
                     Global Inspeksi Sistem (GIS) Laboratorium menghadirkan standar akurasi tertinggi dalam layanan pengujian air dan lingkungan dan industri melalui inovasi teknologi masa depan.

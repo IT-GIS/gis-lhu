@@ -192,13 +192,13 @@ const CONTACT_STYLES = `
   }
 
   .contact-page .hero-content {
-    position: relative;
-    z-index: 2;
-    width: min(1280px, 100%);
-    margin: 0 auto;
-    padding: 72px max(24px, calc((100vw - 1280px) / 2 + 56px));
-    color: var(--white);
-  }
+  position: relative;
+  z-index: 2;
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding: clamp(72px, 8vw, 120px) clamp(24px, 7vw, 88px);
+  color: var(--white);
+}
 
   .contact-page .eyebrow {
     display: inline-flex;
@@ -212,22 +212,25 @@ const CONTACT_STYLES = `
     text-transform: uppercase;
   }
 
-  .contact-page .hero-title {
-    color: var(--white);
-    font-size: clamp(2.4rem, 5vw, 4.6rem);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: 0;
-    margin: 0 0 22px;
-  }
+.contact-page .hero-title {
+  color: var(--white);
+  max-width: 780px;
+  font-size: clamp(2.2rem, 4.6vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  margin: 0 0 22px;
+  text-wrap: balance;
+}
 
-  .contact-page .hero-text {
-    max-width: 640px;
-    color: rgba(255, 255, 255, 0.86);
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0;
-  }
+.contact-page .hero-text {
+  max-width: 640px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
+  font-weight: 650;
+  line-height: 1.75;
+  margin: 0;
+}
 
   .contact-page .quick-contact {
     display: grid;
@@ -284,32 +287,34 @@ const CONTACT_STYLES = `
 
   .contact-page .section-header {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: 40px;
-    align-items: end;
+    grid-template-columns: minmax(420px, 0.95fr) minmax(420px, 1.05fr);
+    gap: clamp(32px, 4vw, 56px);
+    align-items: center;
     margin-bottom: 42px;
   }
 
   .contact-page .section-title {
     color: var(--primary);
-    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-size: clamp(2.6rem, 3.7vw, 4rem);
     font-weight: 800;
-    line-height: 1.12;
-    letter-spacing: 0;
+    line-height: 1.08;
+    letter-spacing: -0.04em;
     margin: 0;
+    max-width: 660px;
   }
 
   .contact-page .section-copy {
-    color: #405a70;
-    font-size: 1.05rem;
-    font-weight: 600;
-    line-height: 1.8;
+    color: #24445f;
+    font-size: clamp(1rem, 1.25vw, 1.22rem);
+    font-weight: 650;
+    line-height: 1.75;
     margin: 0;
+    max-width: 720px;
   }
 
   .contact-page .office-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 28px;
   }
 
@@ -337,11 +342,14 @@ const CONTACT_STYLES = `
   }
 
   .contact-page .office-card.surabaya {
-    background: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1200') center/cover;
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    background: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1600') center/cover;
   }
 
   .contact-page .office-body {
-    padding: 34px;
+    width: min(100%, 760px);
+    padding: clamp(34px, 4vw, 52px);
     color: var(--white);
   }
 
@@ -360,14 +368,16 @@ const CONTACT_STYLES = `
 
   .contact-page .office-title {
     color: var(--white);
-    font-size: 1.8rem;
+    font-size: clamp(2rem, 2.8vw, 3rem);
     font-weight: 800;
-    margin: 0 0 18px;
+    line-height: 1.08;
+    margin: 0 0 22px;
   }
 
   .contact-page .office-list {
     display: grid;
-    gap: 14px;
+    gap: 15px;
+    max-width: 680px;
   }
 
   .contact-page .office-list li {
@@ -820,8 +830,6 @@ const CONTACT_STYLES = `
     }
 
     .contact-page .quick-contact,
-    .contact-page .section-header,
-    .contact-page .office-grid,
     .contact-page .contact-panel,
     .contact-page .footer-grid {
       grid-template-columns: 1fr;
@@ -829,6 +837,28 @@ const CONTACT_STYLES = `
 
     .contact-page .quick-contact {
       margin-top: 28px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .contact-page .section-header {
+      grid-template-columns: 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .contact-page .section-title {
+      font-size: clamp(2.1rem, 8vw, 2.8rem);
+      max-width: 100%;
+      letter-spacing: -0.035em;
+    }
+
+    .contact-page .section-copy {
+      max-width: 100%;
+    }
+
+    .contact-page .office-card.surabaya {
+      width: 100%;
     }
   }
 
@@ -849,21 +879,25 @@ const CONTACT_STYLES = `
       transform: none;
     }
 
-    .contact-page .hero-content {
-      padding: 56px 24px;
-      max-width: 100vw;
-      overflow-wrap: normal;
-    }
+.contact-page .hero-content {
+  width: 100%;
+  padding: 104px 22px 64px;
+  max-width: 100vw;
+}
 
-    .contact-page .hero-title {
-      max-width: 320px;
-      font-size: clamp(1.9rem, 8.8vw, 2.1rem);
-      line-height: 1.08;
-    }
+.contact-page .hero-title {
+  max-width: 520px;
+  font-size: clamp(1.75rem, 7.2vw, 2.35rem);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
 
-    .contact-page .hero-text {
-      max-width: 330px;
-    }
+.contact-page .hero-text {
+  max-width: 520px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
 
     .contact-page .contact-hero {
       min-height: 100vh;
@@ -873,11 +907,19 @@ const CONTACT_STYLES = `
       padding: 72px 0;
     }
 
+    .contact-page .office-card {
+      min-height: 470px;
+    }
+
     .contact-page .office-body,
     .contact-page .contact-info-panel,
     .contact-page .form-panel,
     .contact-page .footer-panel {
       padding: 28px 22px;
+    }
+
+    .contact-page .office-title {
+      font-size: 2rem;
     }
 
     .contact-page .form-row {
@@ -1102,14 +1144,7 @@ export function ContactPage() {
             </div>
 
             {/* Mengubah grid menjadi 1 kolom, membatasi lebar maksimal, dan menaruhnya di tengah */}
-            <div
-              className="office-grid"
-              style={{
-                gridTemplateColumns: "1fr",
-                maxWidth: "600px",
-                margin: "0 auto",
-              }}
-            >
+            <div className="office-grid">
               <article className="office-card surabaya glass">
                 <div className="office-body">
                   <span className="office-kicker">Branch Office</span>
