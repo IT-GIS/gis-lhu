@@ -312,11 +312,14 @@ const CONTACT_STYLES = `
     max-width: 720px;
   }
 
-  .contact-page .office-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
+.contact-page .office-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
 
   .contact-page .office-card {
     position: relative;
@@ -342,16 +345,18 @@ const CONTACT_STYLES = `
   }
 
   .contact-page .office-card.surabaya {
-    width: min(100%, 1120px);
-    margin: 0 auto;
-    background: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1600') center/cover;
-  }
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-height: 460px;
+  background: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1600') center/cover;
+}
 
   .contact-page .office-body {
-    width: min(100%, 760px);
-    padding: clamp(34px, 4vw, 52px);
-    color: var(--white);
-  }
+  width: min(100%, 820px);
+  padding: clamp(34px, 4vw, 56px);
+  color: var(--white);
+}
 
   .contact-page .office-kicker {
     display: inline-flex;
@@ -601,94 +606,148 @@ const CONTACT_STYLES = `
 
   .contact-page .footer {
     position: relative;
-    padding: 80px 0 40px;
-    background: linear-gradient(135deg, var(--primary), #0e4e8a);
+    padding: 90px 0 42px;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(0, 223, 216, 0.16), transparent 30%),
+      radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.1), transparent 28%),
+      linear-gradient(135deg, #0A2540 0%, #0D4778 52%, #105C96 100%);
     color: var(--white);
     overflow: hidden;
+  }
+
+  .contact-page .footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 54px 54px;
+    opacity: 0.45;
+    pointer-events: none;
   }
 
   .contact-page .footer-panel {
     position: relative;
     z-index: 10;
-    padding: 60px;
+    padding: clamp(34px, 4vw, 58px);
     border-radius: var(--radius-lg);
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
   .contact-page .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 40px;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.85fr) minmax(220px, 0.6fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+
+  .contact-page .footer-brand {
+    max-width: 520px;
+  }
+
+  .contact-page .footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+
+  .contact-page .footer-logo {
+    width: 74px;
+    height: 74px;
+    object-fit: contain;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.94);
+    padding: 10px;
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+  }
+
+  .contact-page .footer-brand-title {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(1.35rem, 2vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+  }
+
+  .contact-page .footer-brand-subtitle {
+    margin: 5px 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .contact-page .footer-description {
+    margin: 0;
+    max-width: 500px;
+    color: rgba(234, 246, 255, 0.82);
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.85;
+  }
+
+  .contact-page .footer-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .contact-page .footer-badges span {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 223, 216, 0.3);
+    background: rgba(0, 223, 216, 0.1);
+    color: #BFFCFB;
+    padding: 8px 13px;
+    font-size: 0.78rem;
+    font-weight: 800;
   }
 
   .contact-page .footer-col-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #FFFFFF;
+    font-size: 1.18rem;
+    font-weight: 900;
+    color: #ffffff;
     margin: 0 0 24px;
   }
 
   .contact-page .footer-text {
-    color: var(--light-blue);
+    color: rgba(234, 246, 255, 0.82);
     margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 12px;
+    font-weight: 650;
+    line-height: 1.65;
+  }
+
+  .contact-page .footer-text i {
+    width: 20px;
+    color: var(--accent);
+    text-align: center;
   }
 
   .contact-page .footer-link {
-    color: var(--light-blue);
+    color: rgba(234, 246, 255, 0.82);
     transition: var(--transition);
     display: block;
-    margin-bottom: 12px;
+    width: fit-content;
+    margin-bottom: 13px;
+    font-weight: 700;
   }
 
   .contact-page .footer-link:hover {
     color: var(--accent);
-    transform: translateX(5px);
-  }
-
-  .contact-page .newsletter-form {
-    display: flex;
-    margin-top: 16px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-pill);
-    padding: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .contact-page .newsletter-input {
-    flex-grow: 1;
-    min-width: 0;
-    background: transparent;
-    border: none;
-    padding: 10px 16px;
-    color: var(--white);
-    outline: none;
-    font-family: inherit;
-  }
-
-  .contact-page .newsletter-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .contact-page .newsletter-btn {
-    background: var(--secondary);
-    color: var(--white);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: var(--transition);
-    flex: 0 0 auto;
-  }
-
-  .contact-page .newsletter-btn:hover {
-    background: var(--accent);
-    transform: scale(1.05);
+    transform: translateX(6px);
   }
 
   .contact-page .footer-bottom {
@@ -697,9 +756,10 @@ const CONTACT_STYLES = `
     text-align: center;
     margin-top: 60px;
     padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.875rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.9rem;
+    font-weight: 600;
   }
 
   .contact-page .whatsapp-widget {
@@ -800,6 +860,11 @@ const CONTACT_STYLES = `
   }
 
   @media (max-width: 980px) {
+
+
+.contact-page .office-card.surabaya {
+  min-height: 520px;
+}
     .contact-page .navbar {
       border-radius: 28px;
     }
@@ -1143,7 +1208,6 @@ export function ContactPage() {
               </p>
             </div>
 
-            {/* Mengubah grid menjadi 1 kolom, membatasi lebar maksimal, dan menaruhnya di tengah */}
             <div className="office-grid">
               <article className="office-card surabaya glass">
                 <div className="office-body">
@@ -1190,9 +1254,8 @@ export function ContactPage() {
                     <div>
                       <strong>Alamat</strong>
                       <span>
-                        DELREY Biztown Blok B1 No. 5 Jl. Lingkar Bumi Botanika
-                        Utara, Desa Lengkong Kulon, Kecamatan Pagedangan,
-                        Kabupaten Tangerang, Provinsi Banten Kode Pos 15331
+                        Jl. Pahlawan No.2, Kwadengan Barat, Lemahputro, Kec.
+                        Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213
                       </span>
                     </div>
                   </div>
@@ -1293,7 +1356,7 @@ export function ContactPage() {
             <div className="map-shell glass">
               <iframe
                 title="Peta lokasi kantor GIS Laboratorium"
-                src="https://www.google.com/maps?q=Jl.%20Raya%20Daan%20Mogot%20No.%2089%20Wijaya%20Kusuma%20Grogol%20Petamburan%20Jakarta%20Barat&output=embed"
+                src="https://www.google.com/maps?q=Jl.%20Pahlawan%20No.2%2C%20Kwadengan%20Barat%2C%20Lemahputro%2C%20Kec.%20Sidoarjo%2C%20Kabupaten%20Sidoarjo%2C%20Jawa%20Timur%2061213&output=embed"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
@@ -1306,13 +1369,44 @@ export function ContactPage() {
         <div className="container">
           <div className="footer-panel glass-dark">
             <div className="footer-grid">
-              {/* Kolom 1: Contact */}
+              <div className="footer-brand">
+                <div className="footer-logo-wrap">
+                  <img
+                    src="/landing/animation/logo-lab.png"
+                    alt="GIS Laboratorium"
+                    className="footer-logo"
+                  />
+                  <div>
+                    <h3 className="footer-brand-title">GIS Laboratorium</h3>
+                    <p className="footer-brand-subtitle">
+                      PT. Global Inspeksi Sistem
+                    </p>
+                  </div>
+                </div>
+
+                <p className="footer-description">
+                  GIS Laboratorium hadir sebagai mitra pengujian yang membantu
+                  pelanggan memastikan mutu, keamanan, dan kesesuaian produk
+                  maupun lingkungan melalui layanan laboratorium yang akurat dan
+                  terpercaya.
+                </p>
+
+                <div className="footer-badges">
+                  <span>Pengujian Laboratorium</span>
+                  <span>Lingkungan</span>
+                  <span>Pelumas</span>
+                  <span>Sawit & Pupuk</span>
+                </div>
+              </div>
+
               <div>
                 <h4 className="footer-col-title">Contact</h4>
+
                 <div className="footer-text">
-                  <i className="fa-solid fa-envelope" />{" "}
-                  globalinspeksisistem@gmail.com
+                  <i className="fa-solid fa-envelope" />
+                  <span>info@gislaboratorium.com</span>
                 </div>
+
                 <div
                   className="footer-text"
                   style={{ alignItems: "flex-start" }}
@@ -1320,7 +1414,7 @@ export function ContactPage() {
                   <i
                     className="fa-solid fa-phone"
                     style={{ marginTop: "4px" }}
-                  />{" "}
+                  />
                   <div>
                     +62 812-8532-8232
                     <br />
@@ -1329,14 +1423,16 @@ export function ContactPage() {
                     +62 812-1704-7976
                   </div>
                 </div>
+
                 <div className="footer-text">
-                  <i className="fa-solid fa-globe" /> www.gislaboratorium.com
+                  <i className="fa-solid fa-globe" />
+                  <span>www.gislaboratorium.com</span>
                 </div>
               </div>
 
-              {/* Kolom 2: Link */}
               <div>
                 <h4 className="footer-col-title">Link</h4>
+
                 <Link href="/" className="footer-link">
                   Beranda
                 </Link>
@@ -1358,6 +1454,7 @@ export function ContactPage() {
               </div>
             </div>
           </div>
+
           <div className="footer-bottom">
             &copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
           </div>

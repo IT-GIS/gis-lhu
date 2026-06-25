@@ -6,21 +6,33 @@ import {
   LayoutDashboard,
   MessageSquare,
   Newspaper,
-  SearchCheck,
+  // SearchCheck,
   Settings,
   Upload,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import type { AppRole } from "@/lib/domain";
-import { canCreateDocument, canManageBlogPosts, canViewContactMessages } from "@/lib/permissions";
+import {
+  canCreateDocument,
+  canManageBlogPosts,
+  canManageUsers,
+  canViewContactMessages,
+} from "@/lib/permissions";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/documents/new", label: "Buat Draft", icon: Upload, permission: "createDocument" },
+  {
+    href: "/documents/new",
+    label: "Buat Draft",
+    icon: Upload,
+    permission: "createDocument",
+  },
   { href: "/documents", label: "Dokumen LHU", icon: FileText },
-  { href: "/published", label: "Arsip Publikasi", icon: SearchCheck },
+  // { href: "/published", label: "Arsip Publikasi", icon: SearchCheck },
+  { href: "/users", label: "User", icon: Users, permission: "manageUsers" },
 ];
 
 const bottomNavItems = [
@@ -50,6 +62,7 @@ function hasPermission(role: AppRole, permission?: string) {
   if (permission === "createDocument") return canCreateDocument(role);
   if (permission === "manageBlogPosts") return canManageBlogPosts(role);
   if (permission === "viewContactMessages") return canViewContactMessages(role);
+  if (permission === "manageUsers") return canManageUsers(role);
   return true;
 }
 

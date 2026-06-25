@@ -482,109 +482,164 @@ const SCOPE_STYLES = `
     font-style: normal;
   }
 
-.scope-page .footer {
+
+  .scope-page .footer {
     position: relative;
-    padding: 80px 0 40px;
-    background: linear-gradient(135deg, var(--primary), #0e4e8a);
+    padding: 90px 0 42px;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(0, 223, 216, 0.16), transparent 30%),
+      radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.1), transparent 28%),
+      linear-gradient(135deg, #0A2540 0%, #0D4778 52%, #105C96 100%);
     color: var(--white);
     overflow: hidden;
+  }
+
+  .scope-page .footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 54px 54px;
+    opacity: 0.45;
+    pointer-events: none;
   }
 
   .scope-page .footer-panel {
     position: relative;
     z-index: 10;
-    padding: 60px;
+    padding: clamp(34px, 4vw, 58px);
     border-radius: var(--radius-lg);
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
-  /* UBAH: Dari 4 kolom menjadi 2 kolom */
   .scope-page .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 40px;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.85fr) minmax(220px, 0.6fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+
+  .scope-page .footer-brand {
+    max-width: 520px;
+  }
+
+  .scope-page .footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+
+  .scope-page .footer-logo {
+    width: 74px;
+    height: 74px;
+    object-fit: contain;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.94);
+    padding: 10px;
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+  }
+
+  .scope-page .footer-brand-title {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(1.35rem, 2vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+  }
+
+  .scope-page .footer-brand-subtitle {
+    margin: 5px 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .scope-page .footer-description {
+    margin: 0;
+    max-width: 500px;
+    color: rgba(234, 246, 255, 0.82);
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.85;
+  }
+
+  .scope-page .footer-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .scope-page .footer-badges span {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 223, 216, 0.3);
+    background: rgba(0, 223, 216, 0.1);
+    color: #BFFCFB;
+    padding: 8px 13px;
+    font-size: 0.78rem;
+    font-weight: 800;
   }
 
   .scope-page .footer-col-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #FFFFFF;
-    margin-bottom: 24px;
+    font-size: 1.18rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 24px;
   }
 
   .scope-page .footer-text {
-    color: var(--light-blue);
+    color: rgba(234, 246, 255, 0.82);
     margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 12px;
+    font-weight: 650;
+    line-height: 1.65;
+  }
+
+  .scope-page .footer-text i {
+    width: 20px;
+    color: var(--accent);
+    text-align: center;
   }
 
   .scope-page .footer-link {
-    color: var(--light-blue);
+    color: rgba(234, 246, 255, 0.82);
     transition: var(--transition);
     display: block;
-    margin-bottom: 12px;
+    width: fit-content;
+    margin-bottom: 13px;
+    font-weight: 700;
     text-decoration: none;
   }
 
   .scope-page .footer-link:hover {
     color: var(--accent);
-    transform: translateX(5px);
+    transform: translateX(6px);
   }
 
-  .scope-page .newsletter-form {
-    display: flex;
-    margin-top: 16px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-pill);
-    padding: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .scope-page .newsletter-input {
-    flex-grow: 1;
-    min-width: 0;
-    background: transparent;
-    border: none;
-    padding: 10px 16px;
-    color: var(--white);
-    outline: none;
-    font-family: inherit;
-  }
-
-  .scope-page .newsletter-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .scope-page .newsletter-btn {
-    background: var(--secondary);
-    color: var(--white);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: var(--transition);
-    flex: 0 0 auto;
-  }
-
-  .scope-page .newsletter-btn:hover {
-    background: var(--accent);
-    transform: scale(1.05);
-  }
-
-.scope-page .footer-bottom {
+  .scope-page .footer-bottom {
     position: relative;
     z-index: 10;
     text-align: center;
     margin-top: 60px;
     padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.875rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.9rem;
+    font-weight: 600;
   }
 
   .scope-page .whatsapp-widget {
@@ -715,9 +770,13 @@ const SCOPE_STYLES = `
     }
 }
 
-    @media (max-width: 1024px) {
+  @media (max-width: 1024px) {
     .scope-page .footer-grid {
       grid-template-columns: 1fr 1fr;
+    }
+
+    .scope-page .footer-brand {
+      grid-column: 1 / -1;
     }
   }
   
@@ -755,9 +814,31 @@ const SCOPE_STYLES = `
       max-width: 330px;
     }
 
-    .scope-page .scope-panel,
-    .scope-page .footer-panel {
+    .scope-page .scope-panel {
       padding: 28px 20px;
+    }
+
+    .scope-page .footer {
+      padding: 64px 0 32px;
+    }
+
+    .scope-page .footer-panel {
+      padding: 30px 22px;
+      border-radius: 28px;
+    }
+
+    .scope-page .footer-logo-wrap {
+      align-items: flex-start;
+    }
+
+    .scope-page .footer-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+    }
+
+    .scope-page .footer-badges span {
+      font-size: 0.72rem;
     }
 
     .scope-page .search-layout {
@@ -947,12 +1028,44 @@ export function ScopeLandingPage() {
         <div className="container">
           <div className="footer-panel glass-dark">
             <div className="footer-grid">
+              <div className="footer-brand">
+                <div className="footer-logo-wrap">
+                  <img
+                    src="/landing/animation/logo-lab.png"
+                    alt="GIS Laboratorium"
+                    className="footer-logo"
+                  />
+                  <div>
+                    <h3 className="footer-brand-title">GIS Laboratorium</h3>
+                    <p className="footer-brand-subtitle">
+                      PT. Global Inspeksi Sistem
+                    </p>
+                  </div>
+                </div>
+
+                <p className="footer-description">
+                  GIS Laboratorium hadir sebagai mitra pengujian yang membantu
+                  pelanggan memastikan mutu, keamanan, dan kesesuaian produk
+                  maupun lingkungan melalui layanan laboratorium yang akurat dan
+                  terpercaya.
+                </p>
+
+                <div className="footer-badges">
+                  <span>Pengujian Laboratorium</span>
+                  <span>Lingkungan</span>
+                  <span>Pelumas</span>
+                  <span>Sawit & Pupuk</span>
+                </div>
+              </div>
+
               <div>
                 <h4 className="footer-col-title">Contact</h4>
+
                 <div className="footer-text">
-                  <i className="fa-solid fa-envelope" />{" "}
-                  globalinspeksisistem@gmail.com
+                  <i className="fa-solid fa-envelope" />
+                  <span>info@gislaboratorium.com</span>
                 </div>
+
                 <div
                   className="footer-text"
                   style={{ alignItems: "flex-start" }}
@@ -969,13 +1082,16 @@ export function ScopeLandingPage() {
                     +62 812-1704-7976
                   </div>
                 </div>
+
                 <div className="footer-text">
-                  <i className="fa-solid fa-globe" /> www.gislaboratorium.com
+                  <i className="fa-solid fa-globe" />
+                  <span>www.gislaboratorium.com</span>
                 </div>
               </div>
 
               <div>
                 <h4 className="footer-col-title">Link</h4>
+
                 <Link href="/" className="footer-link">
                   Beranda
                 </Link>
@@ -985,7 +1101,7 @@ export function ScopeLandingPage() {
                 <Link href="/service" className="footer-link">
                   Layanan
                 </Link>
-                <Link href={SCOPE_ROUTE} className="footer-link">
+                <Link href="/ruang-lingkup-pengujian" className="footer-link">
                   Ruang Lingkup Pengujian
                 </Link>
                 <Link href="/informasi" className="footer-link">
@@ -997,6 +1113,7 @@ export function ScopeLandingPage() {
               </div>
             </div>
           </div>
+
           <div className="footer-bottom">
             &copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
           </div>

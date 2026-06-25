@@ -685,50 +685,145 @@ const INFORMATION_STYLES = `
 
   .footer {
     position: relative;
-    padding: 80px 0 40px;
-    background: linear-gradient(135deg, var(--primary), #0e4e8a);
+    padding: 90px 0 42px;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(0, 223, 216, 0.16), transparent 30%),
+      radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.1), transparent 28%),
+      linear-gradient(135deg, #0A2540 0%, #0D4778 52%, #105C96 100%);
     color: var(--white);
+    overflow: hidden;
+  }
+  .footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 54px 54px;
+    opacity: 0.45;
+    pointer-events: none;
   }
   .footer-panel {
-    padding: 44px;
+    position: relative;
+    z-index: 10;
+    padding: clamp(34px, 4vw, 58px);
     border-radius: var(--radius-lg);
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
-  /* UBAH DISINI: Dari 4 kolom menjadi 2 kolom agar layout tidak kopong */
   .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 36px;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.85fr) minmax(220px, 0.6fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
   }
-  .footer-col-title {
-    margin: 0 0 20px;
-    font-size: 1.15rem;
-    font-weight: 800;
+  .footer-brand {
+    max-width: 520px;
   }
-  .footer-text,
-  .footer-link {
-    color: var(--light-blue);
+  .footer-logo-wrap {
     display: flex;
     align-items: center;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+  .footer-logo {
+    width: 74px;
+    height: 74px;
+    object-fit: contain;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.94);
+    padding: 10px;
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+  }
+  .footer-brand-title {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(1.35rem, 2vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+  }
+  .footer-brand-subtitle {
+    margin: 5px 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .footer-description {
+    margin: 0;
+    max-width: 500px;
+    color: rgba(234, 246, 255, 0.82);
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.85;
+  }
+  .footer-badges {
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 12px;
+    margin-top: 24px;
+  }
+  .footer-badges span {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 223, 216, 0.3);
+    background: rgba(0, 223, 216, 0.1);
+    color: #BFFCFB;
+    padding: 8px 13px;
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+  .footer-col-title {
+    font-size: 1.18rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 24px;
+  }
+  .footer-text {
+    color: rgba(234, 246, 255, 0.82);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 650;
+    line-height: 1.65;
+  }
+  .footer-text i {
+    width: 20px;
+    color: var(--accent);
+    text-align: center;
   }
   .footer-link {
+    color: rgba(234, 246, 255, 0.82);
+    transition: var(--transition);
+    display: block;
+    width: fit-content;
+    margin-bottom: 13px;
+    font-weight: 700;
     text-decoration: none;
-    transition: all 0.3s ease;
   }
-  .footer-link:hover { 
-    color: var(--accent); 
-    transform: translateX(5px);
+  .footer-link:hover {
+    color: var(--accent);
+    transform: translateX(6px);
   }
   .footer-bottom {
+    position: relative;
+    z-index: 10;
     text-align: center;
-    margin-top: 28px;
-    color: rgba(255,255,255,0.65);
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.68);
     font-size: 0.9rem;
+    font-weight: 600;
   }
-  
-  /* Class newsletter bisa dihapus sepenuhnya jika tidak ada lagi di halaman manapun, 
-     namun jika masih ada di file static-pages.ts, biarkan saja (tidak akan ter-render). */
 
   .whatsapp-widget {
     position: fixed;
@@ -769,8 +864,8 @@ const INFORMATION_STYLES = `
     .toolbar { grid-template-columns: 1fr; }
     .category-tabs { justify-content: flex-start; }
     .article-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    /* UBAH DISINI JUGA (Opsional, karena sudah 2 kolom di atas) */
     .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
   }
 
   @media (max-width: 680px) {
@@ -789,9 +884,12 @@ const INFORMATION_STYLES = `
     .hero-logo-badge { bottom: 24px; font-size: 0.76rem; padding: 9px 12px; }
     .article-grid { grid-template-columns: 1fr; }
     .section-meta { align-items: flex-start; flex-direction: column; }
-    .footer-panel { padding: 28px 22px; }
-    /* Jadi 1 kolom bersusun di layar HP */
-    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer { padding: 64px 0 32px; }
+    .footer-panel { padding: 30px 22px; border-radius: 28px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 34px; }
+    .footer-logo-wrap { align-items: flex-start; }
+    .footer-logo { width: 64px; height: 64px; border-radius: 20px; }
+    .footer-badges span { font-size: 0.72rem; }
   }`;
 
 function ensureLandingHeadAssets() {
@@ -1029,12 +1127,44 @@ export function InformationPage({ initialArticles = articles }: { initialArticle
         <div className="container">
           <div className="footer-panel glass-dark">
             <div className="footer-grid">
+              <div className="footer-brand">
+                <div className="footer-logo-wrap">
+                  <img
+                    src="/landing/animation/logo-lab.png"
+                    alt="GIS Laboratorium"
+                    className="footer-logo"
+                  />
+                  <div>
+                    <h3 className="footer-brand-title">GIS Laboratorium</h3>
+                    <p className="footer-brand-subtitle">
+                      PT. Global Inspeksi Sistem
+                    </p>
+                  </div>
+                </div>
+
+                <p className="footer-description">
+                  GIS Laboratorium hadir sebagai mitra pengujian yang membantu
+                  pelanggan memastikan mutu, keamanan, dan kesesuaian produk
+                  maupun lingkungan melalui layanan laboratorium yang akurat dan
+                  terpercaya.
+                </p>
+
+                <div className="footer-badges">
+                  <span>Pengujian Laboratorium</span>
+                  <span>Lingkungan</span>
+                  <span>Pelumas</span>
+                  <span>Sawit & Pupuk</span>
+                </div>
+              </div>
+
               <div>
                 <h4 className="footer-col-title">Contact</h4>
+
                 <div className="footer-text">
-                  <i className="fa-solid fa-envelope" />{" "}
-                  globalinspeksisistem@gmail.com
+                  <i className="fa-solid fa-envelope" />
+                  <span>info@gislaboratorium.com</span>
                 </div>
+
                 <div
                   className="footer-text"
                   style={{ alignItems: "flex-start" }}
@@ -1051,12 +1181,16 @@ export function InformationPage({ initialArticles = articles }: { initialArticle
                     +62 812-1704-7976
                   </div>
                 </div>
+
                 <div className="footer-text">
-                  <i className="fa-solid fa-globe" /> www.gislaboratorium.com
+                  <i className="fa-solid fa-globe" />
+                  <span>www.gislaboratorium.com</span>
                 </div>
               </div>
+
               <div>
                 <h4 className="footer-col-title">Link</h4>
+
                 <Link href="/" className="footer-link">
                   Beranda
                 </Link>
@@ -1078,6 +1212,7 @@ export function InformationPage({ initialArticles = articles }: { initialArticle
               </div>
             </div>
           </div>
+
           <div className="footer-bottom">
             &copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
           </div>
