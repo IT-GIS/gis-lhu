@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { FloatingContactWidget } from "@/features/landing/floating-contact-widget";
+import { LanguageSwitcher } from "@/features/landing/language-switcher";
 const SCOPE_ROUTE = "/ruang-lingkup-pengujian";
 
 const SCOPE_STYLES = `
@@ -111,8 +112,8 @@ const SCOPE_STYLES = `
     display: flex;
     align-items: center;
     gap: 10px;
-    font-weight: 800;
-    font-size: 1.25rem;
+    font-weight: 900;
+    font-size: 1.12rem;
     color: var(--primary);
     letter-spacing: 0;
     white-space: nowrap;
@@ -133,10 +134,10 @@ const SCOPE_STYLES = `
 
   .scope-page .nav-link {
     display: block;
-    padding: 8px 16px;
+    padding: 8px 14px;
     border-radius: var(--radius-pill);
-    font-weight: 500;
-    font-size: 0.95rem;
+    font-weight: 700;
+    font-size: 0.93rem;
     color: var(--text-muted);
     transition: var(--transition);
     white-space: nowrap;
@@ -968,15 +969,18 @@ export function ScopeLandingPage() {
               </Link>
             </li>
           </ul>
-          <button
-            className="mobile-menu-btn"
-            id="mobileMenuBtn"
-            type="button"
-            aria-label="Buka menu"
-            onClick={() => setMenuOpen((value) => !value)}
-          >
-            <i className="fa-solid fa-bars" />
-          </button>
+          <div className="nav-actions">
+            <LanguageSwitcher />
+
+            <button
+              className="mobile-menu-btn"
+              type="button"
+              onClick={() => setMenuOpen((value) => !value)}
+              aria-label="Buka menu"
+            >
+              <i className="fa-solid fa-bars" />
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -1120,56 +1124,7 @@ export function ScopeLandingPage() {
         </div>
       </footer>
 
-      <div className="whatsapp-widget">
-        <div
-          className={`whatsapp-window${whatsappOpen ? " active" : ""}`}
-          id="whatsappWindow"
-        >
-          <div className="wa-header">
-            <div className="wa-brand">
-              <Image
-                src="/landing/animation/logo-lab.png"
-                alt="GISLAB"
-                width={28}
-                height={28}
-              />
-              <span>PT Global Inspeksi Sistem</span>
-            </div>
-            <button
-              className="wa-close"
-              id="closeWhatsapp"
-              type="button"
-              aria-label="Tutup WhatsApp"
-              onClick={() => setWhatsappOpen(false)}
-            >
-              <i className="fa-solid fa-xmark" />
-            </button>
-          </div>
-          <div className="wa-body">
-            <div className="wa-bubble">
-              Halo! Ada yang bisa kami bantu mengenai layanan pengujian GIS?
-            </div>
-            <a
-              className="wa-link"
-              href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium"
-              target="_blank"
-              rel="noopener"
-            >
-              <i className="fa-brands fa-whatsapp" />
-              <span>Customer Service</span>
-            </a>
-          </div>
-        </div>
-        <button
-          className="whatsapp-toggle"
-          id="toggleWhatsapp"
-          type="button"
-          aria-label="Buka WhatsApp"
-          onClick={() => setWhatsappOpen((value) => !value)}
-        >
-          <i className="fa-brands fa-whatsapp" />
-        </button>
-      </div>
+      <FloatingContactWidget />
     </div>
   );
 }

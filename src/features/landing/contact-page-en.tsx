@@ -1000,11 +1000,12 @@ function ensureLandingHeadAssets() {
   const link = document.createElement("link");
   link.id = "landing-font-awesome";
   link.rel = "stylesheet";
-  link.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
+  link.href =
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
   document.head.appendChild(link);
 }
 
-export function ContactPage() {
+export function ContactPageEn() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [whatsappOpen, setWhatsappOpen] = useState(false);
@@ -1044,16 +1045,24 @@ export function ContactPage() {
         body: JSON.stringify(payload),
       });
 
-      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+      const result = (await response.json().catch(() => null)) as {
+        error?: string;
+      } | null;
 
       if (!response.ok) {
-        throw new Error(result?.error || "Pesan belum bisa dikirim. Silakan coba lagi.");
+        throw new Error(
+          result?.error || "The message could not be sent. Please try again.",
+        );
       }
 
       form.reset();
       setMessageReady(true);
     } catch (error) {
-      setMessageError(error instanceof Error ? error.message : "Pesan belum bisa dikirim. Silakan coba lagi.");
+      setMessageError(
+        error instanceof Error
+          ? error.message
+          : "The message could not be sent. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -1079,7 +1088,7 @@ export function ContactPage() {
           <ul className={`nav-menu${menuOpen ? " active" : ""}`} id="navMenu">
             <li>
               <Link href="/" className="nav-link">
-                Beranda
+                Home
               </Link>
             </li>
             <li>
@@ -1089,35 +1098,36 @@ export function ContactPage() {
             </li>
             <li>
               <Link href="/service" className="nav-link">
-                Layanan
+                Service
               </Link>
             </li>
             <li>
               <Link href="/ruang-lingkup-pengujian" className="nav-link">
-                Ruang Lingkup Pengujian
+                Scope of Testing
               </Link>
             </li>
             <li className="nav-dropdown">
               <details>
                 <summary className="nav-link nav-dropdown-trigger">
-                  Informasi <i className="fa-solid fa-chevron-down" />
+                  Information <i className="fa-solid fa-chevron-down" />
                 </summary>
                 <div className="nav-dropdown-menu">
                   <Link href="/informasi" className="nav-dropdown-link">
-                    Artikel <i className="fa-solid fa-newspaper" />
+                    Article <i className="fa-solid fa-newspaper" />
                   </Link>
                   <Link
                     href="/informasi/keluhan-dan-banding"
                     className="nav-dropdown-link"
                   >
-                    Keluhan dan Banding <i className="fa-solid fa-comments" />
+                    Complaints and Appeals{" "}
+                    <i className="fa-solid fa-comments" />
                   </Link>
                 </div>
               </details>
             </li>
             <li>
               <Link href="/contact" className="nav-link active">
-                Kontak
+                Contact
               </Link>
             </li>
           </ul>
@@ -1141,15 +1151,15 @@ export function ContactPage() {
           <div className="contact-hero">
             <div className="hero-content">
               <span className="eyebrow">
-                <i className="fa-solid fa-headset" /> Kontak kami
+                <i className="fa-solid fa-headset" /> Contact us
               </span>
               <h1 className="hero-title">
-                Hubungi kami dan beri tahu kami bagaimana kami dapat membantu.
+                Contact us and let us know how we can help.
               </h1>
               <p className="hero-text">
-                Tim Global Inspeksi Sistem siap membantu kebutuhan pengujian,
-                koordinasi sampel, administrasi, dan informasi layanan
-                laboratorium.
+                The Global Inspection System team is ready to assist with
+                testing needs, sample coordination, administration, and
+                laboratory service information.
               </p>
             </div>
           </div>
@@ -1160,7 +1170,7 @@ export function ContactPage() {
               <span className="quick-icon">
                 <i className="fa-solid fa-phone" />
               </span>
-              <h2 className="quick-label">Telepon</h2>
+              <h2 className="quick-label">Telephone</h2>
               <p className="quick-value">
                 +62 812-8532-8232 <br />
                 +62 817-888-879 <br />
@@ -1202,13 +1212,13 @@ export function ContactPage() {
                   <i className="fa-solid fa-building" /> Office
                 </span>
                 <h2 className="section-title">
-                  Kunjungi kantor GIS Laboratorium.
+                  Visit the GIS Laboratory office.
                 </h2>
               </div>
               <p className="section-copy">
-                GIS Laboratorium siap melayani Anda. Kunjungi kantor kami untuk
-                konsultasi, pengiriman sampel, atau kebutuhan koordinasi
-                pengujian secara langsung.
+                GIS Laboratory is ready to serve you. Visit our office for
+                in-person consultations, sample delivery, or testing
+                coordination needs.
               </p>
             </div>
 
@@ -1249,14 +1259,14 @@ export function ContactPage() {
                 </span>
                 <h2 className="section-title">Contact info</h2>
                 <p>
-                  Hubungi kami untuk pertanyaan layanan, kebutuhan penawaran,
-                  atau konsultasi ruang lingkup pengujian.
+                  Contact us for service inquiries, quote needs, or testing
+                  scope consultations.
                 </p>
                 <div className="info-list">
                   <div className="info-item">
                     <i className="fa-solid fa-location-dot" />
                     <div>
-                      <strong>Alamat</strong>
+                      <strong>Address</strong>
                       <span>
                         Jl. Pahlawan No.2, Kwadengan Barat, Lemahputro, Kec.
                         Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213
@@ -1266,7 +1276,7 @@ export function ContactPage() {
                   <div className="info-item">
                     <i className="fa-solid fa-phone" />
                     <div>
-                      <strong>Telepon</strong>
+                      <strong>Telephone</strong>
                       <span>
                         +62 812-8532-8232 <br />
                         +62 817-888-879 <br />
@@ -1293,8 +1303,8 @@ export function ContactPage() {
                   Contact Us
                 </h2>
                 <p className="form-copy">
-                  Isi pesan singkat berikut agar tim kami dapat membantu Anda
-                  lebih cepat.
+                  Please fill out the short message below so our team can assist
+                  you more quickly.
                 </p>
                 <form
                   className="contact-form"
@@ -1328,7 +1338,7 @@ export function ContactPage() {
                     <textarea
                       id="message"
                       name="message"
-                      placeholder="Ceritakan kebutuhan pengujian atau pertanyaan Anda."
+                      placeholder="Tell us about your testing needs or questions."
                       required
                     />
                   </div>
@@ -1341,8 +1351,8 @@ export function ContactPage() {
                     <i className="fa-solid fa-paper-plane" />
                   </button>
                   <p className={`form-message${messageReady ? " active" : ""}`}>
-                    Terima kasih. Pesan Anda sudah terkirim dan tersimpan di
-                    admin.
+                    Thank you. Your message has been sent and saved in the admin
+                    folder.
                   </p>
                   {messageError ? (
                     <p className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-bold text-rose-700">
@@ -1389,17 +1399,16 @@ export function ContactPage() {
                 </div>
 
                 <p className="footer-description">
-                  GIS Laboratorium hadir sebagai mitra pengujian yang membantu
-                  pelanggan memastikan mutu, keamanan, dan kesesuaian produk
-                  maupun lingkungan melalui layanan laboratorium yang akurat dan
-                  terpercaya.
+                  GIS Laboratory is a testing partner that helps customers
+                  ensure product quality, safety, and environmental compliance
+                  through accurate and reliable laboratory services.
                 </p>
 
                 <div className="footer-badges">
-                  <span>Pengujian Laboratorium</span>
-                  <span>Lingkungan</span>
-                  <span>Pelumas</span>
-                  <span>Sawit & Pupuk</span>
+                  <span>Laboratory Testing</span>
+                  <span>Environment</span>
+                  <span>Lubricant</span>
+                  <span>Palm Oil and Fertilizer</span>
                 </div>
               </div>
 
@@ -1438,22 +1447,22 @@ export function ContactPage() {
                 <h4 className="footer-col-title">Link</h4>
 
                 <Link href="/" className="footer-link">
-                  Beranda
+                  Home
                 </Link>
                 <Link href="/profile" className="footer-link">
                   Profile
                 </Link>
                 <Link href="/service" className="footer-link">
-                  Layanan
+                  Service
                 </Link>
                 <Link href="/ruang-lingkup-pengujian" className="footer-link">
-                  Ruang Lingkup Pengujian
+                  Scope of Testing
                 </Link>
                 <Link href="/informasi" className="footer-link">
-                  Informasi
+                  Information
                 </Link>
                 <Link href="/contact" className="footer-link">
-                  Kontak
+                  Contact
                 </Link>
               </div>
             </div>

@@ -1,4 +1,4 @@
-﻿export type LandingPageKey = "home" | "profile" | "service" | "contact";
+export type LandingPageKey = "home" | "profile" | "service" | "contact";
 
 export type LandingStaticPage = {
   key: LandingPageKey;
@@ -129,11 +129,11 @@ const WHATSAPP_WIDGET_STYLES = `
 const WHATSAPP_WIDGET_HTML = `
   <div class="contact-widget">
     <div class="contact-window icon-only" id="whatsappWindow">
-      <a class="contact-icon-link whatsapp" href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium" target="_blank" rel="noopener" aria-label="WhatsApp GIS">
+      <a class="contact-icon-link whatsapp" href="https://wa.me/6281285328232?text=Hello%20GIS%20Laboratory" target="_blank" rel="noopener" aria-label="WhatsApp GIS">
         <i class="fa-brands fa-whatsapp"></i>
       </a>
 
-      <a class="contact-icon-link email" href="mailto:info@gislaboratorium.com?subject=Informasi%20Layanan%20GISLAB" aria-label="Email GIS">
+      <a class="contact-icon-link email" href="mailto:info@gislaboratorium.com?subject=GISLAB%20Service%20Information" aria-label="Email GIS">
         <i class="fa-solid fa-envelope"></i>
       </a>
 
@@ -142,7 +142,7 @@ const WHATSAPP_WIDGET_HTML = `
       </a>
     </div>
 
-    <button class="contact-toggle" id="toggleWhatsapp" aria-label="Buka menu kontak">
+    <button class="contact-toggle" id="toggleWhatsapp" aria-label="Open contact menu">
       <i class="fa-solid fa-plus"></i>
     </button>
   </div>
@@ -151,9 +151,9 @@ const WHATSAPP_WIDGET_HTML = `
 const pageList = [
   {
     key: "home",
-    title: "GISLAB - Laboratorium Pengujian Global Inspeksi Sistem",
+    title: "GISLAB - Global Inspeksi Sistem Testing Laboratory",
     description:
-      "Laboratorium pengujian akurat, terpercaya, didukung tenaga ahli berpengalaman dan peralatan modern.",
+      "Accurate and reliable testing laboratory supported by experienced experts and modern equipment.",
     bodyClass: "",
     styles: `@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -498,39 +498,39 @@ const pageList = [
     html: `
     <header class="navbar-wrapper" id="navbar">
         <nav class="navbar">
-            <a href="/" class="nav-brand">
+            <a href="/en" class="nav-brand">
                 <img src="/landing/animation/logo-lab.png" style="height: 28px; width: auto; transform: scale(1.8); transform-origin: left center; margin-right: 36px;">
                 Global Inspeksi Sistem
             </a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/" class="nav-link active">Beranda</a></li>
-                <li><a href="/profile" class="nav-link">Profile</a></li>
-                <li><a href="/service" class="nav-link">Layanan</a></li>
-                <li><a href="/ruang-lingkup-pengujian" class="nav-link">Ruang Lingkup Pengujian</a></li>
+                <li><a href="/en" class="nav-link active">Home</a></li>
+                <li><a href="/en/profile" class="nav-link">Profile</a></li>
+                <li><a href="/en/service" class="nav-link">Services</a></li>
+                <li><a href="/en/ruang-lingkup-pengujian" class="nav-link">Testing Scope</a></li>
                 <li class="nav-dropdown">
   <details>
     <summary class="nav-link nav-dropdown-trigger">
-      Informasi <i class="fa-solid fa-chevron-down"></i>
+      Information <i class="fa-solid fa-chevron-down"></i>
     </summary>
     <div class="nav-dropdown-menu">
-      <a href="/informasi" class="nav-dropdown-link">
-        Artikel <i class="fa-solid fa-newspaper"></i>
+      <a href="/en/informasi" class="nav-dropdown-link">
+        Articles <i class="fa-solid fa-newspaper"></i>
       </a>
-      <a href="/informasi/keluhan-dan-banding" class="nav-dropdown-link">
-        Keluhan dan Banding <i class="fa-solid fa-comments"></i>
+      <a href="/en/informasi/keluhan-dan-banding" class="nav-dropdown-link">
+        Complaints and Appeals <i class="fa-solid fa-comments"></i>
       </a>
     </div>
   </details>
 </li>
-                <li><a href="/contact" class="nav-link">Kontak</a></li>
+                <li><a href="/en/contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-actions">
-  <a href="/en" class="language-switch" id="languageSwitch" aria-label="Switch to English" title="Switch to English">
+  <a href="/" class="language-switch" id="languageSwitch" aria-label="Switch to Indonesian" title="Switch to Indonesian">
     <i class="fa-solid fa-globe"></i>
-    <span>EN</span>
+    <span>ID</span>
   </a>
 
-  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka menu">
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
     <i class="fas fa-bars"></i>
   </button>
 </div>
@@ -546,9 +546,9 @@ const pageList = [
             <div class="hero-content">
                 <div class="hero-panel glass">
                     <div class="hero-title-slot">
-                        <h1 class="hero-title" aria-label="Laboratorium Pengujian Global Inspeksi Sistem" style="margin: 0; line-height: 1.3;">
+                        <h1 class="hero-title" aria-label="Global Inspeksi Sistem Testing Laboratory" style="margin: 0; line-height: 1.3;">
                             <span class="typing-ghost typing-neutral" aria-hidden="true">
-                                Laboratorium Pengujian <span class="typing-accent">Global Inspeksi Sistem</span>
+                                Testing Laboratory <span class="typing-accent">Global Inspeksi Sistem</span>
                             </span>
                             <span class="typing-live" aria-hidden="true">
                                 <span id="type-title-1" class="typing-neutral"></span>
@@ -557,13 +557,13 @@ const pageList = [
                         </h1>
                     </div>
                     <div class="hero-subtitle-slot">
-                        <p class="hero-subtitle" aria-label="Laboratorium kami menyediakan layanan pengujian yang akurat, terpercaya, dan didukung oleh tenaga ahli berpengalaman serta peralatan modern." style="margin: 0; font-weight: 600; text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
-                            <span class="typing-ghost" aria-hidden="true">Laboratorium kami menyediakan layanan pengujian yang akurat, terpercaya, dan didukung oleh tenaga ahli berpengalaman serta peralatan modern.</span>
+                        <p class="hero-subtitle" aria-label="Our laboratory provides accurate, reliable testing services supported by experienced experts and modern equipment." style="margin: 0; font-weight: 600; text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
+                            <span class="typing-ghost" aria-hidden="true">Our laboratory provides accurate, reliable testing services supported by experienced experts and modern equipment.</span>
                             <span id="type-sub" class="typing-live" aria-hidden="true"></span>
                         </p>
                     </div>
-                    <a href="/service" class="btn btn-primary" style="flex-shrink: 0;">
-                        Jelajahi Layanan <i class="fa-solid fa-arrow-right ms-2" style="margin-left: 8px;"></i>
+                    <a href="/en/service" class="btn btn-primary" style="flex-shrink: 0;">
+                        Explore Services <i class="fa-solid fa-arrow-right ms-2" style="margin-left: 8px;"></i>
                     </a>
                 </div>
             </div>
@@ -575,15 +575,15 @@ const pageList = [
             <div class="advantages-grid">
                 <div class="advantage-card glass">
                     <div class="advantage-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                    <h3 class="advantage-title">Pengujian Mutu Produk</h3>
+                    <h3 class="advantage-title">Product Quality Testing</h3>
                 </div>
                 <div class="advantage-card glass">
                     <div class="advantage-icon"><i class="fa-solid fa-certificate"></i></div>
-                    <h3 class="advantage-title">Sertifikasi SNI</h3>
+                    <h3 class="advantage-title">SNI Certification</h3>
                 </div>
                 <div class="advantage-card glass">
                     <div class="advantage-icon"><i class="fa-solid fa-globe"></i></div>
-                    <h3 class="advantage-title">Berstandar Internasional</h3>
+                    <h3 class="advantage-title">International Standards</h3>
                 </div>
             </div>
         </div>
@@ -593,30 +593,30 @@ const pageList = [
         <div class="container">
             <div class="about-grid">
                 <div class="about-card glass reveal">
-                    <h2 class="section-title">Tentang Kami</h2>
+                    <h2 class="section-title">About Us</h2>
                     <p class="about-text">
-                        GISLAB merupakan laboratorium pengujian yang berfokus pada layanan pengujian mutu produk, lingkungan, dan kebutuhan industri. Kami hadir untuk membantu perusahaan memastikan kualitas, keamanan, dan kesesuaian produk terhadap standar yang berlaku.
+                        GISLAB is a testing laboratory focused on product quality, environmental, and industrial testing services. We help companies ensure product quality, safety, and conformity with applicable standards.
                     </p>
                     <div>
-                        <a href="/contact" class="btn btn-primary btn-sm">Lihat Selengkapnya</a>
+                        <a href="/en/contact" class="btn btn-primary btn-sm">Learn More</a>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=600" alt="Petugas Laboratorium" class="about-img-small">
+                    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=600" alt="Laboratory personnel" class="about-img-small">
                 </div>
 
                 <div class="about-card glass reveal">
-                    <h2 class="section-title">Fasilitas Keunggulan</h2>
+                    <h2 class="section-title">Key Facilities</h2>
                     <div class="facilities-list">
                         <div class="facility-item">
                             <div class="facility-icon"><i class="fa-solid fa-check"></i></div>
-                            <div class="facility-text">Peralatan pengujian modern</div>
+                            <div class="facility-text">Modern testing equipment</div>
                         </div>
                         <div class="facility-item">
                             <div class="facility-icon"><i class="fa-solid fa-check"></i></div>
-                            <div class="facility-text">Tenaga ahli berpengalaman</div>
+                            <div class="facility-text">Experienced experts</div>
                         </div>
                         <div class="facility-item">
                             <div class="facility-icon"><i class="fa-solid fa-check"></i></div>
-                            <div class="facility-text">Proses pengujian akurat dan terdokumentasi</div>
+                            <div class="facility-text">Accurate and documented testing process</div>
                         </div>
                     </div>
                     <div class="illustration-3d glass"></div>
@@ -629,16 +629,16 @@ const pageList = [
         <div class="container">
             <div class="vm-grid">
                 <div class="vm-card glass-dark reveal">
-                    <h2 class="vm-title"><i class="fa-solid fa-eye"></i> Visi</h2>
-                    <p class="vm-text">Menjadi laboratorium pengujian terpercaya yang mendukung kualitas, keamanan, dan daya saing industri melalui layanan yang profesional dan berintegritas.</p>
+                    <h2 class="vm-title"><i class="fa-solid fa-eye"></i> Vision</h2>
+                    <p class="vm-text">To become a trusted testing laboratory that supports quality, safety, and industrial competitiveness through professional and integrity-driven services.</p>
                 </div>
                 <div class="vm-card glass-dark reveal" style="transition-delay: 0.2s;">
-                    <h2 class="vm-title"><i class="fa-solid fa-bullseye"></i> Misi</h2>
+                    <h2 class="vm-title"><i class="fa-solid fa-bullseye"></i> Mission</h2>
                     <ul class="vm-list">
-                        <li>Memberikan layanan pengujian yang akurat, objektif, dan tepat waktu.</li>
-                        <li>Mendukung pemenuhan standar nasional dan internasional.</li>
-                        <li>Mengembangkan kompetensi SDM dan teknologi laboratorium secara berkelanjutan.</li>
-                        <li>Menjaga kepercayaan pelanggan melalui pelayanan yang transparan dan profesional.</li>
+                        <li>Providing accurate, objective, and timely testing services.</li>
+                        <li>Supporting compliance with national and international standards.</li>
+                        <li>Continuously developing human resource competency and laboratory technology.</li>
+                        <li>Maintaining customer trust through transparent and professional service.</li>
                     </ul>
                 </div>
             </div>
@@ -647,73 +647,73 @@ const pageList = [
 
     <section class="services-section" id="layanan">
         <div class="container">
-            <div class="services-header reveal"><h2 class="section-title">Layanan Kami</h2></div>
+            <div class="services-header reveal"><h2 class="section-title">Our Services</h2></div>
             <div class="carousel-container reveal">
                 <div class="services-track">
-                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="quality" aria-label="Lihat detail Pengujian Mutu Produk & Bahan">
-                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600" alt="Pengujian mutu produk dan bahan" class="service-img">
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="quality" aria-label="View details for Product and Material Quality Testing">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600" alt="Product and material quality testing" class="service-img">
                         <div class="service-content">
-                            <h3 class="service-title">Pengujian Mutu Produk & Bahan</h3>
-                            <p class="service-desc">Pengujian pelumas, produk sawit, pupuk, minyak goreng sawit, minyak makan merah, dan produk teknis lain sesuai ruang lingkup.</p>
+                            <h3 class="service-title">Product & Material Quality Testing</h3>
+                            <p class="service-desc">Testing of lubricants, palm-based products, fertilizers, palm cooking oil, red palm cooking oil, and other technical products within the approved scope.</p>
                             <button class="service-btn" type="button" data-service-detail="quality">Read More</button>
                         </div>
                     </article>
-                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="environment" aria-label="Lihat detail Pengujian Air & Lingkungan">
-                        <img src="https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=600" alt="Pengujian air dan lingkungan" class="service-img">
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="environment" aria-label="View details for Water and Environmental Testing">
+                        <img src="https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=600" alt="Water and environmental testing" class="service-img">
                         <div class="service-content">
-                            <h3 class="service-title">Pengujian Air & Lingkungan</h3>
-                            <p class="service-desc">Pengujian air bersih, air limbah, air minum, air mineral, air demineral, dan sumber air alami sesuai parameter ruang lingkup.</p>
+                            <h3 class="service-title">Water & Environmental Testing</h3>
+                            <p class="service-desc">Testing of clean water, wastewater, drinking water, mineral water, demineralized water, and natural water sources according to scope parameters.</p>
                             <button class="service-btn" type="button" data-service-detail="environment">Read More</button>
                         </div>
                     </article>
-                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="permit" aria-label="Lihat detail Pengujian Udara Ambient & Emisi">
-                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=600" alt="Pengujian udara ambient dan emisi" class="service-img">
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="permit" aria-label="View details for Ambient Air and Emission Testing">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=600" alt="Ambient air and emission testing" class="service-img">
                         <div class="service-content">
-                            <h3 class="service-title">Pengujian Udara Ambient & Emisi</h3>
-                            <p class="service-desc">Pengujian udara ambient dan emisi sumber tidak bergerak untuk mendukung pemantauan kualitas udara dan kepatuhan lingkungan.</p>
+                            <h3 class="service-title">Ambient Air & Emission Testing</h3>
+                            <p class="service-desc">Ambient air and stationary source emission testing to support air quality monitoring and environmental compliance.</p>
                             <button class="service-btn" type="button" data-service-detail="permit">Read More</button>
                         </div>
                     </article>
-                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="sni" aria-label="Lihat detail Pengujian SNI Produk">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" alt="Pengujian SNI Produk" class="service-img">
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="sni" aria-label="View details for SNI Product Testing">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" alt="SNI product testing" class="service-img">
                         <div class="service-content">
-                            <h3 class="service-title">Pengujian SNI Produk</h3>
-                            <p class="service-desc">Pengujian produk berdasarkan persyaratan SNI untuk mendukung proses sertifikasi dan kepatuhan.</p>
+                            <h3 class="service-title">SNI Product Testing</h3>
+                            <p class="service-desc">Product testing based on SNI requirements to support certification and compliance processes.</p>
                             <button class="service-btn" type="button" data-service-detail="sni">Read More</button>
                         </div>
                     </article>
                 
 
-                    <!-- Duplikat untuk carousel seamless agar tidak muncul ruang kosong -->
-                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="quality" aria-label="Lihat detail Pengujian Mutu Produk & Bahan">
-                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600" alt="Pengujian mutu produk dan bahan" class="service-img">
+                    <!-- Duplicate items for a seamless carousel to prevent empty space -->
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="quality" aria-label="View details for Product and Material Quality Testing">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600" alt="Product and material quality testing" class="service-img">
                         <div class="service-content">
-                            <h3 class="service-title">Pengujian Mutu Produk & Bahan</h3>
-                            <p class="service-desc">Pengujian pelumas, produk sawit, pupuk, minyak goreng sawit, minyak makan merah, dan produk teknis lain sesuai ruang lingkup.</p>
+                            <h3 class="service-title">Product & Material Quality Testing</h3>
+                            <p class="service-desc">Testing of lubricants, palm-based products, fertilizers, palm cooking oil, red palm cooking oil, and other technical products within the approved scope.</p>
                             <button class="service-btn" type="button" data-service-detail="quality">Read More</button>
                         </div>
                     </article>
-                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="environment" aria-label="Lihat detail Pengujian Air & Lingkungan">
-                        <img src="https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=600" alt="Pengujian air dan lingkungan" class="service-img">
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="environment" aria-label="View details for Water and Environmental Testing">
+                        <img src="https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=600" alt="Water and environmental testing" class="service-img">
                         <div class="service-content">
-                            <h3 class="service-title">Pengujian Air & Lingkungan</h3>
-                            <p class="service-desc">Pengujian air bersih, air limbah, air minum, air mineral, air demineral, dan sumber air alami sesuai parameter ruang lingkup.</p>
+                            <h3 class="service-title">Water & Environmental Testing</h3>
+                            <p class="service-desc">Testing of clean water, wastewater, drinking water, mineral water, demineralized water, and natural water sources according to scope parameters.</p>
                             <button class="service-btn" type="button" data-service-detail="environment">Read More</button>
                         </div>
                     </article>
-                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="permit" aria-label="Lihat detail Pengujian Udara Ambient & Emisi">
-                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=600" alt="Pengujian udara ambient dan emisi" class="service-img">
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="permit" aria-label="View details for Ambient Air and Emission Testing">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=600" alt="Ambient air and emission testing" class="service-img">
                         <div class="service-content">
-                            <h3 class="service-title">Pengujian Udara Ambient & Emisi</h3>
-                            <p class="service-desc">Pengujian udara ambient dan emisi sumber tidak bergerak untuk mendukung pemantauan kualitas udara dan kepatuhan lingkungan.</p>
+                            <h3 class="service-title">Ambient Air & Emission Testing</h3>
+                            <p class="service-desc">Ambient air and stationary source emission testing to support air quality monitoring and environmental compliance.</p>
                             <button class="service-btn" type="button" data-service-detail="permit">Read More</button>
                         </div>
                     </article>
-                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="sni" aria-label="Lihat detail Pengujian SNI Produk">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" alt="Pengujian SNI Produk" class="service-img">
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="sni" aria-label="View details for SNI Product Testing">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" alt="SNI product testing" class="service-img">
                         <div class="service-content">
-                            <h3 class="service-title">Pengujian SNI Produk</h3>
-                            <p class="service-desc">Pengujian produk berdasarkan persyaratan SNI untuk mendukung proses sertifikasi dan kepatuhan.</p>
+                            <h3 class="service-title">SNI Product Testing</h3>
+                            <p class="service-desc">Product testing based on SNI requirements to support certification and compliance processes.</p>
                             <button class="service-btn" type="button" data-service-detail="sni">Read More</button>
                         </div>
                     </article>
@@ -726,48 +726,48 @@ const pageList = [
         <div class="container">
             <div class="service-detail-layout">
                 <article class="service-detail-article">
-                    <img id="detailCover" class="detail-cover" src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1200" alt="Pengujian laboratorium">
+                    <img id="detailCover" class="detail-cover" src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1200" alt="Laboratory testing">
                     <div class="detail-body">
-                        <span class="detail-kicker"><i class="fa-solid fa-flask-vial"></i> Detail Layanan</span>
-                        <h2 class="detail-title" id="detailTitle">Pengujian Mutu Produk & Bahan</h2>
-                        <p class="detail-copy" id="detailIntro">Pengujian kualitas membantu memastikan bahan, produk, atau sampel memiliki mutu yang konsisten dan sesuai standar teknis. GISLAB mendukung kebutuhan pengujian untuk kontrol mutu, evaluasi produk, dan pembuktian kesesuaian sebelum digunakan atau dipasarkan.</p>
+                        <span class="detail-kicker"><i class="fa-solid fa-flask-vial"></i> Service Details</span>
+                        <h2 class="detail-title" id="detailTitle">Product & Material Quality Testing</h2>
+                        <p class="detail-copy" id="detailIntro">Quality testing helps ensure that materials, products, or samples have consistent quality and meet technical standards. GISLAB supports testing needs for quality control, product evaluation, and conformity verification before use or market release.</p>
 
-                        <h3 id="detailWhyTitle">Mengapa pengujian mutu produk & bahan penting?</h3>
-                        <p class="detail-copy" id="detailWhy">Tanpa pengujian yang terdokumentasi, perusahaan berisiko mengambil keputusan berdasarkan asumsi visual saja. Pengujian kualitas memberikan data objektif untuk mengurangi risiko produk gagal, komplain pelanggan, dan ketidaksesuaian terhadap standar.</p>
+                        <h3 id="detailWhyTitle">Why is product and material quality testing important?</h3>
+                        <p class="detail-copy" id="detailWhy">Without documented testing, companies risk making decisions based only on visual assumptions. Quality testing provides objective data to reduce the risk of product failure, customer complaints, and nonconformity with standards.</p>
 
-                        <h3>Layanan pengujian yang kami solusikan</h3>
+                        <h3>Testing services we provide</h3>
                         <ul class="detail-list" id="detailList">
-                            <li><i class="fa-solid fa-check"></i><span>Pengujian karakteristik fisik dan kimia sesuai kebutuhan produk atau material.</span></li>
-                            <li><i class="fa-solid fa-check"></i><span>Pemeriksaan mutu sampel untuk mendukung quality control dan quality assurance.</span></li>
-                            <li><i class="fa-solid fa-check"></i><span>Analisis hasil uji sebagai dasar evaluasi kesesuaian terhadap spesifikasi teknis.</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>Testing of physical and chemical characteristics according to product or material needs.</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>Sample quality checks to support quality control and quality assurance.</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>Analysis of test results as a basis for evaluating conformity with technical specifications.</span></li>
                         </ul>
 
-                        <h3>Konsultansi dan rekomendasi teknis</h3>
-                        <p class="detail-copy" id="detailConsult">Tim GISLAB dapat membantu pelanggan menentukan parameter uji yang relevan berdasarkan jenis produk, standar acuan, dan kebutuhan dokumen teknis. Dengan begitu, pengujian mengikuti ruang lingkup dan kebutuhan aktual produk.</p>
+                        <h3>Technical consultation and recommendations</h3>
+                        <p class="detail-copy" id="detailConsult">The GISLAB team can help customers determine relevant test parameters based on product type, reference standards, and technical document needs, so testing follows the available scope and actual product requirements.</p>
 
-                        <h3>Komitmen kami</h3>
-                        <p class="detail-copy" id="detailCommitment">GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras dengan ruang lingkup pengujian yang tersedia, sehingga pelanggan memperoleh dasar teknis yang dapat dipertanggungjawabkan.</p>
+                        <h3>Our Commitment</h3>
+                        <p class="detail-copy" id="detailCommitment">GISLAB is committed to providing accurate, documented test results aligned with the available testing scope, giving customers a technically accountable basis for decision-making.</p>
                     </div>
                 </article>
 
                 <aside class="service-detail-sidebar">
                     <div class="sidebar-box">
-                        <h3 class="sidebar-title">Layanan GISLAB</h3>
-                        <button class="sidebar-link" type="button" data-service-detail="quality">Pengujian Mutu Produk & Bahan <i class="fa-solid fa-arrow-right"></i></button>
-                        <button class="sidebar-link" type="button" data-service-detail="environment">Pengujian Air & Lingkungan <i class="fa-solid fa-arrow-right"></i></button>
-                        <button class="sidebar-link" type="button" data-service-detail="permit">Pengujian Udara Ambient & Emisi <i class="fa-solid fa-arrow-right"></i></button>
-                        <button class="sidebar-link" type="button" data-service-detail="sni">Pengujian SNI Produk <i class="fa-solid fa-arrow-right"></i></button>
+                        <h3 class="sidebar-title">GISLAB Services</h3>
+                        <button class="sidebar-link" type="button" data-service-detail="quality">Product & Material Quality Testing <i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="sidebar-link" type="button" data-service-detail="environment">Water & Environmental Testing <i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="sidebar-link" type="button" data-service-detail="permit">Ambient Air & Emission Testing <i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="sidebar-link" type="button" data-service-detail="sni">SNI Product Testing <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                     <div class="sidebar-box">
-                        <h3 class="sidebar-title">Download Profil GISLAB</h3>
-                        <p class="sidebar-note">Unduh profil perusahaan untuk informasi lengkap mengenai layanan pengujian, analisis, dan dukungan laboratorium kami.</p>
+                        <h3 class="sidebar-title">Download GISLAB Profile</h3>
+                        <p class="sidebar-note">Download the company profile for complete information about our testing, analysis, and laboratory support services.</p>
                         <a href="#" class="download-btn"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>
                         <a href="#" class="download-btn"><i class="fa-solid fa-file-word"></i> Download Doc</a>
                     </div>
                     <div class="sidebar-box">
-                        <h3 class="sidebar-title">Butuh rekomendasi parameter?</h3>
-                        <p class="sidebar-note">Hubungi tim GISLAB untuk menentukan parameter uji yang paling sesuai dengan kebutuhan produk atau lingkungan Anda.</p>
-                        <a href="/contact" class="detail-contact-btn"><i class="fa-solid fa-headset"></i> Kontak Kami</a>
+                        <h3 class="sidebar-title">Need parameter recommendations?</h3>
+                        <p class="sidebar-note">Contact the GISLAB team to determine the most suitable test parameters for your product or environmental needs.</p>
+                        <a href="/en/contact" class="detail-contact-btn"><i class="fa-solid fa-headset"></i> Contact Us</a>
                     </div>
                 </aside>
             </div>
@@ -780,22 +780,22 @@ const pageList = [
                 <div class="footer-grid">
                     <div class="footer-brand">
                         <div class="footer-logo-wrap">
-                            <img src="/landing/animation/logo-lab.png" alt="GIS Laboratorium" class="footer-logo">
+                            <img src="/landing/animation/logo-lab.png" alt="GIS Laboratory" class="footer-logo">
                             <div>
-                                <h3 class="footer-brand-title">GIS Laboratorium</h3>
+                                <h3 class="footer-brand-title">GIS Laboratory</h3>
                                 <p class="footer-brand-subtitle">PT. Global Inspeksi Sistem</p>
                             </div>
                         </div>
                         <p class="footer-description">
-                            GIS Laboratorium hadir sebagai mitra pengujian yang membantu pelanggan memastikan mutu,
-                            keamanan, dan kesesuaian produk maupun lingkungan melalui layanan laboratorium yang akurat
-                            dan terpercaya.
+                            GIS Laboratory serves as a testing partner that helps customers ensure the quality,
+                            safety, and conformity of products and the environment through accurate
+                            and reliable laboratory services.
                         </p>
                         <div class="footer-badges">
-                            <span>Pengujian Laboratorium</span>
-                            <span>Lingkungan</span>
-                            <span>Pelumas</span>
-                            <span>Sawit & Pupuk</span>
+                            <span>Laboratory Testing</span>
+                            <span>Environment</span>
+                            <span>Lubricants</span>
+                            <span>Palm Oil & Fertilizer</span>
                         </div>
                     </div>
 
@@ -811,12 +811,12 @@ const pageList = [
 
                     <div>
                         <h4 class="footer-col-title">Link</h4>
-                        <a href="/" class="footer-link">Beranda</a>
-                        <a href="/profile" class="footer-link">Profile</a>
-                        <a href="/service" class="footer-link">Layanan</a>
-                        <a href="/ruang-lingkup-pengujian" class="footer-link">Ruang Lingkup Pengujian</a>
-                        <a href="/informasi" class="footer-link">Informasi</a>
-                        <a href="/contact" class="footer-link">Kontak</a>
+                        <a href="/en" class="footer-link">Home</a>
+                        <a href="/en/profile" class="footer-link">Profile</a>
+                        <a href="/en/service" class="footer-link">Services</a>
+                        <a href="/en/ruang-lingkup-pengujian" class="footer-link">Testing Scope</a>
+                        <a href="/en/informasi" class="footer-link">Information</a>
+                        <a href="/en/contact" class="footer-link">Contact</a>
                     </div>
                 </div>
             </div>
@@ -828,9 +828,9 @@ const pageList = [
   },
   {
     key: "profile",
-    title: "Profil Perusahaan - GIS Laboratorium",
+    title: "Company Profile - GIS Laboratory",
     description:
-      "Profil Global Inspeksi Sistem Laboratorium, visi misi, fasilitas, kebijakan, dan komitmen perusahaan.",
+      "Company profile of Global Inspeksi Sistem Laboratory, including vision, mission, facilities, policies, and company commitments.",
     bodyClass: "liquid-bg font-body-md text-on-background min-h-screen",
     styles: `@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -1047,38 +1047,38 @@ const pageList = [
     html: `
 <header class="navbar-wrapper" id="navbar">
 <nav class="navbar">
-<a href="/" class="nav-brand">
+<a href="/en" class="nav-brand">
 <img src="/landing/animation/logo-lab.png" style="height: 28px; width: auto; transform: scale(1.8); transform-origin: left center; margin-right: 36px;">
                 Global Inspeksi Sistem
             </a>
 <ul class="nav-menu" id="navMenu">
-<li><a href="/" class="nav-link">Beranda</a></li>
-<li><a href="/profile" class="nav-link active">Profile</a></li>
-<li><a href="/service" class="nav-link">Layanan</a></li>
-<li><a href="/ruang-lingkup-pengujian" class="nav-link">Ruang Lingkup Pengujian</a></li>
+<li><a href="/en" class="nav-link">Home</a></li>
+<li><a href="/en/profile" class="nav-link active">Profile</a></li>
+<li><a href="/en/service" class="nav-link">Services</a></li>
+<li><a href="/en/ruang-lingkup-pengujian" class="nav-link">Testing Scope</a></li>
 <li class="nav-dropdown">
   <details>
     <summary class="nav-link nav-dropdown-trigger">
-      Informasi <i class="fa-solid fa-chevron-down"></i>
+      Information <i class="fa-solid fa-chevron-down"></i>
     </summary>
     <div class="nav-dropdown-menu">
-      <a href="/informasi" class="nav-dropdown-link">
-        Artikel <i class="fa-solid fa-newspaper"></i>
+      <a href="/en/informasi" class="nav-dropdown-link">
+        Articles <i class="fa-solid fa-newspaper"></i>
       </a>
-      <a href="/informasi/keluhan-dan-banding" class="nav-dropdown-link">
-        Keluhan dan Banding <i class="fa-solid fa-comments"></i>
+      <a href="/en/informasi/keluhan-dan-banding" class="nav-dropdown-link">
+        Complaints and Appeals <i class="fa-solid fa-comments"></i>
       </a>
     </div>
   </details>
-</li><li><a href="/contact" class="nav-link">Kontak</a></li>
+</li><li><a href="/en/contact" class="nav-link">Contact</a></li>
 </ul>
 <div class="nav-actions">
-  <a href="/en" class="language-switch" id="languageSwitch" aria-label="Switch to English" title="Switch to English">
+  <a href="/" class="language-switch" id="languageSwitch" aria-label="Switch to Indonesian" title="Switch to Indonesian">
     <i class="fa-solid fa-globe"></i>
-    <span>EN</span>
+    <span>ID</span>
   </a>
 
-  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka menu">
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
     <i class="fas fa-bars"></i>
   </button>
 </div>
@@ -1089,9 +1089,9 @@ const pageList = [
 <div class="absolute inset-0 bg-cover bg-center" data-alt="ultra-modern clean bright laboratory with futuristic glass equipment and scientific instruments in a soft blue atmospheric lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhd3SPju_EcKUitBiUGdi5LM2CgMzbO_Y0lve9StPIQEtp-TWzEIXHOct2041e55OyWnmQVRMZzLsTopIp5xR6ofX60AzBiea6EdGEjr1UTXN1bHqSJ06GIcVBl05Gm6mwCEWf4z28g5R6SYenB8t-wCPCjKBLhXA80G3C0IdAzyxyM9bbofzJo6S4a74EMngUosxO1bsbN3MyqfXdXDVm3yxgG08lmmImklFa1WfWzFBI53c-b2CXLkhfYYPar4fE-gC9Xo_Jjqs\u0027')"></div>
 <div class="absolute inset-0 bg-blue-900/20 backdrop-blur-[2px]"></div>
 <div class="relative z-10 glass-card p-16 rounded-[32px] text-center max-w-4xl mx-4">
-<h1 class="font-display-lg text-display-lg text-on-surface mb-6">Profil Perusahaan</h1>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-6">Company Profile</h1>
 <p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto">
-                    Global Inspeksi Sistem (GIS) Laboratorium menghadirkan standar akurasi tertinggi dalam layanan pengujian air dan lingkungan dan industri melalui inovasi teknologi masa depan.
+                    Global Inspeksi Sistem (GIS) Laboratory delivers the highest standards of accuracy in water, environmental, and industrial testing services through future-ready technology innovation.
                 </p>
 </div>
 </section>
@@ -1099,15 +1099,15 @@ const pageList = [
 <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 <div class="space-y-8">
 <div>
-<h2 class="font-headline-md text-headline-md text-primary mb-2">Tentang Kami</h2>
+<h2 class="font-headline-md text-headline-md text-primary mb-2">About Us</h2>
 <div class="h-1 w-24 bg-primary-container rounded-full"></div>
 </div>
 <div class="glass-card p-12 rounded-[32px] space-y-6">
 <p class="font-body-lg text-body-lg leading-relaxed text-on-surface">
-                        Global Inspeksi Sistem (GIS) adalah lembaga pengujian independen yang didedikasikan untuk memberikan hasil analisis yang presisi dan tidak memihak. Didirikan dengan visi untuk menjadi standar emas dalam pengujian laboratorium di Indonesia.
+                        Global Inspeksi Sistem (GIS) is an independent testing institution dedicated to delivering precise and impartial analytical results. It was established with a vision to become the gold standard for laboratory testing in Indonesia.
                     </p>
 <p class="font-body-lg text-body-lg leading-relaxed text-on-surface">
-                        Sejak awal berdiri, kami telah berkomitmen pada kualitas dan integritas. Dengan tim ahli yang berpengalaman dan dukungan teknologi terkini, kami membantu industri memastikan kepatuhan terhadap standar lingkungan dan keselamatan kerja yang ketat.
+                        Since its establishment, we have been committed to quality and integrity. With an experienced expert team and the support of up-to-date technology, we help industries ensure compliance with strict environmental and occupational safety standards.
                     </p>
 </div>
 </div>
@@ -1124,82 +1124,82 @@ const pageList = [
 <div class="w-20 h-20 rounded-2xl bg-primary-container/20 flex items-center justify-center mb-8">
 <span class="material-symbols-outlined text-primary text-4xl" data-icon="visibility">visibility</span>
 </div>
-<h3 class="font-headline-sm text-headline-sm text-primary mb-6">Visi Kami</h3>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-6">Our Vision</h3>
 <p class="font-body-lg text-body-lg text-on-surface">
-                    Menjadi laboratorium pengujian air dan lingkungan dan industri terkemuka di Indonesia yang diakui secara internasional dalam hal akurasi, inovasi, dan integritas profesional.
+                    To become a leading water, environmental, and industrial testing laboratory in Indonesia, internationally recognized for accuracy, innovation, and professional integrity.
                 </p>
 </div>
 <div class="glass-card p-12 rounded-[32px] border-l-4 border-l-primary-container flex flex-col items-center text-center">
 <div class="w-20 h-20 rounded-2xl bg-primary-container/20 flex items-center justify-center mb-8">
 <span class="material-symbols-outlined text-primary text-4xl" data-icon="rocket_launch">rocket_launch</span>
 </div>
-<h3 class="font-headline-sm text-headline-sm text-primary mb-6">Misi Kami</h3>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-6">Our Mission</h3>
 <ul class="font-body-lg text-body-lg text-on-surface text-left space-y-4 list-disc pl-5">
-<li>Memberikan layanan pengujian dengan standar ISO/IEC 17025.</li>
-<li>Mengembangkan kompetensi sumber daya manusia secara berkelanjutan.</li>
-<li>Mengintegrasikan teknologi digital terbaru untuk efisiensi operasional.</li>
-<li>Mendukung pelestarian lingkungan melalui data analisis yang akurat.</li>
+<li>Providing testing services in accordance with ISO/IEC 17025 standards.</li>
+<li>Continuously developing human resource competencies.</li>
+<li>Integrating the latest digital technology for operational efficiency.</li>
+<li>Supporting environmental preservation through accurate analytical data.</li>
 </ul>
 </div>
 </section>
 
 <section class="space-y-16">
 <div class="text-center space-y-4">
-<h2 class="font-headline-md text-headline-md text-on-surface">Fasilitas & Keunggulan</h2>
-<p class="text-secondary font-body-lg">Standar operasional dengan teknologi masa depan</p>
+<h2 class="font-headline-md text-headline-md text-on-surface">Facilities & Advantages</h2>
+<p class="text-secondary font-body-lg">Operational standards powered by future-ready technology</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 <div class="glass-card p-8 rounded-[32px] group hover:bg-white/80 transition-all duration-500">
 <div class="mb-6 inline-block p-4 bg-primary/10 rounded-2xl group-hover:shadow-[0_0_20px_rgba(0,122,255,0.3)] transition-all">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="biotech">biotech</span>
 </div>
-<h4 class="font-headline-sm text-headline-sm mb-4 text-[#0A2540] font-extrabold">Peralatan Terbaik</h4>
-<p class="text-secondary font-body-md">Didukung oleh instrumentasi analisis tercanggih dengan tingkat presisi tinggi untuk hasil yang tak terbantahkan.</p>
+<h4 class="font-headline-sm text-headline-sm mb-4 text-[#0A2540] font-extrabold">Best-in-Class Equipment</h4>
+<p class="text-secondary font-body-md">Supported by advanced analytical instrumentation with high precision for reliable results.</p>
 </div>
 <div class="glass-card p-8 rounded-[32px] group hover:bg-white/80 transition-all duration-500">
 <div class="mb-6 inline-block p-4 bg-primary/10 rounded-2xl group-hover:shadow-[0_0_20px_rgba(0,122,255,0.3)] transition-all">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="verified">verified</span>
 </div>
-<h4 class="font-headline-sm text-headline-sm mb-4 text-[#0A2540] font-extrabold">Pengujian Standar</h4>
-<p class="text-secondary font-body-md">Setiap prosedur pengujian mengacu pada standar nasional (SNI) dan internasional (Standard Methods) yang berlaku.</p>
+<h4 class="font-headline-sm text-headline-sm mb-4 text-[#0A2540] font-extrabold">Standardized Testing</h4>
+<p class="text-secondary font-body-md">Every testing procedure refers to applicable national (SNI) and international standards (Standard Methods).</p>
 </div>
 <div class="glass-card p-8 rounded-[32px] group hover:bg-white/80 transition-all duration-500">
 <div class="mb-6 inline-block p-4 bg-primary/10 rounded-2xl group-hover:shadow-[0_0_20px_rgba(0,122,255,0.3)] transition-all">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="sensors">sensors</span>
 </div>
-<h4 class="font-headline-sm text-headline-sm mb-4 text-[#0A2540] font-extrabold">Teknologi Terkini</h4>
-<p class="text-secondary font-body-md">Implementasi sistem manajemen laboratorium berbasis digital untuk transparansi dan kecepatan akses data real-time.</p>
+<h4 class="font-headline-sm text-headline-sm mb-4 text-[#0A2540] font-extrabold">Latest Technology</h4>
+<p class="text-secondary font-body-md">Implementation of a digital-based laboratory management system for transparency and faster real-time data access.</p>
 </div>
 </div>
 </section>
 
 <section class="space-y-10">
 <div class="text-center space-y-4">
-<h2 class="font-headline-md text-headline-md text-on-surface">Kebijakan & Komitmen</h2>
-<p class="text-secondary font-body-lg">Integritas layanan laboratorium dalam setiap proses pengujian</p>
+<h2 class="font-headline-md text-headline-md text-on-surface">Policies & Commitments</h2>
+<p class="text-secondary font-body-lg">Laboratory service integrity in every testing process</p>
 </div>
 <div class="glass-card policy-tabs rounded-[32px] p-4">
-<ul class="policy-tab-nav mx-auto max-w-fit justify-center" role="tablist" aria-label="Kebijakan dan komitmen perusahaan">
+<ul class="policy-tab-nav mx-auto max-w-fit justify-center" role="tablist" aria-label="Company policies and commitments">
 <li>
 <button class="policy-tab-button active px-8" type="button" role="tab" aria-selected="true" aria-controls="planning-tab" id="planning-tab-button" data-policy-tab="planning-tab">
 <span class="material-symbols-outlined" data-icon="balance">balance</span>
-<span>Kebijakan Ketidakberpihakan</span>
+<span>Impartiality Policy</span>
 </button>
 </li>
 <li>
 <button class="policy-tab-button px-8" type="button" role="tab" aria-selected="false" aria-controls="research-tab" id="research-tab-button" data-policy-tab="research-tab">
 <span class="material-symbols-outlined" data-icon="shield">shield</span>
-<span>Komitmen Anti Suap</span>
+<span>Anti-Bribery Commitment</span>
 </button>
 </li>
 </ul>
 <div class="tab-content">
 <article id="planning-tab" class="policy-tab-panel active" role="tabpanel" aria-labelledby="planning-tab-button">
 <div class="max-w-4xl mx-auto text-center md:text-left">
-<span class="inline-block font-label-caps text-[14pt] bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent uppercase tracking-widest mb-3">Kebijakan</span>
-<h5 class="font-headline-md text-3xl font-bold text-slate-800 mb-8">Ketidakberpihakan</h5>
+<span class="inline-block font-label-caps text-[14pt] bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent uppercase tracking-widest mb-3">Policy</span>
+<h5 class="font-headline-md text-3xl font-bold text-slate-800 mb-8">Impartiality</h5>
 <p class="text-justify text-on-surface font-body-lg leading-relaxed mb-6">
-                    Layanan laboratorium pengujian yang diselenggarakan oleh PT. Global Inspeksi Sistem bertujuan untuk memastikan kepercayaan pemohon atau klien terhadap produk yang dihasilkan, sehingga memenuhi persyaratan Standar Nasional (SNI), Sistem Manajemen, dan persyaratan lainnya yang telah ditetapkan. Hal ini juga bertujuan untuk memberikan perlindungan kepada konsumen serta meningkatkan daya saing dalam pasar domestik. Setiap personel di PT. Global Inspeksi Sistem, sesuai dengan kompetensinya di semua tingkatan organisasi, wajib memenuhi tuntutan mutu layanan laboratorium pengujian produk dan sistem manajemen, dan menghindari segala bentuk tekanan, termasuk tekanan komersial, yang dapat mempengaruhi mutu pelayanan sertifikasi. Layanan laboratorium pengujian produk dan Sistem Manajemen oleh Lembaga Sertifikasi Global Inspeksi Sistem dilaksanakan sesuai dengan lingkup sertifikasi yang telah ditetapkan.
+                    The testing laboratory services conducted by PT. Global Inspeksi Sistem aim to ensure applicant or client confidence in the resulting products so that they meet the requirements of the National Standard (SNI), management systems, and other established requirements. This also aims to provide consumer protection and improve competitiveness in the domestic market. Every PT. Global Inspeksi Sistem personnel, according to their competence at all organizational levels, must meet the quality requirements of product testing laboratory and management system services, and avoid all forms of pressure, including commercial pressure, that may affect the quality of certification services. Product testing laboratory and management system services by Global Inspeksi Sistem Certification Body are carried out according to the established certification scope.
                 </p>
 <p class="text-justify text-on-surface font-body-lg leading-relaxed mb-6">
                     Tangerang, 1 December 2016 <br>
@@ -1214,30 +1214,30 @@ const pageList = [
 
 <article id="research-tab" class="policy-tab-panel" role="tabpanel" aria-labelledby="research-tab-button">
 <div class="max-w-4xl mx-auto text-center md:text-left">
-<span class="inline-block font-label-caps text-[14pt] bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent uppercase tracking-widest mb-3">Komitmen</span>
-<h5 class="font-headline-md text-3xl font-bold text-slate-800 mb-8">Anti Suap</h5>
+<span class="inline-block font-label-caps text-[14pt] bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent uppercase tracking-widest mb-3">Commitment</span>
+<h5 class="font-headline-md text-3xl font-bold text-slate-800 mb-8">Anti-Bribery</h5>
 <p class="text-justify text-on-surface font-body-lg leading-relaxed mb-6">
-                    PT. Global Inspeksi Sistem berkomitmen untuk menjalankan anti-suap dalam melaksanakan layanannya baik dalam sertifikasi, inspeksi, dan juga mengendalikan risiko suap. Setiap penipuan, penipuan, ketidakjujuran, pencurian/penggelapan, pelanggaran dalam proses pengadaan barang dan jasa, penyalahgunaan posisi/otoritas, penyuapan/gratifikasi yang terjadi di PT. Global Inspeksi Sistem atau terkait dengan PT. Global Inspeksi Sistem harap dapat dilaporkan agar dapat segera ditindaklanjuti. PT. Global Inspeksi Sistem menganalisis laporan dan menindaklanjuti laporan pelanggaran berdasarkan bukti yang diberikan dan melindungi Pelapor.
+                    PT. Global Inspeksi Sistem is committed to implementing anti-bribery practices in the delivery of its certification and inspection services and in controlling bribery risks. Any fraud, dishonesty, theft/embezzlement, violations in the procurement of goods and services, abuse of position/authority, bribery, or gratification occurring at PT. Global Inspeksi Sistem or related to PT. Global Inspeksi Sistem should be reported so it can be followed up promptly. PT. Global Inspeksi Sistem analyzes reports and follows up on violation reports based on the evidence provided while protecting the reporter.
                 </p>
 <p class="text-justify text-on-surface font-body-lg leading-relaxed mb-6">
-                    Pelaporan ini dilakukan dengan dukungan data yang relevan dan dimaksudkan untuk kepentingan Perusahaan, tidak dimaksudkan untuk memaksakan seseorang. Pelaporan dapat disampaikan kepada Direktur Global Konstruksi Sertifikasi atau Bagian Informasi Umum, melalui informasi sebagai berikut:
+                    This reporting is carried out with relevant supporting data and is intended for the interests of the Company, not to pressure any individual. Reports may be submitted to the Director of Global Konstruksi Sertifikasi or to the General Information Department through the following contact information:
                 </p>
 <div class="bg-white/60 backdrop-blur-md border border-white shadow-sm rounded-2xl p-6 md:p-8 mb-6 font-body-md text-on-surface text-left">
 <div class="grid grid-cols-[100px_1fr] sm:grid-cols-[160px_1fr] gap-y-3 gap-x-4 break-words">
 <div class="font-bold text-primary">Mail</div><div>globalinspeksisistem@gmail.com</div>
-<div class="font-bold text-primary">Telp</div><div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
-<div class="font-bold text-primary">Site web</div><div>www.gislaboratorium.com</div>
-<div class="font-bold text-primary">Letter</div><div>PT. Global Inspeksi Sistem</div>
+<div class="font-bold text-primary">Phone</div><div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+<div class="font-bold text-primary">Website</div><div>www.gislaboratorium.com</div>
+<div class="font-bold text-primary">Mailing Address</div><div>PT. Global Inspeksi Sistem</div>
 <div class="font-bold text-primary">Head Office (Surabaya)</div><div>Jl. Pahlawan No.2, Kwadengan Barat, Lemahputro, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213</div>
 <div class="font-bold text-primary">Branch Office (Jakarta)</div><div>Jl. Raya Daan Mogot No. 89 RT.2/RW.2, Wijaya Kusuma, Kec. Grogol Petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11460</div>
 </div>
 </div>
 <p class="text-justify text-on-surface font-body-lg leading-relaxed mb-8">
-                    Pelapor harus memberikan identitas mereka dalam melaporkan keluhan dan memastikan bahwa setiap informasi tentang identitas pihak pelapor dan laporannya dijaga kerahasiaannya. Pelaporan dilakukan di bawah prinsip anonim, rahasia dan independen.
+                    Reporters must provide their identity when submitting complaints and ensure that all information about the reporter's identity and report is kept confidential. Reporting is carried out under the principles of anonymity, confidentiality, and independence.
                 </p>
 <p class="text-justify text-on-surface font-body-lg leading-relaxed">
 <span class="font-bold">Director</span><br><br>
-                    Vera marini
+                    Vera Marini
                 </p>
 </div>
 </article>
@@ -1252,22 +1252,22 @@ const pageList = [
                 <div class="footer-grid">
                     <div class="footer-brand">
                         <div class="footer-logo-wrap">
-                            <img src="/landing/animation/logo-lab.png" alt="GIS Laboratorium" class="footer-logo">
+                            <img src="/landing/animation/logo-lab.png" alt="GIS Laboratory" class="footer-logo">
                             <div>
-                                <h3 class="footer-brand-title">GIS Laboratorium</h3>
+                                <h3 class="footer-brand-title">GIS Laboratory</h3>
                                 <p class="footer-brand-subtitle">PT. Global Inspeksi Sistem</p>
                             </div>
                         </div>
                         <p class="footer-description">
-                            GIS Laboratorium hadir sebagai mitra pengujian yang membantu pelanggan memastikan mutu,
-                            keamanan, dan kesesuaian produk maupun lingkungan melalui layanan laboratorium yang akurat
-                            dan terpercaya.
+                            GIS Laboratory serves as a testing partner that helps customers ensure the quality,
+                            safety, and conformity of products and the environment through accurate
+                            and reliable laboratory services.
                         </p>
                         <div class="footer-badges">
-                            <span>Pengujian Laboratorium</span>
-                            <span>Lingkungan</span>
-                            <span>Pelumas</span>
-                            <span>Sawit & Pupuk</span>
+                            <span>Laboratory Testing</span>
+                            <span>Environment</span>
+                            <span>Lubricants</span>
+                            <span>Palm Oil & Fertilizer</span>
                         </div>
                     </div>
 
@@ -1283,12 +1283,12 @@ const pageList = [
 
                     <div>
                         <h4 class="footer-col-title">Link</h4>
-                        <a href="/" class="footer-link">Beranda</a>
-                        <a href="/profile" class="footer-link">Profile</a>
-                        <a href="/service" class="footer-link">Layanan</a>
-                        <a href="/ruang-lingkup-pengujian" class="footer-link">Ruang Lingkup Pengujian</a>
-                        <a href="/informasi" class="footer-link">Informasi</a>
-                        <a href="/contact" class="footer-link">Kontak</a>
+                        <a href="/en" class="footer-link">Home</a>
+                        <a href="/en/profile" class="footer-link">Profile</a>
+                        <a href="/en/service" class="footer-link">Services</a>
+                        <a href="/en/ruang-lingkup-pengujian" class="footer-link">Testing Scope</a>
+                        <a href="/en/informasi" class="footer-link">Information</a>
+                        <a href="/en/contact" class="footer-link">Contact</a>
                     </div>
                 </div>
             </div>
@@ -1301,9 +1301,9 @@ ${WHATSAPP_WIDGET_HTML}
   },
   {
     key: "service",
-    title: "Services | GIS Laboratorium",
+    title: "Services | GIS Laboratory",
     description:
-      "Layanan pengujian mutu produk dan bahan, air dan lingkungan, udara ambient dan emisi, serta SNI produk GIS Laboratorium.",
+      "Product and material quality testing, water and environmental testing, ambient air and emission testing, and SNI product testing services by GIS Laboratory.",
     bodyClass:
       "bg-background font-body-md text-on-background selection:bg-primary selection:text-white",
     styles: `@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -1552,38 +1552,38 @@ ${WHATSAPP_WIDGET_HTML}
 <div class="liquid-bg"></div>
 <header class="navbar-wrapper" id="navbar">
 <nav class="navbar">
-<a href="/" class="nav-brand">
+<a href="/en" class="nav-brand">
 <img src="/landing/animation/logo-lab.png" alt="GISLAB">
                 Global Inspeksi Sistem
             </a>
 <ul class="nav-menu" id="navMenu">
-<li><a href="/" class="nav-link">Beranda</a></li>
-<li><a href="/profile" class="nav-link">Profile</a></li>
-<li><a href="/service" class="nav-link active">Layanan</a></li>
-<li><a href="/ruang-lingkup-pengujian" class="nav-link">Ruang Lingkup Pengujian</a></li>
+<li><a href="/en" class="nav-link">Home</a></li>
+<li><a href="/en/profile" class="nav-link">Profile</a></li>
+<li><a href="/en/service" class="nav-link active">Services</a></li>
+<li><a href="/en/ruang-lingkup-pengujian" class="nav-link">Testing Scope</a></li>
 <li class="nav-dropdown">
   <details>
     <summary class="nav-link nav-dropdown-trigger">
-      Informasi <i class="fa-solid fa-chevron-down"></i>
+      Information <i class="fa-solid fa-chevron-down"></i>
     </summary>
     <div class="nav-dropdown-menu">
-      <a href="/informasi" class="nav-dropdown-link">
-        Artikel <i class="fa-solid fa-newspaper"></i>
+      <a href="/en/informasi" class="nav-dropdown-link">
+        Articles <i class="fa-solid fa-newspaper"></i>
       </a>
-      <a href="/informasi/keluhan-dan-banding" class="nav-dropdown-link">
-        Keluhan dan Banding <i class="fa-solid fa-comments"></i>
+      <a href="/en/informasi/keluhan-dan-banding" class="nav-dropdown-link">
+        Complaints and Appeals <i class="fa-solid fa-comments"></i>
       </a>
     </div>
   </details>
-</li><li><a href="/contact" class="nav-link">Kontak</a></li>
+</li><li><a href="/en/contact" class="nav-link">Contact</a></li>
 </ul>
 <div class="nav-actions">
-  <a href="/en" class="language-switch" id="languageSwitch" aria-label="Switch to English" title="Switch to English">
+  <a href="/" class="language-switch" id="languageSwitch" aria-label="Switch to Indonesian" title="Switch to Indonesian">
     <i class="fa-solid fa-globe"></i>
-    <span>EN</span>
+    <span>ID</span>
   </a>
 
-  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka menu">
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
     <i class="fas fa-bars"></i>
   </button>
 </div>
@@ -1597,54 +1597,54 @@ ${WHATSAPP_WIDGET_HTML}
 <div class="relative z-10 text-center px-4 max-w-4xl">
 <h1 class="font-display-lg text-display-lg text-primary mb-4">GIS Laboratory Services</h1>
 <p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto">
-                    Merintis analisis presisi melalui kerangka diagnostik berakurasi tinggi. Kami memberikan integritas struktural absolut dalam setiap penilaian kimia, biologi, dan lingkungan.
+                    Pioneering precision analysis through high-accuracy diagnostic frameworks. We deliver absolute structural integrity in every chemical, biological, and environmental assessment.
                 </p>
 </div>
 </section>
 <section class="services-section" id="layanan">
 <div class="gis-container">
 <div class="services-header">
-<h2 class="section-title">Layanan Kami</h2>
+<h2 class="section-title">Our Services</h2>
 </div>
 
 <div class="carousel-container">
 <div class="services-track">
-<article class="service-card glass" role="button" tabindex="0" data-service-detail="quality" aria-label="Lihat detail Pengujian Mutu Produk & Bahan">
+<article class="service-card glass" role="button" tabindex="0" data-service-detail="quality" aria-label="View details for Product and Material Quality Testing">
 <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=900"
-alt="Pengujian mutu produk dan bahan" class="service-img">
+alt="Product and material quality testing" class="service-img">
 <div class="service-content">
-<h3 class="service-title">Pengujian Mutu Produk & Bahan</h3>
-<p class="service-desc">Layanan pengujian mutu produk dan bahan sesuai ruang lingkup GISLAB, termasuk pelumas, produk sawit, pupuk, minyak goreng sawit, minyak makan merah, dan produk teknis lain.</p>
+<h3 class="service-title">Product & Material Quality Testing</h3>
+<p class="service-desc">Product and material quality testing services within the GISLAB scope, including lubricants, palm-based products, fertilizers, palm cooking oil, red palm cooking oil, and other technical products.</p>
 <span class="service-btn">Read More</span>
 </div>
 </article>
 
-<article class="service-card glass" role="button" tabindex="0" data-service-detail="environment" aria-label="Lihat detail Pengujian Air & Lingkungan">
+<article class="service-card glass" role="button" tabindex="0" data-service-detail="environment" aria-label="View details for Water and Environmental Testing">
 <img src="https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=900"
-alt="Pengujian air dan lingkungan" class="service-img">
+alt="Water and environmental testing" class="service-img">
 <div class="service-content">
-<h3 class="service-title">Pengujian Air & Lingkungan</h3>
-<p class="service-desc">Pengujian air dan lingkungan untuk memantau kualitas air bersih, air limbah, air minum, air mineral, air demineral, dan sumber air alami berdasarkan data laboratorium.</p>
+<h3 class="service-title">Water & Environmental Testing</h3>
+<p class="service-desc">Water and environmental testing to monitor the quality of clean water, wastewater, drinking water, mineral water, demineralized water, and natural water sources based on laboratory data.</p>
 <span class="service-btn">Read More</span>
 </div>
 </article>
 
-<article class="service-card glass" role="button" tabindex="0" data-service-detail="permit" aria-label="Lihat detail Pengujian Udara Ambient & Emisi">
+<article class="service-card glass" role="button" tabindex="0" data-service-detail="permit" aria-label="View details for Ambient Air and Emission Testing">
 <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=900"
-alt="Pengujian udara ambient dan emisi" class="service-img">
+alt="Ambient air and emission testing" class="service-img">
 <div class="service-content">
-<h3 class="service-title">Pengujian Udara Ambient & Emisi</h3>
-<p class="service-desc">Pengujian udara ambient dan emisi sumber tidak bergerak untuk mendukung pemantauan, evaluasi pengendalian emisi, dan pemenuhan persyaratan lingkungan.</p>
+<h3 class="service-title">Ambient Air & Emission Testing</h3>
+<p class="service-desc">Ambient air and stationary source emission testing to support monitoring, emission control evaluation, and environmental requirement compliance.</p>
 <span class="service-btn">Read More</span>
 </div>
 </article>
 
-<article class="service-card glass" role="button" tabindex="0" data-service-detail="sni" aria-label="Lihat detail Pengujian SNI Produk">
+<article class="service-card glass" role="button" tabindex="0" data-service-detail="sni" aria-label="View details for SNI Product Testing">
 <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=900"
-alt="Pengujian SNI Produk" class="service-img">
+alt="SNI product testing" class="service-img">
 <div class="service-content">
-<h3 class="service-title">Pengujian SNI Produk</h3>
-<p class="service-desc">Pengujian produk berdasarkan persyaratan SNI yang masuk ruang lingkup GISLAB untuk mendukung sertifikasi, pembuktian mutu, dan kepercayaan pasar.</p>
+<h3 class="service-title">SNI Product Testing</h3>
+<p class="service-desc">Product testing based on SNI requirements within the GISLAB scope to support certification, quality verification, and market trust.</p>
 <span class="service-btn">Read More</span>
 </div>
 </article>
@@ -1656,56 +1656,56 @@ alt="Pengujian SNI Produk" class="service-img">
 <div class="gis-container">
 <div class="service-detail-layout">
 <article class="service-detail-article">
-<img id="detailCover" class="detail-cover" src="https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=1200" alt="Pengujian laboratorium">
+<img id="detailCover" class="detail-cover" src="https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=1200" alt="Laboratory testing">
 <div class="detail-body">
-<span class="detail-kicker"><i class="fa-solid fa-flask-vial"></i> Detail Layanan</span>
-<h2 class="detail-title" id="detailTitle">Pengujian Mutu Produk & Bahan</h2>
+<span class="detail-kicker"><i class="fa-solid fa-flask-vial"></i> Service Details</span>
+<h2 class="detail-title" id="detailTitle">Product & Material Quality Testing</h2>
 <p class="detail-copy" id="detailIntro">
-Pengujian mutu produk dan bahan membantu perusahaan memastikan karakteristik produk sesuai dengan standar, spesifikasi teknis, dan kebutuhan pelanggan. Layanan ini disesuaikan dengan ruang lingkup pengujian GISLAB, termasuk pelumas, produk sawit, pupuk, minyak goreng sawit, minyak makan merah, dan produk teknis lainnya.
+Product and material quality testing helps companies ensure that product characteristics meet standards, technical specifications, and customer requirements. This service is aligned with the GISLAB testing scope, including lubricants, palm-based products, fertilizers, palm cooking oil, red palm cooking oil, and other technical products.
 </p>
 
-<h3 id="detailWhyTitle">Mengapa pengujian mutu produk & bahan penting?</h3>
+<h3 id="detailWhyTitle">Why is product and material quality testing important?</h3>
 <p class="detail-copy" id="detailWhy">
-Mutu produk tidak cukup dinilai dari tampilan visual. Data laboratorium diperlukan untuk membuktikan parameter seperti kadar air, kadar kotoran, viskositas, flash point, pour point, kadar unsur, dan parameter teknis lain yang dipersyaratkan dalam standar.
+Product quality cannot be assessed from appearance alone. Laboratory data is required to verify parameters such as moisture content, impurity content, viscosity, flash point, pour point, element content, and other technical parameters required by standards.
 </p>
 
-<h3>Layanan pengujian yang kami solusikan</h3>
+<h3>Testing services we provide</h3>
 <ul class="detail-list" id="detailList">
-<li><i class="fa-solid fa-check"></i><span>Pengujian minyak lumas dan pelumas, seperti viskositas kinematik, flash point, pour point, copper test, total base number, density, dan parameter unsur tertentu.</span></li>
-<li><i class="fa-solid fa-check"></i><span>Pengujian produk sawit dan turunannya, seperti Crude Palm Oil, Palm Kernel, RBD Palm Olein, minyak goreng sawit, dan minyak makan merah.</span></li>
-<li><i class="fa-solid fa-check"></i><span>Pengujian pupuk, seperti NPK, Urea, KCl, Fosfat Alam, ZA, TSP, SP36, Borat, dan Kieserit sesuai parameter yang tersedia dalam ruang lingkup.</span></li>
+<li><i class="fa-solid fa-check"></i><span>Testing of lubricating oils and lubricants, such as kinematic viscosity, flash point, pour point, copper strip corrosion, total base number, density, and certain elemental parameters.</span></li>
+<li><i class="fa-solid fa-check"></i><span>Testing of palm products and derivatives, such as Crude Palm Oil, Palm Kernel, RBD Palm Olein, palm cooking oil, and red palm cooking oil.</span></li>
+<li><i class="fa-solid fa-check"></i><span>Testing of fertilizers, such as NPK, Urea, KCl, Natural Phosphate, ZA, TSP, SP36, Borate, and Kieserite according to parameters available within the scope.</span></li>
 </ul>
 
-<h3>Konsultansi dan rekomendasi teknis</h3>
+<h3>Technical consultation and recommendations</h3>
 <p class="detail-copy" id="detailConsult">
-Tim GISLAB dapat membantu pelanggan menentukan parameter uji yang relevan berdasarkan jenis produk, standar acuan, dan kebutuhan dokumen teknis. Dengan begitu, pengujian mengikuti ruang lingkup dan kebutuhan aktual produk.
+The GISLAB team can help customers determine relevant test parameters based on product type, reference standards, and technical document needs, so testing follows the available scope and actual product requirements.
 </p>
 
-<h3>Komitmen kami</h3>
+<h3>Our Commitment</h3>
 <p class="detail-copy" id="detailCommitment">
-GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras dengan ruang lingkup pengujian yang tersedia, sehingga pelanggan memperoleh dasar teknis yang dapat dipertanggungjawabkan.
+GISLAB is committed to providing accurate, documented test results aligned with the available testing scope, giving customers a technically accountable basis for decision-making.
 </p>
 </div>
 </article>
 
 <aside class="service-detail-sidebar">
 <div class="sidebar-box">
-<h3 class="sidebar-title">Layanan GISLAB</h3>
-<button class="sidebar-link" type="button" data-service-detail="quality">Pengujian Mutu Produk & Bahan <i class="fa-solid fa-arrow-right"></i></button>
-<button class="sidebar-link" type="button" data-service-detail="environment">Pengujian Air & Lingkungan <i class="fa-solid fa-arrow-right"></i></button>
-<button class="sidebar-link" type="button" data-service-detail="permit">Pengujian Udara Ambient & Emisi <i class="fa-solid fa-arrow-right"></i></button>
-<button class="sidebar-link" type="button" data-service-detail="sni">Pengujian SNI Produk <i class="fa-solid fa-arrow-right"></i></button>
+<h3 class="sidebar-title">GISLAB Services</h3>
+<button class="sidebar-link" type="button" data-service-detail="quality">Product & Material Quality Testing <i class="fa-solid fa-arrow-right"></i></button>
+<button class="sidebar-link" type="button" data-service-detail="environment">Water & Environmental Testing <i class="fa-solid fa-arrow-right"></i></button>
+<button class="sidebar-link" type="button" data-service-detail="permit">Ambient Air & Emission Testing <i class="fa-solid fa-arrow-right"></i></button>
+<button class="sidebar-link" type="button" data-service-detail="sni">SNI Product Testing <i class="fa-solid fa-arrow-right"></i></button>
 </div>
 <div class="sidebar-box">
-<h3 class="sidebar-title">Download Profil GISLAB</h3>
-<p class="sidebar-note">Unduh profil perusahaan untuk informasi lengkap mengenai layanan pengujian, analisis, dan dukungan laboratorium kami.</p>
+<h3 class="sidebar-title">Download GISLAB Profile</h3>
+<p class="sidebar-note">Download the company profile for complete information about our testing, analysis, and laboratory support services.</p>
 <a href="#" class="download-btn"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>
 <a href="#" class="download-btn"><i class="fa-solid fa-file-word"></i> Download Doc</a>
 </div>
 <div class="sidebar-box">
-<h3 class="sidebar-title">Butuh rekomendasi parameter?</h3>
-<p class="sidebar-note">Hubungi tim GISLAB untuk menentukan parameter uji yang paling sesuai dengan kebutuhan produk atau lingkungan Anda.</p>
-<a href="/contact" class="detail-contact-btn"><i class="fa-solid fa-headset"></i> Kontak Kami</a>
+<h3 class="sidebar-title">Need parameter recommendations?</h3>
+<p class="sidebar-note">Contact the GISLAB team to determine the most suitable test parameters for your product or environmental needs.</p>
+<a href="/en/contact" class="detail-contact-btn"><i class="fa-solid fa-headset"></i> Contact Us</a>
 </div>
 </aside>
 </div>
@@ -1718,22 +1718,22 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
                 <div class="footer-grid">
                     <div class="footer-brand">
                         <div class="footer-logo-wrap">
-                            <img src="/landing/animation/logo-lab.png" alt="GIS Laboratorium" class="footer-logo">
+                            <img src="/landing/animation/logo-lab.png" alt="GIS Laboratory" class="footer-logo">
                             <div>
-                                <h3 class="footer-brand-title">GIS Laboratorium</h3>
+                                <h3 class="footer-brand-title">GIS Laboratory</h3>
                                 <p class="footer-brand-subtitle">PT. Global Inspeksi Sistem</p>
                             </div>
                         </div>
                         <p class="footer-description">
-                            GIS Laboratorium hadir sebagai mitra pengujian yang membantu pelanggan memastikan mutu,
-                            keamanan, dan kesesuaian produk maupun lingkungan melalui layanan laboratorium yang akurat
-                            dan terpercaya.
+                            GIS Laboratory serves as a testing partner that helps customers ensure the quality,
+                            safety, and conformity of products and the environment through accurate
+                            and reliable laboratory services.
                         </p>
                         <div class="footer-badges">
-                            <span>Pengujian Laboratorium</span>
-                            <span>Lingkungan</span>
-                            <span>Pelumas</span>
-                            <span>Sawit & Pupuk</span>
+                            <span>Laboratory Testing</span>
+                            <span>Environment</span>
+                            <span>Lubricants</span>
+                            <span>Palm Oil & Fertilizer</span>
                         </div>
                     </div>
 
@@ -1749,12 +1749,12 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
 
                     <div>
                         <h4 class="footer-col-title">Link</h4>
-                        <a href="/" class="footer-link">Beranda</a>
-                        <a href="/profile" class="footer-link">Profile</a>
-                        <a href="/service" class="footer-link">Layanan</a>
-                        <a href="/ruang-lingkup-pengujian" class="footer-link">Ruang Lingkup Pengujian</a>
-                        <a href="/informasi" class="footer-link">Informasi</a>
-                        <a href="/contact" class="footer-link">Kontak</a>
+                        <a href="/en" class="footer-link">Home</a>
+                        <a href="/en/profile" class="footer-link">Profile</a>
+                        <a href="/en/service" class="footer-link">Services</a>
+                        <a href="/en/ruang-lingkup-pengujian" class="footer-link">Testing Scope</a>
+                        <a href="/en/informasi" class="footer-link">Information</a>
+                        <a href="/en/contact" class="footer-link">Contact</a>
                     </div>
                 </div>
             </div>
@@ -1766,9 +1766,9 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
   },
   {
     key: "contact",
-    title: "Kontak - GIS Laboratorium",
+    title: "Contact - GIS Laboratory",
     description:
-      "Hubungi GIS Laboratorium untuk kebutuhan pengujian, sertifikasi, inspeksi, dan konsultasi parameter laboratorium.",
+      "Contact GIS Laboratory for testing, certification, inspection, and laboratory parameter consultation needs.",
     bodyClass: "",
     styles: `@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -2051,39 +2051,39 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
     html: `
     <header class="navbar-wrapper" id="navbar">
         <nav class="navbar">
-            <a href="/" class="nav-brand">
+            <a href="/en" class="nav-brand">
                 <img src="/landing/animation/logo-lab.png" alt="GISLAB">
                 Global Inspeksi Sistem
             </a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/" class="nav-link">Beranda</a></li>
-                <li><a href="/profile" class="nav-link">Profile</a></li>
-                <li><a href="/service" class="nav-link">Layanan</a></li>
-                <li><a href="/ruang-lingkup-pengujian" class="nav-link">Ruang Lingkup Pengujian</a></li>
+                <li><a href="/en" class="nav-link">Home</a></li>
+                <li><a href="/en/profile" class="nav-link">Profile</a></li>
+                <li><a href="/en/service" class="nav-link">Services</a></li>
+                <li><a href="/en/ruang-lingkup-pengujian" class="nav-link">Testing Scope</a></li>
                 <li class="nav-dropdown">
   <details>
     <summary class="nav-link nav-dropdown-trigger">
-      Informasi <i class="fa-solid fa-chevron-down"></i>
+      Information <i class="fa-solid fa-chevron-down"></i>
     </summary>
     <div class="nav-dropdown-menu">
-      <a href="/informasi" class="nav-dropdown-link">
-        Artikel <i class="fa-solid fa-newspaper"></i>
+      <a href="/en/informasi" class="nav-dropdown-link">
+        Articles <i class="fa-solid fa-newspaper"></i>
       </a>
-      <a href="/informasi/keluhan-dan-banding" class="nav-dropdown-link">
-        Keluhan dan Banding <i class="fa-solid fa-comments"></i>
+      <a href="/en/informasi/keluhan-dan-banding" class="nav-dropdown-link">
+        Complaints and Appeals <i class="fa-solid fa-comments"></i>
       </a>
     </div>
   </details>
 </li>
-                <li><a href="/contact" class="nav-link active">Kontak</a></li>
+                <li><a href="/en/contact" class="nav-link active">Contact</a></li>
             </ul>
             <div class="nav-actions">
-  <a href="/en" class="language-switch" id="languageSwitch" aria-label="Switch to English" title="Switch to English">
+  <a href="/" class="language-switch" id="languageSwitch" aria-label="Switch to Indonesian" title="Switch to Indonesian">
     <i class="fa-solid fa-globe"></i>
-    <span>EN</span>
+    <span>ID</span>
   </a>
 
-  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka menu">
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
     <i class="fas fa-bars"></i>
   </button>
 </div>
@@ -2094,11 +2094,11 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
         <section class="container">
             <div class="contact-hero">
                 <div class="hero-content">
-                    <span class="eyebrow"><i class="fa-solid fa-headset"></i> Kontak kami</span>
-                    <h1 class="hero-title">Mari diskusikan kebutuhan pengujian Anda.</h1>
+                    <span class="eyebrow"><i class="fa-solid fa-headset"></i> Contact Us</span>
+                    <h1 class="hero-title">Let’s discuss your testing needs.</h1>
                     <p class="hero-text">
-                        Tim GIS Laboratorium siap membantu kebutuhan pengujian produk, lingkungan, inspeksi, dan
-                        sertifikasi dengan proses yang profesional dan responsif.
+                        The GIS Laboratory team is ready to support your product testing, environmental testing, inspection, and
+                        certification needs through a professional and responsive process.
                     </p>
                 </div>
             </div>
@@ -2111,10 +2111,10 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
                 </a>
                 <a class="quick-card glass" href="tel:+6281285328232">
                     <span class="quick-icon"><i class="fa-solid fa-phone"></i></span>
-                    <h2 class="quick-label">Telepon</h2>
+                    <h2 class="quick-label">Phone</h2>
                     <p class="quick-value">+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</p>
                 </a>
-                <a class="quick-card glass" href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium"
+                <a class="quick-card glass" href="https://wa.me/6281285328232?text=Hello%20GIS%20Laboratory"
                     target="_blank" rel="noopener">
                     <span class="quick-icon"><i class="fa-brands fa-whatsapp"></i></span>
                     <h2 class="quick-label">WhatsApp</h2>
@@ -2128,11 +2128,11 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
                 <div class="section-header">
                     <div>
                         <span class="eyebrow"><i class="fa-solid fa-building"></i> Office</span>
-                        <h2 class="section-title">Kunjungi kantor GIS Laboratorium.</h2>
+                        <h2 class="section-title">Visit the GIS Laboratory offices.</h2>
                     </div>
                     <p class="section-copy">
-                        GIS Laboratorium melayani pelanggan melalui kantor Jakarta dan Surabaya. Pilih lokasi terdekat
-                        untuk koordinasi sampel, konsultasi parameter, atau kebutuhan administrasi pengujian.
+                        GIS Laboratory serves customers through its Jakarta and Surabaya offices. Choose the nearest location
+                        for sample coordination, parameter consultation, or testing administration needs.
                     </p>
                 </div>
 
@@ -2140,7 +2140,7 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
                     <article class="office-card glass">
                         <div class="office-image">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1100"
-                                alt="Gedung perkantoran Jakarta">
+                                alt="Jakarta office building">
                         </div>
                         <div class="office-body">
                             <p class="office-kicker">Head Office</p>
@@ -2158,7 +2158,7 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
                     <article class="office-card glass">
                         <div class="office-image">
                             <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1100"
-                                alt="Ruang kantor modern untuk layanan Surabaya">
+                                alt="Modern office space for Surabaya services">
                         </div>
                         <div class="office-body">
                             <p class="office-kicker">Branch Office</p>
@@ -2182,10 +2182,10 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
                 <div class="contact-panel">
                     <aside class="contact-info-panel">
                         <span class="eyebrow"><i class="fa-solid fa-comments"></i> Discuss with us</span>
-                        <h2 class="section-title">Butuh rekomendasi parameter uji?</h2>
+                        <h2 class="section-title">Need test parameter recommendations?</h2>
                         <p>
-                            Kirim kebutuhan Anda melalui form atau hubungi kontak langsung. Tim GIS akan membantu
-                            menentukan layanan dan parameter yang paling sesuai.
+                            Send your requirements through the form or contact us directly. The GIS team will help
+                            determine the most suitable service and parameters.
                         </p>
                         <div class="info-list">
                             <div class="info-item">
@@ -2212,7 +2212,7 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
                             <div class="info-item">
                                 <i class="fa-solid fa-location-dot"></i>
                                 <div>
-                                    <strong>Alamat</strong>
+                                    <strong>Address</strong>
                                     <span>DELREY Biztown Blok B1 No. 5, Jl. Lingkar Bumi Botanika Utara, Desa Lengkong
                                         Kulon, Kecamatan Pagedangan, Kabupaten Tangerang, Banten 15331</span>
                                 </div>
@@ -2221,34 +2221,34 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
                     </aside>
 
                     <section class="form-panel glass" aria-labelledby="contactFormTitle">
-                        <h2 class="form-title" id="contactFormTitle">Kirim pesan</h2>
-                        <p class="form-copy">Isi data singkat berikut agar tim kami bisa menghubungi Anda kembali.</p>
+                        <h2 class="form-title" id="contactFormTitle">Send a Message</h2>
+                        <p class="form-copy">Fill in the brief details below so our team can contact you back.</p>
                         <form class="contact-form" id="contactForm">
                             <div class="form-row">
                                 <div class="field">
-                                    <label for="name">Nama</label>
-                                    <input type="text" id="name" name="name" placeholder="Nama Anda" required>
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" name="name" placeholder="Your name" required>
                                 </div>
                                 <div class="field">
                                     <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" placeholder="email@perusahaan.com"
+                                    <input type="email" id="email" name="email" placeholder="email@company.com"
                                         required>
                                 </div>
                             </div>
                             <div class="field">
-                                <label for="subject">Subjek</label>
-                                <input type="text" id="subject" name="subject" placeholder="Kebutuhan pengujian">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" placeholder="Testing requirements">
                             </div>
                             <div class="field">
-                                <label for="message">Pesan</label>
+                                <label for="message">Message</label>
                                 <textarea id="message" name="message"
-                                    placeholder="Ceritakan sampel, parameter, atau layanan yang Anda butuhkan."
+                                    placeholder="Tell us about the sample, parameter, or service you need."
                                     required></textarea>
                             </div>
                             <button class="btn btn-primary" type="submit">
-                                Kirim Pesan <i class="fa-solid fa-paper-plane"></i>
+                                Send Message <i class="fa-solid fa-paper-plane"></i>
                             </button>
-                            <p class="form-message" id="formMessage">Terima kasih. Draft pesan sudah siap di email Anda.
+                            <p class="form-message" id="formMessage">Thank you. A draft message is ready in your email.
                             </p>
                         </form>
                     </section>
@@ -2259,7 +2259,7 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
         <section class="map-section">
             <div class="container">
                 <div class="map-shell glass">
-                    <iframe title="Peta lokasi kantor GIS Laboratorium"
+                    <iframe title="GIS Laboratory office location map"
   src="https://www.google.com/maps?q=Jl.%20Pahlawan%20No.2%2C%20Kwadengan%20Barat%2C%20Lemahputro%2C%20Kec.%20Sidoarjo%2C%20Kabupaten%20Sidoarjo%2C%20Jawa%20Timur%2061213&output=embed"
   loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
@@ -2273,22 +2273,22 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
                 <div class="footer-grid">
                     <div class="footer-brand">
                         <div class="footer-logo-wrap">
-                            <img src="/landing/animation/logo-lab.png" alt="GIS Laboratorium" class="footer-logo">
+                            <img src="/landing/animation/logo-lab.png" alt="GIS Laboratory" class="footer-logo">
                             <div>
-                                <h3 class="footer-brand-title">GIS Laboratorium</h3>
+                                <h3 class="footer-brand-title">GIS Laboratory</h3>
                                 <p class="footer-brand-subtitle">PT. Global Inspeksi Sistem</p>
                             </div>
                         </div>
                         <p class="footer-description">
-                            GIS Laboratorium hadir sebagai mitra pengujian yang membantu pelanggan memastikan mutu,
-                            keamanan, dan kesesuaian produk maupun lingkungan melalui layanan laboratorium yang akurat
-                            dan terpercaya.
+                            GIS Laboratory serves as a testing partner that helps customers ensure the quality,
+                            safety, and conformity of products and the environment through accurate
+                            and reliable laboratory services.
                         </p>
                         <div class="footer-badges">
-                            <span>Pengujian Laboratorium</span>
-                            <span>Lingkungan</span>
-                            <span>Pelumas</span>
-                            <span>Sawit & Pupuk</span>
+                            <span>Laboratory Testing</span>
+                            <span>Environment</span>
+                            <span>Lubricants</span>
+                            <span>Palm Oil & Fertilizer</span>
                         </div>
                     </div>
 
@@ -2304,12 +2304,12 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
 
                     <div>
                         <h4 class="footer-col-title">Link</h4>
-                        <a href="/" class="footer-link">Beranda</a>
-                        <a href="/profile" class="footer-link">Profile</a>
-                        <a href="/service" class="footer-link">Layanan</a>
-                        <a href="/ruang-lingkup-pengujian" class="footer-link">Ruang Lingkup Pengujian</a>
-                        <a href="/informasi" class="footer-link">Informasi</a>
-                        <a href="/contact" class="footer-link">Kontak</a>
+                        <a href="/en" class="footer-link">Home</a>
+                        <a href="/en/profile" class="footer-link">Profile</a>
+                        <a href="/en/service" class="footer-link">Services</a>
+                        <a href="/en/ruang-lingkup-pengujian" class="footer-link">Testing Scope</a>
+                        <a href="/en/informasi" class="footer-link">Information</a>
+                        <a href="/en/contact" class="footer-link">Contact</a>
                     </div>
                 </div>
             </div>
@@ -2322,6 +2322,6 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
   },
 ] as LandingStaticPage[];
 
-export const landingPages = Object.fromEntries(
+export const landingPagesEn = Object.fromEntries(
   pageList.map((page) => [page.key, page]),
 ) as Record<LandingPageKey, LandingStaticPage>;

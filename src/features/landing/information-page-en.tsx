@@ -20,223 +20,224 @@ const articles: Article[] = [
   {
     id: 3762,
     title:
-      "Pengujian Pelumas: Mengapa Penting untuk Keandalan Mesin dan Efisiensi Operasional",
+      "Lubricant Testing: Why It Matters for Machine Reliability and Operational Efficiency",
     slug: "pengujian-pelumas-mengapa-penting-untuk-keandalan-mesin-dan-efisiensi-operasional",
     date: "2026-03-02T03:01:22",
-    category: "Pelumas",
+    category: "Lubricants",
     image:
       "/landing/blog/pengujian-pelumas-mengapa-penting-untuk-keandalan-mesin-dan-efisiensi-operasional.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2026/03/02/pengujian-pelumas-mengapa-penting-untuk-keandalan-mesin-dan-efisiensi-operasional/",
     excerpt:
-      "Pelumas (oli) adalah “darah” bagi mesin. Fungsinya bukan hanya melumasi, tetapi juga membantu mengurangi gesekan, menstabilkan temperatur, melindungi komponen dari keausan, dan membawa partikel kotoran agar tidak menumpuk di area kritis. Masalahnya,...",
+      "Lubricants (oil) are the “blood” of machines. Their role is not only to lubricate, but also to reduce friction, stabilize temperature, protect components from wear, and carry away contaminant particles so they do not build up in critical areas. The challenge is,...",
   },
   {
     id: 3750,
-    title: "Mengapa Pengujian Lingkungan Penting?",
+    title: "Why Is Environmental Testing Important?",
     slug: "mengapa-pengujian-lingkungan-penting",
     date: "2026-01-08T03:02:44",
-    category: "Lingkungan",
+    category: "Environment",
     image: "/landing/blog/mengapa-pengujian-lingkungan-penting.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2026/01/08/mengapa-pengujian-lingkungan-penting/",
     excerpt:
-      "Pengujian lingkungan merupakan bagian penting dalam menjaga kualitas lingkungan hidup, kesehatan masyarakat, serta keberlanjutan kegiatan industri. Melalui pengujian yang akurat dan berbasis data, potensi pencemaran dapat dideteksi sejak dini sehingga...",
+      "Environmental testing is an important part of maintaining environmental quality, public health, and the sustainability of industrial activities. Through accurate, data-based testing, potential pollution can be detected early so that...",
   },
   {
     id: 3733,
-    title: "Laboratorium Pengujian Global Inspeksi Sistem",
+    title: "Global Inspeksi Sistem Testing Laboratory",
     slug: "laboratorium-pengujian-global-inspeksi-sistem",
     date: "2025-12-17T06:51:28",
-    category: "Laboratorium",
+    category: "Laboratory",
     image: "/landing/blog/laboratorium-pengujian-global-inspeksi-sistem.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/12/17/laboratorium-pengujian-global-inspeksi-sistem/",
     excerpt:
-      "Laboratorium Pengujian Global Inspeksi Sistem Dalam dunia industri dan perdagangan, kualitas dan kepatuhan produk tidak dapat ditentukan hanya dari tampilan fisik. Diperlukan pengujian laboratorium yang akurat dan dapat dipertanggungjawabkan untuk...",
+      "Global Inspeksi Sistem Testing Laboratory In industry and trade, product quality and compliance cannot be determined from physical appearance alone. Accurate and accountable laboratory testing is required to...",
   },
   {
     id: 3665,
     title:
-      "Pengujian Alat Pertanian: Memastikan Kinerja, Keamanan, dan Efisiensi di Lapangan",
+      "Agricultural Equipment Testing: Ensuring Performance, Safety, and Efficiency in the Field",
     slug: "pengujian-alat-pertanian-memastikan-kinerja-keamanan-dan-efisiensi-di-lapangan",
     date: "2025-11-24T05:12:06",
-    category: "Pertanian",
+    category: "Agriculture",
     image:
       "/landing/blog/pengujian-alat-pertanian-memastikan-kinerja-keamanan-dan-efisiensi-di-lapangan.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/11/24/pengujian-alat-pertanian-memastikan-kinerja-keamanan-dan-efisiensi-di-lapangan/",
     excerpt:
-      "Pengujian Alat Pertanian: Layanan Uji Performa, Keamanan, dan Fungsi Sesuai Standar Industri Penggunaan alat pertanian modern—seperti sprayer, drone pertanian, alat olah tanah, dan alat panen—semakin meningkat dalam industri agrikultur. Namun tidak semua...",
+      "Agricultural Equipment Testing: Performance, Safety, and Function Testing Services Based on Industry Standards The use of modern agricultural equipment—such as sprayers, agricultural drones, tillage tools, and harvesting equipment—is increasing in the agriculture industry. However, not all...",
   },
   {
     id: 3329,
-    title: "Faktor Lingkungan Sehat & Layanan Pengujian Laboratorium Terpadu",
+    title:
+      "Healthy Environmental Factors & Integrated Laboratory Testing Services",
     slug: "faktor-lingkungan-sehat-layanan-pengujian-laboratorium-terpadu",
     date: "2025-10-22T03:57:24",
-    category: "Lingkungan",
+    category: "Environment",
     image:
       "/landing/blog/faktor-lingkungan-sehat-layanan-pengujian-laboratorium-terpadu.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/10/22/faktor-lingkungan-sehat-layanan-pengujian-laboratorium-terpadu/",
     excerpt:
-      "PT Global Inspeksi Sistem (GIS) membantu perusahaan memastikan lingkungan kerja dan operasional yang sehat, patuh regulasi, dan berkelanjutan. Layanan kami mencakup perencanaan, pengambilan sampel (sampling), analisis laboratorium, QA/QC, interpretasi...",
+      "PT Global Inspeksi Sistem (GIS) helps companies ensure a healthy, regulation-compliant, and sustainable working and operational environment. Our services include planning, sampling, laboratory analysis, QA/QC, interpretation...",
   },
   {
     id: 3324,
-    title: "Layanan Pengujian Lingkungan: Air, Udara, Emisi, Tanah, Kebisingan",
+    title:
+      "Environmental Testing Services: Water, Air, Emissions, Soil, and Noise",
     slug: "layanan-pengujian-lingkungan-air-udara-emisi-tanah-kebisingan",
     date: "2025-10-08T05:13:40",
-    category: "Lingkungan",
+    category: "Environment",
     image:
       "/landing/blog/layanan-pengujian-lingkungan-air-udara-emisi-tanah-kebisingan.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/10/08/layanan-pengujian-lingkungan-air-udara-emisi-tanah-kebisingan/",
     excerpt:
-      "Kami membantu perusahaan, fasilitas publik, dan pengelola gedung memastikan kualitas lingkungan kerja dan operasional sesuai standar nasional (SNI/peraturan yang berlaku) dan praktik terbaik. Layanan kami mencakup pengambilan sampel sesuai SOP, analisis...",
+      "We help companies, public facilities, and building managers ensure that workplace and operational environmental quality meets national standards (SNI/applicable regulations) and best practices. Our services include SOP-based sampling, analysis...",
   },
   {
     id: 3276,
-    title:
-      "Apakah Minyak Goreng Anda Aman? Minyak Berkualitas Dimulai Dari Pengujian Yang Benar",
+    title: "Is Your Cooking Oil Safe? Quality Oil Starts with Proper Testing",
     slug: "apakah-minyak-goreng-anda-aman-minyak-berkualitas-dimulai-dari-pengujian-yang-tepat",
     date: "2025-08-28T03:59:54",
-    category: "Pangan & Sawit",
+    category: "Food & Palm Oil",
     image:
       "/landing/blog/apakah-minyak-goreng-anda-aman-minyak-berkualitas-dimulai-dari-pengujian-yang-tepat.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/08/28/apakah-minyak-goreng-anda-aman-minyak-berkualitas-dimulai-dari-pengujian-yang-tepat/",
     excerpt:
-      "Minyak goreng yang tampak bening belum tentu aman. Untuk memastikan produk layak edar, konsisten mutunya, dan dipercaya pelanggan, dibutuhkan pengujian laboratorium yang terstandar dan terdokumentasi rapi. Mengapa GIS Labolatorium ? Metode tervalidasi,...",
+      "Cooking oil that looks clear is not necessarily safe. To ensure a product is market-ready, consistent in quality, and trusted by customers, standardized and well-documented laboratory testing is required. Why GIS Laboratory? Validated methods,...",
   },
   {
     id: 3254,
     title:
-      "Pengujian Pelumas Berkualitas oleh GISLAB: Kunci Performa Mesin yang Optimal",
+      "Quality Lubricant Testing by GISLAB: The Key to Optimal Engine Performance",
     slug: "pengujian-pelumas-berkualitas-oleh-gislab-kunci-performa-mesin-yang-optimal",
     date: "2025-08-06T03:40:41",
-    category: "Pelumas",
+    category: "Lubricants",
     image:
       "/landing/blog/pengujian-pelumas-berkualitas-oleh-gislab-kunci-performa-mesin-yang-optimal.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/08/06/pengujian-pelumas-berkualitas-oleh-gislab-kunci-performa-mesin-yang-optimal/",
     excerpt:
-      "Dalam dunia industri dan otomotif, pelumas memegang peran penting untuk menjaga keandalan dan efisiensi mesin. GISLAB hadir sebagai mitra terpercaya Anda dalam layanan pengujian pelumas berkualitas, memberikan jaminan performa terbaik untuk kendaraan...",
+      "In the industrial and automotive sectors, lubricants play an important role in maintaining machine reliability and efficiency. GISLAB is your trusted partner for quality lubricant testing services, helping ensure the best performance for vehicles...",
   },
   {
     id: 3246,
-    title: "Kualitas CPO (Crude Palm Oil) nggak cuma dinilai dari warnanya aja",
+    title: "CPO (Crude Palm Oil) Quality Is Not Judged by Color Alone",
     slug: "kualitas-cpo-crude-palm-oil-nggak-cuma-dinilai-dari-warnanya-aja",
     date: "2025-07-01T02:51:30",
-    category: "Pangan & Sawit",
+    category: "Food & Palm Oil",
     image:
       "/landing/blog/kualitas-cpo-crude-palm-oil-nggak-cuma-dinilai-dari-warnanya-aja.jpg",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/07/01/kualitas-cpo-crude-palm-oil-nggak-cuma-dinilai-dari-warnanya-aja/",
     excerpt:
-      "Ada banyak parameter penting yang diuji, seperti: FFA (Free Fatty Acid) – Menunjukkan tingkat keasaman minyak, Moisture & Impurities – Pengaruh besar ke daya simpan dan kualitas olahan, serta DOBI sebagai indikator kemudahan pemurnian minyak...",
+      "There are many important parameters to test, such as: FFA (Free Fatty Acid) – indicating the acidity level of the oil, Moisture & Impurities – which greatly affect shelf life and processed quality, and DOBI as an indicator of oil refining ease...",
   },
   {
     id: 3234,
-    title: "Layanan Pengujian Pupuk - PT Global Inspeksi Sistem",
+    title: "Fertilizer Testing Services - PT Global Inspeksi Sistem",
     slug: "layanan-pengujian-pupuk-pt-global-inspeksi-sistem",
     date: "2025-07-01T02:50:38",
-    category: "Pertanian",
+    category: "Agriculture",
     image:
       "/landing/blog/layanan-pengujian-pupuk-pt-global-inspeksi-sistem.jpg",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/07/01/layanan-pengujian-pupuk-pt-global-inspeksi-sistem/",
     excerpt:
-      "Tanaman sehat dimulai dari pupuk yang berkualitas. GIS menyediakan layanan pengujian pupuk dengan akurasi tinggi untuk memastikan produk memenuhi standar mutu nasional dan internasional, mulai dari kandungan makronutrien sampai logam berat...",
+      "Healthy plants start with quality fertilizer. GIS provides high-accuracy fertilizer testing services to ensure products meet national and international quality standards, from macronutrient content to heavy metals...",
   },
   {
     id: 3235,
-    title: "Pengujian Lingkungan: Wawasan Akurat untuk Menjaga Ekosistem",
+    title: "Environmental Testing: Accurate Insights to Protect Ecosystems",
     slug: "pengujian-lingkungan-wawasan-akurat-untuk-menjaga-ekosistem",
     date: "2025-07-01T02:49:45",
-    category: "Lingkungan",
+    category: "Environment",
     image:
       "/landing/blog/pengujian-lingkungan-wawasan-akurat-untuk-menjaga-ekosistem.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/07/01/pengujian-lingkungan-wawasan-akurat-untuk-menjaga-ekosistem/",
     excerpt:
-      "Kesehatan lingkungan adalah faktor utama dalam menciptakan kehidupan yang lebih baik dan berkelanjutan. Pengujian lingkungan membantu memastikan air, udara, dan tanah tetap bersih, aman, dan sesuai standar yang berlaku...",
+      "Environmental health is a key factor in creating a better and more sustainable life. Environmental testing helps ensure that water, air, and soil remain clean, safe, and compliant with applicable standards...",
   },
   {
     id: 3236,
-    title: "Analisa Minyak Goreng Sawit: Jaminan Kualitas Terbaik!",
+    title: "Palm Cooking Oil Analysis: Assurance of the Best Quality!",
     slug: "analisa-minyak-goreng-sawit-jaminan-kualitas-terbaik",
     date: "2025-07-01T02:46:57",
-    category: "Pangan & Sawit",
+    category: "Food & Palm Oil",
     image:
       "/landing/blog/analisa-minyak-goreng-sawit-jaminan-kualitas-terbaik.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/07/01/analisa-minyak-goreng-sawit-jaminan-kualitas-terbaik/",
     excerpt:
-      "Minyak goreng sawit adalah salah satu bahan utama dalam dapur. Analisis minyak goreng sawit penting untuk memastikan kualitas, kemurnian, keamanan konsumsi, dan daya simpan tetap optimal sebelum produk sampai ke konsumen...",
+      "Palm cooking oil is one of the main ingredients in the kitchen. Palm cooking oil analysis is important to ensure quality, purity, consumption safety, and optimal shelf life before the product reaches consumers...",
   },
   {
     id: 3237,
     title:
-      "Uji Pelumas Otomotif: Pastikan Mesin Anda Terlindungi dengan Pelumas Berkualitas",
+      "Automotive Lubricant Testing: Make Sure Your Engine Is Protected by Quality Lubricants",
     slug: "uji-pelumas-otomotifpastikan-mesin-anda-terlindungi-dengan-pelumas-berkualitas",
     date: "2025-07-01T02:44:54",
-    category: "Pelumas",
+    category: "Lubricants",
     image:
       "/landing/blog/uji-pelumas-otomotifpastikan-mesin-anda-terlindungi-dengan-pelumas-berkualitas.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/07/01/uji-pelumas-otomotifpastikan-mesin-anda-terlindungi-dengan-pelumas-berkualitas/",
     excerpt:
-      "Pelumas bukan sekadar cairan, tetapi tameng utama bagi mesin kendaraan. GIS menyediakan layanan pengujian pelumas otomotif untuk memastikan performa terbaik dan perlindungan maksimal melalui uji viskositas, keausan, titik nyala, dan komposisi...",
+      "Lubricant is not just a fluid; it is the main shield for vehicle engines. GIS provides automotive lubricant testing services to ensure optimal performance and maximum protection through viscosity, wear, flash point, and composition tests...",
   },
   {
     id: 3232,
-    title: "Layanan Pengujian Berkualitas Global Inspeksi Sistem",
+    title: "Quality Testing Services from Global Inspeksi Sistem",
     slug: "layanan-pengujian-berkualitas-global-inspeksi-sistem",
     date: "2025-07-01T02:39:12",
-    category: "Laboratorium",
+    category: "Laboratory",
     image:
       "/landing/blog/layanan-pengujian-berkualitas-global-inspeksi-sistem.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/07/01/layanan-pengujian-berkualitas-global-inspeksi-sistem/",
     excerpt:
-      "GIS menyediakan berbagai layanan pengujian untuk mendukung standar mutu barang, mulai dari pelumas otomotif dan industri, pupuk, alat pertanian, CPO, lingkungan, air minum, palm kernel, hingga minyak goreng sawit...",
+      "GIS provides a wide range of testing services to support product quality standards, from automotive and industrial lubricants, fertilizers, agricultural equipment, CPO, environment, drinking water, palm kernel, to palm cooking oil...",
   },
   {
     id: 3221,
-    title: "Validasi Performa & Keandalan Alat di Lapangan",
+    title: "Field Performance & Equipment Reliability Validation",
     slug: "validasi-performa-keandalan-alat-di-lapangan",
     date: "2025-07-01T02:26:04",
-    category: "Pertanian",
+    category: "Agriculture",
     image: "/landing/blog/validasi-performa-keandalan-alat-di-lapangan.png",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2025/07/01/validasi-performa-keandalan-alat-di-lapangan/",
     excerpt:
-      "Alat pertanian perlu diuji secara teknis karena performa lapangan tidak hanya soal fungsi dasar. Pengujian mengukur daya tahan material, efisiensi mekanis, presisi operasional, stabilitas, dan keselamatan kerja di berbagai kondisi medan...",
+      "Agricultural equipment needs to be tested technically because field performance is not only about basic function. Testing measures material durability, mechanical efficiency, operational precision, stability, and work safety across various field conditions...",
   },
   {
     id: 3180,
     title:
-      "Mengenal Berbagai Pengujian Laboratorium: Dari Pelumas Otomotif hingga Analisa Minyak Sawit, Apa Saja Manfaatnya?",
+      "Getting to Know Various Laboratory Tests: From Automotive Lubricants to Palm Oil Analysis, What Are the Benefits?",
     slug: "mengenal-berbagai-pengujian-laboratorium-dari-pelumas-otomotif-hingga-analisa-minyak-sawit-apa-saja-manfaatnya-2",
     date: "2024-10-29T03:35:30",
-    category: "Pelumas",
+    category: "Lubricants",
     image:
       "/landing/blog/mengenal-berbagai-pengujian-laboratorium-dari-pelumas-otomotif-hingga-analisa-minyak-sawit-apa-saja-manfaatnya-2.jpg",
     sourceUrl:
       "https://gislaboratorium.com/index.php/2024/10/29/mengenal-berbagai-pengujian-laboratorium-dari-pelumas-otomotif-hingga-analisa-minyak-sawit-apa-saja-manfaatnya-2/",
     excerpt:
-      "Di era industri yang semakin maju, kualitas dan keamanan produk merupakan prioritas utama. GIS hadir sebagai laboratorium pengujian untuk membantu berbagai sektor memastikan produk memenuhi standar yang diakui...",
+      "In an increasingly advanced industrial era, product quality and safety are top priorities. GIS serves as a testing laboratory that helps various sectors ensure their products meet recognized standards...",
   },
 ];
 
 const categories = [
-  "Semua",
-  "Lingkungan",
-  "Pelumas",
-  "Pangan & Sawit",
-  "Pertanian",
-  "Laboratorium",
+  "All",
+  "Environment",
+  "Lubricants",
+  "Food & Palm Oil",
+  "Agriculture",
+  "Laboratory",
 ];
 
 const INFORMATION_STYLES = `
@@ -1069,21 +1070,21 @@ function ensureLandingHeadAssets() {
 }
 
 function formatDate(date: string) {
-  return new Intl.DateTimeFormat("id-ID", {
+  return new Intl.DateTimeFormat("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   }).format(new Date(date));
 }
 
-export function InformationPage({
+export function InformationPageEn({
   initialArticles = articles,
 }: {
   initialArticles?: Article[];
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("Semua");
+  const [activeCategory, setActiveCategory] = useState("All");
   const [whatsappOpen, setWhatsappOpen] = useState(false);
 
   useEffect(() => {
@@ -1093,7 +1094,7 @@ export function InformationPage({
   const normalizedQuery = query.trim().toLowerCase();
   const filteredArticles = initialArticles.filter((article) => {
     const matchesCategory =
-      activeCategory === "Semua" || article.category === activeCategory;
+      activeCategory === "All" || article.category === activeCategory;
     const matchesQuery =
       !normalizedQuery ||
       article.title.toLowerCase().includes(normalizedQuery) ||
@@ -1109,7 +1110,7 @@ export function InformationPage({
 
       <header className="navbar-wrapper" id="navbar">
         <nav className="navbar">
-          <Link href="/" className="nav-brand">
+          <Link href="/en" className="nav-brand">
             <Image
               className="nav-logo"
               src="/landing/animation/logo-lab.png"
@@ -1122,46 +1123,50 @@ export function InformationPage({
           </Link>
           <ul className={`nav-menu${menuOpen ? " open" : ""}`} id="navMenu">
             <li>
-              <Link href="/" className="nav-link">
-                Beranda
+              <Link href="/en" className="nav-link">
+                Home
               </Link>
             </li>
             <li>
-              <Link href="/profile" className="nav-link">
+              <Link href="/en/profile" className="nav-link">
                 Profile
               </Link>
             </li>
             <li>
-              <Link href="/service" className="nav-link">
-                Layanan
+              <Link href="/en/service" className="nav-link">
+                Services
               </Link>
             </li>
             <li>
-              <Link href="/ruang-lingkup-pengujian" className="nav-link">
-                Ruang Lingkup Pengujian
+              <Link href="/en/ruang-lingkup-pengujian" className="nav-link">
+                Testing Scope
               </Link>
             </li>
             <li className="nav-dropdown">
               <details>
                 <summary className="nav-link nav-dropdown-trigger active">
-                  Informasi <i className="fa-solid fa-chevron-down" />
+                  Information <i className="fa-solid fa-chevron-down" />
                 </summary>
                 <div className="nav-dropdown-menu">
-                  <Link href="/informasi" className="nav-dropdown-link active">
-                    Artikel <i className="fa-solid fa-newspaper" />
+                  <Link
+                    href="/en/informasi"
+                    className="nav-dropdown-link active"
+                  >
+                    Articles <i className="fa-solid fa-newspaper" />
                   </Link>
                   <Link
-                    href="/informasi/keluhan-dan-banding"
+                    href="/en/informasi/keluhan-dan-banding"
                     className="nav-dropdown-link"
                   >
-                    Keluhan dan Banding <i className="fa-solid fa-comments" />
+                    Complaints and Appeals{" "}
+                    <i className="fa-solid fa-comments" />
                   </Link>
                 </div>
               </details>
             </li>
             <li>
-              <Link href="/contact" className="nav-link">
-                Kontak
+              <Link href="/en/contact" className="nav-link">
+                Contact
               </Link>
             </li>
           </ul>
@@ -1172,7 +1177,7 @@ export function InformationPage({
               className="mobile-menu-btn"
               type="button"
               onClick={() => setMenuOpen((value) => !value)}
-              aria-label="Buka menu"
+              aria-label="Open menu"
             >
               <i className="fa-solid fa-bars" />
             </button>
@@ -1186,25 +1191,28 @@ export function InformationPage({
             <div className="hero-card">
               <div className="hero-content">
                 <span className="eyebrow">
-                  <i className="fa-solid fa-newspaper" /> Informasi GISLAB
+                  <i className="fa-solid fa-newspaper" /> GISLAB Information
                 </span>
                 <h1 className="hero-title">
-                  Artikel, insight, dan <span>berita pengujian</span>.
+                  Articles, insights, and <span>testing news</span>.
                 </h1>
                 <p className="hero-copy">
-                  Kumpulan artikel dari blog GIS Laboratorium tentang pengujian
-                  pelumas, lingkungan, pangan, sawit, alat pertanian, dan
-                  layanan laboratorium.
+                  A collection of articles from the GIS Laboratory blog about
+                  lubricant, environmental, food, palm oil, agricultural
+                  equipment, and laboratory testing services.
                 </p>
-                <div className="hero-pills" aria-label="Topik utama informasi">
+                <div
+                  className="hero-pills"
+                  aria-label="Main information topics"
+                >
                   <span className="hero-pill">
-                    <i className="fa-solid fa-flask-vial" /> Pengujian Mutu
+                    <i className="fa-solid fa-flask-vial" /> Quality Testing
                   </span>
                   <span className="hero-pill">
-                    <i className="fa-solid fa-leaf" /> Lingkungan
+                    <i className="fa-solid fa-leaf" /> Environment
                   </span>
                   <span className="hero-pill">
-                    <i className="fa-solid fa-oil-can" /> Pelumas & Sawit
+                    <i className="fa-solid fa-oil-can" /> Lubricants & Palm Oil
                   </span>
                 </div>
               </div>
@@ -1227,14 +1235,14 @@ export function InformationPage({
                 <input
                   id="articleSearch"
                   type="search"
-                  placeholder="Cari artikel, topik, atau kategori..."
+                  placeholder="Search articles, topics, or categories..."
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                 />
               </label>
               <div
                 className="category-tabs"
-                aria-label="Filter kategori artikel"
+                aria-label="Article category filter"
               >
                 {categories.map((category) => (
                   <button
@@ -1254,8 +1262,8 @@ export function InformationPage({
         <section className="articles-section">
           <div className="container">
             <div className="section-meta">
-              <span>{filteredArticles.length} artikel ditampilkan</span>
-              <span>Diurutkan dari terbaru</span>
+              <span>{filteredArticles.length} articles shown</span>
+              <span>Sorted from newest</span>
             </div>
 
             <div className="article-grid">
@@ -1279,9 +1287,9 @@ export function InformationPage({
                     <p className="article-excerpt">{article.excerpt}</p>
                     <Link
                       className="article-link"
-                      href={`/informasi/${article.slug}`}
+                      href={`/en/informasi/${article.slug}`}
                     >
-                      Baca Artikel <i className="fa-solid fa-arrow-right" />
+                      Read Article <i className="fa-solid fa-arrow-right" />
                     </Link>
                   </div>
                 </article>
@@ -1289,8 +1297,8 @@ export function InformationPage({
 
               {filteredArticles.length === 0 ? (
                 <div className="empty-state glass">
-                  <h2>Artikel tidak ditemukan</h2>
-                  <p>Coba kata kunci atau kategori lain.</p>
+                  <h2>No articles found</h2>
+                  <p>Try another keyword or category.</p>
                 </div>
               ) : null}
             </div>
@@ -1306,11 +1314,11 @@ export function InformationPage({
                 <div className="footer-logo-wrap">
                   <img
                     src="/landing/animation/logo-lab.png"
-                    alt="GIS Laboratorium"
+                    alt="GIS Laboratory"
                     className="footer-logo"
                   />
                   <div>
-                    <h3 className="footer-brand-title">GIS Laboratorium</h3>
+                    <h3 className="footer-brand-title">GIS Laboratory</h3>
                     <p className="footer-brand-subtitle">
                       PT. Global Inspeksi Sistem
                     </p>
@@ -1318,17 +1326,16 @@ export function InformationPage({
                 </div>
 
                 <p className="footer-description">
-                  GIS Laboratorium hadir sebagai mitra pengujian yang membantu
-                  pelanggan memastikan mutu, keamanan, dan kesesuaian produk
-                  maupun lingkungan melalui layanan laboratorium yang akurat dan
-                  terpercaya.
+                  GIS Laboratory is a testing partner that helps customers
+                  ensure product and environmental quality, safety, and
+                  conformity through accurate and reliable laboratory services.
                 </p>
 
                 <div className="footer-badges">
-                  <span>Pengujian Laboratorium</span>
-                  <span>Lingkungan</span>
-                  <span>Pelumas</span>
-                  <span>Sawit & Pupuk</span>
+                  <span>Laboratory Testing</span>
+                  <span>Environment</span>
+                  <span>Lubricants</span>
+                  <span>Palm Oil & Fertilizers</span>
                 </div>
               </div>
 
@@ -1364,25 +1371,28 @@ export function InformationPage({
               </div>
 
               <div>
-                <h4 className="footer-col-title">Link</h4>
+                <h4 className="footer-col-title">Links</h4>
 
-                <Link href="/" className="footer-link">
-                  Beranda
+                <Link href="/en" className="footer-link">
+                  Home
                 </Link>
-                <Link href="/profile" className="footer-link">
+                <Link href="/en/profile" className="footer-link">
                   Profile
                 </Link>
-                <Link href="/service" className="footer-link">
-                  Layanan
+                <Link href="/en/service" className="footer-link">
+                  Services
                 </Link>
-                <Link href="/ruang-lingkup-pengujian" className="footer-link">
-                  Ruang Lingkup Pengujian
+                <Link
+                  href="/en/ruang-lingkup-pengujian"
+                  className="footer-link"
+                >
+                  Testing Scope
                 </Link>
-                <Link href="/informasi" className="footer-link">
-                  Informasi
+                <Link href="/en/informasi" className="footer-link">
+                  Information
                 </Link>
-                <Link href="/contact" className="footer-link">
-                  Kontak
+                <Link href="/en/contact" className="footer-link">
+                  Contact
                 </Link>
               </div>
             </div>
