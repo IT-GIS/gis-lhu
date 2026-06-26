@@ -9,6 +9,157 @@ export type LandingStaticPage = {
   html: string;
 };
 
+const WHATSAPP_WIDGET_STYLES = `
+  .whatsapp-widget {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1100;
+  }
+
+  .whatsapp-toggle {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: none;
+    color: #fff;
+    background: #25D366;
+    box-shadow: 0 14px 28px rgba(37, 211, 102, 0.28);
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+  }
+
+  .whatsapp-toggle:hover {
+    transform: scale(1.06);
+    background: #128C7E;
+  }
+
+  .whatsapp-window {
+    position: absolute;
+    right: 0;
+    bottom: 76px;
+    width: min(340px, calc(100vw - 48px));
+    border-radius: 22px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.2);
+    transform: translateY(12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+  }
+
+  .whatsapp-window.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .wa-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px;
+    background: #075E54;
+    color: #fff;
+  }
+
+  .wa-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+  }
+
+  .wa-brand img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  .wa-close {
+    border: none;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+
+  .wa-body {
+    padding: 18px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .wa-bubble {
+    padding: 12px 14px;
+    border-radius: 16px;
+    color: #1f2937;
+    background: #e8fff0;
+    font-weight: 650;
+    line-height: 1.55;
+  }
+
+  .wa-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 999px;
+    padding: 12px 16px;
+    color: #fff;
+    background: #25D366;
+    font-weight: 800;
+  }
+
+  @media (max-width: 640px) {
+    .whatsapp-widget {
+      right: 18px;
+      bottom: 18px;
+    }
+
+    .whatsapp-window {
+      width: min(340px, calc(100vw - 36px));
+      bottom: 72px;
+    }
+  }
+`;
+
+const WHATSAPP_WIDGET_HTML = `
+  <div class="whatsapp-widget">
+    <div class="whatsapp-window" id="whatsappWindow">
+      <div class="wa-header">
+        <div class="wa-brand">
+          <img src="/landing/animation/logo-lab.png" alt="GISLAB">
+          <span>PT Global Inspeksi Sistem</span>
+        </div>
+        <button class="wa-close" id="closeWhatsapp" aria-label="Tutup WhatsApp">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="wa-body">
+        <div class="wa-bubble">
+          Halo! Ada yang bisa kami bantu mengenai layanan pengujian GIS?
+        </div>
+        <a class="wa-link" href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>Customer Service</span>
+        </a>
+      </div>
+    </div>
+
+    <button class="whatsapp-toggle" id="toggleWhatsapp" aria-label="Buka WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </button>
+  </div>
+`;
+
 const pageList = [
   {
     key: "home",
@@ -165,14 +316,158 @@ const pageList = [
         .home-detail-list { display: grid; gap: 12px; margin-top: 16px; padding: 0; list-style: none; }
         .home-detail-list li { display: flex; align-items: flex-start; gap: 12px; color: #405a70; font-weight: 600; line-height: 1.7; }
         .home-detail-list i { margin-top: 6px; color: var(--accent); }
-        .footer { position: relative; padding: 80px 0 40px; background: linear-gradient(135deg, var(--primary), #0e4e8a); color: var(--white); overflow: hidden; }
-        .footer-panel { position: relative; z-index: 10; padding: 60px; border-radius: var(--radius-lg); }
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
-        .footer-col-title { font-size: 1.25rem; font-weight: 700; color:#FFFFFF; margin-bottom: 24px; }
-        .footer-text { color: var(--light-blue); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-        .footer-link { color: var(--light-blue); transition: var(--transition); display: block; margin-bottom: 12px; text-decoration: none; }
-        .footer-link:hover { color: var(--accent); transform: translateX(5px); }
-        .footer-bottom { position: relative; z-index: 10; text-align: center; margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; }
+
+        .footer {
+          position: relative;
+          padding: 90px 0 42px;
+          background:
+            radial-gradient(circle at 15% 20%, rgba(0, 223, 216, 0.16), transparent 30%),
+            radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.1), transparent 28%),
+            linear-gradient(135deg, var(--primary), #0d4778 52%, #105c96 100%);
+          color: var(--white);
+          overflow: hidden;
+          font-family: var(--font-main);
+        }
+        .footer::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+          background-size: 54px 54px;
+          opacity: 0.45;
+          pointer-events: none;
+        }
+        .footer-panel {
+          position: relative;
+          z-index: 10;
+          padding: clamp(34px, 4vw, 58px);
+          border-radius: var(--radius-lg);
+          background: linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+        }
+        .footer-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.85fr) minmax(220px, 0.6fr);
+          gap: clamp(32px, 5vw, 72px);
+          align-items: start;
+        }
+        .footer-brand { max-width: 520px; }
+        .footer-logo-wrap {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          margin-bottom: 22px;
+        }
+        .footer-logo {
+          width: 74px;
+          height: 74px;
+          object-fit: contain;
+          border-radius: 24px;
+          background: rgba(255, 255, 255, 0.94);
+          padding: 10px;
+          box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+        }
+        .footer-brand-title {
+          margin: 0;
+          color: #ffffff;
+          font-size: clamp(1.35rem, 2vw, 1.8rem);
+          font-weight: 900;
+          letter-spacing: -0.035em;
+        }
+        .footer-brand-subtitle {
+          margin: 5px 0 0;
+          color: rgba(255, 255, 255, 0.68);
+          font-size: 0.78rem;
+          font-weight: 900;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+        }
+        .footer-description {
+          margin: 0;
+          max-width: 500px;
+          color: rgba(234, 246, 255, 0.82);
+          font-size: 0.98rem;
+          font-weight: 600;
+          line-height: 1.85;
+        }
+        .footer-badges {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 24px;
+        }
+        .footer-badges span {
+          display: inline-flex;
+          align-items: center;
+          border-radius: 999px;
+          border: 1px solid rgba(0, 223, 216, 0.3);
+          background: rgba(0, 223, 216, 0.1);
+          color: #bffcfb;
+          padding: 8px 13px;
+          font-size: 0.78rem;
+          font-weight: 800;
+        }
+        .footer-col-title {
+          font-size: 1.18rem;
+          font-weight: 900;
+          color: #ffffff;
+          margin: 0 0 24px;
+        }
+        .footer-text {
+          color: rgba(234, 246, 255, 0.82);
+          margin-bottom: 16px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          font-weight: 650;
+          line-height: 1.65;
+        }
+        .footer-text i {
+          width: 20px;
+          color: var(--accent);
+          text-align: center;
+        }
+        .footer-link {
+          color: rgba(234, 246, 255, 0.82);
+          transition: var(--transition);
+          display: block;
+          width: fit-content;
+          margin-bottom: 13px;
+          font-weight: 700;
+          text-decoration: none;
+        }
+        .footer-link:hover {
+          color: var(--accent);
+          transform: translateX(6px);
+        }
+        .footer-bottom {
+          position: relative;
+          z-index: 10;
+          text-align: center;
+          margin-top: 60px;
+          padding-top: 24px;
+          border-top: 1px solid rgba(255, 255, 255, 0.12);
+          color: rgba(255, 255, 255, 0.68);
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+        @media (max-width: 1024px) {
+          .footer-grid { grid-template-columns: 1fr 1fr; }
+          .footer-brand { grid-column: 1 / -1; }
+        }
+        @media (max-width: 640px) {
+          .footer { padding: 64px 0 32px; }
+          .footer-panel { padding: 30px 22px; border-radius: 28px; }
+          .footer-grid { grid-template-columns: 1fr; gap: 34px; }
+          .footer-logo-wrap { align-items: flex-start; }
+          .footer-logo { width: 64px; height: 64px; border-radius: 20px; }
+          .footer-badges span { font-size: 0.72rem; }
+        }
 
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -208,6 +503,9 @@ const pageList = [
         }
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
+
+        ${WHATSAPP_WIDGET_STYLES}
+
     `,
     html: `
     <header class="navbar-wrapper" id="navbar">
@@ -389,6 +687,41 @@ const pageList = [
                             <button class="service-btn" type="button" data-service-detail="sni">Read More</button>
                         </div>
                     </article>
+
+
+                    <!-- Duplikat untuk carousel seamless agar tidak muncul ruang kosong -->
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="quality" aria-label="Lihat detail Pengujian Mutu Produk & Bahan">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600" alt="Pengujian mutu produk dan bahan" class="service-img">
+                        <div class="service-content">
+                            <h3 class="service-title">Pengujian Mutu Produk & Bahan</h3>
+                            <p class="service-desc">Pengujian pelumas, produk sawit, pupuk, minyak goreng sawit, minyak makan merah, dan produk teknis lain sesuai ruang lingkup.</p>
+                            <button class="service-btn" type="button" data-service-detail="quality">Read More</button>
+                        </div>
+                    </article>
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="environment" aria-label="Lihat detail Pengujian Air & Lingkungan">
+                        <img src="https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=600" alt="Pengujian air dan lingkungan" class="service-img">
+                        <div class="service-content">
+                            <h3 class="service-title">Pengujian Air & Lingkungan</h3>
+                            <p class="service-desc">Pengujian air bersih, air limbah, air minum, air mineral, air demineral, dan sumber air alami sesuai parameter ruang lingkup.</p>
+                            <button class="service-btn" type="button" data-service-detail="environment">Read More</button>
+                        </div>
+                    </article>
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="permit" aria-label="Lihat detail Pengujian Udara Ambient & Emisi">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=600" alt="Pengujian udara ambient dan emisi" class="service-img">
+                        <div class="service-content">
+                            <h3 class="service-title">Pengujian Udara Ambient & Emisi</h3>
+                            <p class="service-desc">Pengujian udara ambient dan emisi sumber tidak bergerak untuk mendukung pemantauan kualitas udara dan kepatuhan lingkungan.</p>
+                            <button class="service-btn" type="button" data-service-detail="permit">Read More</button>
+                        </div>
+                    </article>
+                    <article class="service-card glass" role="button" tabindex="0" data-service-detail="sni" aria-label="Lihat detail Pengujian SNI Produk">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" alt="Pengujian SNI Produk" class="service-img">
+                        <div class="service-content">
+                            <h3 class="service-title">Pengujian SNI Produk</h3>
+                            <p class="service-desc">Pengujian produk berdasarkan persyaratan SNI untuk mendukung proses sertifikasi dan kepatuhan.</p>
+                            <button class="service-btn" type="button" data-service-detail="sni">Read More</button>
+                        </div>
+                    </article>
                 </div>
             </div>
         </div>
@@ -450,15 +783,37 @@ const pageList = [
         <div class="container">
             <div class="footer-panel glass-dark">
                 <div class="footer-grid">
+                    <div class="footer-brand">
+                        <div class="footer-logo-wrap">
+                            <img src="/landing/animation/logo-lab.png" alt="GIS Laboratorium" class="footer-logo">
+                            <div>
+                                <h3 class="footer-brand-title">GIS Laboratorium</h3>
+                                <p class="footer-brand-subtitle">PT. Global Inspeksi Sistem</p>
+                            </div>
+                        </div>
+                        <p class="footer-description">
+                            GIS Laboratorium hadir sebagai mitra pengujian yang membantu pelanggan memastikan mutu,
+                            keamanan, dan kesesuaian produk maupun lingkungan melalui layanan laboratorium yang akurat
+                            dan terpercaya.
+                        </p>
+                        <div class="footer-badges">
+                            <span>Pengujian Laboratorium</span>
+                            <span>Lingkungan</span>
+                            <span>Pelumas</span>
+                            <span>Sawit & Pupuk</span>
+                        </div>
+                    </div>
+
                     <div>
                         <h4 class="footer-col-title">Contact</h4>
-                        <div class="footer-text"><i class="fa-solid fa-envelope"></i> info@gislaboratorium.com</div>
+                        <div class="footer-text"><i class="fa-solid fa-envelope"></i><span>info@gislaboratorium.com</span></div>
                         <div class="footer-text" style="align-items: flex-start;">
                             <i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
                             <div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
                         </div>
-                        <div class="footer-text"><i class="fa-solid fa-globe"></i> www.gislaboratorium.com</div>
+                        <div class="footer-text"><i class="fa-solid fa-globe"></i><span>www.gislaboratorium.com</span></div>
                     </div>
+
                     <div>
                         <h4 class="footer-col-title">Link</h4>
                         <a href="/" class="footer-link">Beranda</a>
@@ -473,6 +828,7 @@ const pageList = [
             <div class="footer-bottom">© 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.</div>
         </div>
     </footer>
+    ${WHATSAPP_WIDGET_HTML}
 `,
   },
   {
@@ -526,14 +882,158 @@ const pageList = [
         .policy-contact-list li { display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(113, 119, 134, 0.18); color: var(--text-dark); font-family: 'Inter', sans-serif; line-height: 1.55; }
         .policy-contact-list strong { color: var(--primary); font-family: var(--font-main); font-size: 0.78rem; letter-spacing: 0; text-transform: uppercase; }
 
-        .footer { position: relative; padding: 80px 0 40px; background: linear-gradient(135deg, var(--primary), #0e4e8a); color: var(--white); overflow: hidden; font-family: var(--font-main); }
-        .footer-panel { position: relative; z-index: 10; padding: 60px; border-radius: var(--radius-lg); }
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
-        .footer-col-title { font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 24px; }
-        .footer-text { color: var(--light-blue); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-        .footer-link { color: var(--light-blue); transition: var(--transition); display: block; margin-bottom: 12px; text-decoration: none; }
-        .footer-link:hover { color: var(--accent); transform: translateX(5px); }
-        .footer-bottom { position: relative; z-index: 10; text-align: center; margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; }
+
+        .footer {
+          position: relative;
+          padding: 90px 0 42px;
+          background:
+            radial-gradient(circle at 15% 20%, rgba(0, 223, 216, 0.16), transparent 30%),
+            radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.1), transparent 28%),
+            linear-gradient(135deg, var(--primary), #0d4778 52%, #105c96 100%);
+          color: var(--white);
+          overflow: hidden;
+          font-family: var(--font-main);
+        }
+        .footer::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+          background-size: 54px 54px;
+          opacity: 0.45;
+          pointer-events: none;
+        }
+        .footer-panel {
+          position: relative;
+          z-index: 10;
+          padding: clamp(34px, 4vw, 58px);
+          border-radius: var(--radius-lg);
+          background: linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+        }
+        .footer-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.85fr) minmax(220px, 0.6fr);
+          gap: clamp(32px, 5vw, 72px);
+          align-items: start;
+        }
+        .footer-brand { max-width: 520px; }
+        .footer-logo-wrap {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          margin-bottom: 22px;
+        }
+        .footer-logo {
+          width: 74px;
+          height: 74px;
+          object-fit: contain;
+          border-radius: 24px;
+          background: rgba(255, 255, 255, 0.94);
+          padding: 10px;
+          box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+        }
+        .footer-brand-title {
+          margin: 0;
+          color: #ffffff;
+          font-size: clamp(1.35rem, 2vw, 1.8rem);
+          font-weight: 900;
+          letter-spacing: -0.035em;
+        }
+        .footer-brand-subtitle {
+          margin: 5px 0 0;
+          color: rgba(255, 255, 255, 0.68);
+          font-size: 0.78rem;
+          font-weight: 900;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+        }
+        .footer-description {
+          margin: 0;
+          max-width: 500px;
+          color: rgba(234, 246, 255, 0.82);
+          font-size: 0.98rem;
+          font-weight: 600;
+          line-height: 1.85;
+        }
+        .footer-badges {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 24px;
+        }
+        .footer-badges span {
+          display: inline-flex;
+          align-items: center;
+          border-radius: 999px;
+          border: 1px solid rgba(0, 223, 216, 0.3);
+          background: rgba(0, 223, 216, 0.1);
+          color: #bffcfb;
+          padding: 8px 13px;
+          font-size: 0.78rem;
+          font-weight: 800;
+        }
+        .footer-col-title {
+          font-size: 1.18rem;
+          font-weight: 900;
+          color: #ffffff;
+          margin: 0 0 24px;
+        }
+        .footer-text {
+          color: rgba(234, 246, 255, 0.82);
+          margin-bottom: 16px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          font-weight: 650;
+          line-height: 1.65;
+        }
+        .footer-text i {
+          width: 20px;
+          color: var(--accent);
+          text-align: center;
+        }
+        .footer-link {
+          color: rgba(234, 246, 255, 0.82);
+          transition: var(--transition);
+          display: block;
+          width: fit-content;
+          margin-bottom: 13px;
+          font-weight: 700;
+          text-decoration: none;
+        }
+        .footer-link:hover {
+          color: var(--accent);
+          transform: translateX(6px);
+        }
+        .footer-bottom {
+          position: relative;
+          z-index: 10;
+          text-align: center;
+          margin-top: 60px;
+          padding-top: 24px;
+          border-top: 1px solid rgba(255, 255, 255, 0.12);
+          color: rgba(255, 255, 255, 0.68);
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+        @media (max-width: 1024px) {
+          .footer-grid { grid-template-columns: 1fr 1fr; }
+          .footer-brand { grid-column: 1 / -1; }
+        }
+        @media (max-width: 640px) {
+          .footer { padding: 64px 0 32px; }
+          .footer-panel { padding: 30px 22px; border-radius: 28px; }
+          .footer-grid { grid-template-columns: 1fr; gap: 34px; }
+          .footer-logo-wrap { align-items: flex-start; }
+          .footer-logo { width: 64px; height: 64px; border-radius: 20px; }
+          .footer-badges span { font-size: 0.72rem; }
+        }
 
         @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 768px) {
@@ -547,6 +1047,7 @@ const pageList = [
             .footer-grid { grid-template-columns: 1fr; }
             .footer-panel { padding: 32px 20px; }
         }
+            ${WHATSAPP_WIDGET_STYLES}
     `,
     html: `
 <header class="navbar-wrapper" id="navbar">
@@ -586,7 +1087,6 @@ const pageList = [
 <div class="absolute inset-0 bg-cover bg-center" data-alt="ultra-modern clean bright laboratory with futuristic glass equipment and scientific instruments in a soft blue atmospheric lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhd3SPju_EcKUitBiUGdi5LM2CgMzbO_Y0lve9StPIQEtp-TWzEIXHOct2041e55OyWnmQVRMZzLsTopIp5xR6ofX60AzBiea6EdGEjr1UTXN1bHqSJ06GIcVBl05Gm6mwCEWf4z28g5R6SYenB8t-wCPCjKBLhXA80G3C0IdAzyxyM9bbofzJo6S4a74EMngUosxO1bsbN3MyqfXdXDVm3yxgG08lmmImklFa1WfWzFBI53c-b2CXLkhfYYPar4fE-gC9Xo_Jjqs\u0027')"></div>
 <div class="absolute inset-0 bg-blue-900/20 backdrop-blur-[2px]"></div>
 <div class="relative z-10 glass-card p-16 rounded-[32px] text-center max-w-4xl mx-4">
-<span class="font-label-caps text-label-caps text-primary tracking-[0.2em] mb-4 block">IDENTITAS KAMI</span>
 <h1 class="font-display-lg text-display-lg text-on-surface mb-6">Profil Perusahaan</h1>
 <p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto">
                     Global Inspeksi Sistem (GIS) Laboratorium menghadirkan standar akurasi tertinggi dalam layanan pengujian air dan lingkungan dan industri melalui inovasi teknologi masa depan.
@@ -745,78 +1245,56 @@ const pageList = [
 </main>
 
 <footer class="footer" id="kontak">
-<div class="container">
-<div class="footer-panel glass-dark">
-<div class="footer-grid">
-<div>
-<h4 class="footer-col-title">Contact</h4>
-<div class="footer-text"><i class="fa-solid fa-envelope"></i> info@gislaboratorium.com</div>
-<div class="footer-text" style="align-items: flex-start;">
-<i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
-<div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
-</div>
-<div class="footer-text"><i class="fa-solid fa-globe"></i> www.gislaboratorium.com</div>
-</div>
-<div>
-<h4 class="footer-col-title">Link</h4>
-<a href="/" class="footer-link">Beranda</a>
-<a href="/profile" class="footer-link">Profile</a>
-<a href="/service" class="footer-link">Layanan</a>
-<a href="/ruang-lingkup-pengujian" class="footer-link">Ruang Lingkup Pengujian</a>
-<a href="/informasi" class="footer-link">Informasi</a>
-<a href="/contact" class="footer-link">Kontak</a>
-</div>
-</div>
-</div>
-<div class="footer-bottom">
-© 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
-</div>
-</div>
-</footer>
+        <div class="container">
+            <div class="footer-panel glass-dark">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <div class="footer-logo-wrap">
+                            <img src="/landing/animation/logo-lab.png" alt="GIS Laboratorium" class="footer-logo">
+                            <div>
+                                <h3 class="footer-brand-title">GIS Laboratorium</h3>
+                                <p class="footer-brand-subtitle">PT. Global Inspeksi Sistem</p>
+                            </div>
+                        </div>
+                        <p class="footer-description">
+                            GIS Laboratorium hadir sebagai mitra pengujian yang membantu pelanggan memastikan mutu,
+                            keamanan, dan kesesuaian produk maupun lingkungan melalui layanan laboratorium yang akurat
+                            dan terpercaya.
+                        </p>
+                        <div class="footer-badges">
+                            <span>Pengujian Laboratorium</span>
+                            <span>Lingkungan</span>
+                            <span>Pelumas</span>
+                            <span>Sawit & Pupuk</span>
+                        </div>
+                    </div>
 
-<div id="whatsapp-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 font-['Inter']">
-    <div id="whatsapp-window" class="hidden w-[340px] bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 transition-all origin-bottom-right">
-        <div class="bg-[#075E54] p-4 flex items-center justify-between text-white">
-            <div class="flex items-center gap-3">
-                <div class="bg-white p-1 rounded-full">
-                    <img src="https://giscert.com/assets/client/images/GISlogo.png" class="w-8 h-8 object-contain" alt="Logo">
-                </div>
-                <div>
-                    <div class="font-bold text-sm">PT Global Inspeksi Sistem</div>
-                    <div class="text-xs text-white/80">Membalas secepatnya</div>
+                    <div>
+                        <h4 class="footer-col-title">Contact</h4>
+                        <div class="footer-text"><i class="fa-solid fa-envelope"></i><span>info@gislaboratorium.com</span></div>
+                        <div class="footer-text" style="align-items: flex-start;">
+                            <i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
+                            <div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+                        </div>
+                        <div class="footer-text"><i class="fa-solid fa-globe"></i><span>www.gislaboratorium.com</span></div>
+                    </div>
+
+                    <div>
+                        <h4 class="footer-col-title">Link</h4>
+                        <a href="/" class="footer-link">Beranda</a>
+                        <a href="/profile" class="footer-link">Profile</a>
+                        <a href="/service" class="footer-link">Layanan</a>
+                        <a href="/ruang-lingkup-pengujian" class="footer-link">Ruang Lingkup Pengujian</a>
+                        <a href="/informasi" class="footer-link">Informasi</a>
+                        <a href="/contact" class="footer-link">Kontak</a>
+                    </div>
                 </div>
             </div>
-            <button id="close-wa" class="text-white/80 hover:text-white transition-colors">
-                <span class="material-symbols-outlined text-[24px]">close</span>
-            </button>
+            <div class="footer-bottom">© 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.</div>
         </div>
-        <div class="bg-[#ECE5DD] p-4 min-h-[240px] relative before:content-[''] before:absolute before:inset-0 before:bg-[url('https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg')] before:opacity-10 before:mix-blend-multiply before:pointer-events-none">
-            <div class="bg-white rounded-xl p-3 shadow-sm text-sm text-gray-800 w-[85%] mb-4 relative ml-0 border-l-4 border-[#25D366]">
-                Halo! Ada yang bisa kami bantu mengenai layanan sertifikasi dan inspeksi GIS?
-            </div>
-            <a href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium" target="_blank" class="relative flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition-all group w-full border border-transparent hover:border-[#25D366]/30">
-                <div class="relative flex-shrink-0">
-                    <img src="https://2.bp.blogspot.com/-y6xNA_8TpFo/XXWzkdYk0MI/AAAAAAAAA5s/RCzTBJ_FbMwVt5AEZKekwQqiDNqdNQJjgCLcBGAs/s70/supportmale.png" class="w-12 h-12 rounded-full bg-blue-50 object-cover" alt="CS">
-                    <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#25D366] rounded-full border-2 border-white"></div>
-                </div>
-                <div class="flex-1">
-                    <div class="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Support</div>
-                    <div class="text-sm font-bold text-gray-800 group-hover:text-[#075E54]">Customer Service 1</div>
-                </div>
-                <div class="w-8 h-8 rounded-full bg-[#25D366]/10 flex items-center justify-center text-[#25D366] group-hover:bg-[#25D366] group-hover:text-white transition-colors">
-                    <i class="fa-brands fa-whatsapp text-lg"></i>
-                </div>
-            </a>
-        </div>
-    </div>
+    </footer>
 
-    <button id="toggle-wa" class="w-14 h-14 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full shadow-lg shadow-[#25D366]/30 flex items-center justify-center transition-transform hover:scale-110 relative group">
-        <span class="absolute right-full mr-4 bg-white text-gray-800 text-sm font-semibold px-4 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 after:-right-2 after:border-8 after:border-transparent after:border-l-white">
-            Butuh Bantuan?
-        </span>
-        <i class="fa-brands fa-whatsapp text-3xl"></i>
-    </button>
-</div>
+${WHATSAPP_WIDGET_HTML}
 `,
   },
   {
@@ -889,14 +1367,158 @@ const pageList = [
         .download-btn:hover, .detail-contact-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 34px -22px rgba(0, 112, 243, 0.7); }
         .sidebar-note { color: var(--gis-text-muted); font-size: 0.95rem; font-weight: 600; line-height: 1.7; }
 
-        .footer { position: relative; padding: 80px 0 40px; background: linear-gradient(135deg, var(--gis-primary), #0e4e8a); color: var(--gis-white); overflow: hidden; font-family: var(--gis-font-main); }
-        .footer-panel { position: relative; z-index: 10; padding: 60px; border-radius: var(--gis-radius-lg); }
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
-        .footer-col-title { font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 24px; }
-        .footer-text { color: var(--gis-light-blue); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-        .footer-link { color: var(--gis-light-blue); transition: var(--gis-transition); display: block; margin-bottom: 12px; text-decoration: none; }
-        .footer-link:hover { color: var(--gis-accent); transform: translateX(5px); }
-        .footer-bottom { position: relative; z-index: 10; text-align: center; margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; }
+
+        .footer {
+          position: relative;
+          padding: 90px 0 42px;
+          background:
+            radial-gradient(circle at 15% 20%, rgba(0, 223, 216, 0.16), transparent 30%),
+            radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.1), transparent 28%),
+            linear-gradient(135deg, var(--gis-primary), #0d4778 52%, #105c96 100%);
+          color: var(--gis-white);
+          overflow: hidden;
+          font-family: var(--gis-font-main);
+        }
+        .footer::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+          background-size: 54px 54px;
+          opacity: 0.45;
+          pointer-events: none;
+        }
+        .footer-panel {
+          position: relative;
+          z-index: 10;
+          padding: clamp(34px, 4vw, 58px);
+          border-radius: var(--gis-radius-lg);
+          background: linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+        }
+        .footer-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.85fr) minmax(220px, 0.6fr);
+          gap: clamp(32px, 5vw, 72px);
+          align-items: start;
+        }
+        .footer-brand { max-width: 520px; }
+        .footer-logo-wrap {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          margin-bottom: 22px;
+        }
+        .footer-logo {
+          width: 74px;
+          height: 74px;
+          object-fit: contain;
+          border-radius: 24px;
+          background: rgba(255, 255, 255, 0.94);
+          padding: 10px;
+          box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+        }
+        .footer-brand-title {
+          margin: 0;
+          color: #ffffff;
+          font-size: clamp(1.35rem, 2vw, 1.8rem);
+          font-weight: 900;
+          letter-spacing: -0.035em;
+        }
+        .footer-brand-subtitle {
+          margin: 5px 0 0;
+          color: rgba(255, 255, 255, 0.68);
+          font-size: 0.78rem;
+          font-weight: 900;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+        }
+        .footer-description {
+          margin: 0;
+          max-width: 500px;
+          color: rgba(234, 246, 255, 0.82);
+          font-size: 0.98rem;
+          font-weight: 600;
+          line-height: 1.85;
+        }
+        .footer-badges {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 24px;
+        }
+        .footer-badges span {
+          display: inline-flex;
+          align-items: center;
+          border-radius: 999px;
+          border: 1px solid rgba(0, 223, 216, 0.3);
+          background: rgba(0, 223, 216, 0.1);
+          color: #bffcfb;
+          padding: 8px 13px;
+          font-size: 0.78rem;
+          font-weight: 800;
+        }
+        .footer-col-title {
+          font-size: 1.18rem;
+          font-weight: 900;
+          color: #ffffff;
+          margin: 0 0 24px;
+        }
+        .footer-text {
+          color: rgba(234, 246, 255, 0.82);
+          margin-bottom: 16px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          font-weight: 650;
+          line-height: 1.65;
+        }
+        .footer-text i {
+          width: 20px;
+          color: var(--gis-accent);
+          text-align: center;
+        }
+        .footer-link {
+          color: rgba(234, 246, 255, 0.82);
+          transition: var(--gis-transition);
+          display: block;
+          width: fit-content;
+          margin-bottom: 13px;
+          font-weight: 700;
+          text-decoration: none;
+        }
+        .footer-link:hover {
+          color: var(--gis-accent);
+          transform: translateX(6px);
+        }
+        .footer-bottom {
+          position: relative;
+          z-index: 10;
+          text-align: center;
+          margin-top: 60px;
+          padding-top: 24px;
+          border-top: 1px solid rgba(255, 255, 255, 0.12);
+          color: rgba(255, 255, 255, 0.68);
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+        @media (max-width: 1024px) {
+          .footer-grid { grid-template-columns: 1fr 1fr; }
+          .footer-brand { grid-column: 1 / -1; }
+        }
+        @media (max-width: 640px) {
+          .footer { padding: 64px 0 32px; }
+          .footer-panel { padding: 30px 22px; border-radius: 28px; }
+          .footer-grid { grid-template-columns: 1fr; gap: 34px; }
+          .footer-logo-wrap { align-items: flex-start; }
+          .footer-logo { width: 64px; height: 64px; border-radius: 20px; }
+          .footer-badges span { font-size: 0.72rem; }
+        }
 
         .glass-panel { backdrop-filter: blur(20px); background: rgba(255, 255, 255, 0.65); border: 1px solid transparent; border-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2)) 1; }
         .liquid-bg { background: radial-gradient(circle at top left, #f8f9ff 0%, #e5eeff 50%, #d8e2ff 100%); position: fixed; inset: 0; z-index: -1; }
@@ -922,6 +1544,7 @@ const pageList = [
             .detail-cover { height: 260px; }
             .detail-body { padding: 28px 22px; }
         }
+            ${WHATSAPP_WIDGET_STYLES}
     `,
     html: `
 <div class="liquid-bg"></div>
@@ -1081,36 +1704,55 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
 </section>
 </main>
 <footer class="footer" id="kontak">
-<div class="gis-container">
-<div class="footer-panel glass-dark">
-<div class="footer-grid">
-<div>
-<h4 class="footer-col-title">Contact</h4>
-<div class="footer-text"><i class="fa-solid fa-envelope"></i> info@gislaboratorium.com</div>
-<div class="footer-text" style="align-items: flex-start;">
-<i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
-<div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
-</div>
-<div class="footer-text"><i class="fa-solid fa-globe"></i> www.gislaboratorium.com</div>
-</div>
+        <div class="gis-container">
+            <div class="footer-panel glass-dark">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <div class="footer-logo-wrap">
+                            <img src="/landing/animation/logo-lab.png" alt="GIS Laboratorium" class="footer-logo">
+                            <div>
+                                <h3 class="footer-brand-title">GIS Laboratorium</h3>
+                                <p class="footer-brand-subtitle">PT. Global Inspeksi Sistem</p>
+                            </div>
+                        </div>
+                        <p class="footer-description">
+                            GIS Laboratorium hadir sebagai mitra pengujian yang membantu pelanggan memastikan mutu,
+                            keamanan, dan kesesuaian produk maupun lingkungan melalui layanan laboratorium yang akurat
+                            dan terpercaya.
+                        </p>
+                        <div class="footer-badges">
+                            <span>Pengujian Laboratorium</span>
+                            <span>Lingkungan</span>
+                            <span>Pelumas</span>
+                            <span>Sawit & Pupuk</span>
+                        </div>
+                    </div>
 
-<div>
-<h4 class="footer-col-title">Link</h4>
-<a href="/" class="footer-link">Beranda</a>
-<a href="/profile" class="footer-link">Profile</a>
-<a href="/service" class="footer-link">Layanan</a>
-<a href="/ruang-lingkup-pengujian" class="footer-link">Ruang Lingkup Pengujian</a>
-<a href="/informasi" class="footer-link">Informasi</a>
-<a href="/contact" class="footer-link">Kontak</a>
-</div>
+                    <div>
+                        <h4 class="footer-col-title">Contact</h4>
+                        <div class="footer-text"><i class="fa-solid fa-envelope"></i><span>info@gislaboratorium.com</span></div>
+                        <div class="footer-text" style="align-items: flex-start;">
+                            <i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
+                            <div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+                        </div>
+                        <div class="footer-text"><i class="fa-solid fa-globe"></i><span>www.gislaboratorium.com</span></div>
+                    </div>
 
-</div>
-</div>
-<div class="footer-bottom">
-© 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
-</div>
-</div>
-</footer>
+                    <div>
+                        <h4 class="footer-col-title">Link</h4>
+                        <a href="/" class="footer-link">Beranda</a>
+                        <a href="/profile" class="footer-link">Profile</a>
+                        <a href="/service" class="footer-link">Layanan</a>
+                        <a href="/ruang-lingkup-pengujian" class="footer-link">Ruang Lingkup Pengujian</a>
+                        <a href="/informasi" class="footer-link">Informasi</a>
+                        <a href="/contact" class="footer-link">Kontak</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.</div>
+        </div>
+    </footer>
+    ${WHATSAPP_WIDGET_HTML}
 `,
   },
   {
@@ -1209,14 +1851,158 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
         .map-shell { overflow: hidden; border-radius: var(--radius-lg); min-height: 420px; }
         .map-shell iframe { width: 100%; height: 420px; display: block; border: 0; filter: saturate(0.98) contrast(1.02); }
 
-        .footer { position: relative; padding: 80px 0 40px; background: linear-gradient(135deg, var(--primary), #0e4e8a); color: var(--white); overflow: hidden; }
-        .footer-panel { position: relative; z-index: 10; padding: 60px; border-radius: var(--radius-lg); }
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
-        .footer-col-title { font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 24px; }
-        .footer-text { color: var(--light-blue); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-        .footer-link { color: var(--light-blue); transition: var(--transition); display: block; margin-bottom: 12px; text-decoration: none; }
-        .footer-link:hover { color: var(--accent); transform: translateX(5px); }
-        .footer-bottom { position: relative; z-index: 10; text-align: center; margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; }
+
+        .footer {
+          position: relative;
+          padding: 90px 0 42px;
+          background:
+            radial-gradient(circle at 15% 20%, rgba(0, 223, 216, 0.16), transparent 30%),
+            radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.1), transparent 28%),
+            linear-gradient(135deg, var(--primary), #0d4778 52%, #105c96 100%);
+          color: var(--white);
+          overflow: hidden;
+          font-family: var(--font-main);
+        }
+        .footer::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+          background-size: 54px 54px;
+          opacity: 0.45;
+          pointer-events: none;
+        }
+        .footer-panel {
+          position: relative;
+          z-index: 10;
+          padding: clamp(34px, 4vw, 58px);
+          border-radius: var(--radius-lg);
+          background: linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+        }
+        .footer-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.85fr) minmax(220px, 0.6fr);
+          gap: clamp(32px, 5vw, 72px);
+          align-items: start;
+        }
+        .footer-brand { max-width: 520px; }
+        .footer-logo-wrap {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          margin-bottom: 22px;
+        }
+        .footer-logo {
+          width: 74px;
+          height: 74px;
+          object-fit: contain;
+          border-radius: 24px;
+          background: rgba(255, 255, 255, 0.94);
+          padding: 10px;
+          box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+        }
+        .footer-brand-title {
+          margin: 0;
+          color: #ffffff;
+          font-size: clamp(1.35rem, 2vw, 1.8rem);
+          font-weight: 900;
+          letter-spacing: -0.035em;
+        }
+        .footer-brand-subtitle {
+          margin: 5px 0 0;
+          color: rgba(255, 255, 255, 0.68);
+          font-size: 0.78rem;
+          font-weight: 900;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+        }
+        .footer-description {
+          margin: 0;
+          max-width: 500px;
+          color: rgba(234, 246, 255, 0.82);
+          font-size: 0.98rem;
+          font-weight: 600;
+          line-height: 1.85;
+        }
+        .footer-badges {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 24px;
+        }
+        .footer-badges span {
+          display: inline-flex;
+          align-items: center;
+          border-radius: 999px;
+          border: 1px solid rgba(0, 223, 216, 0.3);
+          background: rgba(0, 223, 216, 0.1);
+          color: #bffcfb;
+          padding: 8px 13px;
+          font-size: 0.78rem;
+          font-weight: 800;
+        }
+        .footer-col-title {
+          font-size: 1.18rem;
+          font-weight: 900;
+          color: #ffffff;
+          margin: 0 0 24px;
+        }
+        .footer-text {
+          color: rgba(234, 246, 255, 0.82);
+          margin-bottom: 16px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          font-weight: 650;
+          line-height: 1.65;
+        }
+        .footer-text i {
+          width: 20px;
+          color: var(--accent);
+          text-align: center;
+        }
+        .footer-link {
+          color: rgba(234, 246, 255, 0.82);
+          transition: var(--transition);
+          display: block;
+          width: fit-content;
+          margin-bottom: 13px;
+          font-weight: 700;
+          text-decoration: none;
+        }
+        .footer-link:hover {
+          color: var(--accent);
+          transform: translateX(6px);
+        }
+        .footer-bottom {
+          position: relative;
+          z-index: 10;
+          text-align: center;
+          margin-top: 60px;
+          padding-top: 24px;
+          border-top: 1px solid rgba(255, 255, 255, 0.12);
+          color: rgba(255, 255, 255, 0.68);
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+        @media (max-width: 1024px) {
+          .footer-grid { grid-template-columns: 1fr 1fr; }
+          .footer-brand { grid-column: 1 / -1; }
+        }
+        @media (max-width: 640px) {
+          .footer { padding: 64px 0 32px; }
+          .footer-panel { padding: 30px 22px; border-radius: 28px; }
+          .footer-grid { grid-template-columns: 1fr; gap: 34px; }
+          .footer-logo-wrap { align-items: flex-start; }
+          .footer-logo { width: 64px; height: 64px; border-radius: 20px; }
+          .footer-badges span { font-size: 0.72rem; }
+        }
 
         .whatsapp-widget { position: fixed; right: 24px; bottom: 24px; z-index: 1100; }
         .whatsapp-toggle { width: 58px; height: 58px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 50%; color: var(--white); background: #25D366; font-size: 1.9rem; box-shadow: 0 18px 34px -18px rgba(37, 211, 102, 0.9); cursor: pointer; transition: var(--transition); }
@@ -1251,6 +2037,7 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
             .section { padding: 72px 0; }
             .office-body, .contact-info-panel, .form-panel, .footer-panel { padding: 28px 22px; }
         }
+            ${WHATSAPP_WIDGET_STYLES}
     `,
     html: `
     <header class="navbar-wrapper" id="navbar">
@@ -1343,9 +2130,7 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
                             <p class="office-kicker">Head Office</p>
                             <h3 class="office-title">Jakarta</h3>
                             <ul class="office-list">
-                                <li><i class="fa-solid fa-location-dot"></i><span>Jl. Raya Daan Mogot No. 89 RT.2/RW.2,
-                                        Wijaya Kusuma, Kec. Grogol Petamburan, Kota Jakarta Barat, DKI Jakarta
-                                        11460</span></li>
+                                <li><i class="fa-solid fa-location-dot"></i><span>Jl. Pahlawan No.2, Kwadengan Barat, Lemahputro, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213</span></li>
                                 <li><i class="fa-solid fa-phone"></i><span>031 99726239</span></li>
                                 <li><i class="fa-solid fa-fax"></i><span>031 99726239</span></li>
                                 <li><i class="fa-solid fa-envelope"></i><span>globalinspeksisistem@gmail.com</span>
@@ -1459,8 +2244,8 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
             <div class="container">
                 <div class="map-shell glass">
                     <iframe title="Peta lokasi kantor GIS Laboratorium"
-                        src="https://www.google.com/maps?q=Jl.%20Raya%20Daan%20Mogot%20No.%2089%20Wijaya%20Kusuma%20Grogol%20Petamburan%20Jakarta%20Barat\u0026output=embed"
-                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  src="https://www.google.com/maps?q=Jl.%20Pahlawan%20No.2%2C%20Kwadengan%20Barat%2C%20Lemahputro%2C%20Kec.%20Sidoarjo%2C%20Kabupaten%20Sidoarjo%2C%20Jawa%20Timur%2061213&output=embed"
+  loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </section>
@@ -1470,22 +2255,35 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
         <div class="container">
             <div class="footer-panel glass-dark">
                 <div class="footer-grid">
-                    <div>
-                        <h4 class="footer-col-title">Contact</h4>
-                        <div class="footer-text">
-                            <i class="fa-solid fa-envelope"></i> info@gislaboratorium.com
-                        </div>
-                        <div class="footer-text" style="align-items: flex-start;">
-                            <i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
+                    <div class="footer-brand">
+                        <div class="footer-logo-wrap">
+                            <img src="/landing/animation/logo-lab.png" alt="GIS Laboratorium" class="footer-logo">
                             <div>
-                                +62 812-8532-8232<br>
-                                +62 817-888-879<br>
-                                +62 812-1704-7976
+                                <h3 class="footer-brand-title">GIS Laboratorium</h3>
+                                <p class="footer-brand-subtitle">PT. Global Inspeksi Sistem</p>
                             </div>
                         </div>
-                        <div class="footer-text">
-                            <i class="fa-solid fa-globe"></i> www.gislaboratorium.com
+                        <p class="footer-description">
+                            GIS Laboratorium hadir sebagai mitra pengujian yang membantu pelanggan memastikan mutu,
+                            keamanan, dan kesesuaian produk maupun lingkungan melalui layanan laboratorium yang akurat
+                            dan terpercaya.
+                        </p>
+                        <div class="footer-badges">
+                            <span>Pengujian Laboratorium</span>
+                            <span>Lingkungan</span>
+                            <span>Pelumas</span>
+                            <span>Sawit & Pupuk</span>
                         </div>
+                    </div>
+
+                    <div>
+                        <h4 class="footer-col-title">Contact</h4>
+                        <div class="footer-text"><i class="fa-solid fa-envelope"></i><span>info@gislaboratorium.com</span></div>
+                        <div class="footer-text" style="align-items: flex-start;">
+                            <i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
+                            <div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+                        </div>
+                        <div class="footer-text"><i class="fa-solid fa-globe"></i><span>www.gislaboratorium.com</span></div>
                     </div>
 
                     <div>
@@ -1499,37 +2297,10 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                © 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
-            </div>
+            <div class="footer-bottom">© 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.</div>
         </div>
     </footer>
-
-    <div class="whatsapp-widget">
-        <div class="whatsapp-window" id="whatsappWindow">
-            <div class="wa-header">
-                <div class="wa-brand">
-                    <img src="/landing/animation/logo-lab.png" alt="GISLAB">
-                    <span>PT Global Inspeksi Sistem</span>
-                </div>
-                <button class="wa-close" id="closeWhatsapp" aria-label="Tutup WhatsApp">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="wa-body">
-                <div class="wa-bubble">Halo! Ada yang bisa kami bantu mengenai layanan pengujian GIS?</div>
-                <a class="wa-link" href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium" target="_blank"
-                    rel="noopener">
-                    <i class="fa-brands fa-whatsapp"></i>
-                    <span>Customer Service 1</span>
-                </a>
-            </div>
-        </div>
-        <button class="whatsapp-toggle" id="toggleWhatsapp" aria-label="Buka WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-        </button>
-    </div>
-
+    ${WHATSAPP_WIDGET_HTML}
 
 `,
   },

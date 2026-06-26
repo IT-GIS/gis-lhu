@@ -49,7 +49,12 @@ export function canDeleteDocument(role: AppRole) {
 }
 
 export function canViewAuditLogs(role: AppRole) {
-  return ["SUPER_ADMIN", "ADMIN_LAB", "VIEWER_AUDITOR", "QA_SUPERVISOR"].includes(role);
+  return [
+    "SUPER_ADMIN",
+    "ADMIN_LAB",
+    "VIEWER_AUDITOR",
+    "QA_SUPERVISOR",
+  ].includes(role);
 }
 
 export function canManageBlogPosts(role: AppRole) {
@@ -57,4 +62,8 @@ export function canManageBlogPosts(role: AppRole) {
 }
 export function canViewContactMessages(role: AppRole) {
   return ["SUPER_ADMIN", "ADMIN_LAB", "FRONTDESK"].includes(role);
+}
+
+export function canManageUsers(role: AppRole) {
+  return role === "SUPER_ADMIN";
 }

@@ -192,13 +192,13 @@ const CONTACT_STYLES = `
   }
 
   .contact-page .hero-content {
-    position: relative;
-    z-index: 2;
-    width: min(1280px, 100%);
-    margin: 0 auto;
-    padding: 72px max(24px, calc((100vw - 1280px) / 2 + 56px));
-    color: var(--white);
-  }
+  position: relative;
+  z-index: 2;
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding: clamp(72px, 8vw, 120px) clamp(24px, 7vw, 88px);
+  color: var(--white);
+}
 
   .contact-page .eyebrow {
     display: inline-flex;
@@ -212,22 +212,25 @@ const CONTACT_STYLES = `
     text-transform: uppercase;
   }
 
-  .contact-page .hero-title {
-    color: var(--white);
-    font-size: clamp(2.4rem, 5vw, 4.6rem);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: 0;
-    margin: 0 0 22px;
-  }
+.contact-page .hero-title {
+  color: var(--white);
+  max-width: 780px;
+  font-size: clamp(2.2rem, 4.6vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  margin: 0 0 22px;
+  text-wrap: balance;
+}
 
-  .contact-page .hero-text {
-    max-width: 640px;
-    color: rgba(255, 255, 255, 0.86);
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0;
-  }
+.contact-page .hero-text {
+  max-width: 640px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
+  font-weight: 650;
+  line-height: 1.75;
+  margin: 0;
+}
 
   .contact-page .quick-contact {
     display: grid;
@@ -284,34 +287,39 @@ const CONTACT_STYLES = `
 
   .contact-page .section-header {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: 40px;
-    align-items: end;
+    grid-template-columns: minmax(420px, 0.95fr) minmax(420px, 1.05fr);
+    gap: clamp(32px, 4vw, 56px);
+    align-items: center;
     margin-bottom: 42px;
   }
 
   .contact-page .section-title {
     color: var(--primary);
-    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-size: clamp(2.6rem, 3.7vw, 4rem);
     font-weight: 800;
-    line-height: 1.12;
-    letter-spacing: 0;
+    line-height: 1.08;
+    letter-spacing: -0.04em;
     margin: 0;
+    max-width: 660px;
   }
 
   .contact-page .section-copy {
-    color: #405a70;
-    font-size: 1.05rem;
-    font-weight: 600;
-    line-height: 1.8;
+    color: #24445f;
+    font-size: clamp(1rem, 1.25vw, 1.22rem);
+    font-weight: 650;
+    line-height: 1.75;
     margin: 0;
+    max-width: 720px;
   }
 
-  .contact-page .office-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
+.contact-page .office-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
 
   .contact-page .office-card {
     position: relative;
@@ -333,13 +341,18 @@ const CONTACT_STYLES = `
   }
 
   .contact-page .office-card.surabaya {
-    background: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1200') center/cover;
-  }
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-height: 460px;
+  background: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1600') center/cover;
+}
 
   .contact-page .office-body {
-    padding: 34px;
-    color: var(--white);
-  }
+  width: min(100%, 820px);
+  padding: clamp(34px, 4vw, 56px);
+  color: var(--white);
+}
 
   .contact-page .office-kicker {
     display: inline-flex;
@@ -356,14 +369,16 @@ const CONTACT_STYLES = `
 
   .contact-page .office-title {
     color: var(--white);
-    font-size: 1.8rem;
+    font-size: clamp(2rem, 2.8vw, 3rem);
     font-weight: 800;
-    margin: 0 0 18px;
+    line-height: 1.08;
+    margin: 0 0 22px;
   }
 
   .contact-page .office-list {
     display: grid;
-    gap: 14px;
+    gap: 15px;
+    max-width: 680px;
   }
 
   .contact-page .office-list li {
@@ -587,94 +602,148 @@ const CONTACT_STYLES = `
 
   .contact-page .footer {
     position: relative;
-    padding: 80px 0 40px;
-    background: linear-gradient(135deg, var(--primary), #0e4e8a);
+    padding: 90px 0 42px;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(0, 223, 216, 0.16), transparent 30%),
+      radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.1), transparent 28%),
+      linear-gradient(135deg, #0A2540 0%, #0D4778 52%, #105C96 100%);
     color: var(--white);
     overflow: hidden;
+  }
+
+  .contact-page .footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 54px 54px;
+    opacity: 0.45;
+    pointer-events: none;
   }
 
   .contact-page .footer-panel {
     position: relative;
     z-index: 10;
-    padding: 60px;
+    padding: clamp(34px, 4vw, 58px);
     border-radius: var(--radius-lg);
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
   .contact-page .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 40px;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.85fr) minmax(220px, 0.6fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+
+  .contact-page .footer-brand {
+    max-width: 520px;
+  }
+
+  .contact-page .footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+
+  .contact-page .footer-logo {
+    width: 74px;
+    height: 74px;
+    object-fit: contain;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.94);
+    padding: 10px;
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+  }
+
+  .contact-page .footer-brand-title {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(1.35rem, 2vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+  }
+
+  .contact-page .footer-brand-subtitle {
+    margin: 5px 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .contact-page .footer-description {
+    margin: 0;
+    max-width: 500px;
+    color: rgba(234, 246, 255, 0.82);
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.85;
+  }
+
+  .contact-page .footer-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .contact-page .footer-badges span {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 223, 216, 0.3);
+    background: rgba(0, 223, 216, 0.1);
+    color: #BFFCFB;
+    padding: 8px 13px;
+    font-size: 0.78rem;
+    font-weight: 800;
   }
 
   .contact-page .footer-col-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #FFFFFF;
+    font-size: 1.18rem;
+    font-weight: 900;
+    color: #ffffff;
     margin: 0 0 24px;
   }
 
   .contact-page .footer-text {
-    color: var(--light-blue);
+    color: rgba(234, 246, 255, 0.82);
     margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 12px;
+    font-weight: 650;
+    line-height: 1.65;
+  }
+
+  .contact-page .footer-text i {
+    width: 20px;
+    color: var(--accent);
+    text-align: center;
   }
 
   .contact-page .footer-link {
-    color: var(--light-blue);
+    color: rgba(234, 246, 255, 0.82);
     transition: var(--transition);
     display: block;
-    margin-bottom: 12px;
+    width: fit-content;
+    margin-bottom: 13px;
+    font-weight: 700;
   }
 
   .contact-page .footer-link:hover {
     color: var(--accent);
-    transform: translateX(5px);
-  }
-
-  .contact-page .newsletter-form {
-    display: flex;
-    margin-top: 16px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-pill);
-    padding: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .contact-page .newsletter-input {
-    flex-grow: 1;
-    min-width: 0;
-    background: transparent;
-    border: none;
-    padding: 10px 16px;
-    color: var(--white);
-    outline: none;
-    font-family: inherit;
-  }
-
-  .contact-page .newsletter-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .contact-page .newsletter-btn {
-    background: var(--secondary);
-    color: var(--white);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: var(--transition);
-    flex: 0 0 auto;
-  }
-
-  .contact-page .newsletter-btn:hover {
-    background: var(--accent);
-    transform: scale(1.05);
+    transform: translateX(6px);
   }
 
   .contact-page .footer-bottom {
@@ -683,9 +752,10 @@ const CONTACT_STYLES = `
     text-align: center;
     margin-top: 60px;
     padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.875rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.9rem;
+    font-weight: 600;
   }
 
   .contact-page .whatsapp-widget {
@@ -786,6 +856,11 @@ const CONTACT_STYLES = `
   }
 
   @media (max-width: 980px) {
+
+
+.contact-page .office-card.surabaya {
+  min-height: 520px;
+}
     .contact-page .navbar {
       border-radius: 28px;
     }
@@ -816,8 +891,6 @@ const CONTACT_STYLES = `
     }
 
     .contact-page .quick-contact,
-    .contact-page .section-header,
-    .contact-page .office-grid,
     .contact-page .contact-panel,
     .contact-page .footer-grid {
       grid-template-columns: 1fr;
@@ -825,6 +898,28 @@ const CONTACT_STYLES = `
 
     .contact-page .quick-contact {
       margin-top: 28px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .contact-page .section-header {
+      grid-template-columns: 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .contact-page .section-title {
+      font-size: clamp(2.1rem, 8vw, 2.8rem);
+      max-width: 100%;
+      letter-spacing: -0.035em;
+    }
+
+    .contact-page .section-copy {
+      max-width: 100%;
+    }
+
+    .contact-page .office-card.surabaya {
+      width: 100%;
     }
   }
 
@@ -845,21 +940,25 @@ const CONTACT_STYLES = `
       transform: none;
     }
 
-    .contact-page .hero-content {
-      padding: 56px 24px;
-      max-width: 100vw;
-      overflow-wrap: normal;
-    }
+.contact-page .hero-content {
+  width: 100%;
+  padding: 104px 22px 64px;
+  max-width: 100vw;
+}
 
-    .contact-page .hero-title {
-      max-width: 320px;
-      font-size: clamp(1.9rem, 8.8vw, 2.1rem);
-      line-height: 1.08;
-    }
+.contact-page .hero-title {
+  max-width: 520px;
+  font-size: clamp(1.75rem, 7.2vw, 2.35rem);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
 
-    .contact-page .hero-text {
-      max-width: 330px;
-    }
+.contact-page .hero-text {
+  max-width: 520px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
 
     .contact-page .contact-hero {
       min-height: 100vh;
@@ -869,11 +968,19 @@ const CONTACT_STYLES = `
       padding: 72px 0;
     }
 
+    .contact-page .office-card {
+      min-height: 470px;
+    }
+
     .contact-page .office-body,
     .contact-page .contact-info-panel,
     .contact-page .form-panel,
     .contact-page .footer-panel {
       padding: 28px 22px;
+    }
+
+    .contact-page .office-title {
+      font-size: 2rem;
     }
 
     .contact-page .form-row {
@@ -1096,14 +1203,7 @@ export function ContactPage() {
               </p>
             </div>
 
-            <div
-              className="office-grid"
-              style={{
-                gridTemplateColumns: "1fr",
-                maxWidth: "600px",
-                margin: "0 auto",
-              }}
-            >
+            <div className="office-grid">
               <article className="office-card surabaya glass">
                 <div className="office-body">
                   <span className="office-kicker">Office</span>
@@ -1264,13 +1364,44 @@ export function ContactPage() {
         <div className="container">
           <div className="footer-panel glass-dark">
             <div className="footer-grid">
-              {/* Kolom 1: Contact */}
+              <div className="footer-brand">
+                <div className="footer-logo-wrap">
+                  <img
+                    src="/landing/animation/logo-lab.png"
+                    alt="GIS Laboratorium"
+                    className="footer-logo"
+                  />
+                  <div>
+                    <h3 className="footer-brand-title">GIS Laboratorium</h3>
+                    <p className="footer-brand-subtitle">
+                      PT. Global Inspeksi Sistem
+                    </p>
+                  </div>
+                </div>
+
+                <p className="footer-description">
+                  GIS Laboratorium hadir sebagai mitra pengujian yang membantu
+                  pelanggan memastikan mutu, keamanan, dan kesesuaian produk
+                  maupun lingkungan melalui layanan laboratorium yang akurat dan
+                  terpercaya.
+                </p>
+
+                <div className="footer-badges">
+                  <span>Pengujian Laboratorium</span>
+                  <span>Lingkungan</span>
+                  <span>Pelumas</span>
+                  <span>Sawit & Pupuk</span>
+                </div>
+              </div>
+
               <div>
                 <h4 className="footer-col-title">Contact</h4>
+
                 <div className="footer-text">
-                  <i className="fa-solid fa-envelope" />{" "}
-                  gislaboratorium@gmail.com
+                  <i className="fa-solid fa-envelope" />
+                  <span>info@gislaboratorium.com</span>
                 </div>
+
                 <div
                   className="footer-text"
                   style={{ alignItems: "flex-start" }}
@@ -1278,7 +1409,7 @@ export function ContactPage() {
                   <i
                     className="fa-solid fa-phone"
                     style={{ marginTop: "4px" }}
-                  />{" "}
+                  />
                   <div>
                     +62 812-8532-8232
                     <br />
@@ -1287,14 +1418,16 @@ export function ContactPage() {
                     +62 812-1704-7976
                   </div>
                 </div>
+
                 <div className="footer-text">
-                  <i className="fa-solid fa-globe" /> www.gislaboratorium.com
+                  <i className="fa-solid fa-globe" />
+                  <span>www.gislaboratorium.com</span>
                 </div>
               </div>
 
-              {/* Kolom 2: Link */}
               <div>
                 <h4 className="footer-col-title">Link</h4>
+
                 <Link href="/" className="footer-link">
                   Beranda
                 </Link>
@@ -1316,6 +1449,7 @@ export function ContactPage() {
               </div>
             </div>
           </div>
+
           <div className="footer-bottom">
             &copy; 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.
           </div>
@@ -1358,7 +1492,7 @@ export function ContactPage() {
               rel="noopener"
             >
               <i className="fa-brands fa-whatsapp" />
-              <span>Customer Service 1</span>
+              <span>Customer Service</span>
             </a>
           </div>
         </div>
