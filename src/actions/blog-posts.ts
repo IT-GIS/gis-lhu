@@ -38,6 +38,8 @@ export async function createBlogPostAction(formData: FormData) {
     revalidatePath("/posts");
     revalidatePath("/informasi");
     revalidatePath(`/informasi/${post.slug}`);
+    revalidatePath("/en/informasi");
+    revalidatePath(`/en/informasi/${post.slug}`);
   } catch (error) {
     redirect(buildMessageUrl("/posts/new", "error", getErrorMessage(error)));
   }
@@ -57,6 +59,8 @@ export async function updateBlogPostAction(formData: FormData) {
     revalidatePath(`/posts/${postId}/edit`);
     revalidatePath("/informasi");
     revalidatePath(`/informasi/${post.slug}`);
+    revalidatePath("/en/informasi");
+    revalidatePath(`/en/informasi/${post.slug}`);
   } catch (error) {
     redirect(
       buildMessageUrl(`/posts/${postId}/edit`, "error", getErrorMessage(error)),

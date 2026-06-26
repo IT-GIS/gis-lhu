@@ -92,6 +92,57 @@ const LANDING_RUNTIME_CSS = `
   .landing-html .border-l-primary-container {
     border-left-color: #0070eb;
   }
+
+  .landing-html .nav-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .landing-html .language-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    height: 38px;
+    padding: 0 13px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 112, 243, 0.18);
+    color: #0A2540;
+    background: rgba(255, 255, 255, 0.82);
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    transition: all 0.25s ease;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .landing-html .language-switch:hover {
+    color: #0070F3;
+    transform: translateY(-1px);
+    border-color: rgba(0, 112, 243, 0.32);
+    background: #ffffff;
+  }
+
+  .landing-html .language-switch i {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .landing-html .nav-actions {
+      gap: 8px;
+    }
+
+    .landing-html .language-switch {
+      height: 36px;
+      padding: 0 11px;
+      font-size: 0.78rem;
+    }
+  }
 `;
 
 const LANDING_HERO_OVERRIDE_CSS = `
@@ -146,6 +197,175 @@ const LANDING_HERO_OVERRIDE_CSS = `
     max-width: 896px !important;
   }
 
+  .landing-html .navbar-wrapper {
+    width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .landing-html .navbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 14px !important;
+
+    width: min(1000px, calc(100% - 32px)) !important;
+    max-width: 1000px !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 12px 24px !important;
+    border-radius: 999px !important;
+  }
+
+  .landing-html .nav-brand {
+    flex: 0 0 250px !important;
+    min-width: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+
+    color: var(--primary, #0A2540) !important;
+    font-size: 1.02rem !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.025em !important;
+    white-space: normal !important;
+  }
+
+  .landing-html .nav-brand img {
+    width: 44px !important;
+    height: 44px !important;
+    object-fit: contain !important;
+    flex: 0 0 44px !important;
+    margin-right: 0 !important;
+    transform: scale(1.45) !important;
+    transform-origin: center !important;
+  }
+
+  .landing-html .nav-menu {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+
+  .landing-html .nav-menu > li {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .landing-html .nav-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+
+    min-height: 38px !important;
+    padding: 8px 12px !important;
+    border-radius: 999px !important;
+
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  .landing-html .nav-actions {
+    flex: 0 0 auto !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+  }
+
+  .landing-html .language-switch {
+    height: 38px !important;
+    padding: 0 13px !important;
+    font-size: 0.8rem !important;
+    font-weight: 900 !important;
+    white-space: nowrap !important;
+  }
+
+  .landing-html .mobile-menu-btn {
+    flex: 0 0 auto !important;
+  }
+
+  @media (max-width: 1180px) {
+    .landing-html .navbar {
+      gap: 12px !important;
+      padding: 11px 18px !important;
+    }
+
+    .landing-html .nav-brand {
+      flex-basis: 230px !important;
+      font-size: 1rem !important;
+    }
+
+    .landing-html .nav-brand img {
+      height: 30px !important;
+      margin-right: 26px !important;
+      transform: scale(1.55) !important;
+    }
+
+    .landing-html .nav-menu {
+      gap: 5px !important;
+    }
+
+    .landing-html .nav-link {
+      padding: 8px 10px !important;
+      font-size: 0.84rem !important;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .landing-html .navbar {
+      position: relative !important;
+    }
+
+    .landing-html .nav-brand {
+      flex: 1 1 auto !important;
+      max-width: 360px !important;
+    }
+
+    .landing-html .nav-menu {
+      position: absolute !important;
+      top: calc(100% + 12px) !important;
+      left: 18px !important;
+      right: 18px !important;
+      z-index: 999 !important;
+      display: none !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      justify-content: flex-start !important;
+      gap: 8px !important;
+      padding: 18px !important;
+      border-radius: 24px !important;
+      background: rgba(255, 255, 255, 0.96) !important;
+      border: 1px solid rgba(226, 232, 240, 0.9) !important;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18) !important;
+      backdrop-filter: blur(18px) !important;
+      -webkit-backdrop-filter: blur(18px) !important;
+    }
+
+    .landing-html .nav-menu.active,
+    .landing-html .nav-menu.open {
+      display: flex !important;
+    }
+
+    .landing-html .nav-link {
+      width: 100% !important;
+      justify-content: flex-start !important;
+      padding: 12px 14px !important;
+      font-size: 0.95rem !important;
+    }
+  }
+
   @media (max-width: 768px) {
     .landing-html .profile-main > section:first-child,
     .landing-html.bg-background main > section:first-child {
@@ -158,13 +378,17 @@ const LANDING_HERO_OVERRIDE_CSS = `
     }
 
     .landing-html .navbar {
+      width: 100% !important;
       padding: 10px 14px !important;
+      gap: 12px !important;
     }
 
     .landing-html .nav-brand {
+      flex: 1 1 auto !important;
+      max-width: none !important;
       min-width: 0 !important;
       gap: 8px !important;
-      font-size: 0.88rem !important;
+      font-size: 0.9rem !important;
     }
 
     .landing-html .nav-brand img {
@@ -172,6 +396,16 @@ const LANDING_HERO_OVERRIDE_CSS = `
       height: auto !important;
       margin-right: 0 !important;
       transform: none !important;
+    }
+
+    .landing-html .nav-actions {
+      gap: 8px !important;
+    }
+
+    .landing-html .language-switch {
+      height: 36px !important;
+      padding: 0 11px !important;
+      font-size: 0.78rem !important;
     }
 
     .landing-html .profile-main > section:first-child > .relative.z-10 {
@@ -328,6 +562,88 @@ const serviceDetails = {
   },
 };
 
+const serviceDetailsEn = {
+  quality: {
+    title: "Product & Material Quality Testing",
+    cover:
+      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=1200",
+    alt: "Product and material quality testing in laboratory",
+    intro:
+      "Product and material quality testing helps companies ensure that product characteristics comply with standards, technical specifications, and customer requirements. This service follows the GISLAB testing scope, including lubricants, palm oil products, fertilizers, palm cooking oil, red palm cooking oil, and other technical products.",
+    whyTitle: "Why is product and material quality testing important?",
+    why: "Product quality cannot be assessed from visual appearance alone. Laboratory data is required to verify parameters such as moisture content, impurities, viscosity, flash point, pour point, elemental content, and other technical parameters required by standards. Test results help companies control quality and reduce the risk of product nonconformity.",
+    items: [
+      "Testing of lubricating oil and lubricants, such as kinematic viscosity, flash point, pour point, copper test, total base number, density, and selected elemental parameters.",
+      "Testing of palm oil products and derivatives, such as Crude Palm Oil, Palm Kernel, RBD Palm Olein, palm cooking oil, and red palm cooking oil.",
+      "Testing of fertilizers, such as NPK, Urea, KCl, Natural Phosphate, ZA, TSP, SP36, Borate, and Kieserite according to available scope parameters.",
+    ],
+    consult:
+      "The GISLAB team can help customers determine relevant test parameters based on product type, reference standards, and technical document needs. This ensures that testing is aligned with the actual scope and requirements of the product.",
+    commitment:
+      "GISLAB is committed to providing accurate, documented, and scope-aligned test results, giving customers a reliable technical basis for decision-making.",
+  },
+
+  environment: {
+    title: "Water & Environmental Testing",
+    cover:
+      "https://images.unsplash.com/photo-1564325724739-bae0bd08762c?auto=format&fit=crop&q=80&w=1200",
+    alt: "Water and environmental testing in laboratory",
+    intro:
+      "Water and environmental testing is performed to monitor the quality of water, wastewater, clean water, drinking water, mineral water, and natural water sources. This service helps customers understand sample conditions based on physical and chemical parameters listed in the GISLAB testing scope.",
+    whyTitle: "Why is water and environmental testing important?",
+    why: "Water and wastewater quality affects regulatory compliance, user safety, and environmental impact control. Laboratory testing provides objective data to evaluate parameters such as pH, temperature, TDS, TSS, COD, sulfate, chloride, nitrite, ammonia, dissolved metals, oil and grease, and other parameters according to the testing scope.",
+    items: [
+      "Testing of river water, lake water, estuary water, swamp water, aquifer water, spring water, reservoir water, and well water.",
+      "Testing of clean water, wastewater, drinking water, mineral water, and demineralized water based on available parameters.",
+      "Water sampling for physical and chemical testing according to methods listed in the testing scope.",
+    ],
+    consult:
+      "GISLAB can assist in selecting appropriate testing parameters based on sample type and testing objectives, whether for quality monitoring, internal evaluation, or technical documentation needs.",
+    commitment:
+      "We maintain testing accuracy, data traceability, and clear reporting so customers can make decisions based on reliable laboratory data.",
+  },
+
+  permit: {
+    title: "Ambient Air & Emission Testing",
+    cover:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&q=80&w=1200",
+    alt: "Ambient air and emission testing",
+    intro:
+      "Ambient air and emission testing helps customers monitor air quality and emissions from stationary sources. This service refers to parameters available within the GISLAB scope, including gases, particulates, noise, and air sampling activities.",
+    whyTitle: "Why is air and emission testing important?",
+    why: "Air quality and emission monitoring is required to identify potential pollution, evaluate emission control performance, and support compliance with environmental requirements. Test results serve as a technical basis for reporting, evaluation, and corrective action.",
+    items: [
+      "Ambient air testing, including SO₂, NO₂, NH₃, TSP, PM10, PM2.5, ozone, lead, and noise.",
+      "Stationary source emission testing, including opacity, NO₂, SO₂, H₂S, NO, O₂, CO₂, CO, methane, linear velocity, moisture content, and particulates.",
+      "Ambient air and stationary source emission sampling according to methods listed in the testing scope.",
+    ],
+    consult:
+      "The GISLAB team can assist in determining sampling points, parameters, and air testing requirements based on monitoring objectives and emission source types.",
+    commitment:
+      "GISLAB is committed to providing objective, structured, and documented air and emission testing services to support customers’ environmental management.",
+  },
+
+  sni: {
+    title: "SNI Product Testing",
+    cover:
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200",
+    alt: "SNI product testing in laboratory",
+    intro:
+      "SNI product testing helps ensure that products meet the relevant Indonesian National Standard requirements. This service follows the GISLAB testing scope, such as lubricating oil, mineral water, demineralized water, fertilizers, palm cooking oil, red palm cooking oil, and sprayer equipment.",
+    whyTitle: "Why is SNI product testing important?",
+    why: "SNI testing provides objective evidence that a product has been examined based on required methods and parameters. This data is important for quality control, conformity evaluation, certification processes, and increasing customer trust.",
+    items: [
+      "SNI-based product testing for lubricating oil, fertilizers, palm cooking oil, red palm cooking oil, mineral water, demineralized water, and other products according to the testing scope.",
+      "Testing of agricultural sprayer equipment based on dimensional parameters, specifications, and verification requirements listed in the scope.",
+      "Provision of test result data as a basis for quality evaluation, product conformity, and customer technical documentation needs.",
+    ],
+    consult:
+      "GISLAB can help identify suitable standards and parameters for customer products, making testing more accurate, targeted, and aligned with the available scope.",
+    commitment:
+      "We maintain test result objectivity, method accuracy, and process documentation to support product conformity with applicable standards.",
+  },
+};
+
 type ServiceKey = keyof typeof serviceDetails;
 
 function ensureLandingHeadAssets() {
@@ -386,18 +702,35 @@ function bindHomeTyping() {
 
   if (!title1El || !title2El || !subEl) return () => undefined;
 
-  const typeData = [
-    {
-      title1: "Laboratorium Pengujian ",
-      title2: "Global Inspeksi Sistem",
-      sub: "Laboratorium kami menyediakan layanan pengujian yang akurat, terpercaya, dan didukung oleh tenaga ahli berpengalaman serta peralatan modern.",
-    },
-    {
-      title1: "Pengujian Mutu ",
-      title2: "Barang Terpercaya",
-      sub: "Laboratorium Global Inspeksi Sistem adalah mitra yang andal dalam melakukan pengujian mutu barang.",
-    },
-  ];
+  const isEnglish =
+    window.location.pathname === "/en" ||
+    window.location.pathname.startsWith("/en/");
+
+  const typeData = isEnglish
+    ? [
+        {
+          title1: "Global Inspeksi Sistem ",
+          title2: "Testing Laboratory",
+          sub: "Our laboratory provides accurate and reliable testing services supported by experienced experts and modern equipment.",
+        },
+        {
+          title1: "Trusted Product ",
+          title2: "Quality Testing",
+          sub: "Global Inspeksi Sistem Laboratory is a reliable partner for product quality testing and technical compliance needs.",
+        },
+      ]
+    : [
+        {
+          title1: "Laboratorium Pengujian ",
+          title2: "Global Inspeksi Sistem",
+          sub: "Laboratorium kami menyediakan layanan pengujian yang akurat, terpercaya, dan didukung oleh tenaga ahli berpengalaman serta peralatan modern.",
+        },
+        {
+          title1: "Pengujian Mutu ",
+          title2: "Barang Terpercaya",
+          sub: "Laboratorium Global Inspeksi Sistem adalah mitra yang andal dalam melakukan pengujian mutu barang.",
+        },
+      ];
 
   let timeoutId: ReturnType<typeof setTimeout> | undefined;
   let typeIndex = 0;
@@ -475,7 +808,11 @@ function bindServiceDetails() {
       .replaceAll("'", "&#039;");
 
   const renderServiceDetail = (key: ServiceKey) => {
-    const detail = serviceDetails[key] ?? serviceDetails.quality;
+    const isEnglish =
+      window.location.pathname === "/en" ||
+      window.location.pathname.startsWith("/en/");
+    const activeServiceDetails = isEnglish ? serviceDetailsEn : serviceDetails;
+    const detail = activeServiceDetails[key] ?? activeServiceDetails.quality;
     detailCover.src = detail.cover;
     detailCover.alt = detail.alt;
 
@@ -621,26 +958,24 @@ function injectProfilePolicyPortraits() {
 }
 
 function bindWhatsapp() {
-  const toggleWa = document.getElementById("toggle-wa");
-  const closeWa = document.getElementById("close-wa");
-  const waWindow = document.getElementById("whatsapp-window");
   const toggleWhatsapp = document.getElementById("toggleWhatsapp");
   const closeWhatsapp = document.getElementById("closeWhatsapp");
   const whatsappWindow = document.getElementById("whatsappWindow");
 
-  const toggleLegacy = () => waWindow?.classList.toggle("hidden");
-  const closeLegacy = () => waWindow?.classList.add("hidden");
-  const toggleContact = () => whatsappWindow?.classList.toggle("active");
-  const closeContact = () => whatsappWindow?.classList.remove("active");
+  const toggleContact = () => {
+    whatsappWindow?.classList.toggle("active");
+    toggleWhatsapp?.classList.toggle("active");
+  };
 
-  toggleWa?.addEventListener("click", toggleLegacy);
-  closeWa?.addEventListener("click", closeLegacy);
+  const closeContact = () => {
+    whatsappWindow?.classList.remove("active");
+    toggleWhatsapp?.classList.remove("active");
+  };
+
   toggleWhatsapp?.addEventListener("click", toggleContact);
   closeWhatsapp?.addEventListener("click", closeContact);
 
   return () => {
-    toggleWa?.removeEventListener("click", toggleLegacy);
-    closeWa?.removeEventListener("click", closeLegacy);
     toggleWhatsapp?.removeEventListener("click", toggleContact);
     closeWhatsapp?.removeEventListener("click", closeContact);
   };
@@ -674,6 +1009,34 @@ function bindContactForm() {
   return () => form.removeEventListener("submit", handler);
 }
 
+function bindLanguageSwitcher() {
+  const languageSwitch = document.getElementById(
+    "languageSwitch",
+  ) as HTMLAnchorElement | null;
+  if (!languageSwitch) return () => undefined;
+
+  const pathname = window.location.pathname;
+  const isEnglish = pathname === "/en" || pathname.startsWith("/en/");
+
+  const targetPath = isEnglish
+    ? pathname.replace(/^\/en/, "") || "/"
+    : pathname === "/"
+      ? "/en"
+      : `/en${pathname}`;
+
+  const label = isEnglish ? "ID" : "EN";
+  const title = isEnglish ? "Ganti ke Bahasa Indonesia" : "Switch to English";
+
+  languageSwitch.href = `${targetPath}${window.location.search}${window.location.hash}`;
+  languageSwitch.title = title;
+  languageSwitch.setAttribute("aria-label", title);
+
+  const text = languageSwitch.querySelector("span");
+  if (text) text.textContent = label;
+
+  return () => undefined;
+}
+
 export function LandingHtmlPage({ page }: { page: LandingStaticPage }) {
   useEffect(() => {
     ensureLandingHeadAssets();
@@ -686,6 +1049,7 @@ export function LandingHtmlPage({ page }: { page: LandingStaticPage }) {
       injectProfilePolicyPortraits(),
       bindWhatsapp(),
       bindContactForm(),
+      bindLanguageSwitcher(),
     ];
 
     return () => {

@@ -10,31 +10,31 @@ const email = "globalinspeksisistem@gmail.com";
 
 const processSteps = [
   {
-    title: "Pengajuan Keluhan / Banding",
+    title: "Filing a Complaint/Appeal",
     icon: "fa-file-pen",
   },
   {
-    title: "Penerimaan & Registrasi",
+    title: "Admission and Registration",
     icon: "fa-clipboard-check",
   },
   {
-    title: "Tinjau Awal",
+    title: "Initial Review",
     icon: "fa-magnifying-glass",
   },
   {
-    title: "Pembentukan Tim Penanganan",
+    title: "Formation of Handling Team",
     icon: "fa-users-gear",
   },
   {
-    title: "Verifikasi & Investigasi",
+    title: "Verification and Investigation",
     icon: "fa-magnifying-glass-chart",
   },
   {
-    title: "Keputusan Penanganan",
+    title: "Handling Decision",
     icon: "fa-scale-balanced",
   },
   {
-    title: "Penyampaian Hasil",
+    title: "Delivery of Results",
     icon: "fa-envelope-open-text",
   },
 ];
@@ -939,7 +939,7 @@ const COMPLAINTS_APPEALS_STYLES = `
   }
 `;
 
-export function ComplaintsAppealsPage() {
+export function ComplaintsAppealsPageEn() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -964,7 +964,7 @@ export function ComplaintsAppealsPage() {
             <ul className={`nav-menu${menuOpen ? " open" : ""}`} id="navMenu">
               <li>
                 <Link href="/" className="nav-link">
-                  Beranda
+                  Home
                 </Link>
               </li>
 
@@ -976,32 +976,33 @@ export function ComplaintsAppealsPage() {
 
               <li>
                 <Link href="/service" className="nav-link">
-                  Layanan
+                  Service
                 </Link>
               </li>
 
               <li>
                 <Link href="/ruang-lingkup-pengujian" className="nav-link">
-                  Ruang Lingkup Pengujian
+                  Scope of Testing
                 </Link>
               </li>
 
               <li className="nav-dropdown">
                 <details>
                   <summary className="nav-link nav-dropdown-trigger active">
-                    Informasi <i className="fa-solid fa-chevron-down" />
+                    Information <i className="fa-solid fa-chevron-down" />
                   </summary>
 
                   <div className="nav-dropdown-menu">
                     <Link href="/informasi" className="nav-dropdown-link">
-                      Artikel <i className="fa-solid fa-newspaper" />
+                      Article <i className="fa-solid fa-newspaper" />
                     </Link>
 
                     <Link
                       href="/informasi/keluhan-dan-banding"
                       className="nav-dropdown-link active"
                     >
-                      Keluhan dan Banding <i className="fa-solid fa-comments" />
+                      Complaints and Appeals{" "}
+                      <i className="fa-solid fa-comments" />
                     </Link>
                   </div>
                 </details>
@@ -1009,7 +1010,7 @@ export function ComplaintsAppealsPage() {
 
               <li>
                 <Link href="/contact" className="nav-link">
-                  Kontak
+                  Contact
                 </Link>
               </li>
             </ul>
@@ -1033,11 +1034,11 @@ export function ComplaintsAppealsPage() {
           <div className="container">
             <div className="hero-grid">
               <div>
-                <h1 className="hero-title">Keluhan dan Banding</h1>
+                <h1 className="hero-title">Complaints and Appeals</h1>
 
                 <p className="hero-desc">
-                  Skema penanganan keluhan dan banding yang objektif,
-                  transparan, tidak diskriminatif, dan terdokumentasi.
+                  An objective, transparent, and documented complaints and
+                  appeals handling scheme.
                 </p>
 
                 <div className="hero-actions">
@@ -1047,14 +1048,14 @@ export function ComplaintsAppealsPage() {
                     rel="noopener noreferrer"
                     className="btn-primary"
                   >
-                    Hubungi WhatsApp <i className="fa-brands fa-whatsapp" />
+                    Contact WhatsApp <i className="fa-brands fa-whatsapp" />
                   </a>
 
                   <a
                     href={`mailto:${email}?subject=Keluhan%20dan%20Banding%20GISLAB`}
                     className="btn-secondary"
                   >
-                    Kirim Email <i className="fa-solid fa-envelope" />
+                    Send Email <i className="fa-solid fa-envelope" />
                   </a>
                 </div>
               </div>
@@ -1083,7 +1084,7 @@ export function ComplaintsAppealsPage() {
           <div className="container">
             <div className="procedure-heading">
               <h2 className="procedure-title">
-                Alur penanganan dari pengajuan sampai penyampaian hasil.
+                The handling flow from submission to delivery of results.
               </h2>
             </div>
 
@@ -1128,17 +1129,16 @@ export function ComplaintsAppealsPage() {
                   </div>
 
                   <p className="footer-description">
-                    GIS Laboratorium hadir sebagai mitra pengujian yang membantu
-                    pelanggan memastikan mutu, keamanan, dan kesesuaian produk
-                    maupun lingkungan melalui layanan laboratorium yang akurat
-                    dan terpercaya.
+                    GIS Laboratory is a testing partner that helps customers
+                    ensure product quality, safety, and environmental compliance
+                    through accurate and reliable laboratory services.
                   </p>
 
                   <div className="footer-badges">
-                    <span>Pengujian Laboratorium</span>
-                    <span>Lingkungan</span>
-                    <span>Pelumas</span>
-                    <span>Sawit & Pupuk</span>
+                    <span>Laboratory Testing</span>
+                    <span>Environment</span>
+                    <span>Lubricant</span>
+                    <span>Palm Oil and Fertilizer</span>
                   </div>
                 </div>
 
@@ -1177,22 +1177,22 @@ export function ComplaintsAppealsPage() {
                   <h4 className="footer-col-title">Link</h4>
 
                   <Link href="/" className="footer-link">
-                    Beranda
+                    Home
                   </Link>
                   <Link href="/profile" className="footer-link">
                     Profile
                   </Link>
                   <Link href="/service" className="footer-link">
-                    Layanan
+                    Service
                   </Link>
                   <Link href="/ruang-lingkup-pengujian" className="footer-link">
-                    Ruang Lingkup Pengujian
+                    Scope of Testing
                   </Link>
                   <Link href="/informasi" className="footer-link">
-                    Informasi
+                    Information
                   </Link>
                   <Link href="/contact" className="footer-link">
-                    Kontak
+                    Contact
                   </Link>
                 </div>
               </div>
