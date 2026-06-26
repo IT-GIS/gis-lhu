@@ -18,13 +18,17 @@ export type Article = {
 const articles: Article[] = [
   {
     id: 3762,
-    title: "Pengujian Pelumas: Mengapa Penting untuk Keandalan Mesin dan Efisiensi Operasional",
+    title:
+      "Pengujian Pelumas: Mengapa Penting untuk Keandalan Mesin dan Efisiensi Operasional",
     slug: "pengujian-pelumas-mengapa-penting-untuk-keandalan-mesin-dan-efisiensi-operasional",
     date: "2026-03-02T03:01:22",
     category: "Pelumas",
-    image: "/landing/blog/pengujian-pelumas-mengapa-penting-untuk-keandalan-mesin-dan-efisiensi-operasional.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2026/03/02/pengujian-pelumas-mengapa-penting-untuk-keandalan-mesin-dan-efisiensi-operasional/",
-    excerpt: "Pelumas (oli) adalah “darah” bagi mesin. Fungsinya bukan hanya melumasi, tetapi juga membantu mengurangi gesekan, menstabilkan temperatur, melindungi komponen dari keausan, dan membawa partikel kotoran agar tidak menumpuk di area kritis. Masalahnya,...",
+    image:
+      "/landing/blog/pengujian-pelumas-mengapa-penting-untuk-keandalan-mesin-dan-efisiensi-operasional.png",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2026/03/02/pengujian-pelumas-mengapa-penting-untuk-keandalan-mesin-dan-efisiensi-operasional/",
+    excerpt:
+      "Pelumas (oli) adalah “darah” bagi mesin. Fungsinya bukan hanya melumasi, tetapi juga membantu mengurangi gesekan, menstabilkan temperatur, melindungi komponen dari keausan, dan membawa partikel kotoran agar tidak menumpuk di area kritis. Masalahnya,...",
   },
   {
     id: 3750,
@@ -33,8 +37,10 @@ const articles: Article[] = [
     date: "2026-01-08T03:02:44",
     category: "Lingkungan",
     image: "/landing/blog/mengapa-pengujian-lingkungan-penting.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2026/01/08/mengapa-pengujian-lingkungan-penting/",
-    excerpt: "Pengujian lingkungan merupakan bagian penting dalam menjaga kualitas lingkungan hidup, kesehatan masyarakat, serta keberlanjutan kegiatan industri. Melalui pengujian yang akurat dan berbasis data, potensi pencemaran dapat dideteksi sejak dini sehingga...",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2026/01/08/mengapa-pengujian-lingkungan-penting/",
+    excerpt:
+      "Pengujian lingkungan merupakan bagian penting dalam menjaga kualitas lingkungan hidup, kesehatan masyarakat, serta keberlanjutan kegiatan industri. Melalui pengujian yang akurat dan berbasis data, potensi pencemaran dapat dideteksi sejak dini sehingga...",
   },
   {
     id: 3733,
@@ -43,18 +49,24 @@ const articles: Article[] = [
     date: "2025-12-17T06:51:28",
     category: "Laboratorium",
     image: "/landing/blog/laboratorium-pengujian-global-inspeksi-sistem.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/12/17/laboratorium-pengujian-global-inspeksi-sistem/",
-    excerpt: "Laboratorium Pengujian Global Inspeksi Sistem Dalam dunia industri dan perdagangan, kualitas dan kepatuhan produk tidak dapat ditentukan hanya dari tampilan fisik. Diperlukan pengujian laboratorium yang akurat dan dapat dipertanggungjawabkan untuk...",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/12/17/laboratorium-pengujian-global-inspeksi-sistem/",
+    excerpt:
+      "Laboratorium Pengujian Global Inspeksi Sistem Dalam dunia industri dan perdagangan, kualitas dan kepatuhan produk tidak dapat ditentukan hanya dari tampilan fisik. Diperlukan pengujian laboratorium yang akurat dan dapat dipertanggungjawabkan untuk...",
   },
   {
     id: 3665,
-    title: "Pengujian Alat Pertanian: Memastikan Kinerja, Keamanan, dan Efisiensi di Lapangan",
+    title:
+      "Pengujian Alat Pertanian: Memastikan Kinerja, Keamanan, dan Efisiensi di Lapangan",
     slug: "pengujian-alat-pertanian-memastikan-kinerja-keamanan-dan-efisiensi-di-lapangan",
     date: "2025-11-24T05:12:06",
     category: "Pertanian",
-    image: "/landing/blog/pengujian-alat-pertanian-memastikan-kinerja-keamanan-dan-efisiensi-di-lapangan.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/11/24/pengujian-alat-pertanian-memastikan-kinerja-keamanan-dan-efisiensi-di-lapangan/",
-    excerpt: "Pengujian Alat Pertanian: Layanan Uji Performa, Keamanan, dan Fungsi Sesuai Standar Industri Penggunaan alat pertanian modern—seperti sprayer, drone pertanian, alat olah tanah, dan alat panen—semakin meningkat dalam industri agrikultur. Namun tidak semua...",
+    image:
+      "/landing/blog/pengujian-alat-pertanian-memastikan-kinerja-keamanan-dan-efisiensi-di-lapangan.png",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/11/24/pengujian-alat-pertanian-memastikan-kinerja-keamanan-dan-efisiensi-di-lapangan/",
+    excerpt:
+      "Pengujian Alat Pertanian: Layanan Uji Performa, Keamanan, dan Fungsi Sesuai Standar Industri Penggunaan alat pertanian modern—seperti sprayer, drone pertanian, alat olah tanah, dan alat panen—semakin meningkat dalam industri agrikultur. Namun tidak semua...",
   },
   {
     id: 3329,
@@ -62,9 +74,12 @@ const articles: Article[] = [
     slug: "faktor-lingkungan-sehat-layanan-pengujian-laboratorium-terpadu",
     date: "2025-10-22T03:57:24",
     category: "Lingkungan",
-    image: "/landing/blog/faktor-lingkungan-sehat-layanan-pengujian-laboratorium-terpadu.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/10/22/faktor-lingkungan-sehat-layanan-pengujian-laboratorium-terpadu/",
-    excerpt: "PT Global Inspeksi Sistem (GIS) membantu perusahaan memastikan lingkungan kerja dan operasional yang sehat, patuh regulasi, dan berkelanjutan. Layanan kami mencakup perencanaan, pengambilan sampel (sampling), analisis laboratorium, QA/QC, interpretasi...",
+    image:
+      "/landing/blog/faktor-lingkungan-sehat-layanan-pengujian-laboratorium-terpadu.png",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/10/22/faktor-lingkungan-sehat-layanan-pengujian-laboratorium-terpadu/",
+    excerpt:
+      "PT Global Inspeksi Sistem (GIS) membantu perusahaan memastikan lingkungan kerja dan operasional yang sehat, patuh regulasi, dan berkelanjutan. Layanan kami mencakup perencanaan, pengambilan sampel (sampling), analisis laboratorium, QA/QC, interpretasi...",
   },
   {
     id: 3324,
@@ -72,29 +87,40 @@ const articles: Article[] = [
     slug: "layanan-pengujian-lingkungan-air-udara-emisi-tanah-kebisingan",
     date: "2025-10-08T05:13:40",
     category: "Lingkungan",
-    image: "/landing/blog/layanan-pengujian-lingkungan-air-udara-emisi-tanah-kebisingan.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/10/08/layanan-pengujian-lingkungan-air-udara-emisi-tanah-kebisingan/",
-    excerpt: "Kami membantu perusahaan, fasilitas publik, dan pengelola gedung memastikan kualitas lingkungan kerja dan operasional sesuai standar nasional (SNI/peraturan yang berlaku) dan praktik terbaik. Layanan kami mencakup pengambilan sampel sesuai SOP, analisis...",
+    image:
+      "/landing/blog/layanan-pengujian-lingkungan-air-udara-emisi-tanah-kebisingan.png",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/10/08/layanan-pengujian-lingkungan-air-udara-emisi-tanah-kebisingan/",
+    excerpt:
+      "Kami membantu perusahaan, fasilitas publik, dan pengelola gedung memastikan kualitas lingkungan kerja dan operasional sesuai standar nasional (SNI/peraturan yang berlaku) dan praktik terbaik. Layanan kami mencakup pengambilan sampel sesuai SOP, analisis...",
   },
   {
     id: 3276,
-    title: "Apakah Minyak Goreng Anda Aman? Minyak Berkualitas Dimulai Dari Pengujian Yang Benar",
+    title:
+      "Apakah Minyak Goreng Anda Aman? Minyak Berkualitas Dimulai Dari Pengujian Yang Benar",
     slug: "apakah-minyak-goreng-anda-aman-minyak-berkualitas-dimulai-dari-pengujian-yang-tepat",
     date: "2025-08-28T03:59:54",
     category: "Pangan & Sawit",
-    image: "/landing/blog/apakah-minyak-goreng-anda-aman-minyak-berkualitas-dimulai-dari-pengujian-yang-tepat.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/08/28/apakah-minyak-goreng-anda-aman-minyak-berkualitas-dimulai-dari-pengujian-yang-tepat/",
-    excerpt: "Minyak goreng yang tampak bening belum tentu aman. Untuk memastikan produk layak edar, konsisten mutunya, dan dipercaya pelanggan, dibutuhkan pengujian laboratorium yang terstandar dan terdokumentasi rapi. Mengapa GIS Labolatorium ? Metode tervalidasi,...",
+    image:
+      "/landing/blog/apakah-minyak-goreng-anda-aman-minyak-berkualitas-dimulai-dari-pengujian-yang-tepat.png",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/08/28/apakah-minyak-goreng-anda-aman-minyak-berkualitas-dimulai-dari-pengujian-yang-tepat/",
+    excerpt:
+      "Minyak goreng yang tampak bening belum tentu aman. Untuk memastikan produk layak edar, konsisten mutunya, dan dipercaya pelanggan, dibutuhkan pengujian laboratorium yang terstandar dan terdokumentasi rapi. Mengapa GIS Labolatorium ? Metode tervalidasi,...",
   },
   {
     id: 3254,
-    title: "Pengujian Pelumas Berkualitas oleh GISLAB: Kunci Performa Mesin yang Optimal",
+    title:
+      "Pengujian Pelumas Berkualitas oleh GISLAB: Kunci Performa Mesin yang Optimal",
     slug: "pengujian-pelumas-berkualitas-oleh-gislab-kunci-performa-mesin-yang-optimal",
     date: "2025-08-06T03:40:41",
     category: "Pelumas",
-    image: "/landing/blog/pengujian-pelumas-berkualitas-oleh-gislab-kunci-performa-mesin-yang-optimal.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/08/06/pengujian-pelumas-berkualitas-oleh-gislab-kunci-performa-mesin-yang-optimal/",
-    excerpt: "Dalam dunia industri dan otomotif, pelumas memegang peran penting untuk menjaga keandalan dan efisiensi mesin. GISLAB hadir sebagai mitra terpercaya Anda dalam layanan pengujian pelumas berkualitas, memberikan jaminan performa terbaik untuk kendaraan...",
+    image:
+      "/landing/blog/pengujian-pelumas-berkualitas-oleh-gislab-kunci-performa-mesin-yang-optimal.png",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/08/06/pengujian-pelumas-berkualitas-oleh-gislab-kunci-performa-mesin-yang-optimal/",
+    excerpt:
+      "Dalam dunia industri dan otomotif, pelumas memegang peran penting untuk menjaga keandalan dan efisiensi mesin. GISLAB hadir sebagai mitra terpercaya Anda dalam layanan pengujian pelumas berkualitas, memberikan jaminan performa terbaik untuk kendaraan...",
   },
   {
     id: 3246,
@@ -102,9 +128,12 @@ const articles: Article[] = [
     slug: "kualitas-cpo-crude-palm-oil-nggak-cuma-dinilai-dari-warnanya-aja",
     date: "2025-07-01T02:51:30",
     category: "Pangan & Sawit",
-    image: "/landing/blog/kualitas-cpo-crude-palm-oil-nggak-cuma-dinilai-dari-warnanya-aja.jpg",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/07/01/kualitas-cpo-crude-palm-oil-nggak-cuma-dinilai-dari-warnanya-aja/",
-    excerpt: "Ada banyak parameter penting yang diuji, seperti: FFA (Free Fatty Acid) – Menunjukkan tingkat keasaman minyak, Moisture & Impurities – Pengaruh besar ke daya simpan dan kualitas olahan, serta DOBI sebagai indikator kemudahan pemurnian minyak...",
+    image:
+      "/landing/blog/kualitas-cpo-crude-palm-oil-nggak-cuma-dinilai-dari-warnanya-aja.jpg",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/07/01/kualitas-cpo-crude-palm-oil-nggak-cuma-dinilai-dari-warnanya-aja/",
+    excerpt:
+      "Ada banyak parameter penting yang diuji, seperti: FFA (Free Fatty Acid) – Menunjukkan tingkat keasaman minyak, Moisture & Impurities – Pengaruh besar ke daya simpan dan kualitas olahan, serta DOBI sebagai indikator kemudahan pemurnian minyak...",
   },
   {
     id: 3234,
@@ -112,9 +141,12 @@ const articles: Article[] = [
     slug: "layanan-pengujian-pupuk-pt-global-inspeksi-sistem",
     date: "2025-07-01T02:50:38",
     category: "Pertanian",
-    image: "/landing/blog/layanan-pengujian-pupuk-pt-global-inspeksi-sistem.jpg",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/07/01/layanan-pengujian-pupuk-pt-global-inspeksi-sistem/",
-    excerpt: "Tanaman sehat dimulai dari pupuk yang berkualitas. GIS menyediakan layanan pengujian pupuk dengan akurasi tinggi untuk memastikan produk memenuhi standar mutu nasional dan internasional, mulai dari kandungan makronutrien sampai logam berat...",
+    image:
+      "/landing/blog/layanan-pengujian-pupuk-pt-global-inspeksi-sistem.jpg",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/07/01/layanan-pengujian-pupuk-pt-global-inspeksi-sistem/",
+    excerpt:
+      "Tanaman sehat dimulai dari pupuk yang berkualitas. GIS menyediakan layanan pengujian pupuk dengan akurasi tinggi untuk memastikan produk memenuhi standar mutu nasional dan internasional, mulai dari kandungan makronutrien sampai logam berat...",
   },
   {
     id: 3235,
@@ -122,9 +154,12 @@ const articles: Article[] = [
     slug: "pengujian-lingkungan-wawasan-akurat-untuk-menjaga-ekosistem",
     date: "2025-07-01T02:49:45",
     category: "Lingkungan",
-    image: "/landing/blog/pengujian-lingkungan-wawasan-akurat-untuk-menjaga-ekosistem.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/07/01/pengujian-lingkungan-wawasan-akurat-untuk-menjaga-ekosistem/",
-    excerpt: "Kesehatan lingkungan adalah faktor utama dalam menciptakan kehidupan yang lebih baik dan berkelanjutan. Pengujian lingkungan membantu memastikan air, udara, dan tanah tetap bersih, aman, dan sesuai standar yang berlaku...",
+    image:
+      "/landing/blog/pengujian-lingkungan-wawasan-akurat-untuk-menjaga-ekosistem.png",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/07/01/pengujian-lingkungan-wawasan-akurat-untuk-menjaga-ekosistem/",
+    excerpt:
+      "Kesehatan lingkungan adalah faktor utama dalam menciptakan kehidupan yang lebih baik dan berkelanjutan. Pengujian lingkungan membantu memastikan air, udara, dan tanah tetap bersih, aman, dan sesuai standar yang berlaku...",
   },
   {
     id: 3236,
@@ -132,19 +167,26 @@ const articles: Article[] = [
     slug: "analisa-minyak-goreng-sawit-jaminan-kualitas-terbaik",
     date: "2025-07-01T02:46:57",
     category: "Pangan & Sawit",
-    image: "/landing/blog/analisa-minyak-goreng-sawit-jaminan-kualitas-terbaik.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/07/01/analisa-minyak-goreng-sawit-jaminan-kualitas-terbaik/",
-    excerpt: "Minyak goreng sawit adalah salah satu bahan utama dalam dapur. Analisis minyak goreng sawit penting untuk memastikan kualitas, kemurnian, keamanan konsumsi, dan daya simpan tetap optimal sebelum produk sampai ke konsumen...",
+    image:
+      "/landing/blog/analisa-minyak-goreng-sawit-jaminan-kualitas-terbaik.png",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/07/01/analisa-minyak-goreng-sawit-jaminan-kualitas-terbaik/",
+    excerpt:
+      "Minyak goreng sawit adalah salah satu bahan utama dalam dapur. Analisis minyak goreng sawit penting untuk memastikan kualitas, kemurnian, keamanan konsumsi, dan daya simpan tetap optimal sebelum produk sampai ke konsumen...",
   },
   {
     id: 3237,
-    title: "Uji Pelumas Otomotif: Pastikan Mesin Anda Terlindungi dengan Pelumas Berkualitas",
+    title:
+      "Uji Pelumas Otomotif: Pastikan Mesin Anda Terlindungi dengan Pelumas Berkualitas",
     slug: "uji-pelumas-otomotifpastikan-mesin-anda-terlindungi-dengan-pelumas-berkualitas",
     date: "2025-07-01T02:44:54",
     category: "Pelumas",
-    image: "/landing/blog/uji-pelumas-otomotifpastikan-mesin-anda-terlindungi-dengan-pelumas-berkualitas.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/07/01/uji-pelumas-otomotifpastikan-mesin-anda-terlindungi-dengan-pelumas-berkualitas/",
-    excerpt: "Pelumas bukan sekadar cairan, tetapi tameng utama bagi mesin kendaraan. GIS menyediakan layanan pengujian pelumas otomotif untuk memastikan performa terbaik dan perlindungan maksimal melalui uji viskositas, keausan, titik nyala, dan komposisi...",
+    image:
+      "/landing/blog/uji-pelumas-otomotifpastikan-mesin-anda-terlindungi-dengan-pelumas-berkualitas.png",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/07/01/uji-pelumas-otomotifpastikan-mesin-anda-terlindungi-dengan-pelumas-berkualitas/",
+    excerpt:
+      "Pelumas bukan sekadar cairan, tetapi tameng utama bagi mesin kendaraan. GIS menyediakan layanan pengujian pelumas otomotif untuk memastikan performa terbaik dan perlindungan maksimal melalui uji viskositas, keausan, titik nyala, dan komposisi...",
   },
   {
     id: 3232,
@@ -152,9 +194,12 @@ const articles: Article[] = [
     slug: "layanan-pengujian-berkualitas-global-inspeksi-sistem",
     date: "2025-07-01T02:39:12",
     category: "Laboratorium",
-    image: "/landing/blog/layanan-pengujian-berkualitas-global-inspeksi-sistem.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/07/01/layanan-pengujian-berkualitas-global-inspeksi-sistem/",
-    excerpt: "GIS menyediakan berbagai layanan pengujian untuk mendukung standar mutu barang, mulai dari pelumas otomotif dan industri, pupuk, alat pertanian, CPO, lingkungan, air minum, palm kernel, hingga minyak goreng sawit...",
+    image:
+      "/landing/blog/layanan-pengujian-berkualitas-global-inspeksi-sistem.png",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/07/01/layanan-pengujian-berkualitas-global-inspeksi-sistem/",
+    excerpt:
+      "GIS menyediakan berbagai layanan pengujian untuk mendukung standar mutu barang, mulai dari pelumas otomotif dan industri, pupuk, alat pertanian, CPO, lingkungan, air minum, palm kernel, hingga minyak goreng sawit...",
   },
   {
     id: 3221,
@@ -163,22 +208,35 @@ const articles: Article[] = [
     date: "2025-07-01T02:26:04",
     category: "Pertanian",
     image: "/landing/blog/validasi-performa-keandalan-alat-di-lapangan.png",
-    sourceUrl: "https://gislaboratorium.com/index.php/2025/07/01/validasi-performa-keandalan-alat-di-lapangan/",
-    excerpt: "Alat pertanian perlu diuji secara teknis karena performa lapangan tidak hanya soal fungsi dasar. Pengujian mengukur daya tahan material, efisiensi mekanis, presisi operasional, stabilitas, dan keselamatan kerja di berbagai kondisi medan...",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2025/07/01/validasi-performa-keandalan-alat-di-lapangan/",
+    excerpt:
+      "Alat pertanian perlu diuji secara teknis karena performa lapangan tidak hanya soal fungsi dasar. Pengujian mengukur daya tahan material, efisiensi mekanis, presisi operasional, stabilitas, dan keselamatan kerja di berbagai kondisi medan...",
   },
   {
     id: 3180,
-    title: "Mengenal Berbagai Pengujian Laboratorium: Dari Pelumas Otomotif hingga Analisa Minyak Sawit, Apa Saja Manfaatnya?",
+    title:
+      "Mengenal Berbagai Pengujian Laboratorium: Dari Pelumas Otomotif hingga Analisa Minyak Sawit, Apa Saja Manfaatnya?",
     slug: "mengenal-berbagai-pengujian-laboratorium-dari-pelumas-otomotif-hingga-analisa-minyak-sawit-apa-saja-manfaatnya-2",
     date: "2024-10-29T03:35:30",
     category: "Pelumas",
-    image: "/landing/blog/mengenal-berbagai-pengujian-laboratorium-dari-pelumas-otomotif-hingga-analisa-minyak-sawit-apa-saja-manfaatnya-2.jpg",
-    sourceUrl: "https://gislaboratorium.com/index.php/2024/10/29/mengenal-berbagai-pengujian-laboratorium-dari-pelumas-otomotif-hingga-analisa-minyak-sawit-apa-saja-manfaatnya-2/",
-    excerpt: "Di era industri yang semakin maju, kualitas dan keamanan produk merupakan prioritas utama. GIS hadir sebagai laboratorium pengujian untuk membantu berbagai sektor memastikan produk memenuhi standar yang diakui...",
+    image:
+      "/landing/blog/mengenal-berbagai-pengujian-laboratorium-dari-pelumas-otomotif-hingga-analisa-minyak-sawit-apa-saja-manfaatnya-2.jpg",
+    sourceUrl:
+      "https://gislaboratorium.com/index.php/2024/10/29/mengenal-berbagai-pengujian-laboratorium-dari-pelumas-otomotif-hingga-analisa-minyak-sawit-apa-saja-manfaatnya-2/",
+    excerpt:
+      "Di era industri yang semakin maju, kualitas dan keamanan produk merupakan prioritas utama. GIS hadir sebagai laboratorium pengujian untuk membantu berbagai sektor memastikan produk memenuhi standar yang diakui...",
   },
 ];
 
-const categories = ["Semua", "Lingkungan", "Pelumas", "Pangan & Sawit", "Pertanian", "Laboratorium"];
+const categories = [
+  "Semua",
+  "Lingkungan",
+  "Pelumas",
+  "Pangan & Sawit",
+  "Pertanian",
+  "Laboratorium",
+];
 
 const INFORMATION_STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -829,18 +887,122 @@ const INFORMATION_STYLES = `
     position: fixed;
     right: 24px;
     bottom: 24px;
-    z-index: 999;
+    z-index: 1100;
   }
+
   .whatsapp-toggle {
-    width: 62px;
-    height: 62px;
-    border: 0;
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
-    background: #25d366;
-    color: #fff;
-    font-size: 1.85rem;
-    box-shadow: 0 14px 30px rgba(37, 211, 102, 0.32);
+    border: none;
+    color: #ffffff;
+    background: #25D366;
+    box-shadow: 0 14px 28px rgba(37, 211, 102, 0.28);
+    font-size: 1.8rem;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+  }
+
+  .whatsapp-toggle:hover {
+    transform: scale(1.06);
+    background: #128C7E;
+  }
+
+  .whatsapp-window {
+    position: absolute;
+    right: 0;
+    bottom: 76px;
+    width: min(340px, calc(100vw - 48px));
+    border-radius: 22px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.2);
+    transform: translateY(12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+  }
+
+  .whatsapp-window.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .wa-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px;
+    background: #075E54;
+    color: #ffffff;
+  }
+
+  .wa-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    min-width: 0;
+  }
+
+  .wa-brand img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex: 0 0 28px;
+  }
+
+  .wa-brand span {
+    white-space: nowrap;
+  }
+
+  .wa-close {
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .wa-body {
+    padding: 18px;
+    display: grid;
+    gap: 14px;
+    background: #ECE5DD;
+  }
+
+  .wa-bubble {
+    padding: 12px 14px;
+    border-radius: 16px;
+    color: #1f2937;
+    background: #ffffff;
+    font-weight: 650;
+    line-height: 1.55;
+    border-left: 4px solid #25D366;
+  }
+
+  .wa-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 999px;
+    padding: 12px 16px;
+    color: #ffffff;
+    background: #25D366;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .wa-link i {
+    font-size: 1.2rem;
   }
 
   @media (max-width: 1060px) {
@@ -890,6 +1052,8 @@ const INFORMATION_STYLES = `
     .footer-logo-wrap { align-items: flex-start; }
     .footer-logo { width: 64px; height: 64px; border-radius: 20px; }
     .footer-badges span { font-size: 0.72rem; }
+    .whatsapp-widget { right: 18px; bottom: 18px; }
+    .whatsapp-window { width: min(340px, calc(100vw - 36px)); bottom: 72px; }
   }`;
 
 function ensureLandingHeadAssets() {
@@ -897,7 +1061,8 @@ function ensureLandingHeadAssets() {
     const link = document.createElement("link");
     link.dataset.gislabFontawesome = "true";
     link.rel = "stylesheet";
-    link.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
+    link.href =
+      "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
     document.head.appendChild(link);
   }
 }
@@ -910,10 +1075,15 @@ function formatDate(date: string) {
   }).format(new Date(date));
 }
 
-export function InformationPage({ initialArticles = articles }: { initialArticles?: Article[] }) {
+export function InformationPage({
+  initialArticles = articles,
+}: {
+  initialArticles?: Article[];
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("Semua");
+  const [whatsappOpen, setWhatsappOpen] = useState(false);
 
   useEffect(() => {
     ensureLandingHeadAssets();
@@ -921,7 +1091,8 @@ export function InformationPage({ initialArticles = articles }: { initialArticle
 
   const normalizedQuery = query.trim().toLowerCase();
   const filteredArticles = initialArticles.filter((article) => {
-    const matchesCategory = activeCategory === "Semua" || article.category === activeCategory;
+    const matchesCategory =
+      activeCategory === "Semua" || article.category === activeCategory;
     const matchesQuery =
       !normalizedQuery ||
       article.title.toLowerCase().includes(normalizedQuery) ||
@@ -1220,15 +1391,48 @@ export function InformationPage({ initialArticles = articles }: { initialArticle
       </footer>
 
       <div className="whatsapp-widget">
-        <a
+        <div className={`whatsapp-window${whatsappOpen ? " active" : ""}`}>
+          <div className="wa-header">
+            <div className="wa-brand">
+              <img src="/landing/animation/logo-lab.png" alt="GISLAB" />
+              <span>PT Global Inspeksi Sistem</span>
+            </div>
+
+            <button
+              className="wa-close"
+              type="button"
+              aria-label="Tutup WhatsApp"
+              onClick={() => setWhatsappOpen(false)}
+            >
+              <i className="fa-solid fa-xmark" />
+            </button>
+          </div>
+
+          <div className="wa-body">
+            <div className="wa-bubble">
+              Halo! Ada yang bisa kami bantu mengenai layanan pengujian GIS?
+            </div>
+
+            <a
+              className="wa-link"
+              href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="fa-brands fa-whatsapp" />
+              <span>Customer Service</span>
+            </a>
+          </div>
+        </div>
+
+        <button
           className="whatsapp-toggle"
-          href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Buka WhatsApp GIS Laboratorium"
+          type="button"
+          aria-label="Buka WhatsApp"
+          onClick={() => setWhatsappOpen((open) => !open)}
         >
           <i className="fa-brands fa-whatsapp" />
-        </a>
+        </button>
       </div>
     </>
   );

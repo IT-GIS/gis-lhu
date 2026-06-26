@@ -9,6 +9,157 @@ export type LandingStaticPage = {
   html: string;
 };
 
+const WHATSAPP_WIDGET_STYLES = `
+  .whatsapp-widget {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1100;
+  }
+
+  .whatsapp-toggle {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: none;
+    color: #fff;
+    background: #25D366;
+    box-shadow: 0 14px 28px rgba(37, 211, 102, 0.28);
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+  }
+
+  .whatsapp-toggle:hover {
+    transform: scale(1.06);
+    background: #128C7E;
+  }
+
+  .whatsapp-window {
+    position: absolute;
+    right: 0;
+    bottom: 76px;
+    width: min(340px, calc(100vw - 48px));
+    border-radius: 22px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.2);
+    transform: translateY(12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+  }
+
+  .whatsapp-window.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .wa-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px;
+    background: #075E54;
+    color: #fff;
+  }
+
+  .wa-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+  }
+
+  .wa-brand img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  .wa-close {
+    border: none;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+
+  .wa-body {
+    padding: 18px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .wa-bubble {
+    padding: 12px 14px;
+    border-radius: 16px;
+    color: #1f2937;
+    background: #e8fff0;
+    font-weight: 650;
+    line-height: 1.55;
+  }
+
+  .wa-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 999px;
+    padding: 12px 16px;
+    color: #fff;
+    background: #25D366;
+    font-weight: 800;
+  }
+
+  @media (max-width: 640px) {
+    .whatsapp-widget {
+      right: 18px;
+      bottom: 18px;
+    }
+
+    .whatsapp-window {
+      width: min(340px, calc(100vw - 36px));
+      bottom: 72px;
+    }
+  }
+`;
+
+const WHATSAPP_WIDGET_HTML = `
+  <div class="whatsapp-widget">
+    <div class="whatsapp-window" id="whatsappWindow">
+      <div class="wa-header">
+        <div class="wa-brand">
+          <img src="/landing/animation/logo-lab.png" alt="GISLAB">
+          <span>PT Global Inspeksi Sistem</span>
+        </div>
+        <button class="wa-close" id="closeWhatsapp" aria-label="Tutup WhatsApp">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="wa-body">
+        <div class="wa-bubble">
+          Halo! Ada yang bisa kami bantu mengenai layanan pengujian GIS?
+        </div>
+        <a class="wa-link" href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>Customer Service</span>
+        </a>
+      </div>
+    </div>
+
+    <button class="whatsapp-toggle" id="toggleWhatsapp" aria-label="Buka WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </button>
+  </div>
+`;
+
 const pageList = [
   {
     key: "home",
@@ -352,6 +503,9 @@ const pageList = [
         }
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
+
+        ${WHATSAPP_WIDGET_STYLES}
+
     `,
     html: `
     <header class="navbar-wrapper" id="navbar">
@@ -674,6 +828,7 @@ const pageList = [
             <div class="footer-bottom">© 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.</div>
         </div>
     </footer>
+    ${WHATSAPP_WIDGET_HTML}
 `,
   },
   {
@@ -892,6 +1047,7 @@ const pageList = [
             .footer-grid { grid-template-columns: 1fr; }
             .footer-panel { padding: 32px 20px; }
         }
+            ${WHATSAPP_WIDGET_STYLES}
     `,
     html: `
 <header class="navbar-wrapper" id="navbar">
@@ -1138,49 +1294,7 @@ const pageList = [
         </div>
     </footer>
 
-<div id="whatsapp-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 font-['Inter']">
-    <div id="whatsapp-window" class="hidden w-[340px] bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 transition-all origin-bottom-right">
-        <div class="bg-[#075E54] p-4 flex items-center justify-between text-white">
-            <div class="flex items-center gap-3">
-                <div class="bg-white p-1 rounded-full">
-                    <img src="https://giscert.com/assets/client/images/GISlogo.png" class="w-8 h-8 object-contain" alt="Logo">
-                </div>
-                <div>
-                    <div class="font-bold text-sm">PT Global Inspeksi Sistem</div>
-                    <div class="text-xs text-white/80">Membalas secepatnya</div>
-                </div>
-            </div>
-            <button id="close-wa" class="text-white/80 hover:text-white transition-colors">
-                <span class="material-symbols-outlined text-[24px]">close</span>
-            </button>
-        </div>
-        <div class="bg-[#ECE5DD] p-4 min-h-[240px] relative before:content-[''] before:absolute before:inset-0 before:bg-[url('https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg')] before:opacity-10 before:mix-blend-multiply before:pointer-events-none">
-            <div class="bg-white rounded-xl p-3 shadow-sm text-sm text-gray-800 w-[85%] mb-4 relative ml-0 border-l-4 border-[#25D366]">
-                Halo! Ada yang bisa kami bantu mengenai layanan sertifikasi dan inspeksi GIS?
-            </div>
-            <a href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium" target="_blank" class="relative flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition-all group w-full border border-transparent hover:border-[#25D366]/30">
-                <div class="relative flex-shrink-0">
-                    <img src="https://2.bp.blogspot.com/-y6xNA_8TpFo/XXWzkdYk0MI/AAAAAAAAA5s/RCzTBJ_FbMwVt5AEZKekwQqiDNqdNQJjgCLcBGAs/s70/supportmale.png" class="w-12 h-12 rounded-full bg-blue-50 object-cover" alt="CS">
-                    <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#25D366] rounded-full border-2 border-white"></div>
-                </div>
-                <div class="flex-1">
-                    <div class="text-[11px] font-bold text-gray-500 uppercase tracking-wide">Support</div>
-                    <div class="text-sm font-bold text-gray-800 group-hover:text-[#075E54]">Customer Service 1</div>
-                </div>
-                <div class="w-8 h-8 rounded-full bg-[#25D366]/10 flex items-center justify-center text-[#25D366] group-hover:bg-[#25D366] group-hover:text-white transition-colors">
-                    <i class="fa-brands fa-whatsapp text-lg"></i>
-                </div>
-            </a>
-        </div>
-    </div>
-    
-    <button id="toggle-wa" class="w-14 h-14 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full shadow-lg shadow-[#25D366]/30 flex items-center justify-center transition-transform hover:scale-110 relative group">
-        <span class="absolute right-full mr-4 bg-white text-gray-800 text-sm font-semibold px-4 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 after:-right-2 after:border-8 after:border-transparent after:border-l-white">
-            Butuh Bantuan?
-        </span>
-        <i class="fa-brands fa-whatsapp text-3xl"></i>
-    </button>
-</div>
+${WHATSAPP_WIDGET_HTML}
 `,
   },
   {
@@ -1430,6 +1544,7 @@ const pageList = [
             .detail-cover { height: 260px; }
             .detail-body { padding: 28px 22px; }
         }
+            ${WHATSAPP_WIDGET_STYLES}
     `,
     html: `
 <div class="liquid-bg"></div>
@@ -1637,6 +1752,7 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
             <div class="footer-bottom">© 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.</div>
         </div>
     </footer>
+    ${WHATSAPP_WIDGET_HTML}
 `,
   },
   {
@@ -1921,6 +2037,7 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
             .section { padding: 72px 0; }
             .office-body, .contact-info-panel, .form-panel, .footer-panel { padding: 28px 22px; }
         }
+            ${WHATSAPP_WIDGET_STYLES}
     `,
     html: `
     <header class="navbar-wrapper" id="navbar">
@@ -2183,32 +2300,7 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
             <div class="footer-bottom">© 2026 GISLAB - Global Inspeksi Sistem. All rights reserved.</div>
         </div>
     </footer>
-
-    <div class="whatsapp-widget">
-        <div class="whatsapp-window" id="whatsappWindow">
-            <div class="wa-header">
-                <div class="wa-brand">
-                    <img src="/landing/animation/logo-lab.png" alt="GISLAB">
-                    <span>PT Global Inspeksi Sistem</span>
-                </div>
-                <button class="wa-close" id="closeWhatsapp" aria-label="Tutup WhatsApp">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="wa-body">
-                <div class="wa-bubble">Halo! Ada yang bisa kami bantu mengenai layanan pengujian GIS?</div>
-                <a class="wa-link" href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium" target="_blank"
-                    rel="noopener">
-                    <i class="fa-brands fa-whatsapp"></i>
-                    <span>Customer Service 1</span>
-                </a>
-            </div>
-        </div>
-        <button class="whatsapp-toggle" id="toggleWhatsapp" aria-label="Buka WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-        </button>
-    </div>
-
+    ${WHATSAPP_WIDGET_HTML}
     
 `,
   },

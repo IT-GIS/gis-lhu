@@ -1156,7 +1156,7 @@ export function ScopeLandingPage() {
               rel="noopener"
             >
               <i className="fa-brands fa-whatsapp" />
-              <span>Customer Service 1</span>
+              <span>Customer Service</span>
             </a>
           </div>
         </div>
