@@ -846,6 +846,12 @@ const pageList = [
         body { background-color: #FAFCFF; overflow-x: hidden; position: relative; }
         body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 15% 50%, rgba(0, 223, 216, 0.04), transparent 25%), radial-gradient(circle at 85% 30%, rgba(0, 112, 243, 0.04), transparent 25%); z-index: -1; pointer-events: none; }
         .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px); border: 1px solid transparent; border-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2)) 1; box-shadow: 0px 0px 30px rgba(0, 122, 255, 0.1); }
+        .profile-hero-card {
+  border: none !important;
+  border-image: none !important;
+  outline: none !important;
+  box-shadow: 0 24px 70px rgba(10, 37, 64, 0.12) !important;
+}
         .glass-dark { background: var(--glass-dark-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-dark-border); color: var(--white); }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
         .liquid-bg { background: #FAFCFF; background-attachment: fixed; }
@@ -876,7 +882,68 @@ const pageList = [
         .policy-contact-list { display: grid; gap: 10px; margin-top: 28px; padding: 0; list-style: none; }
         .policy-contact-list li { display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(113, 119, 134, 0.18); color: var(--text-dark); font-family: 'Inter', sans-serif; line-height: 1.55; }
         .policy-contact-list strong { color: var(--primary); font-family: var(--font-main); font-size: 0.78rem; letter-spacing: 0; text-transform: uppercase; }
+        .facility-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  width: 100%;
+  align-items: stretch;
+}
 
+.facility-card {
+  min-height: 320px;
+  padding: 42px 38px;
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.facility-card:hover {
+  background: rgba(255, 255, 255, 0.82);
+  transform: translateY(-6px);
+}
+
+.facility-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 28px;
+  border-radius: 24px;
+  background: rgba(0, 112, 243, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.facility-card:hover .facility-icon {
+  box-shadow: 0 0 24px rgba(0, 122, 255, 0.28);
+  transform: translateY(-2px);
+}
+
+.facility-icon .material-symbols-outlined {
+  color: var(--secondary);
+  font-size: 36px;
+}
+
+.facility-title {
+  width: 100%;
+  margin: 0 0 16px;
+  color: #0A2540;
+  font-weight: 900;
+  text-align: center;
+}
+
+.facility-desc {
+  width: 100%;
+  margin: 0;
+  color: var(--text-muted);
+  text-align: justify;
+  text-align-last: center;
+  line-height: 1.75;
+}
 
         .footer {
           position: relative;
@@ -1088,7 +1155,7 @@ const pageList = [
 <section class="relative h-[600px] rounded-[32px] overflow-hidden flex items-center justify-center">
 <div class="absolute inset-0 bg-cover bg-center" data-alt="ultra-modern clean bright laboratory with futuristic glass equipment and scientific instruments in a soft blue atmospheric lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhd3SPju_EcKUitBiUGdi5LM2CgMzbO_Y0lve9StPIQEtp-TWzEIXHOct2041e55OyWnmQVRMZzLsTopIp5xR6ofX60AzBiea6EdGEjr1UTXN1bHqSJ06GIcVBl05Gm6mwCEWf4z28g5R6SYenB8t-wCPCjKBLhXA80G3C0IdAzyxyM9bbofzJo6S4a74EMngUosxO1bsbN3MyqfXdXDVm3yxgG08lmmImklFa1WfWzFBI53c-b2CXLkhfYYPar4fE-gC9Xo_Jjqs\u0027')"></div>
 <div class="absolute inset-0 bg-blue-900/20 backdrop-blur-[2px]"></div>
-<div class="relative z-10 glass-card p-16 rounded-[32px] text-center max-w-4xl mx-4">
+<div class="relative z-10 glass-card profile-hero-card p-16 rounded-[32px] text-center max-w-4xl mx-4">
 <h1 class="font-display-lg text-display-lg text-on-surface mb-6">Profil Perusahaan</h1>
 <p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto">
                     Global Inspeksi Sistem (GIS) Laboratorium menghadirkan standar akurasi tertinggi dalam layanan pengujian air dan lingkungan dan industri melalui inovasi teknologi masa depan.
@@ -1144,33 +1211,41 @@ const pageList = [
 </section>
 
 <section class="space-y-16">
-<div class="text-center space-y-4">
-<h2 class="font-headline-md text-headline-md text-on-surface">Fasilitas & Keunggulan</h2>
-<p class="text-secondary font-body-lg">Standar operasional dengan teknologi masa depan</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="glass-card p-8 rounded-[32px] group hover:bg-white/80 transition-all duration-500">
-<div class="mb-6 inline-block p-4 bg-primary/10 rounded-2xl group-hover:shadow-[0_0_20px_rgba(0,122,255,0.3)] transition-all">
-<span class="material-symbols-outlined text-primary text-3xl" data-icon="biotech">biotech</span>
-</div>
-<h4 class="font-headline-sm text-headline-sm mb-4 text-[#0A2540] font-extrabold">Peralatan Terbaik</h4>
-<p class="text-secondary font-body-md">Didukung oleh instrumentasi analisis tercanggih dengan tingkat presisi tinggi untuk hasil yang tak terbantahkan.</p>
-</div>
-<div class="glass-card p-8 rounded-[32px] group hover:bg-white/80 transition-all duration-500">
-<div class="mb-6 inline-block p-4 bg-primary/10 rounded-2xl group-hover:shadow-[0_0_20px_rgba(0,122,255,0.3)] transition-all">
-<span class="material-symbols-outlined text-primary text-3xl" data-icon="verified">verified</span>
-</div>
-<h4 class="font-headline-sm text-headline-sm mb-4 text-[#0A2540] font-extrabold">Pengujian Standar</h4>
-<p class="text-secondary font-body-md">Setiap prosedur pengujian mengacu pada standar nasional (SNI) dan internasional (Standard Methods) yang berlaku.</p>
-</div>
-<div class="glass-card p-8 rounded-[32px] group hover:bg-white/80 transition-all duration-500">
-<div class="mb-6 inline-block p-4 bg-primary/10 rounded-2xl group-hover:shadow-[0_0_20px_rgba(0,122,255,0.3)] transition-all">
-<span class="material-symbols-outlined text-primary text-3xl" data-icon="sensors">sensors</span>
-</div>
-<h4 class="font-headline-sm text-headline-sm mb-4 text-[#0A2540] font-extrabold">Teknologi Terkini</h4>
-<p class="text-secondary font-body-md">Implementasi sistem manajemen laboratorium berbasis digital untuk transparansi dan kecepatan akses data real-time.</p>
-</div>
-</div>
+  <div class="text-center space-y-4">
+    <h2 class="font-headline-md text-headline-md text-on-surface">Fasilitas & Keunggulan</h2>
+  </div>
+
+  <div class="facility-grid">
+    <div class="glass-card facility-card group">
+      <div class="facility-icon">
+        <span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+      </div>
+      <h4 class="font-headline-sm text-headline-sm facility-title">Peralatan Pengujian Terbaik</h4>
+      <p class="font-body-md facility-desc">
+        Didukung oleh instrumen analisis modern dengan tingkat presisi tinggi untuk menghasilkan data pengujian yang andal.
+      </p>
+    </div>
+
+    <div class="glass-card facility-card group">
+      <div class="facility-icon">
+        <span class="material-symbols-outlined" data-icon="verified">verified</span>
+      </div>
+      <h4 class="font-headline-sm text-headline-sm facility-title">Pengujian Terstandar</h4>
+      <p class="font-body-md facility-desc">
+        Setiap proses pengujian mengacu pada standar nasional seperti SNI serta standar internasional yang relevan.
+      </p>
+    </div>
+
+    <div class="glass-card facility-card group">
+      <div class="facility-icon">
+        <span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+      </div>
+      <h4 class="font-headline-sm text-headline-sm facility-title">Teknologi Terkini</h4>
+      <p class="font-body-md facility-desc">
+        Penerapan sistem manajemen laboratorium berbasis digital untuk mendukung transparansi dan akses data yang lebih cepat.
+      </p>
+    </div>
+  </div>
 </section>
 
 <section class="space-y-10">
@@ -1597,7 +1672,7 @@ ${WHATSAPP_WIDGET_HTML}
 <div class="relative z-10 text-center px-4 max-w-4xl">
 <h1 class="font-display-lg text-display-lg text-primary mb-4">GIS Laboratory Services</h1>
 <p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto">
-                    Merintis analisis presisi melalui kerangka diagnostik berakurasi tinggi. Kami memberikan integritas struktural absolut dalam setiap penilaian kimia, biologi, dan lingkungan.
+                     Memastikan hasil pengujian yang akurat melalui proses analisis yang terukur, terdokumentasi, dan sesuai ruang lingkup layanan. GIS Laboratorium mendukung kebutuhan pengujian kimia, biologi, dan lingkungan dengan data yang jelas, terpercaya, dan dapat dipertanggungjawabkan.
                 </p>
 </div>
 </section>
