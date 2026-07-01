@@ -1181,7 +1181,7 @@ const pageList = [
 <div class="relative">
 <div class="absolute -inset-4 bg-primary/10 blur-[60px] rounded-full"></div>
 <div class="relative glass-card rounded-[40px] overflow-hidden aspect-square">
-<img class="w-full h-full object-cover" data-alt="microscopic view of crystalline structures in high-resolution detail with blue light refraction and scientific aesthetics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6Pm37V_Jw3Efy8Fsq0z-MWl51-bYCkPs3dSIJfK6Qtho4LZZfhMJnd6_ciQRRKE8lepnmnAopX4DHExWK8OiHYpO3Ecx9GSD51MdC25swVUSoiUlloRQngbVpxUXXoj1uwilV183VLj1gm1rFeXBFJSikxcaCyLklULPQM_VDvYiyGUHFjy8uPHneNCVZNf_hzLrFq7W2MWwlnq2I6YdYaMniX5XNw__va4oFVwF27zLlwLIsqBMH7k04O7CEFhH2QGDFY94yF9Y"/>
+<img class="w-full h-full object-cover" data-alt="microscopic view of crystalline structures in high-resolution detail with blue light refraction and scientific aesthetics" src="/landing/profile/laboratory-profile.png"/>
 </div>
 </div>
 </section>
