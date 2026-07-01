@@ -988,9 +988,6 @@ export function ScopeLandingPage() {
         <section className="scope-hero-section">
           <div className="scope-hero">
             <div className="hero-content">
-              <span className="eyebrow">
-                <i className="fa-solid fa-flask-vial" /> Lingkup akreditasi
-              </span>
               <h1 className="hero-title">Ruang Lingkup Pengujian</h1>
               <p className="hero-text">
                 Daftar metode, bahan atau produk, dan jenis pengujian yang

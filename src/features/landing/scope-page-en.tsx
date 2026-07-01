@@ -994,9 +994,6 @@ export function ScopePageEn() {
         <section className="scope-hero-section">
           <div className="scope-hero">
             <div className="hero-content">
-              <span className="eyebrow">
-                <i className="fa-solid fa-flask-vial" /> Accredited scope
-              </span>
               <h1 className="hero-title">Testing Scope</h1>
               <p className="hero-text">
                 A list of testing methods, materials or products, and test types
