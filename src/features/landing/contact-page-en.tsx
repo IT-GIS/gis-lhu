@@ -234,53 +234,65 @@ const CONTACT_STYLES = `
 }
 
   .contact-page .quick-contact {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    width: min(1280px, calc(100% - 48px));
-    margin: -58px auto 0;
-    position: relative;
-    z-index: 5;
-  }
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: min(1320px, calc(100% - 48px));
+  margin: -58px auto 0;
+  position: relative;
+  z-index: 5;
+  align-items: stretch;
+}
 
   .contact-page .quick-card {
-    min-height: 154px;
-    padding: 28px;
-    border-radius: var(--radius-md);
-    transition: var(--transition);
-  }
+  min-height: 210px;
+  padding: 34px 32px;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
   .contact-page .quick-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-hover);
-  }
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
 
   .contact-page .quick-icon {
-    width: 48px;
-    height: 48px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 16px;
-    color: var(--secondary);
-    background: rgba(0, 112, 243, 0.1);
-    font-size: 1.25rem;
-    margin-bottom: 18px;
-  }
+  width: 58px;
+  height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  color: var(--secondary);
+  background: rgba(0, 112, 243, 0.1);
+  font-size: 1.28rem;
+  margin: 0 auto 22px;
+}
 
   .contact-page .quick-label {
-    color: var(--primary);
-    font-size: 1.05rem;
-    font-weight: 800;
-    margin: 0 0 8px;
-  }
+  width: 100%;
+  color: var(--primary);
+  font-size: 1.08rem;
+  font-weight: 900;
+  margin: 0 0 12px;
+  text-align: center;
+}
 
   .contact-page .quick-value {
-    color: #405a70;
-    font-weight: 700;
-    overflow-wrap: anywhere;
-    margin: 0;
-  }
+  width: 100%;
+  color: #405a70;
+  font-weight: 800;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  margin: 0;
+  text-align: center;
+}
 
   .contact-page .section {
     padding: 96px 0;
@@ -1150,9 +1162,7 @@ export function ContactPageEn() {
         <section className="contact-hero-section">
           <div className="contact-hero">
             <div className="hero-content">
-              <span className="eyebrow">
-                <i className="fa-solid fa-headset" /> Contact us
-              </span>
+              
               <h1 className="hero-title">
                 Contact us and let us know how we can help.
               </h1>
@@ -1199,7 +1209,7 @@ export function ContactPageEn() {
                 <i className="fa-brands fa-whatsapp" />
               </span>
               <h2 className="quick-label">WhatsApp</h2>
-              <p className="quick-value">Customer Service GIS</p>
+              <p className="quick-value">+62 812-8532-8232</p>
             </a>
           </div>
         </section>
@@ -1208,9 +1218,6 @@ export function ContactPageEn() {
           <div className="container">
             <div className="section-header">
               <div>
-                <span className="eyebrow">
-                  <i className="fa-solid fa-building" /> Office
-                </span>
                 <h2 className="section-title">
                   Visit the GIS Laboratory office.
                 </h2>
@@ -1225,7 +1232,7 @@ export function ContactPageEn() {
             <div className="office-grid">
               <article className="office-card surabaya glass">
                 <div className="office-body">
-                  <span className="office-kicker">Branch Office</span>
+                  <span className="office-kicker">Office</span>
                   <h3 className="office-title">Surabaya</h3>
                   <ul className="office-list">
                     <li>
