@@ -16,6 +16,10 @@ const allowedMimeTypes = new Map([
   ["image/gif", ".gif"],
 ]);
 
+function getUploadDir() {
+  return path.join(process.cwd(), "uploads", "blog");
+}
+
 function createSafeFileName(originalName: string, extension: string) {
   const baseName = originalName
     .replace(/\.[^/.]+$/, "")
@@ -69,7 +73,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const uploadDir = path.join(process.cwd(), "public", "landing", "blog");
+  const uploadDir = getUploadDir();
   await mkdir(uploadDir, { recursive: true });
 
   const fileName = createSafeFileName(file.name, extension);
@@ -80,6 +84,6 @@ export async function POST(request: Request) {
 
   return NextResponse.json({
     ok: true,
-    path: `/landing/blog/${fileName}`,
+    path: `/uploads/blog/${fileName}`,
   });
 }
