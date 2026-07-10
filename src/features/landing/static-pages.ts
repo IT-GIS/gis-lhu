@@ -219,14 +219,130 @@ const pageList = [
         .typing-live { position: absolute; inset: 0; display: block;}
         .typing-neutral { background: none !important; color: inherit !important; -webkit-text-fill-color: initial !important; }
         .typing-accent { background: linear-gradient(135deg, var(--secondary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .advantages-wrapper { position: relative; z-index: 20; margin-top: -60px; padding-bottom: 60px; }
-        .advantages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .advantage-card { padding: 32px; border-radius: var(--radius-md); text-align: center; transition: var(--transition); display: flex; flex-direction: column; align-items: center; gap: 16px; animation: fadeUp 1s ease-out backwards; }
-        .advantage-card:nth-child(2) { animation-delay: 0.2s; }
-        .advantage-card:nth-child(3) { animation-delay: 0.4s; }
-        .advantage-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
-        .advantage-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(0, 112, 243, 0.1); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; color: var(--secondary); margin-bottom: 8px; }
-        .advantage-title { font-size: 1.25rem; font-weight: 700; color: var(--primary); }
+        .advantages-wrapper {
+  position: relative;
+  z-index: 20;
+  margin-top: -60px;
+  padding-bottom: 60px;
+}
+
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.advantage-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+  padding: 34px 28px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  animation: fadeUp 1s ease-out backwards;
+}
+
+.advantage-card::before {
+  content: "";
+  position: absolute;
+  inset: -90px auto auto -90px;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(0, 223, 216, 0.2), transparent 68%);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.advantage-card::after {
+  content: "";
+  position: absolute;
+  right: 24px;
+  bottom: 22px;
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 112, 243, 0.12);
+  opacity: 0.75;
+}
+
+.advantage-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.advantage-card:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.advantage-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 28px 70px rgba(0, 112, 243, 0.16);
+}
+
+.advantage-card:hover::before {
+  opacity: 1;
+}
+
+.advantage-icon {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  border-radius: 28px;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(135deg, #0070F3, #00DFD8) border-box;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--secondary);
+  margin-bottom: 8px;
+  box-shadow:
+    0 18px 40px rgba(0, 112, 243, 0.16),
+    inset 0 0 0 8px rgba(0, 112, 243, 0.06);
+  transition: var(--transition);
+}
+
+.advantage-icon::before {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border-radius: 34px;
+  border: 1px dashed rgba(0, 112, 243, 0.24);
+}
+
+.advantage-icon::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #00DFD8, #0070F3);
+  border: 4px solid #ffffff;
+  box-shadow: 0 10px 20px rgba(0, 112, 243, 0.18);
+}
+
+.advantage-card:hover .advantage-icon {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.advantage-title {
+  position: relative;
+  z-index: 2;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1.35;
+}
         .about-section { padding: 100px 0; position: relative; }
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: stretch; }
         .about-card { padding: 48px; border-radius: var(--radius-lg); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; }
@@ -571,23 +687,31 @@ const pageList = [
     </section>
 
     <div class="advantages-wrapper">
-        <div class="container">
-            <div class="advantages-grid">
-                <div class="advantage-card glass">
-                    <div class="advantage-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                    <h3 class="advantage-title">Pengujian Mutu Produk</h3>
-                </div>
-                <div class="advantage-card glass">
-                    <div class="advantage-icon"><i class="fa-solid fa-certificate"></i></div>
-                    <h3 class="advantage-title">Sertifikasi SNI</h3>
-                </div>
-                <div class="advantage-card glass">
-                    <div class="advantage-icon"><i class="fa-solid fa-globe"></i></div>
-                    <h3 class="advantage-title">Berstandar Internasional</h3>
-                </div>
-            </div>
+  <div class="container">
+    <div class="advantages-grid">
+      <div class="advantage-card glass">
+        <div class="advantage-icon">
+          <i class="fa-solid fa-flask-vial"></i>
         </div>
+        <h3 class="advantage-title">Pengujian Mutu Produk</h3>
+      </div>
+
+      <div class="advantage-card glass">
+        <div class="advantage-icon">
+          <i class="fa-solid fa-award"></i>
+        </div>
+        <h3 class="advantage-title">Sertifikasi SNI</h3>
+      </div>
+
+      <div class="advantage-card glass">
+        <div class="advantage-icon">
+          <i class="fa-solid fa-earth-asia"></i>
+        </div>
+        <h3 class="advantage-title">Berstandar Internasional</h3>
+      </div>
     </div>
+  </div>
+</div>
 
     <section class="about-section" id="profile">
         <div class="container">
@@ -865,6 +989,159 @@ const pageList = [
         .nav-link.active { background: rgba(0, 223, 216, 0.15); color: var(--secondary); font-weight: 600; }
         .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--primary); background: none; border: none; cursor: pointer; }
         .profile-main { padding-top: 140px; }
+        .profile-vm-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.profile-vm-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 390px;
+  padding: 46px 42px;
+  border-radius: 32px;
+  border-left: 5px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.profile-vm-card::before {
+  content: "";
+  position: absolute;
+  top: -90px;
+  right: -90px;
+  width: 210px;
+  height: 210px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(0, 223, 216, 0.18), transparent 68%);
+  opacity: 0.9;
+}
+
+.profile-vm-card::after {
+  content: "";
+  position: absolute;
+  left: 34px;
+  bottom: 30px;
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  border: 1px dashed rgba(0, 112, 243, 0.22);
+}
+
+.profile-vm-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 70px rgba(0, 112, 243, 0.15);
+}
+
+.profile-vm-card.mission {
+  border-left-color: var(--primary-container);
+}
+
+.profile-vm-icon {
+  position: relative;
+  z-index: 2;
+  width: 104px;
+  height: 104px;
+  margin: 0 auto 30px;
+  border-radius: 34px;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(135deg, #0070F3, #00DFD8) border-box;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+  box-shadow:
+    0 22px 46px rgba(0, 112, 243, 0.18),
+    inset 0 0 0 10px rgba(0, 112, 243, 0.06);
+  transition: var(--transition);
+}
+
+.profile-vm-icon::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 40px;
+  border: 1px dashed rgba(0, 112, 243, 0.24);
+}
+
+.profile-vm-icon::after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #00DFD8, #0070F3);
+  border: 5px solid #ffffff;
+  box-shadow: 0 10px 20px rgba(0, 112, 243, 0.2);
+}
+
+.profile-vm-icon i {
+  position: relative;
+  z-index: 2;
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.profile-vm-card:hover .profile-vm-icon {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.profile-vm-title {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 20px;
+  color: var(--primary);
+  font-size: clamp(1.55rem, 2vw, 2rem);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.profile-vm-text {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  color: #334155;
+  line-height: 1.85;
+  text-align: justify;
+  text-align-last: center;
+}
+
+.profile-vm-list {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin: 0;
+  padding-left: 0;
+  display: grid;
+  gap: 14px;
+  list-style: none;
+  color: #334155;
+  line-height: 1.65;
+  text-align: left;
+}
+
+.profile-vm-list li {
+  position: relative;
+  padding-left: 34px;
+}
+
+.profile-vm-list li::before {
+  content: "\\f058";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  top: 1px;
+  color: var(--secondary);
+}
         .specular-edge { border: 1px solid; border-image-source: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.1) 100%); border-image-slice: 1; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .policy-tabs { position: relative; overflow: hidden; }
@@ -882,6 +1159,40 @@ const pageList = [
         .policy-contact-list { display: grid; gap: 10px; margin-top: 28px; padding: 0; list-style: none; }
         .policy-contact-list li { display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(113, 119, 134, 0.18); color: var(--text-dark); font-family: 'Inter', sans-serif; line-height: 1.55; }
         .policy-contact-list strong { color: var(--primary); font-family: var(--font-main); font-size: 0.78rem; letter-spacing: 0; text-transform: uppercase; }
+        .policy-tab-panel {
+  width: 100%;
+}
+
+.policy-tab-panel.active {
+  display: block;
+}
+
+.policy-copy {
+  max-width: 100%;
+}
+
+.policy-tab-panel img,
+.policy-tab-panel figure,
+.policy-tab-panel picture,
+.policy-portrait,
+.policy-photo,
+.policy-image,
+.policy-figure,
+.policy-visual,
+.policy-panel-image,
+.policy-panel-visual {
+  display: none !important;
+}
+
+.policy-tab-panel > div {
+  max-width: 100% !important;
+}
+
+.policy-tab-panel [style*="grid-template-columns"],
+.policy-tab-panel [style*="display: grid"] {
+  display: block !important;
+  grid-template-columns: 1fr !important;
+}
         .facility-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -907,25 +1218,63 @@ const pageList = [
 }
 
 .facility-icon {
-  width: 72px;
-  height: 72px;
-  margin: 0 auto 28px;
-  border-radius: 24px;
-  background: rgba(0, 112, 243, 0.1);
+  position: relative;
+  z-index: 2;
+  width: 104px;
+  height: 104px;
+  margin: 0 auto 30px;
+  border-radius: 34px;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(135deg, #0070F3, #00DFD8) border-box;
+  border: 2px solid transparent;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  color: var(--secondary);
+  box-shadow:
+    0 22px 46px rgba(0, 112, 243, 0.18),
+    inset 0 0 0 10px rgba(0, 112, 243, 0.06);
   transition: var(--transition);
 }
 
-.facility-card:hover .facility-icon {
-  box-shadow: 0 0 24px rgba(0, 122, 255, 0.28);
-  transform: translateY(-2px);
+.facility-icon::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 40px;
+  border: 1px dashed rgba(0, 112, 243, 0.24);
 }
 
+.facility-icon::after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #00DFD8, #0070F3);
+  border: 5px solid #ffffff;
+  box-shadow: 0 10px 20px rgba(0, 112, 243, 0.2);
+}
+
+.facility-icon i,
 .facility-icon .material-symbols-outlined {
+  position: relative;
+  z-index: 2;
   color: var(--secondary);
-  font-size: 36px;
+  font-size: 2.65rem;
+  line-height: 1;
+}
+
+.facility-card:hover .facility-icon {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow:
+    0 28px 60px rgba(0, 112, 243, 0.24),
+    inset 0 0 0 10px rgba(0, 112, 243, 0.08);
 }
 
 .facility-title {
@@ -1084,6 +1433,26 @@ const pageList = [
           font-size: 0.9rem;
           font-weight: 600;
         }
+        @media (max-width: 900px) {
+  .profile-vm-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-vm-card {
+    min-height: auto;
+    padding: 36px 28px;
+  }
+
+  .profile-vm-icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 30px;
+  }
+
+  .profile-vm-icon i {
+    font-size: 2.25rem;
+  }
+}
         @media (max-width: 1024px) {
           .footer-grid { grid-template-columns: 1fr 1fr; }
           .footer-brand { grid-column: 1 / -1; }
@@ -1186,28 +1555,35 @@ const pageList = [
 </div>
 </section>
 
-<section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-<div class="glass-card p-12 rounded-[32px] border-l-4 border-l-primary flex flex-col items-center text-center">
-<div class="w-20 h-20 rounded-2xl bg-primary-container/20 flex items-center justify-center mb-8">
-<span class="material-symbols-outlined text-primary text-4xl" data-icon="visibility">visibility</span>
-</div>
-<h3 class="font-headline-sm text-headline-sm text-primary mb-6">Visi Kami</h3>
-<p class="font-body-lg text-body-lg text-on-surface">
-                    Menjadi laboratorium pengujian air dan lingkungan dan industri terkemuka di Indonesia yang diakui secara internasional dalam hal akurasi, inovasi, dan integritas profesional.
-                </p>
-</div>
-<div class="glass-card p-12 rounded-[32px] border-l-4 border-l-primary-container flex flex-col items-center text-center">
-<div class="w-20 h-20 rounded-2xl bg-primary-container/20 flex items-center justify-center mb-8">
-<span class="material-symbols-outlined text-primary text-4xl" data-icon="rocket_launch">rocket_launch</span>
-</div>
-<h3 class="font-headline-sm text-headline-sm text-primary mb-6">Misi Kami</h3>
-<ul class="font-body-lg text-body-lg text-on-surface text-left space-y-4 list-disc pl-5">
-<li>Memberikan layanan pengujian dengan standar ISO/IEC 17025.</li>
-<li>Mengembangkan kompetensi sumber daya manusia secara berkelanjutan.</li>
-<li>Mengintegrasikan teknologi digital terbaru untuk efisiensi operasional.</li>
-<li>Mendukung pelestarian lingkungan melalui data analisis yang akurat.</li>
-</ul>
-</div>
+<section class="profile-vm-grid">
+  <div class="glass-card profile-vm-card">
+    <div class="profile-vm-icon">
+      <i class="fa-solid fa-eye"></i>
+    </div>
+
+    <h3 class="profile-vm-title">Visi Kami</h3>
+
+    <p class="font-body-lg text-body-lg profile-vm-text">
+      Menjadi laboratorium pengujian air, lingkungan, dan industri terkemuka di Indonesia
+      yang diakui secara nasional maupun internasional dalam hal akurasi, inovasi,
+      dan integritas profesional.
+    </p>
+  </div>
+
+  <div class="glass-card profile-vm-card mission">
+    <div class="profile-vm-icon">
+      <i class="fa-solid fa-bullseye"></i>
+    </div>
+
+    <h3 class="profile-vm-title">Misi Kami</h3>
+
+    <ul class="font-body-lg text-body-lg profile-vm-list">
+      <li>Memberikan layanan pengujian yang akurat, terpercaya, dan sesuai standar.</li>
+      <li>Mengembangkan kompetensi sumber daya manusia secara berkelanjutan.</li>
+      <li>Mengintegrasikan teknologi digital untuk mendukung efisiensi layanan.</li>
+      <li>Mendukung pengelolaan mutu dan lingkungan melalui data pengujian yang dapat dipertanggungjawabkan.</li>
+    </ul>
+  </div>
 </section>
 
 <section class="space-y-16">
@@ -1216,36 +1592,36 @@ const pageList = [
   </div>
 
   <div class="facility-grid">
-    <div class="glass-card facility-card group">
-      <div class="facility-icon">
-        <span class="material-symbols-outlined" data-icon="biotech">biotech</span>
-      </div>
-      <h4 class="font-headline-sm text-headline-sm facility-title">Peralatan Pengujian Terbaik</h4>
-      <p class="font-body-md facility-desc">
-        Didukung oleh instrumen analisis modern dengan tingkat presisi tinggi untuk menghasilkan data pengujian yang andal.
-      </p>
+  <div class="glass-card facility-card group">
+    <div class="facility-icon">
+      <i class="fa-solid fa-microscope"></i>
     </div>
-
-    <div class="glass-card facility-card group">
-      <div class="facility-icon">
-        <span class="material-symbols-outlined" data-icon="verified">verified</span>
-      </div>
-      <h4 class="font-headline-sm text-headline-sm facility-title">Pengujian Terstandar</h4>
-      <p class="font-body-md facility-desc">
-        Setiap proses pengujian mengacu pada standar nasional seperti SNI serta standar internasional yang relevan.
-      </p>
-    </div>
-
-    <div class="glass-card facility-card group">
-      <div class="facility-icon">
-        <span class="material-symbols-outlined" data-icon="sensors">sensors</span>
-      </div>
-      <h4 class="font-headline-sm text-headline-sm facility-title">Teknologi Terkini</h4>
-      <p class="font-body-md facility-desc">
-        Penerapan sistem manajemen laboratorium berbasis digital untuk mendukung transparansi dan akses data yang lebih cepat.
-      </p>
-    </div>
+    <h4 class="font-headline-sm text-headline-sm facility-title">Peralatan Pengujian Terbaik</h4>
+    <p class="font-body-md facility-desc">
+      Didukung oleh instrumen analisis modern dengan tingkat presisi tinggi untuk menghasilkan data pengujian yang andal.
+    </p>
   </div>
+
+  <div class="glass-card facility-card group">
+    <div class="facility-icon">
+      <i class="fa-solid fa-certificate"></i>
+    </div>
+    <h4 class="font-headline-sm text-headline-sm facility-title">Pengujian Terstandar</h4>
+    <p class="font-body-md facility-desc">
+      Setiap proses pengujian mengacu pada standar nasional seperti SNI serta standar internasional yang relevan.
+    </p>
+  </div>
+
+  <div class="glass-card facility-card group">
+    <div class="facility-icon">
+      <i class="fa-solid fa-microchip"></i>
+    </div>
+    <h4 class="font-headline-sm text-headline-sm facility-title">Teknologi Terkini</h4>
+    <p class="font-body-md facility-desc">
+      Penerapan sistem manajemen laboratorium berbasis digital untuk mendukung transparansi dan akses data yang lebih cepat.
+    </p>
+  </div>
+</div>
 </section>
 
 <section class="space-y-10">
@@ -1304,7 +1680,6 @@ const pageList = [
 <div class="font-bold text-primary">Site web</div><div>www.gislaboratorium.com</div>
 <div class="font-bold text-primary">Letter</div><div>PT. Global Inspeksi Sistem</div>
 <div class="font-bold text-primary">Head Office (Surabaya)</div><div>Jl. Pahlawan No.2, Kwadengan Barat, Lemahputro, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213</div>
-<div class="font-bold text-primary">Branch Office (Jakarta)</div><div>Jl. Raya Daan Mogot No. 89 RT.2/RW.2, Wijaya Kusuma, Kec. Grogol Petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11460</div>
 </div>
 </div>
 <p class="text-justify text-on-surface font-body-lg leading-relaxed mb-8">

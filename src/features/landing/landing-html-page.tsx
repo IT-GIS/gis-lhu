@@ -925,35 +925,6 @@ function bindProfileTabs() {
 }
 
 function injectProfilePolicyPortraits() {
-  const panelIds = ["planning-tab", "research-tab"];
-  const portraitSrc = "/landing/profile/vera-marini.png";
-
-  panelIds.forEach((id) => {
-    const panel = document.getElementById(id);
-    const content = panel?.firstElementChild;
-    if (
-      !panel ||
-      !content ||
-      content.classList.contains("policy-with-portrait")
-    )
-      return;
-
-    content.classList.add("policy-with-portrait");
-    content.classList.remove("max-w-4xl");
-
-    const copyColumn = document.createElement("div");
-    copyColumn.className = "policy-copy-column";
-    Array.from(content.childNodes).forEach((child) =>
-      copyColumn.appendChild(child),
-    );
-
-    const portrait = document.createElement("figure");
-    portrait.className = "policy-portrait";
-    portrait.innerHTML = `<img src="${portraitSrc}" alt="Vera Marini, Director PT Global Inspeksi Sistem" loading="lazy">`;
-
-    content.append(copyColumn, portrait);
-  });
-
   return () => undefined;
 }
 
@@ -1046,7 +1017,6 @@ export function LandingHtmlPage({ page }: { page: LandingStaticPage }) {
       bindHomeTyping(),
       bindServiceDetails(),
       bindProfileTabs(),
-      injectProfilePolicyPortraits(),
       bindWhatsapp(),
       bindContactForm(),
       bindLanguageSwitcher(),
