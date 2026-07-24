@@ -1175,7 +1175,7 @@ export function ContactPageEn() {
 
           <div className="quick-contact">
             {/* Mengganti href tel ke nomor utama dan menampilkan 3 nomor tersusun */}
-            <a className="quick-card glass" href="tel:+6281285328232">
+            <a className="quick-card glass" href="tel:+6285645046160">
               <span className="quick-icon">
                 <i className="fa-solid fa-phone" />
               </span>
@@ -1183,7 +1183,7 @@ export function ContactPageEn() {
               <p className="quick-value">
                 +62 856-4504-6160 <br />
                 +62 812-8532-8232 <br />
-                +62 817-888-879 
+                +62 817-888-879
               </p>
             </a>
 
@@ -1200,7 +1200,7 @@ export function ContactPageEn() {
 
             <a
               className="quick-card glass"
-              href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium"
+              href="https://wa.me/6285645046160?text=Halo%20GIS%20Laboratorium"
               target="_blank"
               rel="noopener"
             >
@@ -1209,6 +1209,7 @@ export function ContactPageEn() {
               </span>
               <h2 className="quick-label">WhatsApp</h2>
               <p className="quick-value">+62 812-8532-8232</p>
+              <p className="quick-value">+62 856-4504-6160</p>
             </a>
           </div>
         </section>
@@ -1236,7 +1237,7 @@ export function ContactPageEn() {
                   <ul className="office-list">
                     <li>
                       <i className="fa-solid fa-phone" />
-                      <span>+62 812-8532-8232</span>
+                      <span>+62 856-4504-6160</span>
                     </li>
                     <li>
                       <i className="fa-solid fa-envelope" />
@@ -1286,7 +1287,7 @@ export function ContactPageEn() {
                       <span>
                         +62 856-4504-6160 <br />
                         +62 812-8532-8232 <br />
-                        +62 817-888-879 
+                        +62 817-888-879
                       </span>
                     </div>
                   </div>
@@ -1440,7 +1441,6 @@ export function ContactPageEn() {
                     +62 812-8532-8232
                     <br />
                     +62 817-888-879
-                    
                   </div>
                 </div>
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { LanguageSwitcher } from "@/features/landing/language-switcher";
 
-const whatsappNumber = "6281285328232";
+const whatsappNumber = "6285645046160";
 const email = "globalinspeksisistem@gmail.com";
 
 const processSteps = [

@@ -129,7 +129,7 @@ const WHATSAPP_WIDGET_STYLES = `
 const WHATSAPP_WIDGET_HTML = `
   <div class="contact-widget">
     <div class="contact-window icon-only" id="whatsappWindow">
-      <a class="contact-icon-link whatsapp" href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium" target="_blank" rel="noopener" aria-label="WhatsApp GIS">
+      <a class="contact-icon-link whatsapp" href="https://wa.me/6285645046160?text=Halo%20GIS%20Laboratorium" target="_blank" rel="noopener" aria-label="WhatsApp GIS">
         <i class="fa-brands fa-whatsapp"></i>
       </a>
 
@@ -2559,12 +2559,12 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
                     <h2 class="quick-label">Email</h2>
                     <p class="quick-value">globalinspeksisistem@gmail.com</p>
                 </a>
-                <a class="quick-card glass" href="tel:+6281285328232">
+                <a class="quick-card glass" href="tel:+6285645046160">
                     <span class="quick-icon"><i class="fa-solid fa-phone"></i></span>
                     <h2 class="quick-label">Telepon</h2>
                     <p class="quick-value">+62 856-4504-6160<br>+62 812-8532-8232<br>+62 817-888-879</p>
                 </a>
-                <a class="quick-card glass" href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium"
+                <a class="quick-card glass" href="https://wa.me/6285645046160?text=Halo%20GIS%20Laboratorium"
                     target="_blank" rel="noopener">
                     <span class="quick-icon"><i class="fa-brands fa-whatsapp"></i></span>
                     <h2 class="quick-label">WhatsApp</h2>
