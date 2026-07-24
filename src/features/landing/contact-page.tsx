@@ -1198,8 +1198,8 @@ export function ContactPage() {
                 <i className="fa-brands fa-whatsapp" />
               </span>
               <h2 className="quick-label">WhatsApp</h2>
-              <p className="quick-value">+62 812-8532-8232</p>
               <p className="quick-value">+62 856-4504-6160</p>
+              <p className="quick-value">+62 812-8532-8232</p>
             </a>
           </div>
         </section>
