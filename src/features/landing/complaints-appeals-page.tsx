@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { LanguageSwitcher } from "@/features/landing/language-switcher";
 
-const whatsappNumber = "6281285328232";
+const whatsappNumber = "6285645046160";
 const email = "globalinspeksisistem@gmail.com";
 
 const processSteps = [
@@ -1159,11 +1159,12 @@ export function ComplaintsAppealsPage() {
                       style={{ marginTop: "4px" }}
                     />
                     <div>
+                      +62 856-4504-6160
+                      <br />
                       +62 812-8532-8232
                       <br />
                       +62 817-888-879
-                      <br />
-                      +62 812-1704-7976
+                      
                     </div>
                   </div>
 

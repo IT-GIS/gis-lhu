@@ -129,7 +129,7 @@ export function FloatingContactWidget() {
         <div className={`floating-contact-window${open ? " active" : ""}`}>
           <a
             className="floating-contact-icon-link whatsapp"
-            href="https://wa.me/6281285328232?text=Halo%20GIS%20Laboratorium"
+            href="https://wa.me/6285645046160?text=Halo%20GIS%20Laboratorium"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp GIS"

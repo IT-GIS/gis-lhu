@@ -1349,11 +1349,12 @@ export function InformationPage({
                     style={{ marginTop: "4px" }}
                   />
                   <div>
+                    +62 856-4504-6160
+                    <br />
                     +62 812-8532-8232
                     <br />
                     +62 817-888-879
-                    <br />
-                    +62 812-1704-7976
+                    
                   </div>
                 </div>
 

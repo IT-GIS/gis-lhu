@@ -67,6 +67,13 @@ const NEU_CSS = `
     background: #fff;
   }
 
+  .neu-login-logo {
+  width: 4.8rem;
+  height: 4.8rem;
+  object-fit: contain;
+  display: block;
+}
+
   /* Title */
   .neu-title {
     font-size: 1.6rem;
@@ -318,24 +325,23 @@ export default function LoginClient() {
               <div className="cf-spinner" />
               <div className="cf-title">{verificationText}</div>
               <div className="cf-subtitle">
-                Please wait while we secure your connection before accessing GIS LHU.
+                Please wait while we secure your connection before accessing GIS
+                LHU.
                 <br />
                 This process is automatic.
               </div>
-              <div className="cf-footer">
-                Ray ID: {rayId}
-              </div>
+              <div className="cf-footer">Ray ID: {rayId}</div>
             </div>
           ) : (
             <>
               {/* ── Logo Avatar ── */}
               <div className="neu-avatar">
                 <div className="neu-avatar-inner">
-                  <div className="relative font-black text-2xl tracking-tight flex items-baseline" style={{ fontFamily: "var(--font-display-ui)" }}>
-                    <span style={{ color: "#2B3386" }}>G</span>
-                    <span style={{ color: "#C1121F", fontSize: "1.8rem", margin: "0 -2px" }}>I</span>
-                    <span style={{ color: "#2B3386" }}>S</span>
-                  </div>
+                  <img
+                    src="/landing/animation/logo-lab.png"
+                    alt="Logo GIS"
+                    className="neu-login-logo"
+                  />
                 </div>
               </div>
 
@@ -346,13 +352,31 @@ export default function LoginClient() {
               </div>
 
               {/* ── Form ── */}
-              <form onSubmit={handleSubmit} style={{ width: "100%", display: "flex", flexDirection: "column", gap: "1.4rem" }}>
-
+              <form
+                onSubmit={handleSubmit}
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1.4rem",
+                }}
+              >
                 {/* Email Field */}
                 <div className="neu-field">
                   <span className="neu-input-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                     </svg>
                   </span>
                   <input
@@ -370,8 +394,19 @@ export default function LoginClient() {
                 {/* Password Field */}
                 <div className="neu-field">
                   <span className="neu-input-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                     </svg>
                   </span>
                   <input
@@ -389,27 +424,56 @@ export default function LoginClient() {
                 {/* Error */}
                 {error && (
                   <div className="neu-error">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" x2="12" y1="8" y2="12" />
+                      <line x1="12" x2="12.01" y1="16" y2="16" />
                     </svg>
                     {error}
                   </div>
                 )}
 
                 {/* Submit Button */}
-                <button type="submit" disabled={isPending} className="neu-btn-primary">
-                  {isPending
-                    ? <><span className="neu-spinner" /> Masuk...</>
-                    : <>
+                <button
+                  type="submit"
+                  disabled={isPending}
+                  className="neu-btn-primary"
+                >
+                  {isPending ? (
+                    <>
+                      <span className="neu-spinner" /> Masuk...
+                    </>
+                  ) : (
+                    <>
                       Masuk
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
                       </svg>
                     </>
-                  }
+                  )}
                 </button>
               </form>
-
             </>
           )}
         </div>
