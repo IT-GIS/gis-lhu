@@ -1162,7 +1162,6 @@ export function ContactPageEn() {
         <section className="contact-hero-section">
           <div className="contact-hero">
             <div className="hero-content">
-              
               <h1 className="hero-title">
                 Contact us and let us know how we can help.
               </h1>
@@ -1182,9 +1181,9 @@ export function ContactPageEn() {
               </span>
               <h2 className="quick-label">Telephone</h2>
               <p className="quick-value">
+                +62 856-4504-6160 <br />
                 +62 812-8532-8232 <br />
-                +62 817-888-879 <br />
-                +62 812-1704-7976
+                +62 817-888-879 
               </p>
             </a>
 
@@ -1285,9 +1284,9 @@ export function ContactPageEn() {
                     <div>
                       <strong>Telephone</strong>
                       <span>
+                        +62 856-4504-6160 <br />
                         +62 812-8532-8232 <br />
-                        +62 817-888-879 <br />
-                        +62 812-1704-7976
+                        +62 817-888-879 
                       </span>
                     </div>
                   </div>
@@ -1436,11 +1435,12 @@ export function ContactPageEn() {
                     style={{ marginTop: "4px" }}
                   />
                   <div>
+                    +62 856-4504-6160
+                    <br />
                     +62 812-8532-8232
                     <br />
                     +62 817-888-879
-                    <br />
-                    +62 812-1704-7976
+                    
                   </div>
                 </div>
 

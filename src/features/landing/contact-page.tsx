@@ -1171,9 +1171,9 @@ export function ContactPage() {
               </span>
               <h2 className="quick-label">Telepon</h2>
               <p className="quick-value">
+                +62 856-4504-6160 <br />
                 +62 812-8532-8232 <br />
-                +62 817-888-879 <br />
-                +62 812-1704-7976
+                +62 817-888-879
               </p>
             </a>
 
@@ -1199,6 +1199,7 @@ export function ContactPage() {
               </span>
               <h2 className="quick-label">WhatsApp</h2>
               <p className="quick-value">+62 812-8532-8232</p>
+              <p className="quick-value">+62 856-4504-6160</p>
             </a>
           </div>
         </section>
@@ -1274,9 +1275,9 @@ export function ContactPage() {
                     <div>
                       <strong>Telepon</strong>
                       <span>
+                        +62 856-4504-6160 <br />
                         +62 812-8532-8232 <br />
-                        +62 817-888-879 <br />
-                        +62 812-1704-7976
+                        +62 817-888-879
                       </span>
                     </div>
                   </div>
@@ -1426,11 +1427,11 @@ export function ContactPage() {
                     style={{ marginTop: "4px" }}
                   />
                   <div>
+                    +62 856-4504-6160
+                    <br />
                     +62 812-8532-8232
                     <br />
                     +62 817-888-879
-                    <br />
-                    +62 812-1704-7976
                   </div>
                 </div>
 

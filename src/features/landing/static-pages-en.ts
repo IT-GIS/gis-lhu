@@ -928,7 +928,7 @@ const pageList = [
                         <div class="footer-text"><i class="fa-solid fa-envelope"></i><span>info@gislaboratorium.com</span></div>
                         <div class="footer-text" style="align-items: flex-start;">
                             <i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
-                            <div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+                            <div>+62 856-4504-6160<br>+62 812-8532-8232<br>+62 817-888-879</div>
                         </div>
                         <div class="footer-text"><i class="fa-solid fa-globe"></i><span>www.gislaboratorium.com</span></div>
                     </div>
@@ -1675,7 +1675,7 @@ const pageList = [
 <div class="bg-white/60 backdrop-blur-md border border-white shadow-sm rounded-2xl p-6 md:p-8 mb-6 font-body-md text-on-surface text-left">
 <div class="grid grid-cols-[100px_1fr] sm:grid-cols-[160px_1fr] gap-y-3 gap-x-4 break-words">
 <div class="font-bold text-primary">Mail</div><div>globalinspeksisistem@gmail.com</div>
-<div class="font-bold text-primary">Phone</div><div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+<div class="font-bold text-primary">Phone</div><div>+62 856-4504-6160<br>+62 812-8532-8232<br>+62 817-888-879</div>
 <div class="font-bold text-primary">Website</div><div>www.gislaboratorium.com</div>
 <div class="font-bold text-primary">Mailing Address</div><div>PT. Global Inspeksi Sistem</div>
 <div class="font-bold text-primary">Head Office (Surabaya)</div><div>Jl. Pahlawan No.2, Kwadengan Barat, Lemahputro, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213</div>
@@ -1725,7 +1725,7 @@ const pageList = [
                         <div class="footer-text"><i class="fa-solid fa-envelope"></i><span>info@gislaboratorium.com</span></div>
                         <div class="footer-text" style="align-items: flex-start;">
                             <i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
-                            <div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+                            <div>+62 856-4504-6160<br>+62 812-8532-8232<br>+62 817-888-879</div>
                         </div>
                         <div class="footer-text"><i class="fa-solid fa-globe"></i><span>www.gislaboratorium.com</span></div>
                     </div>
@@ -2191,7 +2191,7 @@ GISLAB is committed to providing accurate, documented test results aligned with 
                         <div class="footer-text"><i class="fa-solid fa-envelope"></i><span>info@gislaboratorium.com</span></div>
                         <div class="footer-text" style="align-items: flex-start;">
                             <i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
-                            <div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+                            <div>+62 856-4504-6160<br>+62 812-8532-8232<br>+62 817-888-879</div>
                         </div>
                         <div class="footer-text"><i class="fa-solid fa-globe"></i><span>www.gislaboratorium.com</span></div>
                     </div>
@@ -2561,7 +2561,7 @@ GISLAB is committed to providing accurate, documented test results aligned with 
                 <a class="quick-card glass" href="tel:+6281285328232">
                     <span class="quick-icon"><i class="fa-solid fa-phone"></i></span>
                     <h2 class="quick-label">Phone</h2>
-                    <p class="quick-value">+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</p>
+                    <p class="quick-value">+62 856-4504-6160<br>+62 812-8532-8232<br>+62 817-888-879</p>
                 </a>
                 <a class="quick-card glass" href="https://wa.me/6281285328232?text=Hello%20GIS%20Laboratory"
                     target="_blank" rel="noopener">
@@ -2648,7 +2648,7 @@ GISLAB is committed to providing accurate, documented test results aligned with 
                                 <i class="fa-solid fa-phone"></i>
                                 <div>
                                     <strong>Phone</strong>
-                                    <span>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</span>
+                                    <span>+62 856-4504-6160<br>+62 812-8532-8232<br>+62 817-888-879</span>
                                 </div>
                             </div>
                             <div class="info-item">
@@ -2746,7 +2746,7 @@ GISLAB is committed to providing accurate, documented test results aligned with 
                         <div class="footer-text"><i class="fa-solid fa-envelope"></i><span>info@gislaboratorium.com</span></div>
                         <div class="footer-text" style="align-items: flex-start;">
                             <i class="fa-solid fa-phone" style="margin-top: 4px;"></i>
-                            <div>+62 812-8532-8232<br>+62 817-888-879<br>+62 812-1704-7976</div>
+                            <div>+62 856-4504-6160<br>+62 812-8532-8232<br>+62 817-888-879</div>
                         </div>
                         <div class="footer-text"><i class="fa-solid fa-globe"></i><span>www.gislaboratorium.com</span></div>
                     </div>
