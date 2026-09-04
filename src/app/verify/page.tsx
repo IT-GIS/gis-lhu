@@ -132,28 +132,43 @@ export const metadata: Metadata = {
     "Verifikasi keaslian Laporan Hasil Uji GISLAB menggunakan nomor order, nomor LHU, atau barcode.",
 };
 
-export default function VerificationSearchPage() {
+export function VerificationSearchPageContent({
+  language = "id",
+}: {
+  language?: "id" | "en";
+}) {
+  const isEnglish = language === "en";
+
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#eff8ff_0%,#ffffff_48%,#f5fbff_100%)] text-slate-950">
       <style dangerouslySetInnerHTML={{ __html: VERIFICATION_NAVBAR_STYLES }} />
-      <PublicVerificationNavbar />
+      <PublicVerificationNavbar language={language} />
       <main className="px-4 pb-10 pt-32 sm:px-6 sm:pt-36 lg:px-10 lg:pt-40 lg:pb-16">
         <div className="mx-auto max-w-5xl">
           <div className="mb-8 max-w-2xl">
             <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-sky-700">
-              GISLAB PUBLIC VERIFICATION
+              {isEnglish
+                ? "GISLAB PUBLIC VERIFICATION"
+                : "GISLAB PUBLIC VERIFICATION"}
             </p>
             <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-5xl">
-              Verifikasi Laporan Hasil Uji
+              {isEnglish
+                ? "Verify Laboratory Test Report"
+                : "Verifikasi Laporan Hasil Uji"}
             </h1>
             <p className="mt-4 text-base leading-7 text-slate-600">
-              Pastikan dokumen LHU tercatat dan diterbitkan oleh PT Global
-              Inspeksi Sistem.
+              {isEnglish
+                ? "Confirm that the LHU is registered and issued by PT Global Inspeksi Sistem."
+                : "Pastikan dokumen LHU tercatat dan diterbitkan oleh PT Global Inspeksi Sistem."}
             </p>
           </div>
-          <VerificationSearch />
+          <VerificationSearch language={language} />
         </div>
       </main>
     </div>
   );
+}
+
+export default function VerificationSearchPage() {
+  return <VerificationSearchPageContent />;
 }

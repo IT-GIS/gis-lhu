@@ -1134,7 +1134,7 @@ export function ContactPageEn() {
                     Complaints and Appeals{" "}
                     <i className="fa-solid fa-comments" />
                   </Link>
-                  <Link href="/verify" className="nav-dropdown-link">
+                  <Link href="/en/verify" className="nav-dropdown-link">
                     LHU Verification <i className="fa-solid fa-check-circle" />
                   </Link>
                 </div>

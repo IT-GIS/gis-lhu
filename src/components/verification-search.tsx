@@ -35,7 +35,12 @@ function tokenFromScan(value: string) {
   }
 }
 
-export function VerificationSearch() {
+export function VerificationSearch({
+  language = "id",
+}: {
+  language?: "id" | "en";
+}) {
+  const isEnglish = language === "en";
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const scanTimerRef = useRef<number | null>(null);
@@ -61,7 +66,11 @@ export function VerificationSearch() {
   const search = async (searchValue = value) => {
     const normalizedValue = searchValue.trim();
     if (!normalizedValue) {
-      setError("Masukkan nomor order atau nomor LHU terlebih dahulu.");
+      setError(
+        isEnglish
+          ? "Enter an order number or LHU number first."
+          : "Masukkan nomor order atau nomor LHU terlebih dahulu.",
+      );
       return;
     }
 
@@ -81,7 +90,11 @@ export function VerificationSearch() {
       };
 
       if (!response.ok || !result.token) {
-        throw new Error(result.message || "Dokumen tidak ditemukan.");
+        throw new Error(
+          isEnglish
+            ? "The document was not found among published LHU records."
+            : result.message || "Dokumen tidak ditemukan.",
+        );
       }
 
       stopScanner();
@@ -100,7 +113,9 @@ export function VerificationSearch() {
       setError(
         searchError instanceof Error
           ? searchError.message
-          : "Pencarian gagal diproses.",
+          : isEnglish
+            ? "The search could not be processed."
+            : "Pencarian gagal diproses.",
       );
     } finally {
       setIsSearching(false);
@@ -113,7 +128,9 @@ export function VerificationSearch() {
 
     if (!window.BarcodeDetector) {
       setScannerMessage(
-        "Browser ini belum mendukung scan barcode otomatis. Silakan masukkan nomor secara manual.",
+        isEnglish
+          ? "This browser does not support automatic barcode scanning. Please enter the number manually."
+          : "Browser ini belum mendukung scan barcode otomatis. Silakan masukkan nomor secara manual.",
       );
       return;
     }
@@ -159,7 +176,9 @@ export function VerificationSearch() {
     } catch {
       stopScanner();
       setScannerMessage(
-        "Kamera tidak dapat diakses. Izinkan akses kamera atau masukkan nomor secara manual.",
+        isEnglish
+          ? "The camera could not be accessed. Allow camera access or enter the number manually."
+          : "Kamera tidak dapat diakses. Izinkan akses kamera atau masukkan nomor secara manual.",
       );
     }
   };
@@ -178,9 +197,13 @@ export function VerificationSearch() {
             <Search className="h-5 w-5" />
           </span>
           <div>
-            <h2 className="font-bold text-slate-950">Cari dokumen</h2>
+            <h2 className="font-bold text-slate-950">
+              {isEnglish ? "Find a document" : "Cari dokumen"}
+            </h2>
             <p className="text-sm text-slate-500">
-              Gunakan salah satu nomor yang tercetak pada LHU.
+              {isEnglish
+                ? "Use one of the numbers printed on the LHU."
+                : "Gunakan salah satu nomor yang tercetak pada LHU."}
             </p>
           </div>
         </div>
@@ -188,13 +211,19 @@ export function VerificationSearch() {
           className="mt-6 block text-sm font-bold text-slate-700"
           htmlFor="verification-value"
         >
-          Nomor order atau nomor LHU
+          {isEnglish
+            ? "Order number or LHU number"
+            : "Nomor order atau nomor LHU"}
         </label>
         <input
           id="verification-value"
           value={value}
           onChange={(event) => setValue(event.target.value)}
-          placeholder="Contoh: GIS2701HOF0007 atau LP/J-0034D/26"
+          placeholder={
+            isEnglish
+              ? "Example: GIS2701HOF0007 or LP/J-0034D/26"
+              : "Contoh: GIS2701HOF0007 atau LP/J-0034D/26"
+          }
           className="mt-2 h-12 w-full rounded-xl border border-slate-300 px-4 font-mono text-sm text-slate-950 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
           autoComplete="off"
         />
@@ -211,7 +240,7 @@ export function VerificationSearch() {
           ) : (
             <CheckCircle2 className="h-5 w-5" />
           )}
-          Verifikasi dokumen
+          {isEnglish ? "Verify document" : "Verifikasi dokumen"}
         </button>
       </form>
 
@@ -221,9 +250,13 @@ export function VerificationSearch() {
             <ScanLine className="h-5 w-5" />
           </span>
           <div>
-            <h2 className="font-bold">Scan barcode</h2>
+            <h2 className="font-bold">
+              {isEnglish ? "Scan barcode" : "Scan barcode"}
+            </h2>
             <p className="text-sm text-slate-300">
-              Arahkan kamera ke QR atau barcode LHU.
+              {isEnglish
+                ? "Point your camera at the LHU QR code or barcode."
+                : "Arahkan kamera ke QR atau barcode LHU."}
             </p>
           </div>
         </div>
@@ -239,7 +272,7 @@ export function VerificationSearch() {
               type="button"
               onClick={stopScanner}
               className="absolute right-3 top-3 rounded-lg bg-black/70 p-2 text-white"
-              aria-label="Tutup scanner"
+              aria-label={isEnglish ? "Close scanner" : "Tutup scanner"}
             >
               <X className="h-4 w-4" />
             </button>
@@ -251,7 +284,7 @@ export function VerificationSearch() {
             className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-sky-400/40 bg-sky-400/10 font-bold text-sky-200 transition hover:bg-sky-400/20"
           >
             <Camera className="h-5 w-5" />
-            Buka kamera
+            {isEnglish ? "Open camera" : "Buka kamera"}
           </button>
         )}
         {scannerMessage ? (

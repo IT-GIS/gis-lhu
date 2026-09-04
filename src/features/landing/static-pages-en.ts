@@ -635,7 +635,7 @@ const pageList = [
       <a href="/en/informasi/keluhan-dan-banding" class="nav-dropdown-link">
         Complaints and Appeals <i class="fa-solid fa-comments"></i>
       </a>
-      <a href="/verify" class="nav-dropdown-link">
+      <a href="/en/verify" class="nav-dropdown-link">
         LHU Verification <i class="fa-solid fa-check-circle"></i>
       </a>
     </div>
@@ -1507,7 +1507,7 @@ const pageList = [
       <a href="/en/informasi/keluhan-dan-banding" class="nav-dropdown-link">
         Complaints and Appeals <i class="fa-solid fa-comments"></i>
       </a>
-      <a href="/verify" class="nav-dropdown-link">
+      <a href="/en/verify" class="nav-dropdown-link">
         LHU Verification <i class="fa-solid fa-check-circle"></i>
       </a>
     </div>
@@ -2028,7 +2028,7 @@ ${WHATSAPP_WIDGET_HTML}
       <a href="/en/informasi/keluhan-dan-banding" class="nav-dropdown-link">
         Complaints and Appeals <i class="fa-solid fa-comments"></i>
       </a>
-      <a href="/verify" class="nav-dropdown-link">
+      <a href="/en/verify" class="nav-dropdown-link">
         LHU Verification <i class="fa-solid fa-check-circle"></i>
       </a>
     </div>
@@ -2530,7 +2530,7 @@ GISLAB is committed to providing accurate, documented test results aligned with 
       <a href="/en/informasi/keluhan-dan-banding" class="nav-dropdown-link">
         Complaints and Appeals <i class="fa-solid fa-comments"></i>
       </a>
-      <a href="/verify" class="nav-dropdown-link">
+      <a href="/en/verify" class="nav-dropdown-link">
         LHU Verification <i class="fa-solid fa-check-circle"></i>
       </a>
     </div>
