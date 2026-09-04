@@ -949,7 +949,7 @@ export function ComplaintsAppealsPageEn() {
       <main className="complaints-page">
         <header className="navbar-wrapper" id="navbar">
           <nav className="navbar">
-            <Link href="/" className="nav-brand">
+            <Link href="/en" className="nav-brand">
               <Image
                 className="nav-logo"
                 src="/landing/animation/logo-lab.png"
@@ -963,25 +963,25 @@ export function ComplaintsAppealsPageEn() {
 
             <ul className={`nav-menu${menuOpen ? " open" : ""}`} id="navMenu">
               <li>
-                <Link href="/" className="nav-link">
+                <Link href="/en" className="nav-link">
                   Home
                 </Link>
               </li>
 
               <li>
-                <Link href="/profile" className="nav-link">
+                <Link href="/en/profile" className="nav-link">
                   Profile
                 </Link>
               </li>
 
               <li>
-                <Link href="/service" className="nav-link">
-                  Service
+                <Link href="/en/service" className="nav-link">
+                  Services
                 </Link>
               </li>
 
               <li>
-                <Link href="/ruang-lingkup-pengujian" className="nav-link">
+                <Link href="/en/ruang-lingkup-pengujian" className="nav-link">
                   Scope of Testing
                 </Link>
               </li>
@@ -993,23 +993,27 @@ export function ComplaintsAppealsPageEn() {
                   </summary>
 
                   <div className="nav-dropdown-menu">
-                    <Link href="/informasi" className="nav-dropdown-link">
+                    <Link href="/en/informasi" className="nav-dropdown-link">
                       Article <i className="fa-solid fa-newspaper" />
                     </Link>
 
                     <Link
-                      href="/informasi/keluhan-dan-banding"
+                      href="/en/informasi/keluhan-dan-banding"
                       className="nav-dropdown-link active"
                     >
                       Complaints and Appeals{" "}
                       <i className="fa-solid fa-comments" />
+                    </Link>
+                    <Link href="/verify" className="nav-dropdown-link">
+                      LHU Verification{" "}
+                      <i className="fa-solid fa-check-circle" />
                     </Link>
                   </div>
                 </details>
               </li>
 
               <li>
-                <Link href="/contact" className="nav-link">
+                <Link href="/en/contact" className="nav-link">
                   Contact
                 </Link>
               </li>
@@ -1164,7 +1168,6 @@ export function ComplaintsAppealsPageEn() {
                       +62 812-8532-8232
                       <br />
                       +62 817-888-879
-                      
                     </div>
                   </div>
 
@@ -1180,19 +1183,22 @@ export function ComplaintsAppealsPageEn() {
                   <Link href="/" className="footer-link">
                     Home
                   </Link>
-                  <Link href="/profile" className="footer-link">
+                  <Link href="/en/profile" className="footer-link">
                     Profile
                   </Link>
-                  <Link href="/service" className="footer-link">
+                  <Link href="/en/service" className="footer-link">
                     Service
                   </Link>
-                  <Link href="/ruang-lingkup-pengujian" className="footer-link">
+                  <Link
+                    href="/en/ruang-lingkup-pengujian"
+                    className="footer-link"
+                  >
                     Scope of Testing
                   </Link>
-                  <Link href="/informasi" className="footer-link">
+                  <Link href="/en/informasi" className="footer-link">
                     Information
                   </Link>
-                  <Link href="/contact" className="footer-link">
+                  <Link href="/en/contact" className="footer-link">
                     Contact
                   </Link>
                 </div>

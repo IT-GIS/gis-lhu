@@ -869,7 +869,8 @@ function ensureLandingHeadAssets() {
   const link = document.createElement("link");
   link.id = "landing-font-awesome";
   link.rel = "stylesheet";
-  link.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
+  link.href =
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
   document.head.appendChild(link);
 }
 
@@ -890,13 +891,17 @@ export function ScopeLandingPage() {
   }, []);
 
   useEffect(() => {
-    const groups = Array.from(document.querySelectorAll<HTMLElement>(".scope-page .data-group"));
+    const groups = Array.from(
+      document.querySelectorAll<HTMLElement>(".scope-page .data-group"),
+    );
     const normalizedQuery = query.trim().toUpperCase();
     let foundAny = false;
 
     groups.forEach((group) => {
       const textContent = group.textContent ?? "";
-      const matches = normalizedQuery === "" || textContent.toUpperCase().includes(normalizedQuery);
+      const matches =
+        normalizedQuery === "" ||
+        textContent.toUpperCase().includes(normalizedQuery);
       group.style.display = matches ? "" : "none";
       foundAny = foundAny || matches;
     });
@@ -959,6 +964,9 @@ export function ScopeLandingPage() {
                     className="nav-dropdown-link"
                   >
                     Keluhan dan Banding <i className="fa-solid fa-comments" />
+                  </Link>
+                  <Link href="/verify" className="nav-dropdown-link">
+                    Verifikasi LHU <i className="fa-solid fa-check-circle" />
                   </Link>
                 </div>
               </details>
@@ -1081,7 +1089,6 @@ export function ScopeLandingPage() {
                     +62 812-8532-8232
                     <br />
                     +62 817-888-879
-                    
                   </div>
                 </div>
 

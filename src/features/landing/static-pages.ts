@@ -635,6 +635,9 @@ const pageList = [
       <a href="/informasi/keluhan-dan-banding" class="nav-dropdown-link">
         Keluhan dan Banding <i class="fa-solid fa-comments"></i>
       </a>
+      <a href="/verify" class="nav-dropdown-link">
+        Verifikasi LHU <i class="fa-solid fa-check-circle"></i>
+      </a>
     </div>
   </details>
 </li>
@@ -1504,6 +1507,9 @@ const pageList = [
       <a href="/informasi/keluhan-dan-banding" class="nav-dropdown-link">
         Keluhan dan Banding <i class="fa-solid fa-comments"></i>
       </a>
+      <a href="/verify" class="nav-dropdown-link">
+        Verifikasi LHU <i class="fa-solid fa-check-circle"></i>
+      </a>
     </div>
   </details>
 </li><li><a href="/contact" class="nav-link">Kontak</a></li>
@@ -2023,6 +2029,9 @@ ${WHATSAPP_WIDGET_HTML}
       <a href="/informasi/keluhan-dan-banding" class="nav-dropdown-link">
         Keluhan dan Banding <i class="fa-solid fa-comments"></i>
       </a>
+      <a href="/verify" class="nav-dropdown-link">
+        Verifikasi LHU <i class="fa-solid fa-check-circle"></i>
+      </a>
     </div>
   </details>
 </li><li><a href="/contact" class="nav-link">Kontak</a></li>
@@ -2521,6 +2530,9 @@ GISLAB berkomitmen memberikan hasil uji yang akurat, terdokumentasi, dan selaras
       </a>
       <a href="/informasi/keluhan-dan-banding" class="nav-dropdown-link">
         Keluhan dan Banding <i class="fa-solid fa-comments"></i>
+      </a>
+      <a href="/verify" class="nav-dropdown-link">
+        Verifikasi LHU <i class="fa-solid fa-check-circle"></i>
       </a>
     </div>
   </details>

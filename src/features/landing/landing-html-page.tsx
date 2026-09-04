@@ -1035,6 +1035,7 @@ export function LandingHtmlPage({ page }: { page: LandingStaticPage }) {
       <style dangerouslySetInnerHTML={{ __html: LANDING_PROFILE_POLICY_CSS }} />
       <div
         className={["landing-html", page.bodyClass].filter(Boolean).join(" ")}
+        suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: page.html }}
       />
     </>

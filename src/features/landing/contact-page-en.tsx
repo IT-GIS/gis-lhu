@@ -1104,17 +1104,17 @@ export function ContactPageEn() {
               </Link>
             </li>
             <li>
-              <Link href="/profile" className="nav-link">
+              <Link href="/en/profile" className="nav-link">
                 Profile
               </Link>
             </li>
             <li>
-              <Link href="/service" className="nav-link">
-                Service
+              <Link href="/en/service" className="nav-link">
+                Services
               </Link>
             </li>
             <li>
-              <Link href="/ruang-lingkup-pengujian" className="nav-link">
+              <Link href="/en/ruang-lingkup-pengujian" className="nav-link">
                 Scope of Testing
               </Link>
             </li>
@@ -1124,21 +1124,24 @@ export function ContactPageEn() {
                   Information <i className="fa-solid fa-chevron-down" />
                 </summary>
                 <div className="nav-dropdown-menu">
-                  <Link href="/informasi" className="nav-dropdown-link">
+                  <Link href="/en/informasi" className="nav-dropdown-link">
                     Article <i className="fa-solid fa-newspaper" />
                   </Link>
                   <Link
-                    href="/informasi/keluhan-dan-banding"
+                    href="/en/informasi/keluhan-dan-banding"
                     className="nav-dropdown-link"
                   >
                     Complaints and Appeals{" "}
                     <i className="fa-solid fa-comments" />
                   </Link>
+                  <Link href="/verify" className="nav-dropdown-link">
+                    LHU Verification <i className="fa-solid fa-check-circle" />
+                  </Link>
                 </div>
               </details>
             </li>
             <li>
-              <Link href="/contact" className="nav-link active">
+              <Link href="/en/contact" className="nav-link active">
                 Contact
               </Link>
             </li>
@@ -1456,19 +1459,22 @@ export function ContactPageEn() {
                 <Link href="/" className="footer-link">
                   Home
                 </Link>
-                <Link href="/profile" className="footer-link">
+                <Link href="/en/profile" className="footer-link">
                   Profile
                 </Link>
-                <Link href="/service" className="footer-link">
+                <Link href="/en/service" className="footer-link">
                   Service
                 </Link>
-                <Link href="/ruang-lingkup-pengujian" className="footer-link">
+                <Link
+                  href="/en/ruang-lingkup-pengujian"
+                  className="footer-link"
+                >
                   Scope of Testing
                 </Link>
-                <Link href="/informasi" className="footer-link">
+                <Link href="/en/informasi" className="footer-link">
                   Information
                 </Link>
-                <Link href="/contact" className="footer-link">
+                <Link href="/en/contact" className="footer-link">
                   Contact
                 </Link>
               </div>

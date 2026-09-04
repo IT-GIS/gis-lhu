@@ -966,6 +966,9 @@ export function ScopePageEn() {
                     Complaints and Appeals{" "}
                     <i className="fa-solid fa-comments" />
                   </Link>
+                  <Link href="/verify" className="nav-dropdown-link">
+                    LHU Verification <i className="fa-solid fa-check-circle" />
+                  </Link>
                 </div>
               </details>
             </li>
@@ -1087,7 +1090,6 @@ export function ScopePageEn() {
                     +62 812-8532-8232
                     <br />
                     +62 817-888-879
-                    
                   </div>
                 </div>
 

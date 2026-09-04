@@ -1,10 +1,6 @@
 import { randomBytes } from "crypto";
 
-import {
-  type Prisma,
-  ReviewAction,
-  type Role,
-} from "@prisma/client";
+import { type Prisma, ReviewAction, type Role } from "@prisma/client";
 
 import { recordAudit } from "@/lib/audit";
 import type { AuthUser } from "@/lib/auth";
@@ -20,10 +16,7 @@ import {
 } from "@/lib/permissions";
 import { prisma } from "@/lib/prisma";
 import { parseLhuDocumentInput, resolveLhuPayload } from "@/lib/lhu-payload";
-import {
-  reviewCommentSchema,
-  transitionSchema,
-} from "@/lib/validators";
+import { reviewCommentSchema, transitionSchema } from "@/lib/validators";
 import { canTransitionStatus } from "@/lib/workflow";
 
 let formTypeEnumReady = false;
@@ -33,7 +26,8 @@ async function ensureLatestFormTypeEnum() {
     return;
   }
 
-  const alterSql = "MODIFY `formType` ENUM('TYPE_1','TYPE_2','TYPE_3','TYPE_4','TYPE_5','TYPE_6','TYPE_7') NOT NULL";
+  const alterSql =
+    "MODIFY `formType` ENUM('TYPE_1','TYPE_2','TYPE_3','TYPE_4','TYPE_5','TYPE_6','TYPE_7') NOT NULL";
 
   try {
     await prisma.$executeRawUnsafe(`ALTER TABLE \`document\` ${alterSql}`);
@@ -47,7 +41,9 @@ async function ensureLatestFormTypeEnum() {
     } catch {
       throw new Error(
         `Database enum FormType belum mendukung tipe form terbaru. Jalankan migration form type terbaru sampai 20260622000000_add_form_type_7_za terlebih dahulu. Detail: ${
-          lowercaseError instanceof Error ? lowercaseError.message : "ALTER TABLE document gagal"
+          lowercaseError instanceof Error
+            ? lowercaseError.message
+            : "ALTER TABLE document gagal"
         }`,
       );
     }
@@ -218,7 +214,10 @@ async function generateDocumentNumber(tx: Prisma.TransactionClient) {
       return latest;
     }
 
-    const sequence = Number.parseInt(document.documentNumber.slice(prefix.length), 10);
+    const sequence = Number.parseInt(
+      document.documentNumber.slice(prefix.length),
+      10,
+    );
     return Number.isFinite(sequence) ? Math.max(latest, sequence) : latest;
   }, 0);
 
@@ -226,10 +225,21 @@ async function generateDocumentNumber(tx: Prisma.TransactionClient) {
 }
 
 function isDocumentNumberUniqueError(error: unknown) {
-  const candidate = error as { code?: string; meta?: { target?: unknown }; message?: string };
-  const target = Array.isArray(candidate.meta?.target) ? candidate.meta.target.join(" ") : String(candidate.meta?.target ?? "");
+  const candidate = error as {
+    code?: string;
+    meta?: { target?: unknown };
+    message?: string;
+  };
+  const target = Array.isArray(candidate.meta?.target)
+    ? candidate.meta.target.join(" ")
+    : String(candidate.meta?.target ?? "");
 
-  return candidate.code === "P2002" && /documentNumber|Document_documentNumber_key/i.test(`${target} ${candidate.message ?? ""}`);
+  return (
+    candidate.code === "P2002" &&
+    /documentNumber|Document_documentNumber_key/i.test(
+      `${target} ${candidate.message ?? ""}`,
+    )
+  );
 }
 
 function createVerificationToken() {
@@ -397,7 +407,9 @@ async function ensureDocumentVerificationTokens() {
       },
     },
   });
-  const missingTokenDocuments = documents.filter((document) => !document.verification);
+  const missingTokenDocuments = documents.filter(
+    (document) => !document.verification,
+  );
 
   if (!missingTokenDocuments.length) {
     return;
@@ -487,7 +499,10 @@ export async function getRecentAuditLog(documentId: string) {
   });
 }
 
-export async function createDocument(actor: AuthUser, input: Record<string, string>) {
+export async function createDocument(
+  actor: AuthUser,
+  input: Record<string, string>,
+) {
   if (!canCreateDocument(actor.role)) {
     throw new Error("Anda tidak memiliki izin untuk membuat dokumen.");
   }
@@ -554,7 +569,10 @@ export async function createDocument(actor: AuthUser, input: Record<string, stri
   throw new Error("Nomor dokumen gagal dibuat. Silakan coba simpan ulang.");
 }
 
-export async function updateDocument(actor: AuthUser, input: Record<string, string>) {
+export async function updateDocument(
+  actor: AuthUser,
+  input: Record<string, string>,
+) {
   const parsed = parseLhuDocumentInput(input);
   const documentId = input.documentId?.trim();
 
@@ -576,10 +594,13 @@ export async function updateDocument(actor: AuthUser, input: Record<string, stri
     }
 
     if (!canEditDocument(actor.role, existing.status)) {
-      throw new Error("Dokumen pada status ini tidak dapat diubah oleh role Anda.");
+      throw new Error(
+        "Dokumen pada status ini tidak dapat diubah oleh role Anda.",
+      );
     }
 
-    const nextFormType = existing.status === "draft" ? parsed.formType : existing.formType;
+    const nextFormType =
+      existing.status === "draft" ? parsed.formType : existing.formType;
 
     const updated = await tx.document.update({
       where: { id: existing.id },
@@ -609,7 +630,10 @@ export async function updateDocument(actor: AuthUser, input: Record<string, stri
   });
 }
 
-export async function deleteDocument(actor: AuthUser, input: Record<string, string>) {
+export async function deleteDocument(
+  actor: AuthUser,
+  input: Record<string, string>,
+) {
   if (!canDeleteDocument(actor.role)) {
     throw new Error("Anda tidak memiliki izin untuk menghapus dokumen.");
   }
@@ -672,7 +696,10 @@ async function createReviewEntry(
   });
 }
 
-export async function transitionDocument(actor: AuthUser, input: Record<string, string>) {
+export async function transitionDocument(
+  actor: AuthUser,
+  input: Record<string, string>,
+) {
   const parsed = transitionSchema.parse(input);
 
   return prisma.$transaction(async (tx) => {
@@ -693,7 +720,9 @@ export async function transitionDocument(actor: AuthUser, input: Record<string, 
 
     if (parsed.nextStatus === "input_hasil") {
       if (!canEditDocument(actor.role, existing.status)) {
-        throw new Error("Anda tidak dapat memindahkan dokumen ke tahap input hasil.");
+        throw new Error(
+          "Anda tidak dapat memindahkan dokumen ke tahap input hasil.",
+        );
       }
     }
 
@@ -712,7 +741,9 @@ export async function transitionDocument(actor: AuthUser, input: Record<string, 
 
     if (parsed.nextStatus === "revisi") {
       if (!canReviewDocument(actor.role)) {
-        throw new Error("Hanya QA atau supervisor yang dapat mengembalikan revisi.");
+        throw new Error(
+          "Hanya QA atau supervisor yang dapat mengembalikan revisi.",
+        );
       }
 
       if (!comment) {
@@ -748,7 +779,8 @@ export async function transitionDocument(actor: AuthUser, input: Record<string, 
       throw new Error("Hanya admin yang dapat revoke dokumen.");
     }
 
-    const publishedAt = parsed.nextStatus === "published" ? new Date() : existing.publishedAt;
+    const publishedAt =
+      parsed.nextStatus === "published" ? new Date() : existing.publishedAt;
 
     const updated = await tx.document.update({
       where: { id: existing.id },
@@ -803,9 +835,14 @@ export async function transitionDocument(actor: AuthUser, input: Record<string, 
   });
 }
 
-export async function addReviewComment(actor: AuthUser, input: Record<string, string>) {
+export async function addReviewComment(
+  actor: AuthUser,
+  input: Record<string, string>,
+) {
   if (!canReviewDocument(actor.role)) {
-    throw new Error("Hanya QA atau supervisor yang dapat menambah komentar review.");
+    throw new Error(
+      "Hanya QA atau supervisor yang dapat menambah komentar review.",
+    );
   }
 
   const parsed = reviewCommentSchema.parse(input);
@@ -820,7 +857,9 @@ export async function addReviewComment(actor: AuthUser, input: Record<string, st
     }
 
     if (existing.status !== "review") {
-      throw new Error("Komentar review hanya dapat ditambahkan saat status review.");
+      throw new Error(
+        "Komentar review hanya dapat ditambahkan saat status review.",
+      );
     }
 
     await createReviewEntry(tx, {
@@ -855,4 +894,40 @@ export async function resolveVerificationToken(token: string) {
   }
 
   return verification;
+}
+
+export async function findPublishedVerification(value: string) {
+  const needle = value.trim().toLowerCase();
+
+  if (!needle) {
+    return null;
+  }
+
+  const documents = await prisma.document.findMany({
+    where: {
+      status: "published",
+      verification: {
+        is: { isActive: true },
+      },
+    },
+    include: {
+      verification: true,
+    },
+  });
+
+  const match = documents.find((document) => {
+    const payload = resolveLhuPayload(document.formType, document.formPayload);
+    const candidates = [
+      document.documentNumber,
+      document.referenceNo,
+      payload.orderNo,
+      payload.reportNo,
+    ];
+
+    return candidates.some(
+      (candidate) => candidate?.trim().toLowerCase() === needle,
+    );
+  });
+
+  return match?.verification?.token ?? null;
 }

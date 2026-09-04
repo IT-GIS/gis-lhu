@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   MessageSquare,
   Newspaper,
+  ScanLine,
   // SearchCheck,
   Settings,
   Upload,
@@ -55,6 +56,7 @@ const bottomNavItems = [
     icon: MessageSquare,
     permission: "viewContactMessages",
   },
+  { href: "/verify", label: "Verifikasi LHU", icon: ScanLine },
 ];
 
 function hasPermission(role: AppRole, permission?: string) {
@@ -68,10 +70,20 @@ function hasPermission(role: AppRole, permission?: string) {
 
 type NavItem = (typeof navItems)[number] | (typeof bottomNavItems)[number];
 
-export function SidebarNav({ isCollapsed = false, userRole }: { isCollapsed?: boolean; userRole: AppRole }) {
+export function SidebarNav({
+  isCollapsed = false,
+  userRole,
+}: {
+  isCollapsed?: boolean;
+  userRole: AppRole;
+}) {
   const pathname = usePathname();
-  const visibleNavItems = navItems.filter((item) => hasPermission(userRole, item.permission));
-  const visibleBottomNavItems = bottomNavItems.filter((item) => hasPermission(userRole, item.permission));
+  const visibleNavItems = navItems.filter((item) =>
+    hasPermission(userRole, item.permission),
+  );
+  const visibleBottomNavItems = bottomNavItems.filter((item) =>
+    hasPermission(userRole, item.permission),
+  );
 
   const renderNavItem = (item: NavItem, visibleItems: NavItem[]) => {
     const Icon = item.icon;

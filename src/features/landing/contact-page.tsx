@@ -1008,7 +1008,8 @@ function ensureLandingHeadAssets() {
   const link = document.createElement("link");
   link.id = "landing-font-awesome";
   link.rel = "stylesheet";
-  link.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
+  link.href =
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
   document.head.appendChild(link);
 }
 
@@ -1052,16 +1053,24 @@ export function ContactPage() {
         body: JSON.stringify(payload),
       });
 
-      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+      const result = (await response.json().catch(() => null)) as {
+        error?: string;
+      } | null;
 
       if (!response.ok) {
-        throw new Error(result?.error || "Pesan belum bisa dikirim. Silakan coba lagi.");
+        throw new Error(
+          result?.error || "Pesan belum bisa dikirim. Silakan coba lagi.",
+        );
       }
 
       form.reset();
       setMessageReady(true);
     } catch (error) {
-      setMessageError(error instanceof Error ? error.message : "Pesan belum bisa dikirim. Silakan coba lagi.");
+      setMessageError(
+        error instanceof Error
+          ? error.message
+          : "Pesan belum bisa dikirim. Silakan coba lagi.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -1119,6 +1128,9 @@ export function ContactPage() {
                     className="nav-dropdown-link"
                   >
                     Keluhan dan Banding <i className="fa-solid fa-comments" />
+                  </Link>
+                  <Link href="/verify" className="nav-dropdown-link">
+                    Verifikasi LHU <i className="fa-solid fa-check-circle" />
                   </Link>
                 </div>
               </details>
